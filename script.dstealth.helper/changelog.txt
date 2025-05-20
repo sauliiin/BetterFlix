@@ -1,0 +1,12 @@
+v1.1.0:
+- Added action=getkodisettings to retrieve 1 or more skin settings as window properties at once.
+- Removed action=getkodisetting was never used and only handled 1 setting at a time.
+
+v1.0.0:
+- Added support to find trailers from IMDb using TMDb API's Search By Title
+- Fixed Play Trailer to work even without a valid Handle
+- Removed Video-Add-on features, DS Helper is now strictly a helper program for DSTV
+
+v0.0.13:
+- Fixed cache.get() returning None instead of [] causing loud errors to be thrown due to IMDB now rate limiting non-browsers
+- Fixed loud error being thrown from dstealth-helper.runAction(), now will silently log

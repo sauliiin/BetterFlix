@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+	<category label="General Settings">
+		<setting label="DStealth-Helper Settings" type="lsep" />
+        <setting label="More verbose logging and popup msgs for errors:" id="setting.noop" type="action" enable="false" action="noop" />
+		<setting label="Enable Debug (verbose logging)" id="debug.enabled" type="bool" default="false" />
+        <setting label="How long before items in cache become stale:" id="setting.noop" type="action" enable="false" action="noop" />
+		<setting label="Cache timeout (minutes)" id="cache.timeout" type="slider" default="60" range="1,300" option="int" />
+        <setting label="Completely empty out the cache:" id="setting.noop" type="action" enable="false" action="noop" />
+		<setting label="Clear Addon Cache" type="action" action="RunScript(script.dstealth.helper, action=cache_clear)" />
+	</category>
+</settings>
