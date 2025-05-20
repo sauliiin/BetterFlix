@@ -1,7 +1,119 @@
 ##############################
 
+import xbmc
+import xbmcgui
+import xbmcvfs
+import sqlite3 as database
+import datetime as dt
+import time
+import requests
+import json
+
 import scripts.modules.cache as cache
 import scripts.helper as Helper
+
+##############################
+# IMDb Rating Functionality
+##############################
+
+def imdb_rating(params: dict):
+    """
+    Busca e atualiza a nota IMDb do item em foco usando mdblist.com e seta na Skin String.
+    Espera receber: imdb_id (ex: 'tt1234567')
+    """
+    debug = get_debug_param(params)
+    imdb_id = params.get('imdb_id') or params.get('imdb') or ''
+    if not imdb_id:
+        handleMissingParam(params, "imdb_id", debug)
+        return
+
+    API_KEY = "es9uiupuet5lr1lt2di1wmvo2"
+    CACHE_PATH = xbmcvfs.translatePath("special://profile/addon_data/script.dstealth.helper/ratings_cache.db")
+
+    class MDbListAPI:
+        def __init__(self):
+            self.dbcon = database.connect(CACHE_PATH, timeout=60)
+            self.dbcon.execute(
+                """
+                CREATE TABLE IF NOT EXISTS ratings (
+                    imdb_id TEXT PRIMARY KEY,
+                    ratings TEXT,
+                    last_updated TIMESTAMP
+                );
+                """
+            )
+            self.dbcur = self.dbcon.cursor()
+
+        def datetime_workaround(self, data, str_format):
+            try:
+                datetime_object = dt.datetime.strptime(data, str_format)
+            except:
+                datetime_object = dt.datetime(*(time.strptime(data, str_format)[0:6]))
+            return datetime_object
+
+        def insert_or_update_ratings(self, imdb_id, ratings):
+            ratings_data = json.dumps(ratings)
+            self.dbcur.execute(
+                """
+                INSERT OR REPLACE INTO ratings (imdb_id, ratings, last_updated)
+                VALUES (?, ?, ?)
+                """,
+                (imdb_id, ratings_data, dt.datetime.now()),
+            )
+            self.dbcon.commit()
+
+        def get_cached_info(self, imdb_id):
+            self.dbcur.execute(
+                "SELECT imdb_id, ratings, last_updated FROM ratings WHERE imdb_id=?",
+                (imdb_id,),
+            )
+            entry = self.dbcur.fetchone()
+            if entry:
+                _, ratings_data, last_updated = entry
+                ratings = json.loads(ratings_data)
+                last_updated_date = self.datetime_workaround(
+                    last_updated, "%Y-%m-%d %H:%M:%S.%f"
+                )
+                if dt.datetime.now() - last_updated_date < dt.timedelta(days=7):
+                    return ratings
+            return None
+
+        def fetch_info(self, imdb_id, api_key):
+            if not imdb_id or not api_key:
+                return {}
+            cached_info = self.get_cached_info(imdb_id)
+            if cached_info:
+                return cached_info
+            url = f"https://mdblist.com/api/?apikey={api_key}&i={imdb_id}"
+            try:
+                response = requests.get(url)
+                if response.status_code != 200:
+                    return {}
+                json_data = response.json()
+                ratings = json_data.get("ratings", [])
+                data = {}
+                for rating in ratings:
+                    source = rating.get("source")
+                    value = rating.get("value")
+                    if source == "imdb" and value is not None:
+                        data["imdbRating"] = str(value)
+                self.insert_or_update_ratings(imdb_id, data)
+                return data
+            except Exception as e:
+                Helper.logerror(f"IMDb rating fetch error: {e}")
+                return {}
+
+    # Busca a nota e seta na skin
+    api = MDbListAPI()
+    rating_data = api.fetch_info(imdb_id, API_KEY)
+    imdb_rating = rating_data.get("imdbRating", "")
+    if imdb_rating:
+        xbmc.executebuiltin(f'Skin.SetString(Pobreflix.IMDbRating,{imdb_rating})')
+        if debug: Helper.DialogOK(f"IMDb Rating: {imdb_rating}")
+    else:
+        xbmc.executebuiltin('Skin.Reset(Pobreflix.IMDbRating)')
+        if debug: Helper.DialogOK("IMDb Rating não encontrada.")
+    return
 
 ##############################
 #      Helper Functions      #
