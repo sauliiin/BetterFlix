@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="skin.dstealthtv" version="1.21.3" name="DStealthTV" provider-name="DStealth">
+	<requires>
+		<import addon="xbmc.gui" version="5.17.0"/>
+		<import addon="script.dstealth.helper" version="1.1.0"/>
+		<import addon="plugin.video.themoviedb.helper" version="6.8.8"/>
+		<import addon="script.skinshortcuts" version="2.0.1" />
+		<import addon="service.library.data.provider" version="0.4.1" />
+		<import addon="resource.images.studios.white" version="0.0.30" />
+		<import addon="resource.images.moviegenreicons.transparent" version="0.0.6" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="1080i" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="1080i" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">DStealth's changes to Estuary</summary>
+		<description lang="en_GB">This is a skin for Kodi 21-Omega. It attempts to be easy for first time Kodi users to understand and use but with a much more customizable main menu with widgets.</description>
+		<disclaimer lang="en_GB">This skin does not host any streaming content nor does the author take responsibility for any content found.</disclaimer>
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>https://forum.kodi.tv/showthread.php?tid=371037</forum>
+		<website>https://forum.kodi.tv/showthread.php?tid=371037</website>
+		<source>https://dstealth.com/kodi/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot-08.jpg</screenshot>
+		</assets>
+	</extension>
+</addon>

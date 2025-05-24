@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DSTV Changes! -->
+<!-- DSTV: Whole file. -->
+<window>
+	<include content="shutdownmenu_defaultcontrol" condition="String.IsEmpty(Window.Property(ds_shutdownmenu_control))">
+		<param name="id" value="9000" />
+	</include>
+	<include content="shutdownmenu_defaultcontrol" condition="String.IsEqual(Window.Property(ds_shutdownmenu_control),9001)">
+		<param name="id" value="9001" />
+	</include>
+	<include content="shutdownmenu_defaultcontrol" condition="String.IsEqual(Window.Property(ds_shutdownmenu_control),9002)">
+		<param name="id" value="9002" />
+	</include>
+	<onunload>ClearProperty(ds_shutdownmenu_control,shutdownmenu)</onunload>
+	<onunload>ClearProperty(ds_shutdownmenu_back,shutdownmenu)</onunload>
+	<controls>
+		<control type="button">
+			<include>FullscreenDimensions</include>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+			<texturefocus colordiffuse="D0FFFFFF">colors/black.png</texturefocus>
+			<texturenofocus colordiffuse="D0FFFFFF">colors/black.png</texturenofocus>
+			<onup>Control.SetFocus(9000,-1)</onup>
+			<ondown>Control.SetFocus(9000,-1)</ondown>
+		</control>
+		<control type="group">
+			<include>FullscreenDimensions</include>
+			<include>Animation_DialogPopupOpenClose</include>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>600</width>
+				<height>700</height>
+				<!-- POWER MENU -->
+				<control type="group">
+					<visible>String.IsEmpty(Window.Property(ds_shutdownmenu_control))</visible>
+					<include content="ds_titlebar">
+						<param name="header_id" value="2" />
+						<param name="header_label" value="Power Menu" />
+					</include>
+					<control type="panel" id="9000">
+						<include>ButtonMenuList</include>
+						<content>
+							<item>
+								<label>TEST</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindow(1131)</onclick>
+								<visible>false</visible>
+							</item>
+							<item>
+								<!-- Favourites -->
+								<label>$LOCALIZE[1036]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindow(favouritesbrowser)</onclick>
+							</item>
+							<item>
+								<label>Settings..</label>
+								<onclick>SetProperty(ds_shutdownmenu_control,9001,shutdownmenu)</onclick>
+								<onclick>SetProperty(ds_shutdownmenu_back,true)</onclick>
+								<onclick>SetFocus(9001,0)</onclick>
+							</item>
+							<item>
+								<label>Power Options..</label>
+								<onclick>SetProperty(ds_shutdownmenu_control,9002,shutdownmenu)</onclick>
+								<onclick>SetProperty(ds_shutdownmenu_back,true)</onclick>
+								<onclick>SetFocus(9002,0)</onclick>
+							</item>
+							<item>
+								<!-- Reload Skin -->
+								<label>$LOCALIZE[20183]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ReloadSkin()</onclick>
+							</item>
+							<item>
+								<!-- Exit -->
+								<label>$LOCALIZE[13012] Kodi</label>
+								<onclick>Quit()</onclick>
+								<visible>System.ShowExitButton</visible>
+							</item>
+						</content>
+					</control>
+				</control>
+				<!-- SETTINGS OPTIONS -->
+				<control type="group">
+					<visible>String.IsEqual(Window.Property(ds_shutdownmenu_control),9001)</visible>
+					<include content="ds_titlebar">
+						<param name="header_id" value="2" />
+						<param name="header_label" value="Settings Options" />
+					</include>
+					<control type="panel" id="9001">
+						<onup>9001</onup>
+						<ondown>9001</ondown>
+						<include>ButtonMenuList</include>
+						<content>
+							<item>
+								<label>&lt;&lt; ..</label>
+								<onclick>ClearProperty(ds_shutdownmenu_control,shutdownmenu)</onclick>
+								<onclick>SetFocus(9000,1)</onclick>
+								<visible>!String.IsEmpty(Window.Property(ds_shutdownmenu_back))</visible>
+							</item>
+							<item>
+								<!-- Look and feel Settings -->
+								<label>$LOCALIZE[24997] settings</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindowAndFocus(appearancesettings,-100,0,-76,0)</onclick>
+							</item>
+							<item>
+								<!-- Skin Settings -->
+								<label>$LOCALIZE[20077]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindow(skinsettings)</onclick>
+							</item>
+							<item>
+								<!-- Kodi Settings -->
+								<label>Kodi $LOCALIZE[21417]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindow(settings)</onclick>
+							</item>
+						</content>
+					</control>
+				</control>
+				<!-- POWER OPTIONS -->
+				<control type="group">
+					<visible>String.IsEqual(Window.Property(ds_shutdownmenu_control),9002)</visible>
+					<include content="ds_titlebar">
+						<param name="header_id" value="2" />
+						<param name="header_label" value="Power Options" />
+					</include>
+					<control type="panel" id="9002">
+						<onup>9002</onup>
+						<ondown>9002</ondown>
+						<include>ButtonMenuList</include>
+						<content>
+							<item>
+								<label>&lt;&lt; ..</label>
+								<onclick>ClearProperty(ds_shutdownmenu_control,shutdownmenu)</onclick>
+								<onclick>SetFocus(9000,2)</onclick>
+								<visible>!String.IsEmpty(Window.Property(ds_shutdownmenu_back))</visible>
+							</item>
+							<item>
+								<!-- Master mode -->
+								<label>$VAR[MasterModeLabel]</label>
+								<onclick>mastermode</onclick>
+								<visible>System.HasLocks</visible>
+							</item>
+							<item>
+								<!-- Log off <profileName> -->
+								<label>$LOCALIZE[20126] "$INFO[system.profilename]"</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>System.LogOff</onclick>
+								<visible>System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)</visible>
+								<visible>System.Loggedon</visible>
+							</item>
+							<item>
+								<!-- Custom shutdown timer -->
+								<label>$LOCALIZE[20150]</label>
+								<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
+								<visible>!System.HasAlarm(shutdowntimer)</visible>
+								<visible>System.CanPowerDown | System.CanSuspend | System.CanHibernate</visible>
+							</item>
+							<item>
+								<!-- Cancel shutdown timer -->
+								<label>$LOCALIZE[20151] $INFO[System.AlarmPos,(,)]</label>
+								<onclick>CancelAlarm(shutdowntimer)</onclick>
+								<visible>System.HasAlarm(shutdowntimer)</visible>
+							</item>
+							<item>
+								<!-- Inhibit Idle Shutdown -->
+								<label>$LOCALIZE[13017]</label>
+								<onclick>InhibitIdleShutdown(true)</onclick>
+								<visible>System.HasShutdown +!System.IdleShutdownInhibited</visible>
+							</item>
+							<item>
+								<!-- Allow Idle Shutdown -->
+								<label>$LOCALIZE[13018]</label>
+								<onclick>InhibitIdleShutdown(false)</onclick>
+								<visible>System.HasShutdown + System.IdleShutdownInhibited</visible>
+							</item>
+							<item>
+								<!-- Suspend -->
+								<label>$LOCALIZE[13011]</label>
+								<onclick>Suspend()</onclick>
+								<visible>System.CanSuspend</visible>
+							</item>
+							<!-- Hibernate -->
+							<item>
+								<label>$LOCALIZE[13010]</label>
+								<onclick>Hibernate()</onclick>
+								<visible>System.CanHibernate</visible>
+							</item>
+							<item>
+								<!-- Reboot -->
+								<label>$LOCALIZE[13013]</label>
+								<onclick>Reset()</onclick>
+								<visible>System.CanReboot</visible>
+							</item>
+							<item>
+								<!-- Power off system -->
+								<label>$LOCALIZE[13016]</label>
+								<onclick>Powerdown()</onclick>
+								<visible>System.CanPowerDown</visible>
+							</item>
+						</content>
+					</control>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>
