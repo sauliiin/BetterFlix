@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Default Shortcuts Doc: https://github.com/MikeSiLVO/script.skinshortcuts/blob/master/docs/Providing%20default%20shortcuts.md -->
+<!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
+<shortcuts>
+	<shortcut>
+		<defaultID>mm-favourites</defaultID>
+		<label>Favourites</label>
+		<thumb>special://skin/extras/icons/favourites.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-trakt</defaultID>
+		<label>Trakt</label>
+		<thumb>special://skin/extras/icons/trakt.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-movies</defaultID>
+		<label>Movies</label>
+		<thumb>special://skin/extras/icons/movies.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-tvshows</defaultID>
+		<label>TV Shows</label>
+		<thumb>special://skin/extras/icons/tv.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-mymovies</defaultID>
+		<label>My Movies</label>
+		<thumb>special://skin/extras/icons/mymovies.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-mytvshows</defaultID>
+		<label>My TV Shows</label>
+		<thumb>special://skin/extras/icons/mytv.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-livetv</defaultID>
+		<label>Live TV</label>
+		<thumb>special://skin/extras/icons/tv_pvr.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-search</defaultID>
+		<label>Search</label>
+		<thumb>special://skin/extras/icons/search.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-weather</defaultID>
+		<label>Weather</label>
+		<thumb>special://skin/extras/icons/weather.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+</shortcuts>

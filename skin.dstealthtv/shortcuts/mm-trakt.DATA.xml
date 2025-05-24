@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Default Shortcuts Doc: https://github.com/MikeSiLVO/script.skinshortcuts/blob/master/docs/Providing%20default%20shortcuts.md -->
+<!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
+<shortcuts>
+  <shortcut>
+    <label>Recommended Movies</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>Recommended TV Shows</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>Movies Watchlist</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>TV Shows Watchlist</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>TV Shows In-Progress</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+	<shortcut>
+		<label>New TV Episodes</label>
+		<label2 />
+		<icon />
+		<thumb />
+		<action />
+	</shortcut>
+</shortcuts>

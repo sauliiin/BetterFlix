@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- DSTV File! -->
+<includes>
+	<include name='dstv_changelog'>
+		<!-- DO NOT USE double-quotes! -->
+		<onclick>SetProperty(TextViewer_Text,"[B][COLOR powderblue]Like my work? You can buy me a coffee @ [/COLOR][COLOR deepskyblue]https://ko-fi.com/dstealth[/COLOR]
+[B][COLOR orange]Please report bugs on the Kodi forums: [/COLOR][COLOR deepskyblue]https://forum.kodi.tv/showthread.php?tid=371037 [/COLOR][/B]
+
+[B][COLOR gray]2024-06-16: [/COLOR][COLOR lime]v1.21.3[/COLOR][/B]
+	- Added new color themes
+	- Added Trakt menu item as part of default menu items
+	- Added setting to lock Viewtypes via View>Options menu. (wasn't perfect but it's functional)
+	  [COLOR gold]- Please report any bugs on the Kodi Forums thread.[/COLOR]
+	- Added some miscellaneous widget presets to the ''DSTV Default Presets''
+	- Added Skin Settings > Visuals options to control Menu Item &amp; Widget Header text case
+	- Renamed old color themes to more descriptive names
+	- Updated Main Menu colors to apply color themes better
+	- Updated Main Menu items to display visual Up/Down arrows when the menu overflows
+
+[B][COLOR gray]2023-12-14: [COLOR green]v1.21.2[/COLOR][/COLOR][/B]
+	- Added Skin Settings > Visuals option to Preload Fanart for the more powerful machines
+	- Reworked main screen info area and added Age Rating display
+
+[B][COLOR gray]2023-12-12: [COLOR green]v1.21.1[/COLOR][/COLOR][/B]
+	- Merged in fixes from v1.20.1
+	- Reworked prefixed paths for some of the Movie widgets to return better results.
+
+[B][COLOR gray]2023-12-10: [COLOR green]v1.21.0[/COLOR][/COLOR][/B]
+	- UPDATED DStealthTV skin to Kodi 21-Omega changes.
+	- Renamed skin to "DStealthTV" without any Kodi version suffixes. [COLOR red]Sorry, this will reset old menu configurations but it will prevent such scenarios from happening in the future.[/COLOR]
+
+[B][COLOR black]--------------------------------------------------------------------------------------------------------------------------------------------[/COLOR][/B]
+
+[B][COLOR gray]2023-12-14: [COLOR green]v1.20.2[/COLOR][/COLOR][/B]
+	- Added Skin Settings > Visuals option to Preload Fanart for the more powerful machines
+	- Reworked main screen info area and added Age Rating display
+	- Reworked prefixed paths for some of the Movie widgets to return better results.
+
+[B][COLOR gray]2023-12-11: [COLOR green]v1.20.1[/COLOR][/COLOR][/B]
+	- Fixed some views having wrong highlighting and selection colors.
+	- Re-reworked popup dialog for Widget Source.
+
+[B][COLOR gray]2023-12-10: [COLOR green]v1.20.0[/COLOR][/COLOR][/B]
+	- UPDATED DStealthTV skin to Kodi 20-Nexus changes.
+	- Added PVR Timer options to Add Widget-Source menu.
+	- Fixed Power Menu wrap-around scrolling.
+	- Restored a few missing system-dependant Power Menu options.
+	- Updated Video Calibration screen to have better contrast for selected control.
+
+[B][COLOR black]--------------------------------------------------------------------------------------------------------------------------------------------[/COLOR][/B]
+
+[B][COLOR gray]2023-12-09: [B][COLOR green]v1.19.2[/COLOR][/COLOR][/B]
+	- Fixed bug where update notification msg appears when resetting Skin Settings
+	- Fixed main menu slide animations not showing when menu item changes
+	- Fixed Weather Hourly and Forecast widget content being swapped
+	- Modified default Sort Order for Anticipated Movies &amp; TV Shows preset widgets to soonest first
+	- Moved '$LOCALIZE[31095]' setting into Skin Settings > Visuals
+	- Reduced Changelog body text size
+	- Reduced some Menu Icon's sizes to be more uniform with the others
+
+[B][COLOR green]1.19.1[/COLOR][/B]
+	- Added 'DSTV Updated' notification message whenever DSTV is updated.
+	- Added 'View Changelog' to Skin Settings > General page.
+	- Updated Main Menu 'Settings' button to show popup Settings Options menu instead of going straight to Kodi Settings.
+	- Updated Skin Settings > Convenience Settings page to reflect Kodi Settings values.
+
+[B][COLOR green]1.19.0[/COLOR][/B]
+	- Added 5 new menu icons and improved search icon
+	- Added and reorganized a few widget-source options
+	- Added better Netflix-like diffuse for fanart preview with toggleable setting
+	- Added built in IMDb Trailers and 'Play Trailer' context menu option in list views
+	- Added Convenience Settings page in Skin Settings for a list of settings I think make the experience better
+	- Added DSTV Default Presets to the add-widget menu options
+	- Added Live TV PVR default menu-presets and updated add-widget pvr options
+	- Added loading pulser in Add-ons Browser widgets
+	- Added more contrast for On-Screen-Display playback buttons
+	- Added option to display ClearLogo's when available instead of title text
+	- Added option to display widget titles per widget in Menu Editor for Widget Management
+	- Added option to display widget types as Landscape per widget in Menu Editor for Widget Management
+	- Added option to reduce the size of the Watched checkmark size in Skin Settings > Visuals
+	- Added option to use DSTV Helper for IMDb trailers, option also adds a context menu option to 'Play Trailer'
+	- Added support for 'Movie Genre Icons - Transparent' also made it a skin requirement for auto-installation for new installs
+	- Fixed a couple visual bugs on the home screen
+	- Fixed Add-on Browser page color scheme not matching skin-theme
+	- Fixed navigation getting stuck when first menu item has no widgets, menu will now take focus by default
+	- Fixed rating badge in ListView not having enough contrast
+	- Fixed some default widgets not behaving correctly when widget-items clicked on from the main menu
+	- Optimized Skin Settings pages by order the settings alphabetically
+	- Optimized some menu item displays to be quicker and less resource intensive
+	- Optimized Widget Management Dialog ever so slightly
+	- Updated default menu widgets to use TheMovieDb Helper sources since DS-Helper no longer acts as a video add-on
+	- Removed Unnecessary resolutions from addon.xml
+	- Couldn't fix Movie Sets playlist widgets displaying individual movies - script.skinshortcuts issue. Workaround: when setting widget, select: Video Library > Movies > Sets
+	- Updated DialogVideoInfo.xml screen to hide [Play] button if ListItem.Path empty
+	- Updated Skin addon.xml: forumn and source tags to proper public facing addresses
+
+[B][COLOR green]1.0.19[/COLOR][/B]
+	- Initial public release of DSTV Estuary-Mod Skin by DStealth on Kodi Forums
+		",Home)</onclick>
+	</include>
+</includes>
