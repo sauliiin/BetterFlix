@@ -1,79 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- DSTV Changes! -->
-<!-- DSTV: Whole file. -->
 <window>
 	<defaultcontrol>996</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<coordinates>
+		<origin x="712" y="155"/>
+	</coordinates>
 	<controls>
-		<control type="button">
-			<include>FullscreenDimensions</include>
-			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
-			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
-			<texturefocus colordiffuse="D0FFFFFF">colors/black.png</texturefocus>
-			<texturenofocus colordiffuse="D0FFFFFF">colors/black.png</texturenofocus>
-			<onup>Control.SetFocus(996,-1)</onup>
-			<ondown>Control.SetFocus(996,-1)</ondown>
-		</control>
+		<include>ContextFade</include>
 		<control type="group">
-			<include>FullscreenDimensions</include>
-			<include>Animation_DialogPopupOpenClose</include>
-			<control type="group">
-				<centerleft>50%</centerleft>
-				<centertop>50%</centertop>
-				<width>450</width>
-				<height>650</height>
-				<control type="grouplist" id="996">
-					<!-- Set max Height at 10 items (x65). -->
-					<height max="650">auto</height>
-					<usecontrolcoords>true</usecontrolcoords>
-					<control type="button" id="8001">
-						<!-- Browse Widget Folder button -->
-						<height>65</height>
-						<align>center</align>
-						<label>Browse Widget Folder</label>
-						<focusedcolor>background</focusedcolor>
-						<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
-						<texturenofocus colordiffuse="dialog_tint">colors/white.png</texturenofocus>
-						<onclick>ActivateWindow(Videos,"$INFO[Window(home).Property(ds_prop_widgetpath)]",return)</onclick>
-						<visible>Window.IsActive(home) + !String.IsEmpty(Window(home).Property(ds_prop_widgetpath))</visible>
-					</control>
-					<control type="button" id="8002">
-						<!-- Play Trailer button - list views -->
-						<height>65</height>
-						<align>center</align>
-						<label>Play Trailer</label>
-						<focusedcolor>background</focusedcolor>
-						<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
-						<texturenofocus colordiffuse="dialog_tint">colors/white.png</texturenofocus>
-						<onclick>RunScript(script.dstealth.helper, action=trailer, autoplay=true, dbtype=$INFO[ListItem.DBType], imdb=$INFO[ListItem.IMDbNumber], title=$INFO[ListItem.Label], year=$INFO[ListItem.Year])</onclick>
-						<visible>!Window.IsActive(home) + !Skin.HasSetting(dstv_setting_dont_handle_trailers)</visible>
-					</control>
-					<control type="button" id="8003">
-						<!-- Play Trailer button - widget view -->
-						<height>65</height>
-						<align>center</align>
-						<label>Play Trailer</label>
-						<focusedcolor>background</focusedcolor>
-						<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
-						<texturenofocus colordiffuse="dialog_tint">colors/white.png</texturenofocus>
-						<onclick>RunScript(script.dstealth.helper, action=trailer, autoplay=true, dbtype=$INFO[Window(Home).Property(ds_info_dbtype)], imdb=$INFO[Window(Home).Property(ds_info_imdb_id)], title=$INFO[Window(Home).Property(ds_info_title)], year=$INFO[Window(Home).Property(ds_info_dt_year)])</onclick>
-						<visible>Window.IsActive(home) + !Skin.HasSetting(dstv_setting_dont_handle_trailers) + [String.IsEqual(Window(home).Property(ds_info_dbtype),movie) | String.IsEqual(Window(home).Property(ds_info_dbtype),tvshow)]</visible>
-					</control>
-				</control>
-				<include content="UpDownArrows">
-					<!-- arrow dimensions are 48x24 -->
-					<param name="container_id" value="996" />
-					<param name="posx" value="201" />
-					<param name="up_posy" value="-40" />
-					<param name="down_posy" value="666" />
-				</include>
-				<control type="button" id="1000">
-					<!-- button template -->
-					<height>66</height>
-					<align>center</align>
-					<focusedcolor>background</focusedcolor>
-					<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
-					<texturenofocus colordiffuse="dialog_tint">colors/white.png</texturenofocus>
-				</control>
+			<include content="CenterContext">
+				<param name="id" value="996" />
+			</include>
+			<control type="label">
+				<top>-70</top>
+				<left>-225</left>
+				<width>896</width>
+				<height>70</height>
+				<font>font36_title</font>
+				<textcolor>black</textcolor>
+				<align>center</align>
+				<label>$VAR[ContextMenuTitleVar]</label>
+			</control>
+			<control type="button">
+				<left>-1920</left>
+				<top>-1080</top>
+				<width>5760</width>
+				<height>3240</height>
+				<texturefocus />
+				<texturenofocus />
+				<onclick>Action(close)</onclick>
+			</control>
+			<control type="grouplist" id="996">
+				<description>grouplist for context buttons</description>
+				<left>0</left>
+				<top>0</top>
+				<width>446</width>
+				<height max="780">auto</height>
+				<usecontrolcoords>true</usecontrolcoords>
+			</control>
+			<include content="UpDownArrows">
+				<param name="container_id" value="996" />
+				<param name="posx" value="199" />
+				<param name="up_posy" value="-130" />
+				<param name="down_posy" value="790" />
+			</include>
+			<control type="button" id="1000">
+				<description>button template</description>
+				<left>0</left>
+				<top></top>
+				<width>446</width>
+				<height>70</height>
+				<align>center</align>
+				<font>font32</font>
+				<textcolor>white</textcolor>
+				<focusedcolor>black</focusedcolor>
+				<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
+				<texturenofocus />
 			</control>
 		</control>
 	</controls>

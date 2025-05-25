@@ -567,8 +567,6 @@
 		<param name="aspect_ratio"/>
 		<param name="display_type"/>
 		<param name="display_type_isposters"/>
-		<param name="display_type_issquares"/>
-		<param name="display_type_islandscape"/>
 		<definition>
 			<!-- Widget Header -->
 			<control type="group" id="$PARAM[list_id]1">
@@ -715,7 +713,6 @@
 					</control>
 				</itemlayout>
 				<!-- Focused Widget Panels Layout -->
-				<!-- Focused Widget Panels Layout -->
 				<focusedlayout width="$PARAM[widget_width]">
 					<control type="group">
 						<depth>DepthContentPopout</depth>
@@ -750,7 +747,6 @@
 						<onfocus>SetProperty(ds_info_dbtype, $INFO[ListItem.DBType], home)</onfocus>
 						</control>
 
-						<!-- Selection Box for Squares & Posters -->
 						<control type="image">
 						<visible>Control.HasFocus($PARAM[list_id]) + !$PARAM[display_type_islandscape]</visible>
 						<left>-3%</left>
