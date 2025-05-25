@@ -105,7 +105,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">emalta</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_trending&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trending_week&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
 			<property name="widgetSortBy">year</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
@@ -467,12 +467,14 @@
 		<control type="grouplist" id="50000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
-			<left>10</left>
-			<top>51%</top>
+			<left>50</left>
+			<top>52%</top>
 			<width>100%</width>
-			<height>49%</height>
+			<height>38%</height>
 			<scrolltime tween="linear" easing="in">250</scrolltime>
 			<orientation>vertical</orientation>
+			<wrap>true</wrap>
+			<wraparound>true</wraparound>
 			<itemgap>-40</itemgap>
 			<usecontrolcoords>true</usecontrolcoords>
 			<include content="ds_widgetPanelList">
@@ -524,7 +526,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50203" />
 				<param name="widget_header" value="Em Alta" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_trending&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trending_week&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
 				<param name="sortby" value="year" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -700,12 +702,14 @@
 		<control type="grouplist" id="50000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
-			<left>10</left>
-			<top>51%</top>
+			<left>50</left>
+			<top>52%</top>
 			<width>100%</width>
-			<height>49%</height>
+			<height>38%</height>
 			<scrolltime tween="linear" easing="in">250</scrolltime>
 			<orientation>vertical</orientation>
+			<wrap>true</wrap>
+			<wraparound>true</wraparound>
 			<itemgap>-40</itemgap>
 			<usecontrolcoords>true</usecontrolcoords>
 			<include content="ds_widgetPanelList">
@@ -887,12 +891,14 @@
 		<control type="grouplist" id="50000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
-			<left>10</left>
-			<top>51%</top>
+			<left>50</left>
+			<top>52%</top>
 			<width>100%</width>
-			<height>49%</height>
+			<height>38%</height>
 			<scrolltime tween="linear" easing="in">250</scrolltime>
 			<orientation>vertical</orientation>
+			<wrap>true</wrap>
+			<wraparound>true</wraparound>
 			<itemgap>-40</itemgap>
 			<usecontrolcoords>true</usecontrolcoords>
 			<include content="ds_widgetPanelList">
@@ -1120,12 +1126,14 @@
 		<control type="grouplist" id="50000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streaming)</visible>
-			<left>10</left>
-			<top>51%</top>
+			<left>50</left>
+			<top>52%</top>
 			<width>100%</width>
-			<height>49%</height>
+			<height>38%</height>
 			<scrolltime tween="linear" easing="in">250</scrolltime>
 			<orientation>vertical</orientation>
+			<wrap>true</wrap>
+			<wraparound>true</wraparound>
 			<itemgap>-40</itemgap>
 			<usecontrolcoords>true</usecontrolcoords>
 			<include content="ds_widgetPanelList">

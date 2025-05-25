@@ -94,6 +94,7 @@
         <scrolltime tween="linear" easing="in">250</scrolltime>
         <orientation>vertical</orientation>
         <wrap>true</wrap>
+        <wraparound>true</wraparound>
         <!-- Negative value for containing widget header -->
         <itemgap>-40</itemgap>
         <usecontrolcoords>true</usecontrolcoords>
