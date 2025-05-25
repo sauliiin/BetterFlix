@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+  <!-- Property Groups -->
+  <!-- Pulls the xml-tag's value from the Mainmenu as a property for use with $SKINSHORTCUTS[].
+      Example:
+        MAIN MENU Item has:
+          <label>Kodi</label>
+          <property name="old">Xbmc</property>
+        PROPERTY set to:
+          <property name="newName" tag="label" />
+          <property name="oldName" tag="property" attribute="name|old" />
+        USAGE in Submenu:
+          $SKINSHORTCUTS[newName] => Kodi
+          $SKINSHORTCUTS[oldName] => Xbmc
+    -->
+
+  <propertyGroup name="MainMenuProps">
+    <property name="menuid" tag="mainmenuid" />
+    <property name="menugroup" tag="property" attribute="name|labelID" />
+    <property name="menulabel" tag="label" />
+    <property name="menulabel2" tag="label2" />
+    <property name="menuicon" tag="icon" />
+    <property name="menuthumb" tag="thumb" />
+    <property name="menuonclick" tag="onclick" />
+    <property name="menulist" tag="property" attribute="name|list" />
+    <property name="offset_id">$PYTHON[$SKINSHORTCUTS[menuid]-1]</property>
+    <property name="padded_id">$PYTHON['%02d' % $SKINSHORTCUTS[menuid]]</property>
+  </propertyGroup>
+
+  <propertyGroup name="SubMenuProps">
+    <property name="label" tag="label" />
+    <property name="visible" tag="visible" />
+    <property name="smid" tag="mainmenuid" />
+    <property name="mmid" tag="property" attribute="name|mainmenuid" />
+    <property name="contentPath" tag="property" attribute="name|widgetPath" />
+    <property name="target" tag="property" attribute="name|widgetTarget" />
+    <property name="type" tag="property" attribute="name|widgetType" />
+    <property name="sortby" tag="property" attribute="name|widgetSortBy" />
+    <property name="sortorder" tag="property" attribute="name|widgetSortOrder" />
+    <property name="limit" tag="property" attribute="name|widgetLimit" />
+    
+    <property name="padded_smid">$PYTHON['%02d' % $SKINSHORTCUTS[smid]]</property>
+    <property name="padded_mmid">$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]</property>
+    
+    <property name="width" tag="property" attribute="name|displayType" value="squares">200</property>
+    <property name="width" tag="property" attribute="name|displayType" value="landscape">444</property>
+    <property name="width">200</property>
+    <property name="height" tag="property" attribute="name|displayType" value="squares">200</property>
+    <property name="height" tag="property" attribute="name|displayType" value="landscape">250</property>
+    <property name="height">300</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="squares">210</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">454</property>
+    <property name="widget_width">210</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="squares">300</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">350</property>
+    <property name="widget_height">400</property>
+    <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">keep</property>
+    <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
+    <property name="aspect_ratio">keep</property>
+    <property name="display_titles" tag="property" attribute="name|displayTitles" value="true">true</property>
+    <property name="display_titles">false</property>
+    <property name="display_type" tag="property" attribute="name|displayType" value="squares">squares</property>
+    <property name="display_type" tag="property" attribute="name|displayType" value="landscape">landscape</property>
+    <property name="display_type">posters</property>
+    <property name="display_type_isposters" tag="property" attribute="name|displayType" value="squares">false</property>
+    <property name="display_type_isposters" tag="property" attribute="name|displayType" value="landscape">false</property>
+    <property name="display_type_isposters">true</property>
+    <property name="display_type_issquares" tag="property" attribute="name|displayType" value="squares">true</property>
+    <property name="display_type_issquares">false</property>
+    <property name="display_type_islandscape" tag="property" attribute="name|displayType" value="landscape">true</property>
+    <property name="display_type_islandscape">false</property>
+    <property name="pvr_tv_rec_status" tag="property" attribute="name|widgetPath" value="dstv_ss_pvr_tv_recording_status">true</property>
+    <property name="pvr_tv_rec_status">false</property>
+    <property name="w_cond" tag="property" attribute="name|widgetPath" value="dstv_ss_weather_conditions">true</property>
+    <property name="w_cond">false</property>
+    <property name="w_forc" tag="property" attribute="name|widgetPath" value="dstv_ss_weather_forecast">true</property>
+    <property name="w_forc">false</property>
+    <property name="w_hour" tag="property" attribute="name|widgetPath" value="dstv_ss_weather_hourly">true</property>
+    <property name="w_hour">false</property>
+  </propertyGroup>
+
+  <submenu include="ss_widgets">
+    <propertyGroup>MainMenuProps</propertyGroup>
+    
+    <controls>
+      <control type="grouplist" id="50000">
+        <include>Visible_Right</include>
+        <!-- only one of "50000" will be visible at any time -->
+        <skinshortcuts>visibility</skinshortcuts>
+        <left>50</left>
+        <top>52%</top>
+        <width>100%</width>
+        <height>38%</height>
+        <scrolltime tween="linear" easing="in">250</scrolltime>
+        <orientation>vertical</orientation>
+        <wrap>true</wrap>
+        <wraparound>true</wraparound>
+        <!-- Negative value for containing widget header -->
+        <itemgap>-40</itemgap>
+        <usecontrolcoords>true</usecontrolcoords>
+        <!-- Widget Panels -->
+        <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
+        <!-- Empty Menu Item button -->
+        <control type="button" id="59999">
+          <visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
+          <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+          <left>400</left>
+          <right>400</right>
+          <height>150</height>
+          <align>center</align>
+          <aligny>center</aligny>
+          <label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
+          <wrapmultiline>true</wrapmultiline>
+          <onup>50000</onup>
+          <ondown>50000</ondown>
+          <onleft>9000</onleft>
+          <onright>9000</onright>
+          <onback>9000</onback>
+          <onclick>ActivateWindowAndFocus(skinsettings,9000,1,8201,0)</onclick>
+          <onfocus>SetProperty(ds_mainmenu_hidden,true,home)</onfocus>
+          <onfocus>ClearProperty(ds_info_title)</onfocus>
+          <onfocus>ClearProperty(ds_info_dt_premier)</onfocus>
+          <onfocus>ClearProperty(ds_info_dt_date)</onfocus>
+          <onfocus>ClearProperty(ds_info_dt_year)</onfocus>
+          <onfocus>ClearProperty(ds_info_duration)</onfocus>
+          <onfocus>ClearProperty(ds_info_rating)</onfocus>
+          <onfocus>ClearProperty(ds_info_agerating)</onfocus>
+          <onfocus>ClearProperty(ds_info_studio)</onfocus>
+          <onfocus>ClearProperty(ds_info_genre)</onfocus>
+          <onfocus>ClearProperty(ds_info_tagline)</onfocus>
+          <onfocus>ClearProperty(ds_info_desc)</onfocus>
+          <onfocus>ClearProperty(ds_info_weather)</onfocus>
+          <onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
+          <onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+          <onfocus>ClearProperty(ds_info_clearlogo)</onfocus>
+          <onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
+          <onfocus>ClearProperty(ds_info_dbtype)</onfocus>
+          <texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>
+          <texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
+        </control>
+      </control>
+    </controls>
+    
+    <items insert="SubMenuPanels">
+      <propertyGroup>SubMenuProps</propertyGroup>
+      <controls>
+          <include content="ds_widgetPanelList">
+            <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
+            <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
+            <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
+            <param name="sortby" value="$SKINSHORTCUTS[sortby]" />
+            <param name="sortorder" value="$SKINSHORTCUTS[sortorder]" />
+            <param name="limit" value="$SKINSHORTCUTS[limit]" />
+            <param name="widget_target" value="$SKINSHORTCUTS[target]" />
+            <param name="width" value="$SKINSHORTCUTS[width]" />
+            <param name="height" value="$SKINSHORTCUTS[height]" />
+            <param name="widget_width" value="$SKINSHORTCUTS[widget_width]" />
+            <param name="widget_height" value="$SKINSHORTCUTS[widget_height]" />
+            <param name="aspect_ratio" value="$SKINSHORTCUTS[aspect_ratio]" />
+            <param name="display_titles" value="$SKINSHORTCUTS[display_titles]" />
+            <param name="display_type" value="$SKINSHORTCUTS[display_type]" />
+            <param name="display_type_isposters" value="$SKINSHORTCUTS[display_type_isposters]" />
+            <param name="display_type_issquares" value="$SKINSHORTCUTS[display_type_issquares]" />
+            <param name="display_type_islandscape" value="$SKINSHORTCUTS[display_type_islandscape]" />
+            <param name="pvr_tv_rec_status" value="$SKINSHORTCUTS[pvr_tv_rec_status]" />
+            <param name="w_cond" value="$SKINSHORTCUTS[w_cond]" />
+            <param name="w_hour" value="$SKINSHORTCUTS[w_hour]" />
+            <param name="w_forc" value="$SKINSHORTCUTS[w_forc]" />
+          </include>
+      </controls>
+    </items>
+    
+  </submenu>
+
+</template>

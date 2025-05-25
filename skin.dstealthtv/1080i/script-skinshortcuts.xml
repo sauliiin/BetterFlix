@@ -326,14 +326,6 @@
                   <label2>[COLOR grey]$INFO[Container(211).ListItem.Property(widgetName)][/COLOR]</label2>
                   <enable>!String.IsEqual(Container(211).ListItem.Label,&lt;None&gt;)</enable>
                 </control>
-                <!-- Widget Display -->
-                <control type="button" id="9101">
-                  <include>DefaultSettingButton</include>
-                  <label>Widget Display</label>
-                  <onfocus>SetProperty(ds_setdesc, "Set the widget to display content as Posters or Squares.")</onfocus>
-                  <label2>[COLOR selected]$VAR[ds_WidgetDisplayVar][/COLOR]</label2>
-                  <enable>!String.IsEmpty(Container(211).ListItem.Property(widgetPath))</enable>
-                </control>
                 <!-- Sort By -->
                 <control type="button" id="9102">
                   <include>DefaultSettingButton</include>

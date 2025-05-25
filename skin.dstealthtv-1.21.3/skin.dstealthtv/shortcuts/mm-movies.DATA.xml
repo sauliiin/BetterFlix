@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Default Shortcuts Doc: https://github.com/MikeSiLVO/script.skinshortcuts/blob/master/docs/Providing%20default%20shortcuts.md -->
+<!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
+<shortcuts>
+  <shortcut>
+    <label>Anticipated Movies</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>In Theatres</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>New Movies</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>Popular New Movies</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+  <shortcut>
+    <label>Popular Movies</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+	<shortcut>
+		<label>Top Rated</label>
+		<label2 />
+		<icon />
+		<thumb />
+		<action />
+	</shortcut>
+	<shortcut>
+		<label>Most Voted</label>
+		<label2 />
+		<icon />
+		<thumb />
+		<action />
+	</shortcut>
+	<shortcut>
+		<label>Movie Genres</label>
+		<label2 />
+		<icon />
+		<thumb />
+		<action />
+	</shortcut>
+</shortcuts>

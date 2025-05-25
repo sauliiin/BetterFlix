@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DSTV File! -->
+<window type="dialog" id="1132">
+	<include content="ds_dialog_yesno">
+		<param name="window_id" value="1132" />
+		<param name="title" value="Reset 1st Run Prompt" />
+		<param name="msg" value="Are you sure you want the 1st run prompt to re-appear on the Home screen?" />
+		<param name="yes_onclick1">Skin.Reset(ds-1strun-done)</param>
+		<param name="yes_onclick2">Notification(1st Run Prompt, Prompt will appear on Home screen!)</param>
+		<param name="yes_onclick3"></param>
+		<param name="yes_onclick4"></param>
+		<param name="yes_cond1">true</param>
+		<param name="yes_cond2">true</param>
+		<param name="yes_cond3">true</param>
+		<param name="yes_cond4">true</param>
+	</include>
+</window>

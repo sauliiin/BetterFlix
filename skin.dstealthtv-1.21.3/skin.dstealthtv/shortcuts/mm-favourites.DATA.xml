@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Default Shortcuts Doc: https://github.com/MikeSiLVO/script.skinshortcuts/blob/master/docs/Providing%20default%20shortcuts.md -->
+<!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
+<shortcuts>
+	<shortcut>
+		<label>My Favourites</label>
+		<label2 />
+		<icon />
+		<action />
+	</shortcut>
+  <shortcut>
+    <label>Android Apps</label>
+    <label2 />
+    <icon />
+    <action />
+  </shortcut>
+</shortcuts>

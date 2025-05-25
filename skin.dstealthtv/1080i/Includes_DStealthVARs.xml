@@ -89,6 +89,11 @@
 		<value condition="!String.IsEmpty(Window(home).Property(ds_infoRat))">$INFO[Window(home).Property(ds_infoRat)]</value>
 		<value></value>
 	</variable>
+	<variable name="ds_infoRatingv">
+		<value condition="!String.IsEmpty(ListItem.RatingAndVotes)">$INFO[ListItem.RatingAndVotes,Rating: ]</value>
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_ratingv))">$INFO[Window(home).Property(ds_info_ratingv),Rating: ]</value>
+		<value></value>
+	</variable>
 	<variable name="ds_infoAgeRating">
 		<value condition="!String.IsEmpty(ListItem.Mpaa)">[B][ $INFO[ListItem.Mpaa] ][/B]</value>
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_agerating))">[B][ $INFO[Window(home).Property(ds_info_agerating)] ][/B]</value>

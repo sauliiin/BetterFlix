@@ -115,11 +115,13 @@
 						<visible>Integer.IsGreater(Playlist.Length(video),1)</visible>
 					</control>
 					<control type="radiobutton" id="70043">
+						<width>56</width>
+						<height>56</height>
 						<include content="OSDButton">
 							<param name="texture" value="osd/fullscreen/buttons/information.png"/>
 						</include>
 						<onclick>Info</onclick>
-						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="150" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
 					</control>
 					<control type="radiobutton" id="70045">
 						<include content="OSDButton">

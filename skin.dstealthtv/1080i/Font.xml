@@ -46,6 +46,11 @@
 			<size>16</size>
 		</font>
 		<font>
+			<name>netSssp</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>22</size>
+		</font>
+		<font>
 			<name>netSp</name>
 			<filename>Netflix-sans-bold.ttf</filename>
 			<size>18</size>
