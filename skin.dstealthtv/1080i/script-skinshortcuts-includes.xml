@@ -464,7 +464,7 @@
 		<include condition="String.IsEqual(System.ProfileName,Mestre Yoda)">skinshortcuts-template-ss_widgets-Mestre Yoda</include>
 		</include>
 	<include name="skinshortcuts-template-ss_widgets-Mestre Yoda">
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="51000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<left>50</left>
@@ -661,8 +661,8 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
+			<control type="button" id="50010">
+				<visible>Integer.IsLess(Container(51000).NumItems,2)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
 				<left>400</left>
 				<right>400</right>
@@ -671,8 +671,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>51000</onup>
+				<ondown>51000</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -699,7 +699,7 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="51001">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<left>50</left>
@@ -850,8 +850,8 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
+			<control type="button" id="50011">
+				<visible>Integer.IsLess(Container(51001).NumItems,2)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
 				<left>400</left>
 				<right>400</right>
@@ -860,8 +860,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>51001</onup>
+				<ondown>51001</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -888,7 +888,7 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="51002">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<left>50</left>
@@ -1085,8 +1085,8 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
+			<control type="button" id="50012">
+				<visible>Integer.IsLess(Container(51002).NumItems,2)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
 				<left>400</left>
 				<right>400</right>
@@ -1095,8 +1095,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>51002</onup>
+				<ondown>51002</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -1123,7 +1123,7 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="51003">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streaming)</visible>
 			<left>50</left>
@@ -1274,8 +1274,8 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
+			<control type="button" id="50013">
+				<visible>Integer.IsLess(Container(51003).NumItems,2)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
 				<left>400</left>
 				<right>400</right>
@@ -1284,8 +1284,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>51003</onup>
+				<ondown>51003</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
