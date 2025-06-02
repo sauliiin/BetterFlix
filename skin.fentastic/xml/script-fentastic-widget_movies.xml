@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="MovieWidgets">
+        <include content="WidgetListBigLandscape">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32476&amp;iconImage=player.png&amp;mode=build_movie_list&amp;action=in_progress_movies"/>
+            <param name="widget_header" value="Assistindo"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19011"/>
+        </include>
+        <include content="WidgetListLandscape">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_movie_list&amp;action=trakt_watchlist&amp;name=Movies&amp;iconImage=%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Forg.xbmc.kodi%2Ffiles%2F.kodi%2Faddons%2Fplugin.video.pov%2Fresources%2Fmedia%2Ftrakt.png"/>
+            <param name="widget_header" value="Para Assistir"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19012"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32459&amp;iconImage=popular.png&amp;mode=build_movie_list&amp;action=tmdb_movies_popular"/>
+            <param name="widget_header" value="Popular"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19013"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies"/>
+            <param name="widget_header" value="Em Alta"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19014"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=user_lists&amp;name=Lastest+movie+releases"/>
+            <param name="widget_header" value="Lançamentos"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19015"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=mestreyodarossi&amp;slug=can-t-go-wrong-movies&amp;list_id=31640422&amp;list_type=my_lists&amp;name=Can%27t+go+wrong+movies"/>
+            <param name="widget_header" value="Can't go Wrong"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19016"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=mestreyodarossi&amp;slug=recomendacoes-para-voce-couchmoney-tv&amp;list_id=31320545&amp;list_type=my_lists&amp;name=Recomenda%C3%A7%C3%B5es+Para+Voc%C3%AA+%5Bcouchmoney.tv%5D"/>
+            <param name="widget_header" value="Recomendações para Você "/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19017"/>
+        </include>
+        <include content="WidgetListBigLandscape">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32475&amp;iconImage=watched.png&amp;mode=build_movie_list&amp;action=watched_movies"/>
+            <param name="widget_header" value="Assistidos Recentemente"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19018"/>
+        </include>
+    </include>
+</includes>

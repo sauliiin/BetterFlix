@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="Custom2Widgets">
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-filmes&amp;list_id=99492&amp;list_type=user_lists&amp;name=Netflix++filmes"/>
+            <param name="widget_header" value="Netflix"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24011"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-filmes&amp;list_id=99493&amp;list_type=user_lists&amp;name=Amazon+filmes"/>
+            <param name="widget_header" value="Amazon Prime"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24012"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=hbo-max-6x02vndwnv&amp;list_id=97189&amp;list_type=user_lists&amp;name=HBO+Max"/>
+            <param name="widget_header" value="HBO Max"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24013"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=garycrawfordgc&amp;slug=hulu-movies&amp;list_id=3096&amp;name=Hulu+Movies"/>
+            <param name="widget_header" value="Hulu "/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24014"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=sig1878&amp;slug=movies-paramount-plus&amp;list_id=22660908&amp;list_type=liked_lists&amp;name=Movies+-+Paramount+Plus"/>
+            <param name="widget_header" value="Paramount +"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24015"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=smoothtk09&amp;slug=starz-movies&amp;list_id=28266418&amp;list_type=liked_lists&amp;name=Starz+Movies"/>
+            <param name="widget_header" value="Starz "/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="24016"/>
+        </include>
+    </include>
+</includes>

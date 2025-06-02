@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="Custom1Widgets">
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=user_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura"/>
+            <param name="widget_header" value="Ação e Aventura"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23011"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=animacao&amp;list_id=100436&amp;list_type=user_lists&amp;name=Anima%C3%A7%C3%A3o"/>
+            <param name="widget_header" value="Animação"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23012"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=best-ever&amp;list_id=92577&amp;list_type=user_lists&amp;name=Best+ever"/>
+            <param name="widget_header" value="Best ever - IMDB"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23013"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_movie_list&amp;action=tmdb_movies_genres&amp;genre_id=14&amp;name=Fantasy&amp;iconImage=%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Forg.xbmc.kodi%2Ffiles%2F.kodi%2Faddons%2Fplugin.video.pov%2Fresources%2Fmedia%2Fgenres.png"/>
+            <param name="widget_header" value="Fantasia"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23014"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=sci-fi&amp;list_id=99440&amp;list_type=user_lists&amp;name=Sci-Fi"/>
+            <param name="widget_header" value="Ficçao Científica"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23015"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=horror&amp;list_id=92573&amp;list_type=user_lists&amp;name=Horror"/>
+            <param name="widget_header" value="Horror"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23016"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=super-herois&amp;list_id=99449&amp;list_type=user_lists&amp;name=Super+Her%C3%B3is"/>
+            <param name="widget_header" value="Super Heróis"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23017"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=user_lists&amp;name=Suspense"/>
+            <param name="widget_header" value="Suspense"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23018"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=zombies-and-outbreak&amp;list_id=94403&amp;list_type=user_lists&amp;name=Zombies+and+Outbreak"/>
+            <param name="widget_header" value="Zombies and Outbreak"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="23019"/>
+        </include>
+    </include>
+</includes>

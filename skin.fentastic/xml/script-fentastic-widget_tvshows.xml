@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="TVShowWidgets">
+        <include content="WidgetListBigLandscape">
+            <param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv"/>
+            <param name="widget_header" value="Assistindo"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22011"/>
+        </include>
+        <include content="WidgetListEpisodes">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32483&amp;iconImage=next_episodes.png&amp;mode=build_next_episode"/>
+            <param name="widget_header" value="Próximos Episódios"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22012"/>
+        </include>
+        <include content="WidgetListBigLandscape">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_tvshow_list&amp;action=trakt_watchlist&amp;name=TV+Shows&amp;iconImage=%2Fstorage%2Femulated%2F0%2FAndroid%2Fdata%2Forg.xbmc.kodi%2Ffiles%2F.kodi%2Faddons%2Fplugin.video.pov%2Fresources%2Fmedia%2Ftrakt.png"/>
+            <param name="widget_header" value="Para Assistir"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22013"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_movie_list&amp;action=trakt_movies_trending_recent"/>
+            <param name="widget_header" value="Em Alta"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22014"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=series-cant-go-wrong&amp;list_id=101250&amp;list_type=user_lists&amp;name=Series+can%27t+go+wrong"/>
+            <param name="widget_header" value="Can't go Wrong"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22015"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-series&amp;list_id=99489&amp;list_type=user_lists&amp;name=Netflix+Series"/>
+            <param name="widget_header" value="Netflix"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22016"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-prime&amp;list_id=99490&amp;list_type=user_lists&amp;name=Amazon+Prime"/>
+            <param name="widget_header" value="Amazon Prime"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22017"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=disney-series&amp;list_id=100560&amp;list_type=user_lists&amp;name=Disney%2B+S%C3%A9ries"/>
+            <param name="widget_header" value="Disney + "/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22018"/>
+        </include>
+        <include content="WidgetListBigLandscape">
+            <param name="content_path" value="plugin://plugin.video.pov/?name=32475&amp;iconImage=watched.png&amp;mode=build_tvshow_list&amp;action=watched_tvshows"/>
+            <param name="widget_header" value="Assistidos Recentemente"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22019"/>
+        </include>
+    </include>
+</includes>
