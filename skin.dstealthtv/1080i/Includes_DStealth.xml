@@ -284,6 +284,38 @@
 			</control>
 		</definition>
 	</include>
+		<include name="ds_power">
+		<param name="height">100</param>
+		<param name="onunfocus">SetProperty(ds_setdesc,)</param>
+		<param name="enable">true</param>
+		<param name="visible">true</param>
+		<definition>
+			<control type="radiobutton" id="$PARAM[control_id]">
+				<width>100</width>
+				<height>$PARAM[height]</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<onfocus>$PARAM[onfocus]</onfocus>
+				<onunfocus>$PARAM[onunfocus]</onunfocus>
+				<onclick>$PARAM[onclick]</onclick>
+				<onclick>$PARAM[onclick_2]</onclick>
+				<font></font>
+				<label>$PARAM[label]</label>
+				<texturefocus />
+				<texturenofocus />
+				<radioposx>40</radioposx>
+				<radioposy>0</radioposy>
+				<radiowidth>30</radiowidth>
+				<radioheight>30</radioheight>
+				<textureradioonfocus colordiffuse="selected">$PARAM[icon]</textureradioonfocus>
+				<textureradioonnofocus colordiffuse="grey">$PARAM[icon]</textureradioonnofocus>
+				<textureradioofffocus colordiffuse="selected">$PARAM[icon]</textureradioofffocus>
+				<textureradiooffnofocus colordiffuse="grey">$PARAM[icon]</textureradiooffnofocus>
+				<enable>$PARAM[enable]</enable>
+				<visible>$PARAM[visible]</visible>
+			</control>
+		</definition>
+	</include>
 	<include name="shutdownmenu_defaultcontrol">
 		<definition>
 			<defaultcontrol>$PARAM[id]</defaultcontrol>

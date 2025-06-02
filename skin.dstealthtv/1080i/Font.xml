@@ -22,23 +22,56 @@
 		<font>
 			<name>netN</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>28</size>
+			<size>26</size>
+		</font>
+		<font>
+			<name>netteste</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>68</size>
 		</font>
 		<font>
 			<name>netB</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>33</size>
+			<size>26</size>
 			<style>bold</style>
 		</font>
 		<font>
 			<name>netS</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>26</size>
+			<size>27</size>
+		</font>
+		<font>
+			<name>netSd</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>22</size>
+		</font>
+		<font>
+			<name>netSb</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>24</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>fontOSD</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>29</size>
+		</font>
+		<font>
+			<name>fontOSDb</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>28</size>
+			<style>bold</style>
 		</font>
 		<font>
 			<name>netSs</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>19</size>
+			<size>22</size>
+		</font>
+		<font>
+			<name>netSsT</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>20</size>
+			<style>bold</style>
 		</font>
 		<font>
 			<name>netSss</name>
@@ -48,12 +81,18 @@
 		<font>
 			<name>netSssp</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>22</size>
+			<size>19</size>
 		</font>
 		<font>
 			<name>netSp</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>18</size>
+			<size>23</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>netuser</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>19</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -101,6 +140,11 @@
 			<size>25</size>
 		</font>
 		<font>
+			<name>font27l</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
 			<name>font27_narrow</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>25</size>
@@ -110,6 +154,12 @@
 			<name>font32</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>30</size>
+		</font>
+		<font>
+			<name>font32b</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>31</size>
+			<style>bold</style>
 		</font>
 		<font>
 			<name>font37</name>
@@ -128,20 +178,19 @@
 		</font>
 		<font>
 			<name>font_clock</name>
-			<filename>Roboto-Thin.ttf</filename>
-			<size>62</size>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>60</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>
 			<name>font_flag</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>16</size>
-			<style>bold</style>
 		</font>
 		<font>
 			<name>widget_label</name>
-			<filename>Netflix-sans-medium.ttf</filename>
-			<size>24</size>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>28</size>
 		</font>
 		<font>
 			<name>font15_title</name>
@@ -180,6 +229,12 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>font36_titleb</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>34</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>font40_title</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>32</size>
@@ -198,9 +253,15 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>font_MainMenuT</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>90</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>font_MainMenu</name>
-			<filename>Netflix-sans-medium.ttf</filename>
-			<size>52</size>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>50</size>
 			<style>bold</style>
 		</font>
 		<font>

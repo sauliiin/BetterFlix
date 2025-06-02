@@ -42,21 +42,21 @@
     <property name="padded_smid">$PYTHON['%02d' % $SKINSHORTCUTS[smid]]</property>
     <property name="padded_mmid">$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]</property>
     
-    <property name="width" tag="property" attribute="name|displayType" value="squares">200</property>
+    <property name="width" tag="property" attribute="name|displayType" value="squares">214</property>
     <property name="width" tag="property" attribute="name|displayType" value="landscape">444</property>
-    <property name="width">200</property>
-    <property name="height" tag="property" attribute="name|displayType" value="squares">200</property>
+    <property name="width">212</property>
+    <property name="height" tag="property" attribute="name|displayType" value="squares">214</property>
     <property name="height" tag="property" attribute="name|displayType" value="landscape">250</property>
-    <property name="height">300</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="squares">210</property>
+    <property name="height">322</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="squares">225</property>
     <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">454</property>
-    <property name="widget_width">210</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="squares">300</property>
+    <property name="widget_width">225</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="squares">322</property>
     <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">350</property>
-    <property name="widget_height">400</property>
-    <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">keep</property>
+    <property name="widget_height">430</property>
+    <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">stretch</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
-    <property name="aspect_ratio">keep</property>
+    <property name="aspect_ratio">stretch</property>
     <property name="display_titles" tag="property" attribute="name|displayTitles" value="true">true</property>
     <property name="display_titles">false</property>
     <property name="display_type" tag="property" attribute="name|displayType" value="squares">squares</property>
@@ -87,10 +87,10 @@
         <include>Visible_Right</include>
         <!-- only one of "50000" will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
-        <left>50</left>
-        <top>52%</top>
+        <left>0</left>
+        <top>54%</top>
         <width>100%</width>
-        <height>38%</height>
+        <height>440</height>
         <scrolltime tween="linear" easing="in">250</scrolltime>
         <orientation>vertical</orientation>
         <wrap>true</wrap>
@@ -104,7 +104,7 @@
         <control type="button" id="59999">
           <visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
           <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
-          <left>400</left>
+          <left>500</left>
           <right>400</right>
           <height>150</height>
           <align>center</align>

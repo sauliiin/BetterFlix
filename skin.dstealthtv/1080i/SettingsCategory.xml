@@ -37,14 +37,14 @@
 				<top>130</top>
 				<right>0</right>
 				<height>2</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="red" border="2">dialogs/separator-grey.png</texture>
 			</control>
 			<control type="image">
 				<left>470</left>
 				<bottom>135</bottom>
 				<right>0</right>
 				<height>2</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="red" border="2">dialogs/separator-grey.png</texture>
 			</control>
 		</control>
 		<control type="button" id="7">
@@ -115,7 +115,7 @@
 				<font>font37</font>
 				<!-- DSTV: focusedcolor background -->
 				<focusedcolor>background</focusedcolor>
-				<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
+				<texturefocus colordiffuse="red">lists/focus.png</texturefocus>
 				<texturenofocus />
 			</control>
 		</control>
@@ -157,7 +157,7 @@
 				<onclick>SettingsLevelChange</onclick>
 				<textoffsetx>100</textoffsetx>
 				<textoffsety>0</textoffsety>
-				<texturefocus colordiffuse="button_focus">colors/white.png</texturefocus>
+				<texturefocus colordiffuse="FFE50914">colors/white.png</texturefocus>
 				<texturenofocus />
 				<radioposx>40</radioposx>
 				<radioposy>0</radioposy>

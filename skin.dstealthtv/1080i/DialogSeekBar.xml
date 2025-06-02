@@ -4,13 +4,17 @@
 	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
 	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
 	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | !String.IsEmpty(Player.SeekNumeric) | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
-	<include>Animation_BottomSlide</include>
+	<animation type="WindowOpen" reversible="False">
+		<effect type="fade" start="0" end="100" time="300"/>
+	</animation>
+	<animation type="WindowClose" reversible="False">
+		<effect type="fade" start="100" end="0" time="300"/>
+	</animation>
 	<depth>DepthOSD</depth>
 	<zorder>0</zorder>
 	<controls>
 		<include>PVRChannelNumberInput</include>
 		<control type="group">
-			<animation effect="slide" start="0,200" end="0,0" time="300" tween="cubic" easing="out">VisibleChange</animation>
 			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | ![!String.IsEmpty(Player.SeekNumeric) | Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
 			<visible>!Player.HasGame</visible>
 			<bottom>0</bottom>
@@ -157,14 +161,34 @@
 				</control>
 			</control>
 			<control type="label">
-				<centerleft>50%</centerleft>
-				<centertop>125</centertop>
-				<width>50%</width>
+				<top>54</top>
+				<left>225</left>
+				<width>134</width>
 				<height>60</height>
+				<label>$INFO[Player.Time]</label>
+				<font>fontOSD</font>
 				<align>center</align>
-				<aligny>top</aligny>
-				<label>$VAR[SeekTimeLabelVar]</label>
-				<font>font45</font>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
+			</control>
+			<control type="label">
+				<top>54</top>
+				<left>1539</left>
+				<width>134</width>
+				<height>60</height>
+				<label>$INFO[Player.TimeRemaining]</label>
+				<font>fontOSD</font>
+				<align>center</align>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
+			</control>
+			<control type="label">
+				<top>110</top>
+				<width>260</width>
+				<centerleft>50%</centerleft>
+				<height>60</height>
+				<label>Duração: $INFO[Player.Duration]</label>
+				<font>fontOSDb</font>
 				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
@@ -176,7 +200,7 @@
 				<align>center</align>
 				<aligny>top</aligny>
 				<label>$VAR[SeekLabel]</label>
-				<font>font13</font>
+				<font>fontOSD</font>
 				<shadowcolor>black</shadowcolor>
 			</control>
 			<control type="group">
@@ -212,83 +236,45 @@
 					<left>0</left>
 					<top>65</top>
 					<width>100%</width>
-					<height>26</height>
+					<height>10</height>
 					<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 					<!-- DSTV: colordiffuse. -->
 					<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
-					<textureslidernibfocus colordiffuse="button_focus">colors/white.png</textureslidernibfocus>
+					<textureslidernibfocus colordiffuse="FFE50914">colors/white.png</textureslidernibfocus>
 					<visible>Player.SeekEnabled + !Player.ChannelPreviewActive</visible>
 				</control>
 			</control>
 			<control type="group">
 				<visible>!VideoPlayer.Content(LiveTV)</visible>
 				<control type="progress">
-					<left>0</left>
+					<left>390</left>
 					<top>70</top>
-					<width>100%</width>
-					<height>16</height>
+					<width>58%</width>
+					<height>10</height>
 					<info>Player.ProgressCache</info>
 					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
 					<midtexture>colors/white50.png</midtexture>
 				</control>
 				<control type="progress">
-					<left>0</left>
+					<left>390</left>
 					<top>70</top>
-					<width>100%</width>
-					<height>16</height>
+					<width>58%</width>
+					<height>10</height>
 					<info>Player.Progress</info>
 					<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
-					<midtexture colordiffuse="button_focus">colors/white.png</midtexture>
+					<midtexture colordiffuse="FFE50914">colors/white.png</midtexture>
 				</control>
 				<control type="slider" id="401">
-					<left>0</left>
+					<left>390</left>
 					<top>65</top>
-					<width>100%</width>
-					<height>26</height>
+					<width>58%</width>
+					<height>10</height>
 					<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 					<!-- DSTV: colordiffuse. -->
 					<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
-					<textureslidernibfocus colordiffuse="button_focus">colors/white.png</textureslidernibfocus>
+					<textureslidernibfocus colordiffuse="FFE50914">colors/white.png</textureslidernibfocus>
 					<visible>Player.SeekEnabled</visible>
 				</control>
-			</control>
-			<control type="ranges">
-				<left>0</left>
-				<top>70</top>
-				<width>100%</width>
-				<height>8</height>
-				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
-				<lefttexture>colors/white.png</lefttexture>
-				<midtexture colordiffuse="FFFF0000">colors/white.png</midtexture>
-				<righttexture>colors/white.png</righttexture>
-				<info>Player.Editlist</info>
-			</control>
-			<control type="ranges">
-				<left>0</left>
-				<top>82</top>
-				<width>100%</width>
-				<height>8</height>
-				<texturebg border="3" colordiffuse="00FFFFFF">colors/red50.png</texturebg>
-				<righttexture>colors/red.png</righttexture>
-				<info>Player.Cuts</info>
-			</control>
-			<control type="ranges">
-				<left>0</left>
-				<top>82</top>
-				<width>100%</width>
-				<height>4</height>
-				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
-				<righttexture>colors/white.png</righttexture>
-				<info>Player.SceneMarkers</info>
-			</control>
-			<control type="ranges">
-				<left>0</left>
-				<top>82</top>
-				<width>100%</width>
-				<height>4</height>
-				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
-				<righttexture>colors/white.png</righttexture>
-				<info>Player.Chapters</info>
 			</control>
 		</control>
 		<control type="group">
@@ -297,14 +283,14 @@
 			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding | !Player.Paused</visible>
 			<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
-			<animation effect="slide" end="0,-20" time="150" condition="VideoPlayer.Content(LiveTV)">conditional</animation>
+
 			<bottom>0</bottom>
 			<height>380</height>
 			<control type="label">
 				<left>20</left>
-				<width>80%</width>
+				<width>100%</width>
 				<top>-200</top>
-				<height>25</height>
+				<height>20</height>
 				<label>$INFO[VideoPlayer.ChannelName]</label>
 				<shadowcolor>text_shadow</shadowcolor>
 				<font>font45_title</font>
@@ -313,7 +299,7 @@
 				<left>20</left>
 				<width>290</width>
 				<top>-160</top>
-				<height>25</height>
+				<height>20</height>
 				<label>$INFO[VideoPlayer.ChannelNumberLabel]</label>
 				<shadowcolor>text_shadow</shadowcolor>
 				<font>WeatherTemp</font>
@@ -365,14 +351,14 @@
 				<left>240</left>
 				<top>180</top>
 				<right>20</right>
-				<height>25</height>
+				<height>20</height>
 				<label>$VAR[OSDNextLabelVar]</label>
 				<visible>VideoPlayer.HasEpg + !RDS.HasRadioText</visible>
 			</control>
 			<control type="label">
 				<left>240</left>
 				<top>180</top>
-				<height>25</height>
+				<height>20</height>
 				<label>[COLOR grey]$LOCALIZE[14304]: [/COLOR]$INFO[RDS.GetLine(0)]</label>
 				<visible>RDS.HasRadioText</visible>
 			</control>

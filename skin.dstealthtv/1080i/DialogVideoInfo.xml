@@ -14,7 +14,16 @@
 			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="Window.IsVisible(script-embuary-video.xml) | Window.IsVisible(script-embuary-person.xml) | Window.IsVisible(script-embuary-image.xml)">Conditional</animation>
 			<!-- DSTV: control-image: overlay background fade -->
 			<control type="image">
-				<texture colordiffuse="DD000000">colors/black.png</texture>
+				<width>100%</width>
+				<height>100%</height>
+				<texture fallback="common/black.png">$INFO[ListItem.Art(fanart)]</texture>
+				<aspectratio>scale</aspectratio>
+			</control>
+
+			<control type="image">
+				<width>100%</width>
+				<height>100%</height>
+				<texture colordiffuse="A0000000">colors/black.png</texture>
 			</control>
 			<control type="group">
 				<top>150</top>
@@ -88,45 +97,43 @@
 				<top>-30</top>
 				<control type="group" id="140">
 					<top>468</top>
+					
 					<control type="button" id="138">
-						<width>754</width>
-						<height>418</height>
-						<textoffsetx>40</textoffsetx>
-						<textoffsety>20</textoffsety>
-						<aligny>bottom</aligny>
+						<width>794</width>
+						<height>414</height>
 						<label></label>
-						<!-- DSTV: background (plot background). -->
-						<focusedcolor>background</focusedcolor>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
+						<texturefocus border="21" colordiffuse="B3FFFFFF">colors/white.png</texturefocus>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Header,Críticas do Trakt,home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Text,$ESCINFO[Window(Home).Property(Trakt.Reviews)],home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">ActivateWindow(1102)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
 						<onup>50</onup>
 						<onleft>4000</onleft>
 						<onright>4000</onright>
 						<ondown>5000</ondown>
 						<texturenofocus border="21">dialogs/dialog-bg.png</texturenofocus>
 						<visible>Integer.IsGreater(Container(4000).NumItems,0)</visible>
-						<!-- DSTV: selected tag. -->
 						<selected>String.IsEmpty(ListItem.Path)</selected>
 					</control>
 					<control type="image">
-						<left>735</left>
-						<width>512</width>
+						<left>785</left>
+						<width>462</width>
 						<height>418</height>
-						<aligny>bottom</aligny>
 						<texture border="21">dialogs/dialog-bg.png</texture>
 						<visible>Integer.IsGreater(Container(4000).NumItems,0)</visible>
 					</control>
 					<control type="button" id="139">
 						<width>1245</width>
 						<height>418</height>
-						<textoffsetx>40</textoffsetx>
-						<textoffsety>20</textoffsety>
-						<aligny>bottom</aligny>
 						<label></label>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
-						<onclick condition="!String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Header,Críticas do Trakt,home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Text,$ESCINFO[Window(Home).Property(Trakt.Reviews)],home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">ActivateWindow(1102)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
 						<onup>50</onup>
 						<onleft>4000</onleft>
 						<onright>4000</onright>
@@ -134,40 +141,75 @@
 						<texturenofocus border="21">dialogs/dialog-bg.png</texturenofocus>
 						<visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
 					</control>
+					
 					<control type="textbox">
 						<left>40</left>
 						<top>25</top>
-						<width>670</width>
+						<width>720</width>
 						<height>363</height>
+						<font>netSd</font>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+					</control>
+					<control type="textbox">
+						<left>40</left>
+						<top>25</top>
+						<width>720</width>
+						<height>363</height>
+						<font>netSd</font>
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<!-- DSTV: visible with control !hasfocus 138. -->
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138)</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
 					</control>
-					<!-- DSTV: control textbox: Plot text focused -->
+					
 					<control type="textbox">
 						<left>40</left>
 						<top>25</top>
-						<width>670</width>
+						<width>720</width>
 						<height>363</height>
+						<font>netSd</font>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<textcolor>background</textcolor>
+						<autoscroll delay="4000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+					</control>
+					<control type="textbox">
+						<left>40</left>
+						<top>25</top>
+						<width>720</width>
+						<height>363</height>
+						<font>netSd</font>
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<textcolor>background</textcolor>
-						<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138)</visible>
+						<autoscroll delay="4000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+					</control>
+					
+					<control type="textbox">
+						<left>40</left>
+						<top>25</top>
+						<width>1165</width>
+						<height>363</height>
+						<font>netSd</font>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<autoscroll delay="4000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
 					</control>
 					<control type="textbox">
 						<left>40</left>
 						<top>25</top>
 						<width>1165</width>
 						<height>363</height>
+						<font>netSd</font>
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
 					</control>
 				</control>
 				<control type="grouplist" id="4000">
 					<orientation>vertical</orientation>
-					<left>755</left>
+					<left>805</left>
 					<top>488</top>
 					<height>377</height>
 					<itemgap>-8</itemgap>
@@ -200,6 +242,11 @@
 						<param name="label" value="[COLOR button_focus]$LOCALIZE[563]: [/COLOR]$INFO[ListItem.RatingAndVotes]" />
 						<param name="altlabel" value="$LOCALIZE[563]: $INFO[ListItem.RatingAndVotes]" />
 						<param name="visible" value="!String.IsEmpty(ListItem.RatingAndVotes)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="control_id" value="151" />
+						<param name="label" value="[COLOR button_focus]IMDB: [/COLOR]$VAR[ds_infoRatIMDB]" />
+						<param name="altlabel" value="IMDB: $VAR[ds_infoRatIMDB]" />						
 					</include>
 					<include content="InfoDialogMetadata">
 						<param name="control_id" value="150" />
@@ -317,7 +364,7 @@
 					<visible>Integer.IsEqual(Container(50).NumItems,0)</visible>
 				</control>
 				<control type="panel" id="50">
-					<top>158</top>
+					<top>153</top>
 					<width>1235</width>
 					<height>370</height>
 					<onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
@@ -545,7 +592,7 @@
 				</control>
 				<control type="grouplist" id="5000">
 					<left>0</left>
-					<top>864</top>
+					<top>870</top>
 					<width>1246</width>
 					<height>400</height>
 					<onleft>5000</onleft>
@@ -565,23 +612,14 @@
 						<param name="selected" value="!String.IsEmpty(ListItem.Path) + [String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)]" />
 						<param name="label" value="$VAR[VideoInfoPlayButtonLabelVar]" />
 						<!-- DSTV: visible param -->
-            			<param name="visible" value="!String.IsEmpty(ListItem.Path)" />
-					</include>
-					<!-- DSTV: DS-Helper Trailers -->
-					<include content="InfoDialogButton">
-						<param name="id" value="5011" />
-						<param name="icon" value="icons/infodialogs/trailer.png" />
-						<param name="label" value="$LOCALIZE[20410]" />
-						<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
-						<param name="onclick_2" value="RunScript(script.dstealth.helper, action=trailer, autoplay=false, dbtype=$INFO[ListItem.DBType], imdb=$INFO[ListItem.IMDbNumber], title=$INFO[ListItem.Label], year=$INFO[ListItem.Year])" />
-						<param name="visible" value="!Skin.HasSetting(dstv_setting_dont_handle_trailers)" />
+            			<param name="visible" value="true" />
 					</include>
 					<include content="InfoDialogButton">
 						<param name="id" value="11" />
 						<param name="icon" value="icons/infodialogs/trailer.png" />
 						<param name="label" value="$LOCALIZE[20410]" />
-						<!-- DSTV: selected Skin.HasSetting() check. -->
-						<param name="visible" value="Skin.HasSetting(dstv_setting_dont_handle_trailers) + !String.IsEmpty(ListItem.Trailer) + ![String.StartsWith(Container.FolderPath,plugin://) + String.Contains(Container.FolderPath,trailer)]" />
+						<param name="onclick" value="RunPlugin(plugin://plugin.video.youtube/play/?video_id=$INFO[ListItem.Trailer,plugin://plugin.video.youtube/play/?video_id=])" />
+						<param name="visible" value="true" />
 					</include>
 					<include content="InfoDialogButton">
 						<param name="id" value="441" />
@@ -590,6 +628,15 @@
 						<param name="onclick_2" value="RunScript(script.cinemavision,experience)" />
 						<param name="label" value="$LOCALIZE[31003]" />
 						<param name="visible" value="System.AddonIsEnabled(script.cinemavision) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]" />
+					</include>
+					<include content="InfoDialogButton">
+						<param name="id" value="14" />
+						<param name="icon" value="icons/infodialogs/info.png" />
+						<param name="label" value="$LOCALIZE[207]" />
+						<param name="visible" value="true" />
+						<param name="onclick_1" value="SetProperty(TextViewer_Header,$LOCALIZE[207],home)" />
+						<param name="onclick_2" value="SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)" />
+						<param name="onclick_3" value="ActivateWindow(1102)" />
 					</include>
 					<control type="group" id="400">
 						<width>264</width>
@@ -660,12 +707,6 @@
 						<param name="onclick_2" value="ActivateWindow(Music,musicdb://albums/?artist=$INFO[ListItem.Artist]&amp;albumartistonly=true&amp;compilation=false)" />
 						<param name="label" value="$LOCALIZE[132]" />
 						<param name="visible" value="String.IsEqual(ListItem.DBType,musicvideo)" />
-					</include>
-					<include content="InfoDialogButton">
-						<param name="id" value="14" />
-						<param name="icon" value="icons/infodialogs/versions.png" />
-						<param name="label" value="$LOCALIZE[40000]" />
-						<param name="visible" value="String.IsEqual(ListItem.DBType,movie)" />
 					</include>
 					<include content="InfoDialogButton">
 						<param name="id" value="443" />

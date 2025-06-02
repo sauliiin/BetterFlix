@@ -221,20 +221,10 @@
 				<control type="image">
 					<centerleft>50%</centerleft>
 					<centertop>50%</centertop>
-					<width>80</width>
-					<height>80</height>
+					<width>150</width>
+					<height>150</height>
 					<aspectratio>keep</aspectratio>
-					<animation effect="rotate" end="-45" center="auto" time="200" delay="600" loop="true" reversible="false" condition="true">Conditional</animation>
-					<texture colordiffuse="button_focus">spinner.png</texture>
-				</control>
-				<control type="image">
-					<centerleft>50%</centerleft>
-					<centertop>50%</centertop>
-					<width>50</width>
-					<height>50</height>
-					<aspectratio>keep</aspectratio>
-					<animation effect="rotate" end="45" center="auto" time="200" delay="600" loop="true" reversible="false" condition="true">Conditional</animation>
-					<texture flipx="true" colordiffuse="button_focus">spinner.png</texture>
+					<texture>special://skin/gif/netflix.gif</texture>
 				</control>
 			</control>
 		</control>

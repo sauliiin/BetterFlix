@@ -89,9 +89,30 @@
 		<value condition="!String.IsEmpty(Window(home).Property(ds_infoRat))">$INFO[Window(home).Property(ds_infoRat)]</value>
 		<value></value>
 	</variable>
+	<variable name="ds_infoRatIMDB">
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))">$INFO[Window(home).Property(ds_info_imdb_rating)]</value>
+	</variable>
+	<variable name="ds_infoRatfire">
+		<value condition="
+			String.StartsWith(ListItem.Rating,8) |
+			String.StartsWith(ListItem.Rating,9) |
+			String.StartsWith(ListItem.Rating,10) |
+			String.StartsWith(ListItem.Rating,7.2) |
+			String.StartsWith(ListItem.Rating,7.3) |
+			String.StartsWith(ListItem.Rating,7.4) |
+			String.StartsWith(ListItem.Rating,7.5) |
+			String.StartsWith(ListItem.Rating,7.6) |
+			String.StartsWith(ListItem.Rating,7.7) |
+			String.StartsWith(ListItem.Rating,7.8) |
+			String.StartsWith(ListItem.Rating,7.9)
+		">
+			dstv/truefire.png
+		</value>
+		<value></value>
+	</variable>
 	<variable name="ds_infoRatingv">
-		<value condition="!String.IsEmpty(ListItem.RatingAndVotes)">$INFO[ListItem.RatingAndVotes,Rating: ]</value>
-		<value condition="!String.IsEmpty(Window(home).Property(ds_info_ratingv))">$INFO[Window(home).Property(ds_info_ratingv),Rating: ]</value>
+		<value condition="!String.IsEmpty(ListItem.RatingAndVotes)">$INFO[ListItem.RatingAndVotes]</value>
+		<value condition="!String.IsEmpty(Window(home).Property(ds_infoRatingv))">$INFO[Window(home).Property(ds_infoRatingv)]</value>
 		<value></value>
 	</variable>
 	<variable name="ds_infoAgeRating">
@@ -111,7 +132,6 @@
 	</variable>
 	<variable name="ds_infoTitle">
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_title))">$INFO[Window(home).Property(ds_info_title)]</value>
-		<value condition="!String.IsEmpty(ListItem.Label)">$INFO[ListItem.Label]</value>
 		<value></value>
 	</variable>
 	<variable name="ds_infoWeather">

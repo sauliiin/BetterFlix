@@ -69,8 +69,7 @@
 			<effect type="slide" start="0,200" end="0,0" time="300" tween="cubic" easing="out" />
 		</animation>
 		<animation type="WindowClose" reversible="False">
-			<effect type="fade" start="100" end="0" time="300"/>
-			<effect type="slide" start="0,0" end="0,200" time="300" tween="cubic" easing="out" />
+			<effect type="fade" start="100" end="0" time="350"/>
 		</animation>
 	</include>
 	<include name="Vis_FadeSlide_Right">

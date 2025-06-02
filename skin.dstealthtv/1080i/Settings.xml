@@ -31,7 +31,7 @@
 				<include>SettingsPanel</include>
 				<content>
 					<item>
-						<label>Skin settings</label>
+						<label>Ajustes da Skin</label>
 						<onclick>ActivateWindow(skinsettings)</onclick>
 						<icon>icons/settings/skin.png</icon>
 					</item>

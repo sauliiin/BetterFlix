@@ -188,10 +188,8 @@
 	<!-- ===== "Select widget" prompt from button 312 ===== -->
 	<!-- Widget Groups Doc: https://github.com/MikeSiLVO/script.skinshortcuts/blob/master/docs/advanced/Custom%20groupings.md -->
 	<widget-groupings>
-		<node label="Add-Ons">
-			<node label="Video add-ons">
+		<node label="Video add-ons">
 				<content>addon-video</content>
-			</node>
 		</node>
 	</widget-groupings>
 </overrides>
