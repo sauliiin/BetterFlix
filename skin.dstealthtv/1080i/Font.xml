@@ -101,6 +101,11 @@
 			<size>25</size>
 		</font>
 		<font>
+			<name>font27l</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
 			<name>font27_narrow</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>25</size>
@@ -110,6 +115,12 @@
 			<name>font32</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>30</size>
+		</font>
+		<font>
+			<name>font32b</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>31</size>
+			<style>bold</style>
 		</font>
 		<font>
 			<name>font37</name>
@@ -128,8 +139,8 @@
 		</font>
 		<font>
 			<name>font_clock</name>
-			<filename>Roboto-Thin.ttf</filename>
-			<size>62</size>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>60</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>
@@ -180,6 +191,12 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>font36_titleb</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>34</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>font40_title</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>32</size>
@@ -198,9 +215,15 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>font_MainMenuT</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>90</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>font_MainMenu</name>
-			<filename>Netflix-sans-medium.ttf</filename>
-			<size>52</size>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>50</size>
 			<style>bold</style>
 		</font>
 		<font>

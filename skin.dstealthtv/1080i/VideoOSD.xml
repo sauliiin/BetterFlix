@@ -53,8 +53,8 @@
 						<control type="button" id="602">
 							<left>0</left>
 							<top>0</top>
-							<width>54</width>
-							<height>54</height>
+							<width>52</width>
+							<height>52</height>
 							<label></label>
 							<font></font>
 							<!-- DSTV: selected n dstv/osd/button-fo. -->
@@ -69,8 +69,8 @@
 						<control type="image">
 							<left>20</left>
 							<top>10</top>
-							<width>54</width>
-							<height>54</height>
+							<width>52</width>
+							<height>52</height>
 							<animation center="38,38" effect="zoom" end="125" reversible="false" start="85" time="480" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
 							<texture colordiffuse="white">$VAR[PlayerControlsPlayImageVar]</texture>
 						</control>
@@ -96,6 +96,7 @@
 							<param name="texture" value="osd/fullscreen/buttons/home.png"/>
 						</include>
 						<onclick>PlayerControl(ShowVideoMenu)</onclick>
+						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70046)">Conditional</animation>
 						<visible>VideoPlayer.HasMenu</visible>
 					</control>
 					<control type="radiobutton" id="70041">
@@ -104,6 +105,7 @@
 						</include>
 						<onclick>Dialog.Close(VideoOSD)</onclick>
 						<onclick>ActivateWindow(pvrchannelguide)</onclick>
+						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70046)">Conditional</animation>
 						<visible>VideoPlayer.Content(livetv) + VideoPlayer.HasEPG</visible>
 					</control>
 					<control type="radiobutton" id="70042">
@@ -112,16 +114,15 @@
 						</include>
 						<onclick>Dialog.Close(all, true)</onclick>
 						<onclick>ActivateWindow(videoplaylist)</onclick>
+						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70046)">Conditional</animation>
 						<visible>Integer.IsGreater(Playlist.Length(video),1)</visible>
 					</control>
 					<control type="radiobutton" id="70043">
-						<width>56</width>
-						<height>56</height>
 						<include content="OSDButton">
 							<param name="texture" value="osd/fullscreen/buttons/information.png"/>
 						</include>
 						<onclick>Info</onclick>
-						<animation center="38,38" effect="zoom" end="150" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="145" reversible="false" start="85" time="500" tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
 					</control>
 					<control type="radiobutton" id="70045">
 						<include content="OSDButton">

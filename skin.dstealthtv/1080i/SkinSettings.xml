@@ -8,15 +8,6 @@
 	<onload condition="String.IsEmpty(Skin.String(background_overlay))">Skin.SetString(background_overlay,1)</onload>
 	<onload>SetFocus(9001)</onload>
 	<!-- Use DS-Helper to retrieve Kodi Convenience Settings Values into Window(skinsettings).Property(prop) -->
-	<onload>RunScript(script.dstealth.helper, action=getkodisettings, window_id=10035,
-		ds_kodisetting_language=locale.language,
-		ds_kodisetting_country=locale.country,
-		ds_kodisetting_screensaver=screensaver.mode,
-		ds_kodisetting_audiolang=locale.audiolanguage,
-		ds_kodisetting_vidprefer=videoplayer.preferdefaultflag,
-		ds_kodisetting_subtitlelang=locale.subtitlelanguage,
-		ds_kodisetting_weather=weather.addon)
-	</onload>
 	<controls>
 		<include>DefaultBackground</include>
 		<control type="multiimage">

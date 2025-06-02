@@ -567,15 +567,6 @@
 						<!-- DSTV: visible param -->
             			<param name="visible" value="!String.IsEmpty(ListItem.Path)" />
 					</include>
-					<!-- DSTV: DS-Helper Trailers -->
-					<include content="InfoDialogButton">
-						<param name="id" value="5011" />
-						<param name="icon" value="icons/infodialogs/trailer.png" />
-						<param name="label" value="$LOCALIZE[20410]" />
-						<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
-						<param name="onclick_2" value="RunScript(script.dstealth.helper, action=trailer, autoplay=false, dbtype=$INFO[ListItem.DBType], imdb=$INFO[ListItem.IMDbNumber], title=$INFO[ListItem.Label], year=$INFO[ListItem.Year])" />
-						<param name="visible" value="!Skin.HasSetting(dstv_setting_dont_handle_trailers)" />
-					</include>
 					<include content="InfoDialogButton">
 						<param name="id" value="11" />
 						<param name="icon" value="icons/infodialogs/trailer.png" />

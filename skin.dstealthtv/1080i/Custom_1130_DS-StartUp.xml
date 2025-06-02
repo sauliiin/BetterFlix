@@ -86,13 +86,6 @@
 						<!-- disable 1st run prompt -->
 						<onclick>Skin.SetBool(ds-1strun-done)</onclick>
 						<!-- disable mouse -->
-						<onclick>RunScript(script.dstealth.helper,action=setkodisetting,setting=input.enablemouse,value=false)</onclick>
-						<!-- flatten tv shows if only 1 season -->
-						<onclick>RunScript(script.dstealth.helper,action=setkodisetting,setting=videolibrary.flattentvshows,value=1)</onclick>
-						<!-- hide parent flder items -->
-						<onclick>RunScript(script.dstealth.helper,action=setkodisetting,setting=filelists.showparentdiritems,value=false)</onclick>
-						<!-- set media default action to Resume -->
-						<onclick>RunScript(script.dstealth.helper,action=setkodisetting,setting=myvideos.selectaction,value=2)</onclick>
 						<onclick>ReplaceWindow(home)</onclick>
 					</control>
 					<control type="button" id="102">

@@ -88,7 +88,7 @@
         <!-- only one of "50000" will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
         <left>50</left>
-        <top>52%</top>
+        <top>53%</top>
         <width>100%</width>
         <height>38%</height>
         <scrolltime tween="linear" easing="in">250</scrolltime>
@@ -104,7 +104,7 @@
         <control type="button" id="59999">
           <visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
           <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
-          <left>400</left>
+          <left>500</left>
           <right>400</right>
           <height>150</height>
           <align>center</align>

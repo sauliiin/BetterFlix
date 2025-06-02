@@ -11,20 +11,16 @@
 			<include content="CenterContext">
 				<param name="id" value="996" />
 			</include>
-
-			<!-- Título do Menu de Contexto -->
 			<control type="label">
 				<top>-70</top>
 				<left>-225</left>
 				<width>896</width>
 				<height>70</height>
-				<font>font36_title</font>
+				<font>font36_titleb</font>
 				<textcolor>black</textcolor>
 				<align>center</align>
 				<label>$VAR[ContextMenuTitleVar]</label>
 			</control>
-
-			<!-- Fundo que fecha o menu ao clicar fora -->
 			<control type="button">
 				<left>-1920</left>
 				<top>-1080</top>
@@ -34,8 +30,6 @@
 				<texturenofocus />
 				<onclick>Action(close)</onclick>
 			</control>
-
-			<!-- LISTA DE BOTÕES DO MENU DE CONTEXTO -->
 			<control type="grouplist" id="996">
 				<description>grouplist for context buttons</description>
 				<left>0</left>
@@ -43,32 +37,13 @@
 				<width>446</width>
 				<height max="780">auto</height>
 				<usecontrolcoords>true</usecontrolcoords>
-
-				<!-- BOTÃO PERSONALIZADO: Detalhes via TMDb Helper -->
-				<control type="button">
-					<label>Detalhes (TMDb Helper)</label>
-					<width>446</width>
-					<height>70</height>
-					<font>font32</font>
-					<textcolor>white</textcolor>
-					<focusedcolor>black</focusedcolor>
-					<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
-					<texturenofocus />
-					<align>center</align>
-					<onclick>RunScript(script.tmdbenhanced.helper,info=details,query=$INFO[ListItem.Label])</onclick>
-				</control>
-
 			</control>
-
-			<!-- Setas para navegação -->
 			<include content="UpDownArrows">
 				<param name="container_id" value="996" />
 				<param name="posx" value="199" />
 				<param name="up_posy" value="-130" />
 				<param name="down_posy" value="790" />
 			</include>
-
-			<!-- Template do botão (caso queira replicar dinamicamente) -->
 			<control type="button" id="1000">
 				<description>button template</description>
 				<left>0</left>
@@ -76,13 +51,15 @@
 				<width>446</width>
 				<height>70</height>
 				<align>center</align>
-				<font>font32</font>
-				<textcolor>white</textcolor>
+				<font>font32b</font>
+				<textcolor>red</textcolor>
+				<shadowcolor>black</shadowcolor>
+				<shadowoffsetx>4</shadowoffsetx>
+				<shadowoffsety>4</shadowoffsety>
 				<focusedcolor>black</focusedcolor>
 				<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
 				<texturenofocus />
 			</control>
-
 		</control>
 	</controls>
 </window>

@@ -12,7 +12,9 @@
 	<color name="grey">FFF0F0F0</color>
 	<color name="blue">FF7ACAFE</color>
 	<color name="red">FFFF0000</color>
-	<color name="button_focus">FF999999</color>
+	<color name="button_focus">FF616161</color>
+	<color name="button_focusclear">FF787878</color>
+	<color name="translucid">FF999999</color>
 	<color name="button_alt_focus">80999999</color>
 	<color name="text_shadow">22000000</color>
 	<color name="border_alpha">60FFFFFF</color>
@@ -20,3 +22,4 @@
 	<color name="selected">FFFF0000</color>
 	<color name="invalid">FFFF0000</color>
 </colors>
+
