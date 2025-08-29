@@ -21,9 +21,9 @@ Repositório com recursos e customizações para o **Kodi**, trazendo skins e sc
 
 ![Tela de Inicial da Skin](screenshots/1.png)
 
-![Menu](screenshots/1.png)
+![Menu](screenshots/2.png)
 
-![Reviews](screenshots/1.png)
+![Reviews](screenshots/3.png)
 
 ## 🤝 Contribuição
 
