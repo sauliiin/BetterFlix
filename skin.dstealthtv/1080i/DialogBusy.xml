@@ -14,26 +14,37 @@
 				<animation effect="fade" start="100" end="0" time="0" condition="Window.IsVisible(fullscreenvideo) | Window.IsVisible(FullscreenGame)">Conditional</animation>
 			</control>
 			<control type="group">
-				<depth>DepthMax</depth>
 				<centerleft>50%</centerleft>
 				<centertop>50%</centertop>
-				<width>80</width>
-				<height>80</height>
+
+				<!-- Imagem girando (rotate inverso + fade out com atraso) -->
 				<control type="image">
+					<id>9876</id>
 					<centerleft>50%</centerleft>
-					<centertop>50%</centertop>
-					<width>150</width>
-					<height>150</height>
+					<centertop>48%</centertop>
+					<width>100</width>
+					<height>100</height>
 					<aspectratio>keep</aspectratio>
-					<texture>special://skin/gif/netflix.gif</texture>
+					<texture>special://skin/gif/netflix.png</texture>
+					<animation effect="rotate"
+									center="auto"
+									start="360" end="0"
+									time="1000"
+									loop="true"
+									condition="true">Conditional</animation>
+									<animation effect="fade" start="100" end="40" time="1000" delay="0" tween="sine" pulse="true" condition="true">Conditional</animation>
+						</control>
+						<control type="label" id="$PARAM[list_id]2">
+							<animation effect="fade" start="100" end="0" time="1000" delay="1000" tween="sine" pulse="true" condition="true">Conditional</animation>
+					<left>47%</left>
+					<top>53%</top>
+					<width>100%</width>
+					<height>50</height>
+					<font>widget_label</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<label>Loading ...</label>
 				</control>
-				<control type="image">
-					<centerleft>50%</centerleft>
-					<centertop>50%</centertop>
-					<width>30</width>
-					<height>30</height>
-					<texture colordiffuse="button_focus">$INFO[Control.GetLabel(10),dialogs/volume/progress/p,.png]</texture>
-				</control>
+
 			</control>
 		</control>
 	</controls>

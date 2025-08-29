@@ -188,7 +188,7 @@
 				<centerleft>50%</centerleft>
 				<height>60</height>
 				<label>Duração: $INFO[Player.Duration]</label>
-				<font>fontOSDb</font>
+				<font>fontOSD</font>
 				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>

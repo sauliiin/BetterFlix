@@ -110,6 +110,18 @@
 						<onup>8100</onup>
 						<ondown>8100</ondown>
 						<visible>Container(9000).HasFocus(1)</visible>
+						<control type="radiobutton" id="8108"> <include>DefaultSettingButton</include>
+							<label>Mostrar notas MDBList</label>
+							<onfocus>SetProperty(ds_setdesc, "Se ativado, exibe as notas do MDBList e a opção para inserir a chave de API.")</onfocus>
+							<onclick>Skin.ToggleSetting(Enable.MDBListRatings)</onclick>
+							<selected>Skin.HasSetting(Enable.MDBListRatings)</selected>
+						</control>
+						<control type="edit" id="8109"> <description>Campo de texto para a API Key do MDBList</description>
+							<include>DefaultSettingButton</include> <label>Chave da API (MDBList)</label>
+							<setting>api_key</setting>
+							<addon>id.do.seu.script</addon>
+							<visible>Skin.HasSetting(Enable.MDBListRatings)</visible>
+						</control>
 						<!-- enable auto scrolling plot & reviews -->
 						<control type="radiobutton" id="8110">
 							<include>DefaultSettingButton</include>
@@ -142,6 +154,14 @@
 							<onfocus>SetProperty(ds_setdesc, "Show/Hide media flags.")</onfocus>
 							<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
 							<selected>!Skin.HasSetting(hide_mediaflags)</selected>
+						</control>
+						<control type="radiobutton" id="8131">
+							<include>DefaultSettingButton</include>
+							<label>Show on fire Movie/TV Show</label>
+							<label2>$VAR[SkinBoolSetting(enable_ratfire)]</label2>
+							<onfocus>SetProperty(ds_setdesc, Ativa ou desativa o selo Ratfire baseado na nota do filme/série)</onfocus>
+							<onclick>Skin.ToggleSetting(enable_ratfire)</onclick>
+							<selected>Skin.HasSetting(enable_ratfire)</selected> 
 						</control>
 					</control>
 					<!-- MENUS & WIDGETS Submenu -->
@@ -387,14 +407,24 @@
 				<onclick>noop</onclick>
 				<label>$INFO[Window(home).Property(skinshortcuts-loading)]</label>
 			</control>
-			<control type="image">
+			<control type="group">
 				<centerleft>50%</centerleft>
 				<centertop>50%</centertop>
-				<width>150</width>
-				<height>150</height>
-				<aspectratio>keep</aspectratio>
-				<animation effect="rotate" end="-45" center="auto" time="200" delay="600" loop="true" reversible="false" condition="true">Conditional</animation>
-				<texture>special://skin/gif/netflix.gif</texture>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>50%</centertop>
+					<width>100</width>
+					<height>100</height>
+					<aspectratio>keep</aspectratio>
+					<texture>special://skin/gif/netflix.png</texture>
+					<animation effect="rotate"
+									center="auto"
+									start="360" end="0"
+									time="1000"
+									loop="true"
+									condition="true">Conditional</animation>
+									<animation effect="fade" start="100" end="40" time="1000" delay="0" tween="sine" pulse="true" condition="true">Conditional</animation>
+				</control>
 			</control>
 		</control>
 	</controls>

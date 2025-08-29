@@ -31,9 +31,9 @@
 				<height>49</height>
 				<textoffsetx>16</textoffsetx>
 				<aligny>center</aligny>
-				<font>font12</font>
-				<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>
-				<alttexturefocus colordiffuse="button_focus">lists/focus.png</alttexturefocus>
+				<font>font12</font>		
+				<texturefocus colordiffuse="white">lists/focus.png</texturefocus>
+				<alttexturefocus colordiffuse="white">lists/focus.png</alttexturefocus>
 				<texturenofocus />
 				<alttexturenofocus />
 				<onclick>noop</onclick>
@@ -43,7 +43,7 @@
 				<label>$PARAM[label]</label>
 				<altlabel>$PARAM[altlabel]</altlabel>
 				<!-- DSTV: background. -->
-				<focusedcolor>background</focusedcolor>
+				<focusedcolor>black</focusedcolor>
 				<usealttexture>Control.HasFocus($PARAM[control_id])</usealttexture>
 				<visible>$PARAM[visible]</visible>
 			</control>

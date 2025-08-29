@@ -1072,7 +1072,7 @@
 					<top>25</top> <!-- posição vertical -->
 					<left>1705</left> <!-- ajuste horizontal conforme necessário -->
 					<align>right</align>
-					<label>$INFO[System.Time]</label>
+					<label>$INFO[System.Time(hh:mm)]</label>
 					<animation effect="fade" start="100" end="0" time="300" condition="Window.Next(screencalibration)">WindowClose</animation>
 				</control>
 				<!-- Data -->

@@ -17,41 +17,36 @@
 			<visible>![Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide)] + [!String.IsEmpty(Player.SeekNumeric) | Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
 			<animation effect="fade" start="0" end="100" time="300">VisibleChange</animation>
 			<animation effect="fade" start="0" end="100" time="300" condition="Player.Paused + Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(1109_topbaroverlay),5)">Conditional</animation>
-			<control type="image">
-				<left>0</left>
-				<top>0</top>
-				<width>100%</width>
-				<height>55</height>
-				<texture colordiffuse="D0FFFFFF" border="0,55,0,0">frame/osdfade.png</texture>
-			</control>
 			<control type="label">
-				<left>25</left>
-				<top>10</top>
-				<width>700</width>
+				<top>1000</top>
+				<width>100%</width>
+				<align>center</align>
 				<height>60</height>
 				<label>$VAR[SeekLabel]</label>
 				<font>fontOSDb</font>
 				<shadowcolor>black</shadowcolor>
 			</control>
 			<control type="label">
-				<centerleft>50%</centerleft>
-				<top>10</top>
-				<width>50%</width>
-				<height>55</height>
+				<top>944</top>
+				<left>225</left>
+				<width>134</width>
+				<height>60</height>
+				<label>$INFO[Player.Time]</label>
+				<font>fontOSD</font>
 				<align>center</align>
-				<label>$VAR[SeekTimeLabelVar]</label>
-				<font>fontOSDb</font>
+				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label">
-				<right>25</right>
-				<top>10</top>
-				<width>700</width>
+				<top>944</top>
+				<left>1539</left>
+				<width>134</width>
 				<height>60</height>
-				<align>right</align>
-				<font>fontOSDb</font>
-				<label>$INFO[player.chapter,[COLOR button_focus]$LOCALIZE[21396]:[/COLOR] ]$INFO[Player.ChapterCount,/]</label>
-				<visible>!VideoPlayer.Content(LiveTV) + player.chaptercount</visible>
+				<label>$INFO[Player.TimeRemaining]</label>
+				<font>fontOSD</font>
+				<align>center</align>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label">
 				<right>25</right>
@@ -64,9 +59,9 @@
 				<visible>VideoPlayer.Content(LiveTV) + PVR.IsTimeShift</visible>
 			</control>
 			<control type="progress">
-				<left>0</left>
-				<top>55</top>
-				<width>100%</width>
+				<left>390</left>
+				<top>960</top>
+				<width>58%</width>
 				<height>10</height>
 				<info>Player.ProgressCache</info>
 				<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
@@ -74,9 +69,9 @@
 				<visible>!VideoPlayer.Content(LiveTV)</visible>
 			</control>
 			<control type="progress">
-				<left>0</left>
-				<top>55</top>
-				<width>100%</width>
+				<left>390</left>
+				<top>960</top>
+				<width>58%</width>
 				<height>10</height>
 				<info>Player.Progress</info>
 				<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
@@ -84,9 +79,9 @@
 				<visible>!VideoPlayer.Content(LiveTV)</visible>
 			</control>
 			<control type="slider">
-				<left>0</left>
-				<top>50</top>
-				<width>100%</width>
+				<left>390</left>
+				<top>960</top>
+				<width>58%</width>
 				<height>10</height>
 				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 				<!-- DSTV Change: colordiffuse for nib -->
@@ -94,6 +89,29 @@
 				<textureslidernibfocus colordiffuse="button_focus">colors/white.png</textureslidernibfocus>
 				<info>Player.Seekbar</info>
 				<visible>!VideoPlayer.Content(LiveTV) + [Player.Seeking | Player.HasPerformedSeek(3) | Player.Paused]</visible>
+			</control>
+			<control type="group">
+				<width>76</width>
+				<height>76</height>
+				<left>135</left>
+				<top>925</top>
+				<visible>Player.PauseEnabled</visible>
+				<control type="button">
+					<width>52</width>
+					<height>52</height>
+					<label></label>
+					<font></font>
+					<!-- DSTV: selected n dstv/osd/button-fo. -->
+					<texturefocus colordiffuse="selected">dstv/osd/button-fo.png</texturefocus>
+					<texturenofocus />
+					<onclick>PlayerControl(Play)</onclick>
+				</control>
+				<control type="image">
+					<width>74</width>
+					<height>74</height>
+					<animation center="38,38" effect="zoom" end="120" reversible="false" start="85" time="480" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
+					<texture colordiffuse="white">$VAR[PlayerControlsPlayImageVar]</texture>
+				</control>
 			</control>
 			<control type="group">
 				<visible>VideoPlayer.Content(LiveTV)</visible>
@@ -162,15 +180,6 @@
 				<righttexture>colors/white.png</righttexture>
 				<info>Player.SceneMarkers</info>
 			</control>
-			<control type="ranges">
-				<left>0</left>
-				<top>67</top>
-				<width>100%</width>
-				<height>4</height>
-				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
-				<righttexture>colors/white.png</righttexture>
-				<info>Player.Chapters</info>
-			</control>
 		</control>
 		<control type="group">
 			<animation effect="fade" start="0" end="100" time="300" condition="$EXP[infodialog_active]">conditional</animation>
@@ -199,6 +208,16 @@
 						<texture>$VAR[PlayerClearLogoVar]</texture>
 						<aspectratio aligny="center" align="center">keep</aspectratio>
 					</control>
+				</control>
+				<control type="label">
+					<top>-820</top>
+					<width>100%</width>
+					<align>center</align>
+					<aligny>center</aligny>
+					<font>fontOSD</font>
+					<shadowcolor>black</shadowcolor>
+					<visible>!String.IsEmpty(VideoPlayer.Season)</visible>
+					<label>Temporada $INFO[VideoPlayer.Season]  •  Episódio $INFO[VideoPlayer.Episode]</label>
 				</control>
 				<control type="group">
 					<visible>!Window.IsActive(pvrosdchannels) + !Window.IsActive(pvrchannelguide)</visible>
@@ -233,7 +252,7 @@
 					<height>200</height>
 					<width>600</width>
 					<align>right</align>
-					<label>$INFO[System.Time]</label>
+					<label>$INFO[System.Time(hh:mm)]</label>
 				</control>
 				<control type="grouplist">
 					<right>24</right>

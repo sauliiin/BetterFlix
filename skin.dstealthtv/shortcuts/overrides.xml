@@ -60,30 +60,6 @@
 	<!-- NOTE1: group is the <label> tag from mainmenu.DATA.xml without spaces. -->
 	<!-- NOTE2: labelID is the <label> tag from the mm-X.DATA.xml files without spaces -->
 	
-	<!-- Favourites submenu widgets -->
-	<widgetdefaultnode group="favourites"	labelID="myfavourites"			label="Favourites"				target="mixed"		path="favourites://">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="favourites"		labelID="myfavourites"			property="displayType">squares</propertydefault>
-	<propertydefault group="favourites"		labelID="myfavourites"			property="displayTitles">true</propertydefault>
-	
-	<widgetdefaultnode group="favourites"	labelID="androidapps"			label="Android Apps"			target="programs"	path="androidapp://sources/apps/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="favourites"		labelID="androidapps"			property="displayType">squares</propertydefault>
-	<propertydefault group="favourites"		labelID="androidapps"			property="displayTitles">true</propertydefault>
-	
-	<!-- Trakt submenu widgets -->
-	<widgetdefaultnode group="trakt"		labelID="recommendedmovies"		label="Recommended Movies"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_recommendations&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="trakt"		labelID="recommendedtvshows"	label="Recommended TV Shows"	target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_recommendations&amp;tmdb_type=tv&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	
-	<widgetdefaultnode group="trakt"		labelID="movieswatchlist"		label="Movies Watchlist"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_watchlist&amp;tmdb_type=movie&amp;sort_by=rank&amp;sort_how=asc&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="trakt"			labelID="movieswatchlist"		property="widgetSortBy">year</propertydefault>
-	<propertydefault group="trakt"			labelID="movieswatchlist"		property="widgetSortOrder">ascending</propertydefault>
-	
-	<widgetdefaultnode group="trakt"		labelID="tvshowswatchlist"		label="TV Shows Watchlist"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_watchlist&amp;tmdb_type=tv&amp;sort_by=rank&amp;sort_how=asc&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="trakt"			labelID="tvshowswatchlist"		property="widgetSortBy">year</propertydefault>
-	<propertydefault group="trakt"			labelID="tvshowswatchlist"		property="widgetSortOrder">descending</propertydefault>
-	
-	<widgetdefaultnode group="trakt"		labelID="tvshowsin-progress"	label="TV Shows In-Progress"	target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;sort_by=rank&amp;sort_how=asc&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="trakt"		labelID="newtvepisodes"			label="New TV Episodes"			target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;sort_by=year&amp;sort_how=desc&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
-	
 	<!-- Movies submenu widgets -->
 	<widgetdefaultnode group="movies"		labelID="anticipatedmovies"		label="Anticipated Movies"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=trakt_anticipated&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
 	<propertydefault group="movies"			labelID="anticipatedmovies"		property="widgetSortBy">year</propertydefault>
@@ -115,73 +91,18 @@
 	<widgetdefaultnode group="tvshows"		labelID="tvgenres"				label="TV Genres"				target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=genres&amp;tmdb_type=tv&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
 	<propertydefault group="tvshows"		labelID="tvgenres"				property="displayType">squares</propertydefault>
 	<propertydefault group="tvshows"		labelID="tvgenres"				property="displayTitles">true</propertydefault>
-	
-	<!-- My Movies submenu widgets -->
-	<widgetdefaultnode group="mymovies"		labelID="moviesinprogress"		label="In Progress Movies"		target="videos"		path="special://skin/playlists/movies_inprogress.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="recentlyaddedmovies"	label="Recently Added Movies"	target="videos"		path="videodb://recentlyaddedmovies/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="moviesets"				label="Movie Sets"				target="videos"		path="videodb://movies/sets/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="moviesbytitle"			label="Movies by Title"			target="videos"		path="videodb://movies/titles/">ss_arbitrary_widget_name</widgetdefaultnode>
-	
-	<widgetdefaultnode group="mymovies"		labelID="genres"				label="Movie Genres"			target="videos"		path="videodb://movies/genres/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mymovies"		labelID="genres"				property="displayType">squares</propertydefault>
-	<propertydefault group="mymovies"		labelID="genres"				property="displayTitles">true</propertydefault>
 
-	<!-- My TV Shows submenu widgets -->
-	<widgetdefaultnode group="mytvshows"	labelID="unwatchedepisodes"		label="Unwatched Episodes"		target="videos"		path="special://skin/playlists/tvshows_unwatched_episodes.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="unwatchedepisodes"		property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="unwatchedepisodes"		property="displayTitles">true</propertydefault>
+	<!-- Strreaming -->
+	<widgetdefaultnode group="streaming"		labelID="netflix"			label="Netflix"				target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3093&amp;list_name=Netflix+Movies&amp;plugin_category=Netflix+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="amazon"				label="Amazon Prime"				target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3094&amp;list_name=Amazon+Prime+Movies&amp;plugin_category=Amazon+Prime+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="disney"		label="Disney+"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3095&amp;list_name=Disney%2B+Movies&amp;plugin_category=Disney%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="apple"			label="Apple TV+"			target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=2538&amp;list_name=Apple+TV%2B+Movies&amp;plugin_category=Apple+TV%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
 
-	<widgetdefaultnode group="mytvshows"	labelID="showsinprogress"		label="Shows In Progress"		target="videos"		path="special://skin/playlists/tvshows_inprogress.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mytvshows"	labelID="unwatchedshows"		label="Unwatched Shows"			target="videos"		path="special://skin/playlists/tvshows_unwatched.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mytvshows"	labelID="showsbytitle"			label="Shows by Title"			target="videos"		path="videodb://tvshows/titles/">ss_arbitrary_widget_name</widgetdefaultnode>
-	
-	<widgetdefaultnode group="mytvshows"	labelID="genres"				label="TV Genres"				target="videos"		path="videodb://tvshows/genres/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="genres"				property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="genres"				property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="mytvshows"	labelID="studios"				label="TV Studios"				target="videos"		path="videodb://tvshows/studios/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="studios"				property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="studios"				property="displayTitles">true</propertydefault>
-
-	<!-- Live TV submenu wigets -->
-	<widgetdefaultnode group="livetv"		labelID="recordingstatus"		label="Recording Status"		target="pvr"		path="dstv_ss_pvr_tv_recording_status">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="recordingstatus"		property="displayType">landscape</propertydefault>
-	<propertydefault group="livetv"			labelID="recordingstatus"		property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="livetv"		labelID="livetvcategories"		label="Live TV Categories"		target="pvr"		path="pvr://tv/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="livetvcategories"		property="displayType">squares</propertydefault>
-	<propertydefault group="livetv"			labelID="livetvcategories"		property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="livetv"		labelID="allchannels"			label="All Channels"			target="pvr"		path="pvr://channels/tv/*">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="allchannels"			property="displayType">squares</propertydefault>
-	<propertydefault group="livetv"			labelID="allchannels"			property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="livetv"		labelID="tvchannelgroups"		label="TV Channel Groups"		target="tvguide"	path="pvr://channels/tv">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="tvchannelgroups"		property="displayType">squares</propertydefault>
-	<propertydefault group="livetv"			labelID="tvchannelgroups"		property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="livetv"		labelID="recentlyplayedchannels"	label="Recently Played Channels"	target="pvr"		path="pvr://channels/tv/*?view=lastplayed">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="recentlyplayedchannels"	property="displayType">squares</propertydefault>
-	<propertydefault group="livetv"			labelID="recentlyplayedchannels"	property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="livetv"		labelID="recentrecordings"		label="Recent Recordings"		target="pvr"		path="pvr://recordings/tv/active?view=flat">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="livetv"			labelID="recentrecordings"		property="displayType">squares</propertydefault>
-	<propertydefault group="livetv"			labelID="recentrecordings"		property="displayTitles">true</propertydefault>
 
 	<!-- Search submenu wigets -->
 	<widgetdefaultnode group="search"		labelID="search"				label="Search"					target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
 	<propertydefault group="search"			labelID="search"				property="displayType">squares</propertydefault>
 	<propertydefault group="search"			labelID="search"				property="displayTitles">true</propertydefault>
-
-	<!-- Weather submenu widgets -->
-	<widgetdefaultnode group="weather"		labelID="conditions"			label="Weather Conditions"		target=""			path="dstv_ss_weather_conditions">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="weather"		labelID="conditions"			property="displayType">squares</propertydefault>
-	
-	<widgetdefaultnode group="weather"		labelID="forecast"				label="Weather Forecast"		target=""			path="dstv_ss_weather_forecast">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="weather"		labelID="forecast"				property="displayType">squares</propertydefault>
-
-	<widgetdefaultnode group="weather"		labelID="hourly"				label="Weather Hourly"			target=""			path="dstv_ss_weather_hourly">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="weather"		labelID="hourly"				property="displayType">squares</propertydefault>
 	
 	<!-- === END OF DEFAULT PRE-DEFINED WIDGETS === -->
 

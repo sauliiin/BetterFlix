@@ -3,17 +3,9 @@
 <!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
 <shortcuts>
 	<shortcut>
-		<defaultID>mm-favourites</defaultID>
-		<label>Favourites</label>
-		<thumb>special://skin/extras/icons/favourites.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
-		<defaultID>mm-trakt</defaultID>
-		<label>Trakt</label>
-		<thumb>special://skin/extras/icons/trakt.png</thumb>
+		<defaultID>mm-search</defaultID>
+		<label>Search</label>
+		<thumb>special://skin/extras/icons/widg icons/search3.png</thumb>
 		<action>noop</action>
 		<icon />
 		<label2 />
@@ -21,7 +13,7 @@
 	<shortcut>
 		<defaultID>mm-movies</defaultID>
 		<label>Movies</label>
-		<thumb>special://skin/extras/icons/movies.png</thumb>
+		<thumb>special://skin/extras/icons/widg icons/home.png</thumb>
 		<action>noop</action>
 		<icon />
 		<label2 />
@@ -29,47 +21,15 @@
 	<shortcut>
 		<defaultID>mm-tvshows</defaultID>
 		<label>TV Shows</label>
-		<thumb>special://skin/extras/icons/tv.png</thumb>
+		<thumb>special://skin/extras/icons/widg icons/clapperboard.png</thumb>
 		<action>noop</action>
 		<icon />
 		<label2 />
 	</shortcut>
 	<shortcut>
-		<defaultID>mm-mymovies</defaultID>
-		<label>My Movies</label>
-		<thumb>special://skin/extras/icons/mymovies.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
-		<defaultID>mm-mytvshows</defaultID>
-		<label>My TV Shows</label>
-		<thumb>special://skin/extras/icons/mytv.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
-		<defaultID>mm-livetv</defaultID>
-		<label>Live TV</label>
-		<thumb>special://skin/extras/icons/tv_pvr.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
-		<defaultID>mm-search</defaultID>
-		<label>Search</label>
-		<thumb>special://skin/extras/icons/search.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
-		<defaultID>mm-weather</defaultID>
-		<label>Weather</label>
-		<thumb>special://skin/extras/icons/weather.png</thumb>
+		<defaultID>mm-streaming</defaultID>
+		<label>Streammy</label>
+		<thumb>special://skin/extras/icons/widg icons/categories.png</thumb>
 		<action>noop</action>
 		<icon />
 		<label2 />

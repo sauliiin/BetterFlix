@@ -427,14 +427,25 @@
         <onclick>noop</onclick>
         <label>$INFO[Window(home).Property(skinshortcuts-loading)]</label>
       </control>
-      <control type="image">
-        <centerleft>50%</centerleft>
-        <centertop>50%</centertop>
-        <width>150</width>
-        <height>150</height>
-        <aspectratio>keep</aspectratio>
-        <texture>special://skin/gif/netflix.gif</texture>
-      </control>
+      <control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>50%</centertop>
+					<width>100</width>
+					<height>100</height>
+					<aspectratio>keep</aspectratio>
+					<texture>special://skin/gif/netflix.png</texture>
+					<animation effect="rotate"
+									center="auto"
+									start="360" end="0"
+									time="1000"
+									loop="true"
+									condition="true">Conditional</animation>
+									<animation effect="fade" start="100" end="40" time="1000" delay="0" tween="sine" pulse="true" condition="true">Conditional</animation>
+				</control>
+			</control>
     </control>
     
   </controls>

@@ -92,8 +92,14 @@
 	<variable name="ds_infoRatIMDB">
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))">$INFO[Window(home).Property(ds_info_imdb_rating)]</value>
 	</variable>
+	<variable name="ds_info_trakt_rating">
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))">$INFO[Window(home).Property(ds_info_trakt_rating)]</value>
+	</variable>
+	<variable name="ds_info_letterboxd_rating">
+		<value condition="!String.IsEqual(Window(home).Property(ds_info_letterboxd_rating), 0.0)">$INFO[Window(home).Property(ds_info_letterboxd_rating)]</value>
+	</variable>
 	<variable name="ds_infoRatfire">
-		<value condition="
+		<value condition="Skin.HasSetting(enable_ratfire) + (
 			String.StartsWith(ListItem.Rating,8) |
 			String.StartsWith(ListItem.Rating,9) |
 			String.StartsWith(ListItem.Rating,10) |
@@ -105,7 +111,7 @@
 			String.StartsWith(ListItem.Rating,7.7) |
 			String.StartsWith(ListItem.Rating,7.8) |
 			String.StartsWith(ListItem.Rating,7.9)
-		">
+		)">
 			dstv/truefire.png
 		</value>
 		<value></value>

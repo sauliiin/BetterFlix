@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.dstealthtv" version="10.00.9" name="DStealthTV" provider-name="DStealth">
+<addon id="skin.dstealthtv" version="1.00.0" name="DStealthTV" provider-name="DStealth">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.skinshortcuts" version="2.0.1" />
+		<import addon="script.showimdb" version="1.0.0" />
+		<import addon="plugin.video.themoviedb.helper" version="5.4.16" />
 	</requires>
 	<extension point="xbmc.gui.skin" debugging="false">
 		<res width="1920" height="1080" aspect="16:9" default="true" folder="1080i" />
