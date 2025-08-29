@@ -37,9 +37,3 @@ Sugestões e melhorias são sempre bem-vindas!
 
 Este projeto pode incluir arquivos de terceiros. Consulte os arquivos individuais para verificar informações de licença.
 
----
-
-## 🔗 Links Úteis
-- [POV FEN FENLAM – Stremio-like Loading Skin](https://github.com/sauliiin/Pobreflix/tree/main/POV%20FEN%20FENLAM%20-%20Stremio%20like%20loading%20skin)  
-- [script.showimdb-1.1.zip](https://github.com/sauliiin/Pobreflix/blob/main/script.showimdb-1.1.zip)  
-- [skin.dstealthtv-10.00.9.zip](https://github.com/sauliiin/Pobreflix/blob/main/skin.dstealthtv-10.00.9.zip)  
