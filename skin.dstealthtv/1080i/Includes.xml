@@ -2,6 +2,8 @@
 <!-- DSTV Changes! -->
 <includes>
 	<!-- DSTV: include -->
+	<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(Enable.MDBListRatings,false)</onload>
+    <onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(enable_ratfire,true)</onload>
 	<include file="Changelog.xml" />
 	<!-- DSTV: includes -->
 	<include file="Includes_DStealth.xml" />

@@ -244,7 +244,7 @@
 					<!-- Letter -->
 					<control type="group">
 						<control type="image"> 
-							<visible>!String.IsEqual(Window(home).Property(ds_info_letterboxd_rating), 0.0)</visible>
+							<visible>![String.IsEqual(Window(home).Property(ds_info_letterboxd_rating), 0.0) | String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating))]</visible>
 							<left>86.5%</left>
 							<align>left</align>
 							<top>560</top>

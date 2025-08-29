@@ -110,17 +110,10 @@
 						<onup>8100</onup>
 						<ondown>8100</ondown>
 						<visible>Container(9000).HasFocus(1)</visible>
-						<control type="radiobutton" id="8108"> <include>DefaultSettingButton</include>
-							<label>Mostrar notas MDBList</label>
-							<onfocus>SetProperty(ds_setdesc, "Se ativado, exibe as notas do MDBList e a opção para inserir a chave de API.")</onfocus>
-							<onclick>Skin.ToggleSetting(Enable.MDBListRatings)</onclick>
-							<selected>Skin.HasSetting(Enable.MDBListRatings)</selected>
-						</control>
-						<control type="edit" id="8109"> <description>Campo de texto para a API Key do MDBList</description>
-							<include>DefaultSettingButton</include> <label>Chave da API (MDBList)</label>
-							<setting>api_key</setting>
-							<addon>id.do.seu.script</addon>
-							<visible>Skin.HasSetting(Enable.MDBListRatings)</visible>
+						<control type="button" id="8107"> <include>DefaultSettingButton</include>
+							<label>Configurar Notas MDBList</label>
+							<onfocus>SetProperty(ds_setdesc, "Abre as configurações do addon para inserir a API.")</onfocus>
+							<onclick>Addon.OpenSettings(script.showimdb)</onclick>
 						</control>
 						<!-- enable auto scrolling plot & reviews -->
 						<control type="radiobutton" id="8110">
@@ -154,14 +147,6 @@
 							<onfocus>SetProperty(ds_setdesc, "Show/Hide media flags.")</onfocus>
 							<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
 							<selected>!Skin.HasSetting(hide_mediaflags)</selected>
-						</control>
-						<control type="radiobutton" id="8131">
-							<include>DefaultSettingButton</include>
-							<label>Show on fire Movie/TV Show</label>
-							<label2>$VAR[SkinBoolSetting(enable_ratfire)]</label2>
-							<onfocus>SetProperty(ds_setdesc, Ativa ou desativa o selo Ratfire baseado na nota do filme/série)</onfocus>
-							<onclick>Skin.ToggleSetting(enable_ratfire)</onclick>
-							<selected>Skin.HasSetting(enable_ratfire)</selected> 
 						</control>
 					</control>
 					<!-- MENUS & WIDGETS Submenu -->

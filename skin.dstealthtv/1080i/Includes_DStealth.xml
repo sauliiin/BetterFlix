@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-	<!-- DEFAULT SKIN SETTINGS -->
 	<include name="ds_customsettings">
-		<!-- These will run when ds-settings-init hasnt been set yet (a.k.a. on first run) -->
 		<onload>Skin.SetBool(dstv_debug, false)</onload>
-		<!-- Estuary Settings we want to enable by default: -->
 		<onload>Skin.SetBool(circle_rating, true)</onload>
-		<!-- Skin Settings: General -->
+
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(autoscroll, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(hide_mediaflags)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_weatherinfo, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(touchmode)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_dont_handle_trailers)</onload>
-		<!-- Skin Settings: Main Menu -->
+		
+		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(Enable.MDBListRatings,false)</onload>
+		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(enable_ratfire,true)</onload>
+
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_btn_addons, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_btn_power)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_btn_settings, true)</onload>
@@ -20,7 +20,7 @@
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_browsewidget)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_emptywidgets)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_widget_titles, false)</onload>
-		<!-- Skin Settings: Visuals -->
+		
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(background_overlay, 2)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(HomeFanart.ext)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(HomeFanart.name)</onload>
@@ -35,16 +35,15 @@
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(netflix_small_diffuse)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(no_slide_animations)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_smaller_watched)</onload>
-		<!-- Force Locked ViewType Settings for Movies, TV, & Videos to Shift: -->
+		
 		<onload condition="!Skin.HasSetting(ds-settings-init) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Skin.SetString(Skin.ForcedView.movies,$LOCALIZE[31100])</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Skin.SetString(Skin.ForcedView.tvshows,$LOCALIZE[31100])</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Skin.SetString(Skin.ForcedView.videos,$LOCALIZE[31100])</onload>
-		<!-- !!!!! Always set this value to the current version: !!!!! -->
+		
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(ds_settings_vers,1210300)</onload>
-		<!-- Version Updater: Replace these checks with the new version. -->
 		<onload condition="String.IsEmpty(Skin.String(ds_settings_vers)) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Notification("DSTV Updated", "DSTV to v1.21.3 View Changelog for details.", 10000)</onload>
 		<onload condition="String.IsEmpty(Skin.String(ds_settings_vers)) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Skin.SetString(ds_settings_vers,1210300)</onload>
-		<!-- At the end of first run, set the ds-settings-init value to true so the above dont trigger again -->
+		
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(ds-settings-init, true)</onload>
 	</include>
 	<!-- CUSTOM ANIMATIONS -->

@@ -201,6 +201,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">newtvshows</property>
+			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=discover&amp;tmdb_type=tv&amp;tmdb_id=None&amp;with_id=True&amp;with_separator=AND&amp;sort_by=first_air_date.desc&amp;first_air_date.lte=t-0&amp;vote_count.gte=5&amp;vote_average.gte=5&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),tvshows)</visible>
 			<property name="isSubmenu">True</property>
@@ -289,11 +290,10 @@
 			<property name="id">$NUMBER[1]</property>
 			<property name="mainmenuid">4</property>
 			<label>Netflix</label>
-			<label2>Custom item</label2>
+			<label2 />
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">netflix</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3093&amp;list_name=Netflix+Movies&amp;plugin_category=Netflix+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -302,11 +302,10 @@
 			<property name="id">$NUMBER[2]</property>
 			<property name="mainmenuid">4</property>
 			<label>Amazon Prime</label>
-			<label2>Custom item</label2>
+			<label2 />
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">amazonprime</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3094&amp;list_name=Amazon+Prime+Movies&amp;plugin_category=Amazon+Prime+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -315,11 +314,10 @@
 			<property name="id">$NUMBER[3]</property>
 			<property name="mainmenuid">4</property>
 			<label>Disney+</label>
-			<label2>Custom item</label2>
+			<label2 />
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">disney</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3095&amp;list_name=Disney%2B+Movies&amp;plugin_category=Disney%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -328,11 +326,10 @@
 			<property name="id">$NUMBER[4]</property>
 			<property name="mainmenuid">4</property>
 			<label>Apple TV+</label>
-			<label2>Custom item</label2>
+			<label2 />
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">appletv</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=2538&amp;list_name=Apple+TV%2B+Movies&amp;plugin_category=Apple+TV%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -690,11 +687,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50302" />
 				<param name="widget_header" value="New TV Shows" />
-				<param name="content_path" value="" />
+				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=discover&amp;tmdb_type=tv&amp;tmdb_id=None&amp;with_id=True&amp;with_separator=AND&amp;sort_by=first_air_date.desc&amp;first_air_date.lte=t-0&amp;vote_count.gte=5&amp;vote_average.gte=5&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="" />
+				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
@@ -902,11 +899,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50401" />
 				<param name="widget_header" value="Netflix" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3093&amp;list_name=Netflix+Movies&amp;plugin_category=Netflix+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
+				<param name="widget_target" value="" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
@@ -925,11 +922,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50402" />
 				<param name="widget_header" value="Amazon Prime" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3094&amp;list_name=Amazon+Prime+Movies&amp;plugin_category=Amazon+Prime+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
+				<param name="widget_target" value="" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
@@ -948,11 +945,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50403" />
 				<param name="widget_header" value="Disney+" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3095&amp;list_name=Disney%2B+Movies&amp;plugin_category=Disney%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
+				<param name="widget_target" value="" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
@@ -971,11 +968,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50404" />
 				<param name="widget_header" value="Apple TV+" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=2538&amp;list_name=Apple+TV%2B+Movies&amp;plugin_category=Apple+TV%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
+				<param name="widget_target" value="" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
