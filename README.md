@@ -19,6 +19,12 @@ Repositório com recursos e customizações para o **Kodi**, trazendo skins e sc
 2. Instale o arquivo `.zip` no Kodi em **Add-ons > Instalar via arquivo zip**.  
 3. Ative e aproveite! 🎉
 
+![Tela de Inicial da Skin](screenshots/1.png)
+
+![Menu](screenshots/1.png)
+
+![Reviews](screenshots/1.png)
+
 ## 🤝 Contribuição
 
 - Faça um **fork** do repositório.  
