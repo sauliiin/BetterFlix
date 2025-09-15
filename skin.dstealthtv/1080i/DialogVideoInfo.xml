@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
     <defaultcontrol always="true">138</defaultcontrol>
+    <onload>SetProperty(ActorList.State,loading)</onload>
+    <onload>AlarmClock(ShowActorsTimer, SetProperty(ActorList.State,ready), 00:03, silent)</onload>
     <onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
+    <onload>Container.Update($INFO[Control.GetContent(50)],replace)</onload>
+    <onunload>ClearProperty(ActorList.State)</onunload>
     <onunload>ClearProperty(infobackground,home)</onunload>
     <controls>
         <control type="group">
@@ -16,7 +20,6 @@
                 <texture fallback="common/black.png">$INFO[ListItem.Art(fanart)]</texture>
                 <aspectratio>scale</aspectratio>
             </control>
-
             <control type="image">
                 <width>100%</width>
                 <height>100%</height>
@@ -94,7 +97,6 @@
                 <top>-30</top>
                 <control type="group" id="140">
                     <top>468</top>
-                    
                     <control type="button" id="138">
                         <width>794</width>
                         <height>565</height>
@@ -114,7 +116,6 @@
                         <visible>Integer.IsGreater(Container(4000).NumItems,0)</visible>
                         <selected>String.IsEmpty(ListItem.Path)</selected>
                     </control>
-
                     <control type="button" id="139">
                         <width>1245</width>
                         <height>550</height>
@@ -132,7 +133,6 @@
                         <texturenofocus border="21">dialogs/dialog-bg.png</texturenofocus>
                         <visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
                     </control>
-                    
                     <control type="textbox">
                         <left>40</left>
                         <top>25</top>
@@ -153,7 +153,6 @@
                         <autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
                         <visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
                     </control>
-                    
                     <control type="textbox">
                         <left>40</left>
                         <top>25</top>
@@ -176,7 +175,6 @@
                         <autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
                         <visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
                     </control>
-                    
                     <control type="textbox">
                         <left>40</left>
                         <top>25</top>
@@ -324,53 +322,25 @@
                         <param name="visible" value="!String.IsEmpty(ListItem.DBType)" />
                     </include>
                 </control>
-                <control type="group">
-                    <visible>Integer.IsEqual(Container(50).NumItems,0) + String.IsEmpty(ListItem.Art(tvshow.banner)) + String.IsEmpty(ListItem.Art(banner)) + String.IsEmpty(ListItem.Art(clearlogo))</visible>
-                    <animation effect="fade" start="0" end="100" time="300" delay="400">Visible</animation>
-                    <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
-                    <control type="image">
-                        <left>0</left>
-                        <top>164</top>
-                        <width>1245</width>
-                        <height>328</height>
-                        <texture border="21">dialogs/dialog-bg.png</texture>
-                    </control>
-                    <control type="textbox">
-                        <left>17</left>
-                        <top>185</top>
-                        <width>1210</width>
-                        <height>283</height>
-                        <align>center</align>
-                        <aligny>center</aligny>
-                        <font>font36_title</font>
-                        <label>$LOCALIZE[31079]</label>
-                    </control>
-                </control>
+
                 <control type="image">
-                    <left>77</left>
-                    <top>185</top>
-                    <width>1090</width>
-                    <height>283</height>
-                    <fadetime>150</fadetime>
-                    <aspectratio>keep</aspectratio>
-                    <texture>$VAR[BannerVar]</texture>
-                    <visible>Integer.IsEqual(Container(50).NumItems,0)</visible>
-                    <animation effect="fade" start="0" end="100" time="300" delay="400">Visible</animation>
-                    <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
-                </control>
-                <control type="image">
-                    <left>77</left>
-                    <top>185</top>
-                    <width>1090</width>
-                    <height>283</height>
-                    <fadetime>150</fadetime>
-                    <aspectratio>keep</aspectratio>
+                    <left>50</left>
+                    <top>165</top>
+                    <width>800</width>
+                    <height>280</height>
                     <texture>$INFO[ListItem.Art(clearlogo)]</texture>
-                    <visible>Integer.IsEqual(Container(50).NumItems,0) + String.IsEmpty(ListItem.Art(tvshow.banner)) + String.IsEmpty(ListItem.Art(banner))</visible>
-                    <animation effect="fade" start="0" end="100" time="300" delay="400">Visible</animation>
-                    <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+                    <aspectratio>keep</aspectratio>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <visible>String.IsEqual(Window.Property(ActorList.State),loading)</visible>
+                    <animation effect="fade" start="0" end="100" time="400">Visible</animation>
+                    <animation effect="fade" start="100" end="0" time="400">Hidden</animation>
+                    <animation effect="fade" start="80" end="0" time="900" tween="sine" pulse="true" condition="true">Conditional</animation>
                 </control>
+
                 <control type="panel" id="50">
+                    <visible>String.IsEqual(Window.Property(ActorList.State),ready)</visible>
+                    <animation effect="fade" start="0" end="100" time="400">Visible</animation>
                     <top>153</top>
                     <width>1235</width>
                     <height>370</height>
@@ -384,6 +354,9 @@
                     <ondown>140</ondown>
                     <scrolltime>200</scrolltime>
                     <orientation>horizontal</orientation>
+                    <animation effect="fade" start="0" end="100" time="1000">WindowOpen</animation>
+                    <content target="videos" condition="String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;tmdb_type=movie</content>
+                    <content target="videos" condition="!String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;tmdb_type=tv</content>
                     <itemlayout height="317" width="245" condition="!Container.Content(Sets)">
                         <control type="group">
                             <top>10</top>

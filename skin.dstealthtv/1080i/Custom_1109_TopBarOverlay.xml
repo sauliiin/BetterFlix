@@ -224,21 +224,20 @@
 					<visible>String.IsEmpty(Player.Art(clearlogo))</visible>
 					<visible>String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
 					<animation effect="fade" time="150">VisibleChange</animation>
-					<left>20</left>
-					<right>400</right>
+					<width>100%</width> 
 					<control type="label">
 						<label>$VAR[NowPlayingBreadcrumbsVar]</label>
 						<font>font45</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<top>7</top>
 						<height>50</height>
-					</control>
+						<align>center</align> </control>
 					<control type="label">
 						<top>60</top>
 						<label>$VAR[OSDSubLabelVar]</label>
 						<shadowcolor>text_shadow</shadowcolor>
 						<height>60</height>
-					</control>
+						<align>center</align> </control>
 				</control>
 			</control>
 			<control type="group">
@@ -252,7 +251,7 @@
 					<height>200</height>
 					<width>600</width>
 					<align>right</align>
-					<label>$INFO[System.Time(hh:mm)]</label>
+					<label>$INFO[System.Time]</label>
 				</control>
 				<control type="grouplist">
 					<right>24</right>

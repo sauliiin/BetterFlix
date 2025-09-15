@@ -36,6 +36,12 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>netBb</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>26</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>netS</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>27</size>
@@ -142,7 +148,7 @@
 		<font>
 			<name>font27l</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>25</size>
+			<size>24</size>
 		</font>
 		<font>
 			<name>font27_narrow</name>

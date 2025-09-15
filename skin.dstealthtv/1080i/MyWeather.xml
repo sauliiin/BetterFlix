@@ -223,12 +223,11 @@
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix.png</texture>
 					<animation effect="rotate"
-									center="auto"
-									start="360" end="0"
-									time="1000"
-									loop="true"
-									condition="true">Conditional</animation>
-									<animation effect="fade" start="100" end="40" time="1000" delay="0" tween="sine" pulse="true" condition="true">Conditional</animation>
+							center="auto"
+							start="0" end="360"
+							time="1000"
+							loop="true"
+							condition="true">Conditional</animation>
 				</control>
 			</control>
 		</control>
