@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DSTV File! -->
+<window id="1130">
+	<zorder>999</zorder>
+	<defaultcontrol>101</defaultcontrol>
+	<controls>
+		<control type="group">
+			<!-- inner background -->
+			<control type="image">
+				<include>Visible_Fade</include>
+				<include>FullscreenDimensions</include>
+				<texture background="true" colordiffuse="background">colors/white.png</texture>
+			</control>
+			<!-- outer background -->
+			<control type="image">
+				<include>FullscreenDimensions</include>
+				<texture background="true" border="50" colordiffuse="secondary_background">dstv/background_square.png</texture>
+			</control>
+			<control type="scrollbar" id="3000">
+				<include>HiddenObject</include>
+			</control>
+			<control type="grouplist">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>900</width>
+				<height max="940">auto</height>
+				<orientation>vertical</orientation>
+				<itemgap>25</itemgap>
+				<align>center</align>
+				<!-- headline -->
+				<control type="label">
+					<width>100%</width>
+					<height>26</height>
+					<font>font36_title</font>
+					<textcolor>white</textcolor>
+					<scroll>false</scroll>
+					<align>left</align>
+					<aligny>top</aligny>
+					<label>Welcome to DStealthTV!</label>
+				</control>
+				<!-- message -->
+				<control id="5" type="textbox">
+					<centerleft>50%</centerleft>
+					<width>100%</width>
+					<height max="745">auto</height>
+					<font>font27</font>
+					<autoscroll>false</autoscroll>
+					<align>left</align>
+					<textcolor>grey</textcolor>
+					<aligny>top</aligny>
+					<pagecontrol>3000</pagecontrol>
+					<label>This skin is designed to be lightweight &amp; simulate Netflix for TV.[CR][CR]In order to get everything running as it should, I recommend to set the following Kodi options:[CR][CR]- Disable Mouse[CR]- Flatten TV Shows If Only 1 Season[CR]- Insert your MDBList API key to get ratings[CR]</label>
+				</control>
+				<!-- Button -->
+				<control type="grouplist" id="100">
+					<height>55</height>
+					<width>100%</width>
+					<orientation>horizontal</orientation>
+					<itemgap>25</itemgap>
+					<align>center</align>
+					<onright>noop</onright>
+					<onleft>noop</onleft>
+					<onback>noop</onback>
+					<control type="button" id="101">
+						<label>Yep, I will do it!</label>
+						<include content="DialogSettingButton">
+							<param name="height" value="55" />
+						</include>
+						<width min="300">auto</width>
+						<font>font27</font>
+						<onup>PageUp(3000)</onup>
+						<ondown>PageDown(3000)</ondown>
+						<!-- disable 1st run prompt -->
+						<onclick>Skin.SetBool(ds-1strun-done)</onclick>
+						<!-- disable mouse -->
+						<onclick>Addon.OpenSettings(script.showimdb)</onclick>
+						<onclick>ReplaceWindow(home)</onclick>
+					</control>
+					<control type="button" id="102">
+						<label>No, I don't care!</label>
+						<include content="DialogSettingButton">
+							<param name="height" value="55" />
+						</include>
+						<width min="300">auto</width>
+						<font>font27</font>
+						<onup>PageUp(3000)</onup>
+						<ondown>PageDown(3000)</ondown>
+						<!-- disable 1st run prompt -->
+						<onclick>Skin.SetBool(ds-1strun-done)</onclick>
+						<onclick>ReplaceWindow(home)</onclick>
+					</control>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

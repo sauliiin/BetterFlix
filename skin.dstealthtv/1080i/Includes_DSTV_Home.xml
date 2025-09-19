@@ -39,56 +39,11 @@
 					<include>HomeTopNBottomBars</include>
 					<include>HomeMenuLogos</include>
 					<include>HomeTopMenu</include>
-					<control type="image">
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,2)</visible>
-						<centerleft>50%</centerleft>
-						<centertop>46.2%</centertop>
-						<width>75</width>
-						<height>75</height>
-						<aspectratio>keep</aspectratio>
-						<texture>special://skin/gif/netflix.png</texture>
-						<animation effect="rotate"
-										center="auto"
-										start="360" end="0"
-										time="1000"
-										loop="true"
-										condition="true">Conditional</animation>
-										<animation effect="fade" start="100" end="40" time="600" delay="0" pulse="true" condition="true">Conditional</animation>
-						<animation effect="fade" start="0" end="100" time="900">VisibleChange</animation>	
-					</control>
-					<control type="image">
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,2)</visible>
-						<centerleft>50%</centerleft>
-						<centertop>46.2%</centertop>
-						<width>75</width>
-						<height>75</height>
-						<aspectratio>keep</aspectratio>
-						<texture>special://skin/gif/netflix2.png</texture>
-						<animation effect="rotate"
-										center="auto"
-										start="0" end="360"
-										time="800"
-										loop="true"
-										condition="true">Conditional</animation>
-										<animation effect="fade" start="100" end="40" time="600" delay="0" pulse="true" condition="true">Conditional</animation>
-						<animation effect="fade" start="0" end="100" time="900">VisibleChange</animation>	
-					</control>
-					<control type="label" id="$PARAM[list_id]2">
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,2)</visible>
-						<animation effect="fade" start="90" end="0" time="900" delay="700" pulse="true" condition="true">Conditional</animation>
-						<animation effect="fade" start="0" end="90" time="700">VisibleChange</animation>	
-						<left>46.7%</left>
-						<top>52.6%</top>
-						<width>100%</width>
-						<height>50</height>
-						<font>netBb</font>
-						<textcolor>white</textcolor>
-						<label>Loading ...</label>
-					</control>
 				</control>
 			</controls>
 		</definition>
 	</include>
+	<include condition="System.AddonIsEnabled(plugin.video.themoviedb.helper)">TMDbHelperContentList</include>
 
 	<include name="HomeMenuRight">
 		<control type="group" id="2000">
@@ -800,8 +755,8 @@
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="90" time="150" tween="sine" easing="in" center="200,150" />
-							<effect type="zoom" start="100" end="110" time="150" tween="sine" easing="out" center="200,150" delay="175" />
+							<effect type="zoom" start="100" end="90" time="175" easing="in" center="200,150" />
+							<effect type="zoom" start="100" end="110" time="175" easing="out" center="200,150" delay="175" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
@@ -836,7 +791,7 @@
 							<height>104%</height>
 							<texture colordiffuse="primary_background">colors/white.png</texture>
 							<bordertexture colordiffuse="white" infill="false">colors/white.png</bordertexture>
-							<bordersize>5</bordersize>
+							<bordersize>4</bordersize>
 							<aspectratio>scale</aspectratio>
 						</control>
 

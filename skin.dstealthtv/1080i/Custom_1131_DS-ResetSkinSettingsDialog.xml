@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DSTV File! -->
+<window type="dialog" id="1131">
+	<include content="ds_dialog_yesno">
+		<param name="window_id" value="1131" />
+		<param name="title" value="Reset Skin Settings" />
+		<param name="msg" value="Do you really want to reset all Skin Settings?" />
+		<!-- hack: Need to send to 'appearancesettings' page so when we return we're reloading the ds_customsettings -->
+		<param name="yes_onclick1">ActivateWindow(appearancesettings)</param>
+		<param name="yes_onclick2">Skin.SetBool(ds-settings-init, false)</param>
+		<param name="yes_onclick3">Notification(Skin Settings, Reset!)</param>
+		<param name="yes_onclick4">ActivateWindowAndFocus(skinsettings,9000,0,0,0)</param>
+		<param name="yes_cond1">true</param>
+		<param name="yes_cond2">true</param>
+		<param name="yes_cond3">true</param>
+		<param name="yes_cond4">true</param>
+	</include>
+</window>

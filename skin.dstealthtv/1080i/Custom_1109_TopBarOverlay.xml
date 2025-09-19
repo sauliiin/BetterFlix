@@ -197,7 +197,7 @@
 				<animation effect="fade" start="0" end="100" time="300" condition="Skin.HasSetting(touchmode)">conditional</animation>
 				<control type="grouplist">
 					<visible>!String.IsEmpty(Player.Art(tvshow.clearlogo)) | !String.IsEmpty(Player.Art(clearlogo))</visible>
-					<top>-935</top>
+					<top>-945</top>
 					<width>100%</width>
 					<align>center</align>
 					<aligny>center</aligny>
@@ -210,7 +210,7 @@
 					</control>
 				</control>
 				<control type="label">
-					<top>-820</top>
+					<top>-810</top>
 					<width>100%</width>
 					<align>center</align>
 					<aligny>center</aligny>
@@ -237,7 +237,8 @@
 						<label>$VAR[OSDSubLabelVar]</label>
 						<shadowcolor>text_shadow</shadowcolor>
 						<height>60</height>
-						<align>center</align> </control>
+						<align>center</align> 
+					</control>
 				</control>
 			</control>
 			<control type="group">

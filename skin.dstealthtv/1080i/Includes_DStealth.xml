@@ -47,6 +47,11 @@
 		<!-- At the end of first run, set the ds-settings-init value to true so the above dont trigger again -->
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(ds-settings-init, true)</onload>
 	</include>
+	<include name="TMDbHelperContentList">
+		<control type="list" id="9143">
+			<include>HiddenList</include>
+		</control>
+	</include>
 	<!-- CUSTOM ANIMATIONS -->
 	<include name="dsa_delayed_menuicon_slideout">
 		<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
