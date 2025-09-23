@@ -755,8 +755,8 @@
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="90" time="175" easing="in" center="200,150" />
-							<effect type="zoom" start="100" end="110" time="175" easing="out" center="200,150" delay="175" />
+							<effect type="zoom" start="100" end="92" time="175" easing="in" center="200,150" />
+							<effect type="zoom" start="100" end="108" time="175" easing="out" center="200,150" delay="175" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
@@ -786,9 +786,9 @@
 						<control type="image">
 							<visible>Control.HasFocus($PARAM[list_id])</visible>
 							<left>-2.8%</left>
-							<top>-2.1%</top>
+							<top>-1.7%</top>
 							<width>105.5%</width>
-							<height>104%</height>
+							<height>103.6%</height>
 							<texture colordiffuse="primary_background">colors/white.png</texture>
 							<bordertexture colordiffuse="white" infill="false">colors/white.png</bordertexture>
 							<bordersize>4</bordersize>

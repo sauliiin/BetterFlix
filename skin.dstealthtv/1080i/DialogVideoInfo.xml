@@ -2,7 +2,7 @@
 <window>
     <defaultcontrol always="true">138</defaultcontrol>
     <onload>SetProperty(ActorList.State,loading)</onload>
-    <onload>AlarmClock(ShowActorsTimer, SetProperty(ActorList.State,ready), 00:02, silent)</onload>
+    <onload>AlarmClock(ShowActorsTimer, SetProperty(ActorList.State,ready), 00:04, silent)</onload>
     <onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
     <onload>Container.Update($INFO[Control.GetContent(50)],replace)</onload>
     <onunload>ClearProperty(ActorList.State)</onunload>
@@ -333,30 +333,38 @@
                     <aspectratio>keep</aspectratio>
                     <align>center</align>
                     <aligny>center</aligny>
-                    <visible>String.IsEqual(Window.Property(ActorList.State),loading)</visible>
-                    <animation effect="fade" start="0" end="100" time="300">Visible</animation>
-                    <animation effect="fade" start="100" end="0" time="300">Hidden</animation>
+                    <visible>!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(Window.Property(ActorList.State),ready)</visible>
+                    <animation effect="fade" start="0" end="100" time="300" delay="500">Visible</animation>
+                    <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
                     <animation effect="fade" start="80" end="0" time="800" tween="sine" pulse="true" condition="true">Conditional</animation>
                 </control>
 
                 <control type="panel" id="50">
-                    <visible>String.IsEqual(Window.Property(ActorList.State),ready)</visible>
-                    <animation effect="fade" start="0" end="100" time="2000" delay="2000">WindowOpen</animation>
+                    <animation type="WindowOpen" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast)">
+                        <effect type="fade" start="0" end="100" time="1000" delay="4000" />
+                    </animation>
+                    <animation type="WindowOpen" condition="Container.Content(Sets) | !String.IsEmpty(ListItem.Cast)">
+                        <effect type="fade" start="0" end="100" time="1000" delay="500" />
+                    </animation>
                     <top>153</top>
                     <width>1235</width>
                     <height>370</height>
                     <onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
                     <onup condition="System.HasAddon(script.embuary.info) + !System.AddonIsEnabled(script.embuary.info) + !String.IsEqual(ListItem.DBType,set)">EnableAddon(script.embuary.info)</onup>
                     <onup condition="!System.HasAddon(script.embuary.info) + !String.IsEqual(ListItem.DBType,set)">InstallAddon(script.embuary.info)</onup>
-                    <onup>AlarmClock(close_busydialog,Dialog.Close(busydialog),00:05,silent)</onup>
+                    <onup>AlarmClock(close_busydialog,Dialog.Close(busydialog),00:04,silent)</onup>
                     <onup>ActivateWindow(busydialog)</onup>
                     <onleft>50</onleft>
                     <onright>50</onright>
                     <ondown>140</ondown>
                     <scrolltime>200</scrolltime>
                     <orientation>horizontal</orientation>
-                    <content target="videos" condition="String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=movie</content>
-                    <content target="videos" condition="!String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=tv</content>
+
+                    <content target="videos" condition="Container.Content(Sets)">videodb://movies/sets/$INFO[ListItem.SetId]/</content>
+                    <content target="videos" condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">$INFO[ListItem.Cast]</content>
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=movie</content>
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=tv</content>
+
                     <itemlayout height="317" width="245" condition="!Container.Content(Sets)">
                         <control type="group">
                             <top>10</top>
@@ -476,6 +484,7 @@
                             </control>
                         </control>
                     </focusedlayout>
+                    
                     <itemlayout height="317" width="210" condition="Container.Content(Sets)">
                         <control type="group">
                             <left>-10</left>
@@ -568,6 +577,7 @@
                         </control>
                     </focusedlayout>
                 </control>
+                
                 <control type="grouplist" id="5000">
                     <left>800</left>
                     <top>890</top>

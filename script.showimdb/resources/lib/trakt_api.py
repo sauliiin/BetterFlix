@@ -59,16 +59,16 @@ def get_reviews_by_imdb_id(imdb_id, media_type):
                 continue
             
             # Bloco de texto para a análise
-            review_block = f"[B]ANÁLISE:[/B]\n\n{comment_text}"
+            review_block = f"[B][COLOR FFE50914]Review:[/COLOR][/B] {comment_text}"
             
             # Adiciona a nota do usuário, se existir
             if (rating := c.get('user_rating')) is not None:
-                review_block += f"\n\n[B]Nota do usuário: {rating}/10[/B]"
+                review_block += f"\n[B]Nota: {rating}/10[/B]"
             
             formatted_comments.append(review_block)
 
         if formatted_comments:
-            result_text = '\n_________________________________________________________________\n\n'.join(formatted_comments)
+            result_text = '\n\n\n'.join(formatted_comments)
             
     except Exception as e:
         xbmc.log(f"[Trakt_API] Erro na chamada para {imdb_id}: {e}", xbmc.LOGWARNING)
