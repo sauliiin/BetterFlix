@@ -98,7 +98,7 @@
 		<font>
 			<name>netuser</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>19</size>
+			<size>21</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -196,7 +196,7 @@
 		<font>
 			<name>widget_label</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>28</size>
+			<size>27</size>
 		</font>
 		<font>
 			<name>font15_title</name>

@@ -310,8 +310,8 @@
 				<texturenofocus />
 				<radioposx>40</radioposx>
 				<radioposy>0</radioposy>
-				<radiowidth>30</radiowidth>
-				<radioheight>30</radioheight>
+				<radiowidth>29</radiowidth>
+				<radioheight>29</radioheight>
 				<textureradioonfocus colordiffuse="selected">$PARAM[icon]</textureradioonfocus>
 				<textureradioonnofocus colordiffuse="disabled">$PARAM[icon]</textureradioonnofocus>
 				<textureradioofffocus colordiffuse="selected">$PARAM[icon]</textureradioofffocus>

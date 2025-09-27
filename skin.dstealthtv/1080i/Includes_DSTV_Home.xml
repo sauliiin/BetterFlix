@@ -439,13 +439,13 @@
 					<control type="image">
 						<top>35</top>
 						<left>140</left>
-						<width>44</width>
-						<height>44</height>
+						<width>46</width>
+						<height>46</height>
 						<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
 							<effect type="fade" start="100" end="25" time="250" />
 						</animation>
 						<texture colordiffuse="white">$INFO[System.ProfileThumb]</texture>
-						<aspectratio>keep</aspectratio>
+						<aspectratio>stretch</aspectratio>
 					</control>
 					<control type="label">
 						<top>15</top>
@@ -467,7 +467,7 @@
 					<height>100</height>
 					<onback>SetFocus(50000)</onback>
 					<left>105</left>
-					<itemgap>-38</itemgap>
+					<itemgap>-40</itemgap>
 					<orientation>horizontal</orientation>
 					<onup>SetFocus(9000,99,absolute)</onup>
 					<ondown>SetFocus(9000,0,absolute)</ondown>
@@ -755,8 +755,8 @@
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="92" time="175" easing="in" center="200,150" />
-							<effect type="zoom" start="100" end="108" time="175" easing="out" center="200,150" delay="175" />
+							<effect type="zoom" start="100" end="90" time="200" easing="in" center="200,150" />
+							<effect type="zoom" start="100" end="110" time="200" easing="out" center="200,150" delay="175" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>

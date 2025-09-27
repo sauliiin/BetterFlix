@@ -107,9 +107,9 @@
 					<onclick>PlayerControl(Play)</onclick>
 				</control>
 				<control type="image">
-					<width>74</width>
-					<height>74</height>
-					<animation center="38,38" effect="zoom" end="120" reversible="false" start="85" time="480" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
+					<width>76</width>
+					<height>76</height>
+					<animation center="38,38" effect="zoom" end="125" reversible="true" start="102" time="250" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
 					<texture colordiffuse="white">$VAR[PlayerControlsPlayImageVar]</texture>
 				</control>
 			</control>

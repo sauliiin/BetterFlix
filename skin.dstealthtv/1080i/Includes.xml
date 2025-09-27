@@ -1077,19 +1077,9 @@
 				<!-- Data -->
 				<control type="label">
 					<font>font27l</font> <!-- use uma fonte menor para a data -->
-					<textcolor>black</textcolor>
-					<height>30</height>
-					<top>100</top> <!-- posiciona abaixo da hora (ajuste conforme altura da hora) -->
-					<left>1459</left> <!-- 1920 - 50 -->
-					<width>400</width> <!-- ou o quanto achar adequado -->
-					<align>right</align>
-					<label>$INFO[System.DayOfWeek] $INFO[System.Date]</label>
-				</control>
-				<control type="label">
-					<font>font27l</font> <!-- use uma fonte menor para a data -->
 					<height>30</height>
 					<top>98</top> <!-- posiciona abaixo da hora (ajuste conforme altura da hora) -->
-					<left>1460</left> <!-- 1920 - 50 -->
+					<left>1465</left> <!-- 1920 - 50 -->
 					<width>400</width> <!-- ou o quanto achar adequado -->
 					<align>right</align>
 					<label>$INFO[System.DayOfWeek] $INFO[System.Date]</label>
