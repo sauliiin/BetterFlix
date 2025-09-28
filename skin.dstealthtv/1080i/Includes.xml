@@ -952,14 +952,15 @@
 				<top>0</top>
 				<right>0</right>
 				<bottom>0</bottom>
-				<texture colordiffuse="dialog_tint">colors/white.png</texture>
+				<!-- vitral aki -->
+				<texture colordiffuse="33E0E0E0">colors/white.png</texture>
 			</control>
 			<control type="image">
 				<left>0</left>
 				<top>0</top>
 				<right>0</right>
 				<height>70</height>
-				<texture colordiffuse="button_focus" border="2">colors/white70.png</texture>
+				<texture colordiffuse="00E0E0E0" border="2">colors/white70.png</texture>
 			</control>
 			<control type="label" id="$PARAM[header_id]">
 				<left>40</left>
@@ -980,25 +981,6 @@
 				<texturefocus />
 				<texturenofocus />
 				<onclick>noop</onclick>
-			</control>
-			<control type="radiobutton">
-				<right>10</right>
-				<top>11</top>
-				<width>50</width>
-				<height>50</height>
-				<radiowidth>50</radiowidth>
-				<radioheight>50</radioheight>
-				<texturefocus />
-				<texturenofocus />
-				<label></label>
-				<textureradioofffocus colordiffuse="EEFFFFFF">dialogs/close.png</textureradioofffocus>
-				<!-- DSTV: if this special..address changes, update VAR[ds_kodi_icon] -->
-				<textureradiooffnofocus colordiffuse="EEFFFFFF">special://xbmc/media/vendor_icon.png</textureradiooffnofocus>
-				<textureradioonfocus colordiffuse="EEFFFFFF">dialogs/close.png</textureradioonfocus>
-				<!-- DSTV: if this special..address changes, update VAR[ds_kodi_icon] -->
-				<textureradioonnofocus colordiffuse="EEFFFFFF">special://xbmc/media/vendor_icon.png</textureradioonnofocus>
-				<onclick>Action(close)</onclick>
-				<visible>!Skin.HasSetting(touchmode)</visible>
 			</control>
 			<control type="button">
 				<right>10</right>
@@ -1077,9 +1059,19 @@
 				<!-- Data -->
 				<control type="label">
 					<font>font27l</font> <!-- use uma fonte menor para a data -->
+					<textcolor>black</textcolor>
+					<height>30</height>
+					<top>100</top> <!-- posiciona abaixo da hora (ajuste conforme altura da hora) -->
+					<left>1459</left> <!-- 1920 - 50 -->
+					<width>400</width> <!-- ou o quanto achar adequado -->
+					<align>right</align>
+					<label>$INFO[System.DayOfWeek] $INFO[System.Date]</label>
+				</control>
+				<control type="label">
+					<font>font27l</font> <!-- use uma fonte menor para a data -->
 					<height>30</height>
 					<top>98</top> <!-- posiciona abaixo da hora (ajuste conforme altura da hora) -->
-					<left>1465</left> <!-- 1920 - 50 -->
+					<left>1460</left> <!-- 1920 - 50 -->
 					<width>400</width> <!-- ou o quanto achar adequado -->
 					<align>right</align>
 					<label>$INFO[System.DayOfWeek] $INFO[System.Date]</label>
