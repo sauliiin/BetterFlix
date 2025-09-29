@@ -12,7 +12,7 @@
 	<color name="grey">FFF0F0F0</color>
 	<color name="blue">FF7ACAFE</color>
 	<color name="red">FFE50914</color>
-	<color name="button_focus">99E50914</color>
+	<color name="button_focus">99B0B0B0</color>
 	<color name="button_focusclear">FFB0B0B0</color>
 	<color name="translucid">FF999999</color>
 	<color name="button_alt_focus">80999999</color>

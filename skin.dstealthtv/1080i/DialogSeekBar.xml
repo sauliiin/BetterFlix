@@ -162,7 +162,7 @@
 			</control>
 			<control type="label">
 				<top>54</top>
-				<left>225</left>
+				<left>235</left>
 				<width>134</width>
 				<height>60</height>
 				<label>$INFO[Player.Time]</label>
@@ -173,7 +173,7 @@
 			</control>
 			<control type="label">
 				<top>54</top>
-				<left>1539</left>
+				<left>1529</left>
 				<width>134</width>
 				<height>60</height>
 				<label>$INFO[Player.TimeRemaining]</label>
@@ -189,7 +189,6 @@
 				<height>60</height>
 				<label>Duração: $INFO[Player.Duration]</label>
 				<font>fontOSD</font>
-				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label" id="40000">

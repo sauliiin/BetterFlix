@@ -34,7 +34,7 @@
 					<effect type="fade" start="100" end="0" time="350"/>
 				</animation>
 				<control type="grouplist" id="201">
-					<left>125</left>
+					<left>133</left>
 					<top>27</top>
 					<width>100%</width>
 					<height>135</height>
@@ -68,9 +68,9 @@
 						<control type="image">
 							<left>15</left>
 							<top>5</top>
-							<width>62</width>
-							<height>62</height>
-							<animation center="38,38" effect="zoom" end="125" reversible="true" start="102" time="250" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
+							<width>64</width>
+							<height>64</height>
+							<animation center="38,38" effect="zoom" end="125" reversible="false" start="70" time="500" tween="back" condition="Control.HasFocus(602)">Conditional</animation>
 							<texture colordiffuse="white">$VAR[PlayerControlsPlayImageVar]</texture>
 						</control>
 					</control>

@@ -439,8 +439,8 @@
 					<control type="image">
 						<top>35</top>
 						<left>140</left>
-						<width>46</width>
-						<height>46</height>
+						<width>45</width>
+						<height>45</height>
 						<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
 							<effect type="fade" start="100" end="25" time="250" />
 						</animation>
@@ -488,7 +488,7 @@
 						<param name="control_id" value="804" />
 						<param name="icon"      value="icons/search.png" />
 						<param name="onclick"
-								value="ActivateWindow(Videos,&quot;plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&quot;,return)" />
+								value="ActivateWindow(Videos,&quot;plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&tmdb_type=None&reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&widget=true&quot;,return)" />
 					</include>
 				</control>
 
@@ -618,7 +618,7 @@
 						<control type="image">
 							<width>1</width>
 							<height>1</height>
-							<texture colordiffuse="00FFFFFF" background="true">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;tmdb_type=$INFO[ListItem.DBType]</texture>
+							<texture colordiffuse="00FFFFFF" background="true">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=$INFO[ListItem.DBType]</texture>
 						</control>
 						<!-- Invisible background loading of Fanart so it displays faster in the Title area when focussed -->
 						<control type="image">
