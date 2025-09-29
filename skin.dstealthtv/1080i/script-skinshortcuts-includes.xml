@@ -294,7 +294,6 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">netflix</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_movie_list&amp;action=trakt_movies_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -900,11 +899,11 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50401" />
 				<param name="widget_header" value="Netflix" />
-				<param name="content_path" value="plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_movie_list&amp;action=trakt_movies_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
+				<param name="content_path" value="" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
+				<param name="widget_target" value="" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
 				<param name="widget_width" value="225" />
