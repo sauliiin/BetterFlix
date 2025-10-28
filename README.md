@@ -8,7 +8,7 @@ Repositório com recursos e customizações para o **Kodi**, trazendo skins e sc
   Personalização visual inspirada no **Stremio**, trazendo uma experiência de carregamento mais clean.
 
 - **script.showimdb**  
-  Helper universal para exibir notas do **IMDb**, **Trakt** e **Letterboxd**, além de mostrar comentários do Trakt. Yeppp! Todas vão de 0 a 10 para fácilitar (conversão feita via script)
+  Helper universal para exibir notas do **IMDb**, **Trakt** e **Letterboxd**, mostrar comentários do Trakt e reproduzir o trailer em VideoWindow (permite continuar navegando normalmente). Yeppp! Todas vão de 0 a 10 para fácilitar (conversão feita via script)
 
 - **skin.dstealthtv/**  
   Skin leve inspirada no visual da **Netflix**, mas que mantém elementos da **Estuary** por nostalgia.
