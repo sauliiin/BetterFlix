@@ -36,7 +36,7 @@
 					<scroll>false</scroll>
 					<align>left</align>
 					<aligny>top</aligny>
-					<label>Welcome to DStealthTV!</label>
+					<label>Welcome to BetterFlix!</label>
 				</control>
 				<!-- message -->
 				<control id="5" type="textbox">
@@ -49,7 +49,7 @@
 					<textcolor>grey</textcolor>
 					<aligny>top</aligny>
 					<pagecontrol>3000</pagecontrol>
-					<label>This skin is designed to be lightweight &amp; simulate Netflix for TV.[CR][CR]In order to get everything running as it should, I recommend to set the following Kodi options:[CR][CR]- Disable Mouse[CR]- Flatten TV Shows If Only 1 Season[CR]- Insert your MDBList API key to get ratings[CR]</label>
+					<label>This skin is designed to be lightweight &amp; simulate Netflix for TV.[CR][CR]In order to get everything running as it should, I highly recommend to set the following Kodi options:[CR][CR]- Disable Mouse[CR]- Insert your MDBList API key at skin settings to get ratings[CR]. I won't do it for you, cause I believe that everyone should tweak at they're own taste. My Movies and my series will show empty until you log in into trakt, but make you won stuff. Anyway, would you like to insert you MDBList API key now?</label>
 				</control>
 				<!-- Button -->
 				<control type="grouplist" id="100">
@@ -77,7 +77,7 @@
 						<onclick>ReplaceWindow(home)</onclick>
 					</control>
 					<control type="button" id="102">
-						<label>No, I don't care!</label>
+						<label>Nah, I don't care!</label>
 						<include content="DialogSettingButton">
 							<param name="height" value="55" />
 						</include>

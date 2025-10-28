@@ -74,7 +74,7 @@
 						<property name="description">General settings applying to all areas of the skin.</property>
 					</item>
 					<item id="2">
-						<label>Menus &amp; Widgets</label>
+						<label>Menus & Widgets</label>
 						<onclick>noop</onclick>
 						<property name="description">Main menu-related settings: Configure the home screen to your likings.</property>
 					</item>
@@ -110,10 +110,12 @@
 						<onup>8100</onup>
 						<ondown>8100</ondown>
 						<visible>Container(9000).HasFocus(1)</visible>
-						<control type="button" id="8107"> <include>DefaultSettingButton</include>
-							<label>Configurar Notas MDBList</label>
-							<onfocus>SetProperty(ds_setdesc, "Abre as configurações do addon para inserir a API.")</onfocus>
+						<control type="button" id="8107">
+							<include>DefaultSettingButton</include>
+							<label>Configure MDBList Ratings</label>
+							<onfocus>SetProperty(ds_setdesc, "Opens the add-on settings to enter the API key.")</onfocus>
 							<onclick>Addon.OpenSettings(script.showimdb)</onclick>
+							<description>To improve visibility, all ratings have been converted to a 0–10 scale.</description>
 						</control>
 						<!-- enable auto scrolling plot & reviews -->
 						<control type="radiobutton" id="8110">
@@ -147,7 +149,7 @@
 							<onfocus>SetProperty(ds_setdesc, "Show/Hide media flags.")</onfocus>
 							<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
 							<selected>!Skin.HasSetting(hide_mediaflags)</selected>
-						</control>
+						</control>					
 					</control>
 					<!-- MENUS & WIDGETS Submenu -->
 					<control type="grouplist" id="8200">
@@ -161,7 +163,7 @@
 							<include>DefaultSettingButton</include>
 							<label>Edit Main Menu</label>
 							<onfocus>SetProperty(ds_setdesc, "Edit the Main Menu items and widgets.")</onfocus>
-							<onclick condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=manage&amp;group=mainmenu)</onclick>
+							<onclick condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=manage&group=mainmenu)</onclick>
 							<onclick condition="!System.HasAddon(script.skinshortcuts)">InstallAddon(script.skinshortcuts)</onclick>
 						</control>
 						<!-- show Titles on widget-items for all widgets -->
@@ -209,14 +211,6 @@
 							<onclick condition="String.IsEqual(Skin.String(dstv_menu_widgets_text_case),allcaps)">Skin.Reset(dstv_menu_widgets_text_case)</onclick>
 							<onclick condition="String.IsEmpty(Skin.String(dstv_menu_widgets_text_case))">Skin.SetString(dstv_menu_widgets_text_case,titlecase)</onclick>
 						</control>
-						<!-- preload fanart -->
-						<control type="radiobutton" id="8339">
-							<include>DefaultSettingButton</include>
-							<label>Preload Fanart (will slow down widgets loading, but Fanart will display quicker)</label>
-							<onfocus>SetProperty(ds_setdesc, "Toggle whether to load fanart when loading all menu items. Will increase thumbnails cache size. [COLOR orange]Only recommended for powerful hardware or if you're patient.[/COLOR]")</onfocus>
-							<onclick>Skin.ToggleSetting(dstv_setting_preload_fanart)</onclick>
-							<selected>Skin.HasSetting(dstv_setting_preload_fanart)</selected>
-						</control>
 						<!-- Use ClearLogo's when applicable instead of text on Home Screen -->
 						<control type="radiobutton" id="8350">
 							<include>DefaultSettingButton</include>
@@ -232,15 +226,6 @@
 							<onfocus>SetProperty(ds_setdesc, "Toggle whether to display a solid background with fanart in corner.")</onfocus>
 							<onclick>Skin.ToggleSetting(netflix_bg)</onclick>
 							<selected>Skin.HasSetting(netflix_bg)</selected>
-						</control>
-						<!-- Use smaller fanart preview in corner -->
-						<control type="radiobutton" id="8361">
-							<include>DefaultSettingButton</include>
-							<label>-&gt; Use smaller fanart preview in corner (less Netflix fade)</label>
-							<onfocus>SetProperty(ds_setdesc, "Toggle how small the fanart in the corner is with the solid background.")</onfocus>
-							<onclick>Skin.ToggleSetting(netflix_small_diffuse)</onclick>
-							<selected>Skin.HasSetting(netflix_small_diffuse)</selected>
-							<enable>Skin.HasSetting(netflix_bg)</enable>
 						</control>
 						<!-- use slide animations -->
 						<control type="radiobutton" id="8370">
@@ -403,12 +388,11 @@
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix.png</texture>
 					<animation effect="rotate"
-									center="auto"
-									start="360" end="0"
-									time="1000"
-									loop="true"
-									condition="true">Conditional</animation>
-									<animation effect="fade" start="100" end="40" time="1000" delay="0" tween="sine" pulse="true" condition="true">Conditional</animation>
+							center="auto"
+							start="0" end="360"
+							time="1000"
+							loop="true"
+							condition="true">Conditional</animation>
 				</control>
 			</control>
 		</control>

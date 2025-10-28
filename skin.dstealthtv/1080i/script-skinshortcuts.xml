@@ -334,20 +334,6 @@
                   <label2>[COLOR selected]$VAR[ds_WidgetSortByVar][/COLOR]</label2>
                   <enable>!String.IsEmpty(Container(211).ListItem.Property(widgetPath))</enable>
                 </control>
-                <!-- Sort Order -->
-                <control type="button" id="9103">
-                  <label>Sort Order</label>
-                  <include>DefaultSettingButton</include>
-                  <onfocus>SetProperty(ds_setdesc, "Change the sort direction for this widget.")</onfocus>
-                  <label2>[COLOR selected]$VAR[ds_WidgetSortOrderVar][/COLOR]</label2>
-                  <onclick condition="String.IsEmpty(Container(211).ListItem.Property(widgetSortOrder))">SetProperty(customProperty,widgetSortOrder)</onclick>
-                  <onclick condition="String.IsEmpty(Container(211).ListItem.Property(widgetSortOrder))">SetProperty(customValue,ascending)</onclick>
-                  <onclick condition="String.IsEqual(Container(211).ListItem.Property(widgetSortOrder),ascending)">SetProperty(customProperty,widgetSortOrder)</onclick>
-                  <onclick condition="String.IsEqual(Container(211).ListItem.Property(widgetSortOrder),ascending)">SetProperty(customValue,descending)</onclick>
-                  <onclick condition="String.IsEqual(Container(211).ListItem.Property(widgetSortOrder),descending)">SetProperty(customProperty,widgetSortOrder)</onclick>
-                  <onclick>SendClick(404)</onclick>
-                  <enable>!String.IsEmpty(Container(211).ListItem.Property(widgetPath))</enable>
-                </control>
                 <!-- Display Limit -->
                 <control type="button" id="9104">
                   <include>DefaultSettingButton</include>

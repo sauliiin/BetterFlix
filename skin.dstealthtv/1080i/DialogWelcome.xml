@@ -1,0 +1,6 @@
+<window>
+    <defaultcontrol>10</defaultcontrol>
+    <controls>
+        <label id="10">Testando janela customizada...</label>
+    </controls>
+</window>

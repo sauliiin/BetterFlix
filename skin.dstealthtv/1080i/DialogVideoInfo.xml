@@ -5,11 +5,10 @@
 	<onload>SetProperty(ActorList.State,loading)</onload>
 	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
 	<onload condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast)">AlarmClock(ShowActorsTimer,SetProperty(ActorList.State,ready), 00:05, silent)</onload>
-	<onload condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">AlarmClock(ShowActorsTimer,SetProperty(ActorList.State,ready), 00:00:0.1, silent)</onload>
+	<onload condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">AlarmClock(ShowActorsTimer,SetProperty(ActorList.State,ready), 00:05, silent)</onload>
 	<onunload>ClearProperty(ActorList.State)</onunload>
 	<onunload>ClearProperty(infobackground,home)</onunload>
     <controls>
-        <include condition="System.AddonIsEnabled(plugin.video.themoviedb.helper)">TMDbHelperContentList</include>
         <control type="group">
             <centertop>50%</centertop>
             <height>1080</height>
@@ -362,10 +361,19 @@
                     <ondown>140</ondown>
                     <scrolltime>200</scrolltime>
                     <orientation>horizontal</orientation>
+                    
                     <content target="videos" condition="Container.Content(Sets)">videodb://movies/sets/$INFO[ListItem.SetId]/</content>
+                    
                     <content target="videos" condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">$INFO[ListItem.Cast]</content>
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;tmdb_type=movie</content>
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;tmdb_type=tv</content>
+                    
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;tmdb_type=movie</content>
+                    
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;imdb_id=$INFO[ListItem.IMDBNumber]&amp;tmdb_type=movie</content>
+                    
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;tmdb_type=tv</content>
+                    
+                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;imdb_id=$INFO[ListItem.IMDBNumber]&amp;tmdb_type=tv</content>
+                    
                     <itemlayout height="317" width="245" condition="!Container.Content(Sets)">
                         <control type="group">
                             <top>10</top>
@@ -604,8 +612,21 @@
                         <param name="id" value="11" />
                         <param name="icon" value="icons/infodialogs/trailer.png" />
                         <param name="label" value="$LOCALIZE[20410]" />
-                        <param name="onclick" value="RunPlugin(plugin://plugin.video.youtube/play/?video_id=$INFO[ListItem.Trailer,plugin://plugin.video.youtube/play/?video_id=])" />
-                        <param name="visible" value="true" />
+                        
+                        <!-- ✅ MÉTODO 1: PlayMedia direto via YouTube (ListItem.Trailer) -->
+                        <param name="onclick_2_condition" value="!String.IsEmpty(ListItem.Trailer)" />
+                        <param name="onclick_2" value="Dialog.Close(movieinformation)" />
+                        <param name="onclick_2b" value="PlayMedia($INFO[ListItem.Trailer],1)" />
+                        
+                        <!-- ✅ MÉTODO 2: TMDb Helper (fallback final) -->
+                        <param name="onclick_3_condition" value="String.IsEmpty(ListItem.Trailer) + System.AddonIsEnabled(plugin.video.themoviedb.helper) + !String.IsEmpty(ListItem.Property(tmdb_id))" />
+                        <param name="onclick_3" value="Dialog.Close(movieinformation)" />
+                        <param name="onclick_3b_condition" value="String.IsEqual(ListItem.DBType,movie)" />
+                        <param name="onclick_3b" value="PlayMedia(plugin://plugin.video.themoviedb.helper/?info=play&amp;type=movie&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;trailer=true,1)" />
+                        <param name="onclick_3c_condition" value="!String.IsEqual(ListItem.DBType,movie)" />
+                        <param name="onclick_3c" value="PlayMedia(plugin://plugin.video.themoviedb.helper/?info=play&amp;type=tv&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;trailer=true,1)" />
+                        
+                        <param name="visible" value="!String.IsEmpty(ListItem.Trailer) | [System.AddonIsEnabled(plugin.video.themoviedb.helper) + !String.IsEmpty(ListItem.Property(tmdb_id))]" />
                     </include>
                     <include content="InfoDialogButton">
                         <param name="id" value="441" />

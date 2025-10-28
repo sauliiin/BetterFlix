@@ -3,14 +3,6 @@
 <!-- NOTE: The empty xml-tags are REQUIRED!! Without them SkinShortcuts will fail to build the menu. -->
 <shortcuts>
 	<shortcut>
-		<defaultID>mm-search</defaultID>
-		<label>Search</label>
-		<thumb>special://skin/extras/icons/widg icons/search3.png</thumb>
-		<action>noop</action>
-		<icon />
-		<label2 />
-	</shortcut>
-	<shortcut>
 		<defaultID>mm-movies</defaultID>
 		<label>Movies</label>
 		<thumb>special://skin/extras/icons/widg icons/home.png</thumb>
@@ -21,14 +13,22 @@
 	<shortcut>
 		<defaultID>mm-tvshows</defaultID>
 		<label>TV Shows</label>
-		<thumb>special://skin/extras/icons/widg icons/clapperboard.png</thumb>
+		<thumb>special://skin/extras/icons/widg icons/tv2.png</thumb>
 		<action>noop</action>
 		<icon />
 		<label2 />
 	</shortcut>
 	<shortcut>
-		<defaultID>mm-streaming</defaultID>
-		<label>Streammy</label>
+		<defaultID>mm-mytvshows</defaultID>
+		<label>My TV Shows</label>
+		<thumb>special://skin/extras/icons/widg icons/tv2.png</thumb>
+		<action>noop</action>
+		<icon />
+		<label2 />
+	</shortcut>
+	<shortcut>
+		<defaultID>mm-mymovies</defaultID>
+		<label>My Movies</label>
 		<thumb>special://skin/extras/icons/widg icons/categories.png</thumb>
 		<action>noop</action>
 		<icon />

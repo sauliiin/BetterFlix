@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <setting id="api_key" type="text" label="Chave da API (MDBList)" default=""/>
+
+    <!-- API Key configuration -->
+    <setting id="api_key" type="text" label="API Key (MDBList)" default=""/>
+
+    <!-- Maintenance section -->
+    <setting type="lsep" label="Maintenance"/>
+
+    <!-- Description above the Clear Cache button -->
+    <setting type="lsep" label="It's a must to clear cache at first time to clear empty ratings."/>
+
+    <!-- Action button: Clear Cache -->
+    <setting id="clear_cache" type="action" 
+             label="Clear Cache" 
+             action="RunScript(special://home/addons/script.showimdb/resources/clear_cache.py)"
+             help="Deletes temporary files and cached data to free space or fix display issues."
+             description="Click to clear all cached ratings and temporary files."/>
 </settings>

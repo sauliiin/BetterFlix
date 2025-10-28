@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-
 	<include name="DSTVHome">
 		<definition>
 			<!-- DSTV: include, onloads and onunload. -->
@@ -8,6 +7,7 @@
 			<onload condition="!Skin.HasSetting(ds-1strun-done)">ReplaceWindow(1130)</onload>
 			<onload condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=buildxml&mainmenuID=9000&options=noGroups)</onload>
 			<onunload>ClearProperty(ds_prop_widgetpath, home)</onunload>
+			<onload>SetFocus(9000,0)</onload>
 			<defaultcontrol>9000</defaultcontrol>
 			<backgroundcolor>background</backgroundcolor>
 			<!-- DSTV: controls -->
@@ -37,13 +37,11 @@
 					<include>HomeBgFades</include>
 					<include>HomeMenuLeft</include>
 					<include>HomeTopNBottomBars</include>
-					<include>HomeMenuLogos</include>
 					<include>HomeTopMenu</include>
 				</control>
 			</controls>
 		</definition>
 	</include>
-	<include condition="System.AddonIsEnabled(plugin.video.themoviedb.helper)">TMDbHelperContentList</include>
 
 	<include name="HomeMenuRight">
 		<control type="group" id="2000">
@@ -55,10 +53,12 @@
 	</include>
 
 	<include name="InfoArea">
+	
+		<!-- FANART (quando NÃO tem video) -->
 		<control type="group">
 			<left>0</left>
 			<top>0</top>
-			<visible>Skin.HasSetting(netflix_bg) + !Player.HasMedia</visible>
+			<visible>!Player.HasVideo</visible>			
 			<!-- Background to fill in the empty netflix fanart slot -->
 			<control type="image">
 				<right>0</right>
@@ -67,29 +67,18 @@
 				<height>100%</height>
 				<aspectratio aligny="top">stretch</aspectratio>
 				<texture colordiffuse="primary_background">dstv/netflix_blank.png</texture>
-				<fadetime>500</fadetime>
 			</control>
-			<!-- Large Fanart corner image -->
+			<!-- Large Fanart corner image - PRINCIPAL CORREÇÃO AQUI -->
 			<control type="image">
+				<!-- Adicionada animação de fadeout APENAS na fanart -->
+				<animation effect="fade" start="100" end="0" time="300" reversible="false">Hidden</animation>
 				<right>0</right>
 				<top>0</top>
 				<width>78%</width>
 				<height>75%</height>
 				<aspectratio aligny="top">stretch</aspectratio>
 				<texture>$VAR[ds_infoFanart]</texture>
-				<fadetime>500</fadetime>
-				<visible>!Skin.HasSetting(netflix_small_diffuse)</visible>
-			</control>
-			<!-- Small Fanart corner image -->
-			<control type="image">
-				<right>0</right>
-				<top>0</top>
-				<width>55%</width>
-				<height>50%</height>
-				<aspectratio aligny="top">stretch</aspectratio>
-				<texture>$VAR[ds_infoFanart]</texture>
-				<fadetime>500</fadetime>
-				<visible>Skin.HasSetting(netflix_small_diffuse)</visible>
+				<fadetime>600</fadetime>
 			</control>
 			<!-- Netflix corner display fade -->
 			<control type="image">
@@ -97,9 +86,43 @@
 				<top>0</top>
 				<width>93%</width>
 				<height>95%</height>
+				<fadetime>600</fadetime>
 				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
 			</control>
 		</control>
+		<control type="group">
+			<visible>Player.HasVideo</visible>   
+			<control type="image">
+				<right>0</right>
+				<top>0</top>
+				<width>100%</width>
+				<height>100%</height>
+				<aspectratio aligny="top">stretch</aspectratio>
+				<texture colordiffuse="black">colors/black.png</texture>
+			</control>
+			<!-- VideoWindow -->
+			<control type="videowindow">
+				<!-- Animação apenas no videowindow -->
+				<animation effect="fade" start="0" end="100" time="400">Visible</animation>
+				<depth>DepthContentPopout</depth>
+				<right>-25</right>
+				<top>0</top>
+				<width>70%</width>
+				<height>70%</height>
+				<!-- Só exibe o vídeo quando estiver tocando -->
+				<visible>!Player.Paused</visible>
+			</control>		
+			<!-- Netflix corner display fade (IGUAL À FANART) -->
+			<control type="image">
+				<right>0</right>
+				<top>0</top>
+				<width>82%</width>
+				<height>88%</height>
+				<fadetime>600</fadetime>
+				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
+			</control>
+		</control>
+		
 		<control type="group">
 			<left>-15</left>
 			<top>0</top>
@@ -117,9 +140,10 @@
 				<control type="image">
 					<aspectratio aligny="top">stretch</aspectratio>
 					<texture colordiffuse="info_background">dstv/info_bg.png</texture>
-					<fadetime>500</fadetime>
+					<fadetime>600</fadetime>
 				</control>
 			</control>
+
 			<!-- Title Text -->
 			<control type="group">
 				<visible>!Skin.HasSetting(dstv_setting_use_clearlogo_titles) | String.IsEmpty(Window(home).Property(ds_info_clearlogo))</visible>
@@ -134,14 +158,15 @@
 				<control type="label">
 					<font>font_MainMenuT</font>
 					<label>$VAR[ds_infoTitle]</label>
-					<shadowcolor>FF000000</shadowcolor> <!-- sombra preta opaca -->
-					<shadowoffsetx>3</shadowoffsetx> <!-- deslocamento horizontal da sombra -->
-					<shadowoffsety>3</shadowoffsety> <!-- deslocamento vertical da sombra -->
+					<shadowcolor>FF000000</shadowcolor>
+					<shadowoffsetx>3</shadowoffsetx>
+					<shadowoffsety>3</shadowoffsety>
 					<aligny>center</aligny>
 					<scroll>true</scroll>
 					<autoscroll delay="1000" time="1500" repeat="1">true</autoscroll>
 				</control>
 			</control>
+
 			<!-- Title ClearLogo -->
 			<control type="group">
 				<visible>Skin.HasSetting(dstv_setting_use_clearlogo_titles) + !String.IsEmpty(Window(home).Property(ds_info_clearlogo))</visible>
@@ -159,6 +184,7 @@
 					<aspectratio align="left" aligny="center">keep</aspectratio>
 				</control>
 			</control>
+
 			<!-- Info Row -->
 			<control type="group">
 				<visible>!String.IsEmpty(ListItem.Rating)</visible>	
@@ -173,99 +199,99 @@
 					<shadowcolor>FF000000</shadowcolor>
 					<shadowoffsetx>4</shadowoffsetx>
 					<shadowoffsety>4</shadowoffsety>
-					<label>$VAR[ds_infoDate] • $VAR[ds_infoDuration] • $VAR[ds_infoGenre]</label>
+					<label>$VAR[ds_infoRow]</label>
 					<scroll>true</scroll>
 					<autoscroll delay="1000" time="1500" repeat="1">true</autoscroll>
 				</control>
 			</control>
+
 			<!-- IMDB, Letter e Trakt -->
 			<control type="group">
-					<visible>!String.IsEmpty(ListItem.Rating)</visible>
-					<animation effect="fade" start="0" end="100" time="400">VisibleChange</animation>	
-
-					<!-- IMDB -->
-					<control type="group">
-						<control type="image"> 
-							<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
-							<left>79.1%</left>
-							<align>left</align>
-							<top>552</top>
-							<width>70</width>
-							<height>60</height>
-							<aspectratio>keep</aspectratio>
-							<texture>special://skin/gif/imdb.png</texture>
-						</control>
-						<control type="label">
-							<left>83%</left>
-							<align>left</align>
-							<top>566</top>
-							<width>300</width>
-							<height>30</height>
-							<font>netSb</font>
-							<shadowcolor>FF000000</shadowcolor>
-							<shadowoffsetx>3</shadowoffsetx>
-							<shadowoffsety>3</shadowoffsety>
-							<label>$VAR[ds_infoRatIMDB]</label>
-							<font>netuser</font>
-							<textcolor>white</textcolor>
-						</control>
+				<visible>!String.IsEmpty(ListItem.Rating)</visible>
+				<animation effect="fade" start="0" end="100" time="400">VisibleChange</animation>	
+				<!-- IMDB -->
+				<control type="group">
+					<control type="image"> 
+						<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
+						<left>79.1%</left>
+						<align>left</align>
+						<top>552</top>
+						<width>70</width>
+						<height>60</height>
+						<aspectratio>keep</aspectratio>
+						<texture>special://skin/gif/imdb.png</texture>
 					</control>
-
-					<!-- Letter -->
-					<control type="group">
-						<control type="image"> 
-							<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating))</visible>
-							<left>86.5%</left>
-							<align>left</align>
-							<top>560</top>
-							<width>42</width>
-							<height>42</height>
-							<aspectratio>keep</aspectratio>
-							<texture>special://skin/gif/letter.png</texture>
-						</control>
-						<control type="label">
-							<left>89%</left>
-							<align>left</align>
-							<top>566</top>
-							<width>300</width>
-							<height>30</height>
-							<font>netSb</font>
-							<shadowcolor>FF000000</shadowcolor>
-							<shadowoffsetx>3</shadowoffsetx>
-							<shadowoffsety>3</shadowoffsety>
-							<label>$VAR[ds_info_letterboxd_rating]</label>
-							<font>netuser</font>
-							<textcolor>white</textcolor>
-						</control>
+					<control type="label">
+						<left>83%</left>
+						<align>left</align>
+						<top>566</top>
+						<width>300</width>
+						<height>30</height>
+						<font>netSb</font>
+						<shadowcolor>FF000000</shadowcolor>
+						<shadowoffsetx>3</shadowoffsetx>
+						<shadowoffsety>3</shadowoffsety>
+						<label>$VAR[ds_infoRatIMDB]</label>
+						<font>netuser</font>
+						<textcolor>white</textcolor>
 					</control>
+				</control>
 
-					<!-- Trakt -->
-					<control type="group">
-						<control type="image">	
-							<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))</visible>			
-							<aspectratio>keep</aspectratio>
-							<left>92.8%</left>
-							<align>left</align>
-							<top>564</top>
-							<width>36</width>
-							<height>36</height>
-							<texture>special://skin/gif/trakt.png</texture>
-						</control>
-						<control type="label">
-							<left>95%</left>
-							<align>left</align>
-							<top>566</top>
-							<width>300</width>
-							<height>30</height>
-							<font>netSb</font>
-							<shadowcolor>FF000000</shadowcolor>
-							<shadowoffsetx>3</shadowoffsetx>
-							<shadowoffsety>3</shadowoffsety>
-							<label>$VAR[ds_info_trakt_rating]</label>
-							<font>netuser</font>
-							<textcolor>white</textcolor>
-						</control>
+				<!-- Letter -->
+				<control type="group">
+					<control type="image"> 
+						<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating))</visible>
+						<left>86.5%</left>
+						<align>left</align>
+						<top>560</top>
+						<width>42</width>
+						<height>42</height>
+						<aspectratio>keep</aspectratio>
+						<texture>special://skin/gif/letter.png</texture>
 					</control>
+					<control type="label">
+						<left>89%</left>
+						<align>left</align>
+						<top>566</top>
+						<width>300</width>
+						<height>30</height>
+						<font>netSb</font>
+						<shadowcolor>FF000000</shadowcolor>
+						<shadowoffsetx>3</shadowoffsetx>
+						<shadowoffsety>3</shadowoffsety>
+						<label>$VAR[ds_info_letterboxd_rating]</label>
+						<font>netuser</font>
+						<textcolor>white</textcolor>
+					</control>
+				</control>
+
+				<!-- Trakt -->
+				<control type="group">
+					<control type="image">	
+						<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))</visible>			
+						<aspectratio>keep</aspectratio>
+						<left>92.8%</left>
+						<align>left</align>
+						<top>564</top>
+						<width>36</width>
+						<height>36</height>
+						<texture>special://skin/gif/trakt.png</texture>
+					</control>
+					<control type="label">
+						<left>95%</left>
+						<align>left</align>
+						<top>566</top>
+						<width>300</width>
+						<height>30</height>
+						<font>netSb</font>
+						<shadowcolor>FF000000</shadowcolor>
+						<shadowoffsetx>3</shadowoffsetx>
+						<shadowoffsety>3</shadowoffsety>
+						<label>$VAR[ds_info_trakt_rating]</label>
+						<font>netuser</font>
+						<textcolor>white</textcolor>
+					</control>
+				</control>
 			</control>
 
 			<!-- Plot & Description -->
@@ -281,9 +307,9 @@
 					<label>$VAR[ds_infoDescription]</label>
 					<autoscroll delay="6000" time="6000" repeat="6000">Skin.HasSetting(autoscroll)</autoscroll>
 					<font>netS</font>
-					<shadowcolor>FF000000</shadowcolor> <!-- sombra preta opaca -->
-					<shadowoffsetx>3</shadowoffsetx> <!-- deslocamento horizontal da sombra -->
-					<shadowoffsety>3</shadowoffsety> <!-- deslocamento vertical da sombra -->
+					<shadowcolor>FF000000</shadowcolor>
+					<shadowoffsetx>3</shadowoffsetx>
+					<shadowoffsety>3</shadowoffsety>
 				</control>
 			</control>
 		</control>
@@ -312,15 +338,12 @@
 	<include name="HomeMenuLeft">
 		<control type="group" id="999000">
 			<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-				<!-- hide menu when browsing widgets -->
 				<effect type="slide" start="0,0" end="-445,0" time="500" tween="sine" />
 			</animation>
 			<colordiffuse>FFFFFFFF</colordiffuse>
 			<depth>DepthContentPanel</depth>
 			<include>OpenClose_Left</include>
-			<!-- Menu Items List -->
 			<include content="UpDownArrows">
-				<!-- arrow dimensions are 48x24 -->
 				<param name="container_id" value="9000" />
 				<param name="posx" value="220" />
 				<param name="up_posy" value="200" />
@@ -332,7 +355,7 @@
 				<width>600</width>
 				<height>480</height>
 				<movement>6</movement>
-				<focusposition>2</focusposition> 
+				<focusposition>2</focusposition>
 				<onfocus>ClearProperty(listposition,home)</onfocus>
 				<onfocus>ClearProperty(ds_mainmenu_hidden)</onfocus>
 				<fadetime>1000</fadetime>
@@ -341,31 +364,26 @@
 				<ondown>SetFocus(800,0,absolute)</ondown>
 				<scrolltime tween="cubic" easing="out">500</scrolltime>
 				<itemlayout height="75">
-					<!-- Icon Unselected -->
 					<control type="group">
 						<include>dsa_delayed_menuicon_slideout</include>
 						<top>9</top>
 						<left>22</left>
 						<width>60</width>
 						<height>60</height>
-						<!-- menu-focussed -->
 						<control type="image">
 							<include>dsa_quick_fade_on_change</include>
 							<texture colordiffuse="disabled">$INFO[ListItem.icon]</texture>
 							<visible>!String.IsEqual(Window().Property(ds_mainmenu_hidden),true)</visible>
 						</control>
-						<!-- menu-unfocussed -->
 						<control type="image">
 							<include>dsa_quick_fade_on_change</include>
 							<texture colordiffuse="disabled">$INFO[ListItem.icon]</texture>
 							<visible>String.IsEqual(Window().Property(ds_mainmenu_hidden),true)</visible>
 						</control>
 					</control>
-					<!-- Label Unselected -->
 					<control type="group">
 						<include>dsa_delayed_menulabel_fadeout</include>
 						<left>135</left>
-						<!-- menu-focussed -->
 						<control type="label">
 							<include>dsa_quick_fade_on_change</include>
 							<aligny>center</aligny>
@@ -374,7 +392,6 @@
 							<label>$VAR[ds_menu_item_text]</label>
 							<visible>!String.IsEqual(Window().Property(ds_mainmenu_hidden),true)</visible>
 						</control>
-						<!-- menu-unfocussed -->
 						<control type="label">
 							<include>dsa_quick_fade_on_change</include>
 							<font>netN</font>
@@ -385,19 +402,16 @@
 					</control>
 				</itemlayout>
 				<focusedlayout height="75">
-					<!-- Icon Selected -->
 					<control type="group">
 						<include>dsa_delayed_menuicon_slideout</include>
 						<top>9</top>
 						<left>22</left>
 						<width>60</width>
 						<height>60</height>
-						<!-- focused -->
 						<control type="image">
 							<include>dsa_quick_fade_on_change</include>
 							<texture colordiffuse="white">$INFO[ListItem.icon]</texture>
 						</control>
-						<!-- unfocused -->
 						<control type="image">
 							<height>73</height>
 							<width>56</width>
@@ -407,11 +421,9 @@
 							<visible>ControlGroup(800).HasFocus | !ControlGroup(999000).HasFocus</visible>
 						</control>
 					</control>
-					<!-- Label Selected -->
 					<control type="group">
 						<include>dsa_delayed_menulabel_fadeout</include>
 						<left>135</left>
-						<!-- focused -->
 						<control type="label">
 							<include>dsa_quick_fade_on_change</include>
 							<aligny>center</aligny>
@@ -433,7 +445,7 @@
 		<definition>
 			<control type="group">
 				<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-					<effect type="slide" start="0,0" end="-350,0" time="500" tween="sine" />
+					<effect type="fade" start="100" end="0" time="600" />
 				</animation>
 				<control type="group">
 					<control type="image">
@@ -441,9 +453,6 @@
 						<left>140</left>
 						<width>45</width>
 						<height>45</height>
-						<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-							<effect type="fade" start="100" end="25" time="250" />
-						</animation>
 						<texture colordiffuse="white">$INFO[System.ProfileThumb]</texture>
 						<aspectratio>stretch</aspectratio>
 					</control>
@@ -456,9 +465,6 @@
 						<textcolor>disabled</textcolor>
 						<label>$INFO[System.ProfileName]</label>
 						<aligny>center</aligny>
-						<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-							<effect type="fade" start="100" end="25" time="250" />
-						</animation>
 					</control>
 				</control>
 				<control type="grouplist" id="800">
@@ -486,12 +492,10 @@
 					</include>
 					<include content="ds_power">
 						<param name="control_id" value="804" />
-						<param name="icon"      value="icons/search.png" />
-						<param name="onclick"
-								value="ActivateWindow(Videos,&quot;plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&tmdb_type=None&reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&widget=true&quot;,return)" />
+						<param name="icon" value="icons/search.png" />
+						<param name="onclick" value="ActivateWindow(Videos,&quot;plugin://plugin.video.pov/?name=32450&iconImage=search.png&mode=navigator.search&quot;,return)" />
 					</include>
 				</control>
-
 			</control>
 		</definition>
 	</include>
@@ -501,7 +505,6 @@
 			<include content="TopBar">
 				<param name="breadcrumbs_label" value="" />
 			</include>
-			<!-- BottomBar (fade) -->
 			<control type="image">
 				<left>0</left>
 				<bottom>0</bottom>
@@ -512,14 +515,10 @@
 		</definition>
 	</include>
 
-
-	<!-- Widgets -->
 	<include name="ds_widgetPanelList">
-		<!-- internal variables -->
 		<param name="left_offset">100</param>
 		<param name="top_offset">40</param>
 		<param name="display_titles">false</param>
-		<!-- external variables -->
 		<param name="list_id"/>
 		<param name="widget_header"/>
 		<param name="content_path"/>
@@ -535,15 +534,13 @@
 		<param name="display_type"/>
 		<param name="display_type_isposters"/>
 		<definition>
-			<!-- Widget Header -->
 			<control type="group" id="$PARAM[list_id]1">
-				<visible>Skin.HasSetting(show_emptywidgets) | Container($PARAM[list_id]).IsUpdating | Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
 				<animation effect="fade" start="100" end="30" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(9000) + !Control.HasFocus($PARAM[list_id])">Conditional</animation>
 				<left>115</left>
 				<top>0</top>
 				<width>200%</width>
 				<height>38</height>
-				<!-- Widget Title background shadow -->
 				<control type="group">
 					<top>-1</top>
 					<left>-1</left>
@@ -567,7 +564,6 @@
 						<label>[CAPITALIZE][LOWERCASE]$PARAM[widget_header][/LOWERCASE][/CAPITALIZE]</label>
 					</control>
 				</control>
-				<!-- Widget Title foreground text -->
 				<control type="label">
 					<font>widget_label</font>
 					<shadowcolor>primary_background</shadowcolor>
@@ -589,18 +585,17 @@
 			</control>
 			<!-- Widget Panels List -->
 			<control type="fixedlist" id="$PARAM[list_id]">
-				<visible>Container($PARAM[list_id]).IsUpdating | Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
 				<animation effect="fade" start="100" end="10" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(9000) + !Control.HasFocus($PARAM[list_id])">Conditional</animation>
 				<animation effect="fade" start="100" end="10" time="250" tween="sine" reversible="true" condition="Control.HasFocus(9000) + !Skin.HasSetting(netflix_bg)">Conditional</animation>
 				<left>20</left>
 				<top>10</top>
 				<right>0</right>
 				<height>$PARAM[widget_height]</height>
-				<onback>9000</onback>
 				<onleft>9000</onleft>
+				<onback>9000</onback>
 				<onright>SetFocus($PARAM[list_id],0,absolute)</onright>
 				<onfocus>SetProperty(ds_mainmenu_hidden,true,home)</onfocus>
-				<!-- set widgetpath property for ContextMenu "Browse Widget Folder" option -->
 				<onfocus>SetProperty(ds_prop_widgetpath, $PARAM[content_path], home)</onfocus>
 				<!-- Widget Controls -->
 				<scrolltime tween="linear" easing="in">250</scrolltime>
@@ -613,32 +608,17 @@
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
 						<width>$PARAM[width]</width>
-						<itemgap>-400</itemgap>
 						<height>$PARAM[height]</height>
-						<control type="image">
-							<width>1</width>
-							<height>1</height>
-							<texture colordiffuse="00FFFFFF" background="true">plugin://plugin.video.themoviedb.helper/?info=cast&tmdb_id=$INFO[ListItem.Property(tmdb_id)]&tmdb_type=$INFO[ListItem.DBType]</texture>
-						</control>
-						<!-- Invisible background loading of Fanart so it displays faster in the Title area when focussed -->
-						<control type="image">
-							<visible>Skin.HasSetting(dstv_setting_preload_fanart)</visible>
-							<texture colordiffuse="00FFFFFF" background="true">$VAR[ds_infoFanart]</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<!-- Invisible background loading of ClearLogo so it displays faster in the Title area when focussed -->
 						<control type="image">
 							<visible>Skin.HasSetting(dstv_setting_use_clearlogo_titles)</visible>
 							<texture colordiffuse="00FFFFFF" background="true">$INFO[ListItem.Art(clearlogo)]</texture>
 							<aspectratio align="left" aligny="top">keep</aspectratio>
 						</control>
-						<!-- Poster -->
 						<control type="image">
 							<visible>$PARAM[display_type_isposters]</visible>
 							<texture fallback="dstv/kodi_poster.png" background="true">$VAR[ds_WidgetPanelPoster]</texture>
 							<aspectratio>$PARAM[aspect_ratio]</aspectratio>
 						</control>
-						<!-- Label -->
 						<control type="group">
 							<visible>ListItem.Property(weather) | Skin.HasSetting(show_widget_titles) | $PARAM[display_titles]</visible>
 							<top>$PARAM[height]</top>
@@ -651,28 +631,14 @@
 								<label>$INFO[ListItem.Label]</label>
 							</control>
 						</control>
-						<!-- Watched Status - Small -->
 						<control type="image">
 							<visible>Integer.IsGreater(ListItem.Playcount,0) + Skin.HasSetting(dstv_setting_smaller_watched)</visible>
 							<width>38</width>
 							<height>38</height>
 							<texture>dstv/watched.png</texture>
 						</control>
-
-						<!-- Fire -->
 						<control type="group">
-						<!-- só mostra o grupo quando a variável não estiver vazia -->
-						    <visible>
-								String.StartsWith(ListItem.Rating,8) |
-								String.StartsWith(ListItem.Rating,9) |
-								String.StartsWith(ListItem.Rating,10) |
-								String.StartsWith(ListItem.Rating,7.4) |
-								String.StartsWith(ListItem.Rating,7.5) |
-								String.StartsWith(ListItem.Rating,7.6) |
-								String.StartsWith(ListItem.Rating,7.7) |
-								String.StartsWith(ListItem.Rating,7.8) |
-								String.StartsWith(ListItem.Rating,7.9)
-							</visible>
+							<visible>String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,10) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)</visible>
 							<control type="image">
 								<left>163</left>
 								<top>1</top>
@@ -705,10 +671,9 @@
 								</animation>
 							</control>
 						</control>
-
 						<control type="label">
-						    <top>8</top>
-							<left>147</left>
+							<top>8</top>
+							<left>145</left>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -718,8 +683,8 @@
 							<label>$VAR[ds_infoRat]</label>
 						</control>
 						<control type="label">
-						    <top>6</top>
-							<left>149</left>
+							<top>6</top>
+							<left>147</left>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -728,44 +693,38 @@
 							<textcolor>white</textcolor>
 							<label>$VAR[ds_infoRat]</label>
 						</control>
-
 						<control type="label">
 							<visible>!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)</visible>
-							<left>5%</left>
+							<left>4%</left>
 							<top>89%</top>
 							<width>auto</width>
 							<height>41</height>
 							<align>left</align>
 							<aligny>center</aligny>
-							<font>netSssp</font>
-							<texture colordiffuse="AAFFFFFF">colors/black.png</texture>
+							<font>netSa</font>
 							<textcolor>white</textcolor>
-							<focusedcolor>white</focusedcolor>
-							<shadowcolor>FF000000</shadowcolor> <!-- sombra preta opaca -->
-							<shadowoffsetx>4</shadowoffsetx> <!-- deslocamento horizontal da sombra -->
-							<shadowoffsety>4</shadowoffsety> <!-- deslocamento vertical da sombra -->
+							<shadowcolor>FF000000</shadowcolor>
+							<shadowoffsetx>4</shadowoffsetx>
+							<shadowoffsety>4</shadowoffsety>
 							<label>Assistido: $INFO[ListItem.PercentPlayed]%</label>
-							<autoscroll delay="1000" time="1500" repeat="1">true</autoscroll>
 						</control>
-						
 					</control>
 				</itemlayout>
-				<!-- Focused Widget Panels Layout -->
+				<content browse="auto" sortby="$PARAM[sortby]" sortorder="$PARAM[ascending]" target="$PARAM[widget_target]" limit="$PARAM[limit]">$PARAM[content_path]</content>
 				<focusedlayout width="$PARAM[widget_width]">
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="90" time="200" easing="in" center="200,150" />
-							<effect type="zoom" start="100" end="110" time="200" easing="out" center="200,150" delay="175" />
+							<effect type="zoom" start="100" end="93" time="200" easing="in" center="200,150" />
+							<effect type="zoom" start="100" end="108" time="200" easing="out" center="200,150" delay="175" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
 						<width>$PARAM[width]</width>
 						<height>$PARAM[height]</height>
-
 						<!-- Hack for running commands each time a ListItem is focussed. -->
 						<control type="button">
-							<!-- set persistent Info Area data -->
+							<onclick condition="Player.HasVideo + Player.Playing">PlayerControl(Pause)</onclick>
 							<onfocus>SetProperty(ds_info_title, "$INFO[ListItem.Label]", home)</onfocus>
 							<onfocus>SetProperty(ds_info_dt_premier, "$INFO[ListItem.Premiered]", home)</onfocus>
 							<onfocus>SetProperty(ds_info_dt_date, "$INFO[ListItem.Date]", home)</onfocus>
@@ -780,9 +739,13 @@
 							<onfocus>SetProperty(ds_info_clearlogo, $INFO[ListItem.Art(clearlogo)], home)</onfocus>
 							<onfocus>SetProperty(ds_info_tmdb_id, $INFO[ListItem.Property(tmdb_id)], home)</onfocus>
 							<onfocus>SetProperty(ds_info_dbtype, $INFO[ListItem.DBType], home)</onfocus>
+							<onfocus>SetProperty(ds_info_tmdb_id, $INFO[ListItem.Property(tmdb_id)], home)</onfocus>
+							<onfocus>SetProperty(ContextMenuTargetID, $INFO[ListItem.Property(tmdb_id)], home)</onfocus> 
+							<onfocus condition="String.IsEmpty(ListItem.Property(tmdb_id))">SetProperty(ContextMenuTargetID, $INFO[ListItem.IMDBNumber], home)</onfocus>
+							<onfocus>SetProperty(ContextMenuTargetDBType, $INFO[ListItem.DBType], home)</onfocus>
 						</control>
-
-						<!-- Selection Box for Squares & Posters -->
+						
+						<!-- Selection Box for Posters -->
 						<control type="image">
 							<visible>Control.HasFocus($PARAM[list_id])</visible>
 							<left>-2.8%</left>
@@ -791,58 +754,38 @@
 							<height>103.6%</height>
 							<texture colordiffuse="primary_background">colors/white.png</texture>
 							<bordertexture colordiffuse="white" infill="false">colors/white.png</bordertexture>
-							<bordersize>4</bordersize>
+							<bordersize>3</bordersize>
 							<aspectratio>scale</aspectratio>
 						</control>
-
-						<!-- Poster -->
+						
 						<control type="image">
 							<visible>$PARAM[display_type_isposters]</visible>
 							<texture fallback="dstv/kodi_poster.png" background="true">$VAR[ds_WidgetPanelPoster]</texture>
 							<aspectratio>$PARAM[aspect_ratio]</aspectratio>
 						</control>
-
-						<!-- Watched Status - Small -->
 						<control type="image">
 							<visible>Integer.IsGreater(ListItem.Playcount,0) + Skin.HasSetting(dstv_setting_smaller_watched)</visible>
 							<width>38</width>
 							<height>38</height>
 							<texture>dstv/watched.png</texture>
 						</control>
-
 						<control type="label">
 							<visible>!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)</visible>
-							<left>5%</left>
+							<left>4%</left>
 							<top>89%</top>
 							<width>auto</width>
 							<height>41</height>
 							<align>left</align>
 							<aligny>center</aligny>
-							<font>netSssp</font>
-							<texture colordiffuse="AAFFFFFF">colors/black.png</texture>
+							<font>netSa</font>
 							<textcolor>white</textcolor>
-							<focusedcolor>white</focusedcolor>
-							<shadowcolor>FF000000</shadowcolor> <!-- sombra preta opaca -->
-							<shadowoffsetx>4</shadowoffsetx> <!-- deslocamento horizontal da sombra -->
-							<shadowoffsety>4</shadowoffsety> <!-- deslocamento vertical da sombra -->
+							<shadowcolor>FF000000</shadowcolor>
+							<shadowoffsetx>4</shadowoffsetx>
+							<shadowoffsety>4</shadowoffsety>
 							<label>Assistido: $INFO[ListItem.PercentPlayed]%</label>
-							<autoscroll delay="1000" time="1500" repeat="1">true</autoscroll>
 						</control>
-
-						<!-- Fire -->
 						<control type="group">
-						<!-- só mostra o grupo quando a variável não estiver vazia -->
-						    <visible>
-								String.StartsWith(ListItem.Rating,8) |
-								String.StartsWith(ListItem.Rating,9) |
-								String.StartsWith(ListItem.Rating,10) |
-								String.StartsWith(ListItem.Rating,7.4) |
-								String.StartsWith(ListItem.Rating,7.5) |
-								String.StartsWith(ListItem.Rating,7.6) |
-								String.StartsWith(ListItem.Rating,7.7) |
-								String.StartsWith(ListItem.Rating,7.8) |
-								String.StartsWith(ListItem.Rating,7.9)
-							</visible>
+							<visible>String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,10) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)</visible>
 							<control type="image">
 								<left>163</left>
 								<top>1</top>
@@ -851,7 +794,7 @@
 								<aspectratio>stretch</aspectratio>
 								<texture>special://skin/gif/truefire.png</texture>
 								<colordiffuse>red</colordiffuse>
-								<animation type="Conditional" condition="true" loop="true">
+								<animation type="Conditional" condition="true">
 									<effect type="fade" start="50" end="80" time="600" tween="sine" easing="inout" pulse="true" />
 								</animation>
 							</control>
@@ -870,16 +813,14 @@
 								<height>40</height>
 								<aspectratio>stretch</aspectratio>
 								<texture>special://skin/gif/truefire.png</texture>
-								<animation type="Conditional" condition="true" loop="true">
+								<animation type="Conditional" condition="true">
 									<effect type="fade" start="20" end="60" time="600" tween="sine" easing="inout" pulse="true" />
 								</animation>
 							</control>
 						</control>
-
-						<!-- Rating (duplicado para o focusedlayout) -->
 						<control type="label">
-						    <top>8</top>
-							<left>147</left>
+							<top>8</top>
+							<left>145</left>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -889,8 +830,8 @@
 							<label>$VAR[ds_infoRat]</label>
 						</control>
 						<control type="label">
-						    <top>6</top>
-							<left>149</left>
+							<top>6</top>
+							<left>147</left>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -899,8 +840,6 @@
 							<textcolor>white</textcolor>
 							<label>$VAR[ds_infoRat]</label>
 						</control>
-
-						<!-- Label Background Fade -->
 						<control type="image">
 							<visible>ListItem.Property(weather) | Skin.HasSetting(show_widget_titles) | $PARAM[display_titles]</visible>
 							<bottom>0</bottom>
@@ -908,7 +847,6 @@
 							<texture>dstv/widgets/title_bar.png</texture>
 							<aspectratio>stretch</aspectratio>
 						</control>
-						<!-- Label -->
 						<control type="group">
 							<visible>ListItem.Property(weather) | Skin.HasSetting(show_widget_titles) | $PARAM[display_titles]</visible>
 							<top>$PARAM[height]</top>
@@ -923,36 +861,20 @@
 								<autoscroll time="2000" delay="500" repeat="0">true</autoscroll>
 							</control>
 						</control>
-
 					</control>
 				</focusedlayout>
 
 				<content>
 					<item>
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,2)</visible>
+						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
 						<icon>special://skin/gif/loading.gif</icon>
 						<property name="poster">special://skin/gif/loading.gif</property>
-					</item>
-					<item>
-						<visible>Skin.HasSetting(show_emptywidgets) + !Skin.HasSetting(show_browsewidget) + !Container($PARAM[list_id]).IsUpdating + !String.IsEmpty(Control.GetLabel($PARAM[list_id]1)) + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
-						<label>No Content</label>
-						<icon>dstv/widgets/empty.png</icon>
-						<property name="poster">dstv/widgets/empty.png</property>
-					</item>
-				</content>
-				<content browse="auto" sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[widget_target]" limit="$PARAM[limit]">$PARAM[content_path]</content>
-				<content>
-					<item>
-						<visible>Skin.HasSetting(show_browsewidget) + Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) + !Container($PARAM[list_id]).IsUpdating</visible>
-						<label>Browse Widget</label>
-						<onclick>ActivateWindow(Videos,"$PARAM[content_path]",return)</onclick>
-						<icon>dstv/kodi.png</icon>
-						<property name="poster">dstv/kodi_poster.png</property>
 					</item>
 				</content>
 			</control>
 		</definition>
 	</include>
+	
 	<include name="ds_extra_toplabel">
 		<definition>
 			<control type="group">

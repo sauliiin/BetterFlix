@@ -32,51 +32,70 @@ def get_reviews_by_imdb_id(imdb_id, media_type):
     if not imdb_id:
         return ''
     
-    # 1. Tenta buscar do cache primeiro
-    with sqlite3.connect(DB_FILE) as conn:
-        cursor = conn.execute("SELECT data, timestamp FROM trakt_reviews WHERE imdb_id = ?", (imdb_id,))
+    # Otimização: Conecta apenas UMA VEZ
+    conn = sqlite3.connect(DB_FILE, timeout=10)
+    cursor = conn.cursor()
+    
+    try:
+        # 1. Tenta buscar do cache primeiro
+        cursor.execute("SELECT data, timestamp FROM trakt_reviews WHERE imdb_id = ?", (imdb_id,))
         result = cursor.fetchone()
         if result and (time.time() - result[1] < CACHE_MAX_AGE):
             return result[0]
             
-    # 2. Se não houver cache válido, busca na API
-    trakt_type = 'shows' if media_type == 'tv' else 'movies'
-    url = f"https://api.trakt.tv/{trakt_type}/{imdb_id}/comments"
-    result_text = ''
-    try:
-        # ⭐ ALTERAÇÃO 1: Limite aumentado para 30
-        params = {'limit': 30, 'sort': 'likes'}
-        response = session.get(url, headers=HEADERS, params=params, timeout=10)
-        response.raise_for_status()
+        # 2. Se não houver cache válido, busca na API
+        trakt_type = 'shows' if media_type == 'tv' else 'movies'
+        url = f"https://api.trakt.tv/{trakt_type}/{imdb_id}/comments"
+        result_text = ''
         
-        raw_comments = response.json()
-        formatted_comments = []
+        try:
+            params = {'limit': 200, 'sort': 'likes'}
+            response = session.get(url, headers=HEADERS, params=params, timeout=10)
+            response.raise_for_status()
+            
+            raw_comments = response.json()
+            formatted_comments = []
 
-        # ⭐ ALTERAÇÃO 2: Loop para formatar o comentário e adicionar a nota
-        for c in raw_comments:
-            comment_text = c.get('comment', '').strip()
-            if not comment_text:
-                continue
-            
-            # Bloco de texto para a análise
-            review_block = f"[B][COLOR FFE50914]Review:[/COLOR][/B] {comment_text}"
-            
-            # Adiciona a nota do usuário, se existir
-            if (rating := c.get('user_rating')) is not None:
-                review_block += f"\n[B]Nota: {rating}/10[/B]"
-            
-            formatted_comments.append(review_block)
+            for c in raw_comments:
+                # Se já temos 40 reviews, paramos de procurar
+                if len(formatted_comments) >= 40:
+                    break
+                    
+                comment_text = c.get('comment', '').strip()
+                is_spoiler = c.get('spoiler', False)
+                # Otimização: Filtra por idioma
+                user_lang = c.get('user', {}).get('language', 'en') # Assume 'en' se não especificado
 
-        if formatted_comments:
-            result_text = '\n\n\n'.join(formatted_comments)
+                # Otimização: Adicionado filtro de spoiler e idioma
+                if (
+                    not is_spoiler and
+                    comment_text and
+                    len(comment_text) <= 700 and
+                    user_lang in ('pt', 'en')
+                ):
+                    
+                    # Bloco de texto para a análise
+                    review_block = f"[B][COLOR FFE50914]ANÁLISE:[/COLOR][/B] {comment_text}"
+                    
+                    # Adiciona a nota do usuário, se existir
+                    if (rating := c.get('user_rating')) is not None:
+                        review_block += f"  [B]NOTA: {rating}/10[/B]"
+                    
+                    formatted_comments.append(review_block)
+
+            if formatted_comments:
+                result_text = '\n\n'.join(formatted_comments)
+                
+        except Exception as e:
+            xbmc.log(f"[Trakt_API] Erro na chamada para {imdb_id}: {e}", xbmc.LOGWARNING)
+            return ''
             
-    except Exception as e:
-        xbmc.log(f"[Trakt_API] Erro na chamada para {imdb_id}: {e}", xbmc.LOGWARNING)
-        # Em caso de erro, retorna vazio mas não salva cache para tentar novamente depois
-        return ''
-        
-    # 3. Salva o novo resultado no cache
-    with sqlite3.connect(DB_FILE) as conn:
+        # 3. Salva o novo resultado no cache (usando a mesma conexão)
         conn.execute("INSERT OR REPLACE INTO trakt_reviews VALUES (?, ?, ?)", (imdb_id, result_text, time.time()))
-        
-    return result_text
+        conn.commit()
+            
+        return result_text
+
+    finally:
+        # 4. Garante que a conexão seja sempre fechada
+        conn.close()

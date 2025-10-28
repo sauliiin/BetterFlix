@@ -37,7 +37,7 @@
 		</font>
 		<font>
 			<name>netBb</name>
-			<filename>Netflix-sans-bold.ttf</filename>
+			<filename>Netflix-sans-medium.ttf</filename>
 			<size>26</size>
 			<style>bold</style>
 		</font>
@@ -61,6 +61,11 @@
 			<name>fontOSD</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>29</size>
+		</font>
+		<font>
+			<name>fontOSDs</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>25</size>
 		</font>
 		<font>
 			<name>fontOSDb</name>
@@ -87,7 +92,12 @@
 		<font>
 			<name>netSssp</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>19</size>
+			<size>17</size>
+		</font>
+		<font>
+			<name>netSa</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>18</size>
 		</font>
 		<font>
 			<name>netSp</name>
@@ -186,6 +196,11 @@
 			<name>font_clock</name>
 			<filename>Netflix-sans-light.ttf</filename>
 			<size>60</size>
+		</font>
+		<font>
+			<name>font_clockOSD</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>55</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>

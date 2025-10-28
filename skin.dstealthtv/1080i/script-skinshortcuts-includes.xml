@@ -65,7 +65,7 @@
 			<property name="labelID">assistindo</property>
 			<property name="widget">Addon</property>
 			<property name="widgetName">TMDb Helper - Sua Lista de Em Andamento - Classificar por: Padrão</property>
-			<property name="widgetType">mixed</property>
+			<property name="widgetType">movies</property>
 			<property name="widgetTarget">videos</property>
 			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=movie&amp;list_name=Sua+Lista+de+Em+Andamento&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<property name="displayType">posters</property>
@@ -84,11 +84,11 @@
 			<thumb />
 			<property name="labelID">paraassistir</property>
 			<property name="widget">Addon</property>
-			<property name="widgetName">TMDb Helper - Filmes Coleções</property>
+			<property name="widgetName">POV - [B]COLLECTION: [/B]Movies</property>
 			<property name="widgetType">movies</property>
 			<property name="widgetTarget">videos</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_collection&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_collection&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_movie_list&amp;action=trakt_collection&amp;name=Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_movie_list&amp;action=trakt_collection&amp;name=Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
@@ -102,7 +102,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">popular</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=112762&amp;list_name=Popular&amp;plugin_category=Popular&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=user_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[20]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -116,11 +117,12 @@
 			<thumb />
 			<property name="labelID">emalta</property>
 			<property name="widget">Addon</property>
-			<property name="widgetName">TMDb Helper - Trending movies - Classificar por: Padrão</property>
+			<property name="widgetName">POV - [COLOR magenta][I]Trending movies (x65)[/I][/COLOR]</property>
 			<property name="widgetType">movies</property>
 			<property name="widgetTarget">videos</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=100314&amp;list_name=Trending+movies&amp;plugin_category=Trending+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=100314&amp;list_name=Trending+movies&amp;plugin_category=Trending+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetLimit">$NUMBER[20]</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
@@ -134,7 +136,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">lancamentos</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=101251&amp;list_name=Lastest+movie+releases&amp;plugin_category=Lastest+movie+releases&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=user_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetLimit">$NUMBER[20]</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
@@ -148,7 +151,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">zombies</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=105566&amp;list_name=Zumbiesssssss&amp;plugin_category=Zumbiesssssss&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=zumbiesssssss&amp;list_id=105566&amp;list_type=user_lists&amp;name=Zumbiesssssss&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -161,7 +164,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">cantgowrong</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=101652&amp;list_name=Can%27t+go+wrong+movies&amp;plugin_category=Can%27t+go+wrong+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=cant-go-wrong-movies&amp;list_id=101652&amp;list_type=user_lists&amp;name=Can%27t+go+wrong+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -174,7 +177,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">combinacomvoce</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=104379&amp;list_name=Combina+com+Voc%C3%AA&amp;plugin_category=Combina+com+Voc%C3%AA&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=combina-com-voce&amp;list_id=104379&amp;list_type=user_lists&amp;name=Combina+com+Voc%C3%AA&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -187,8 +190,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">assistidosrecentemente</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -215,7 +218,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">proximosepisodios</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?name=32483&amp;iconImage=next_episodes.png&amp;mode=build_next_episode&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
 			<property name="displayTitles">true</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
@@ -229,7 +232,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">paraassistir</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_collection&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_tvshow_list&amp;action=trakt_collection&amp;name=TV+Shows&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -242,8 +245,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">emalta</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trending_week&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
+			<property name="widgetLimit">$NUMBER[20]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -256,7 +259,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">asmelhores</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Series+can%27t+go+wrong&amp;list_id=101250&amp;plugin_category=Series+can%27t+go+wrong&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=series-cant-go-wrong&amp;list_id=101250&amp;list_type=user_lists&amp;name=Series+can%27t+go+wrong&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -269,8 +272,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">netflix</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Netflix+Series&amp;list_id=99489&amp;plugin_category=Netflix+Series&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-series&amp;list_id=99489&amp;list_type=user_lists&amp;name=Netflix+Series&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -283,8 +286,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">amazonprime</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Amazon+Prime&amp;list_id=99490&amp;plugin_category=Amazon+Prime&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-prime&amp;list_id=99490&amp;list_type=user_lists&amp;name=Amazon+Prime&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -297,8 +300,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">assistidosrecentemente</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?name=32475&amp;iconImage=watched.png&amp;mode=build_tvshow_list&amp;action=watched_tvshows&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -311,7 +314,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">acaoeaventura</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=A%C3%A7%C3%A3o+e+Aventura&amp;list_id=99442&amp;plugin_category=A%C3%A7%C3%A3o+e+Aventura&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=user_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -324,7 +328,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">animacao</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Anima%C3%A7%C3%A3o&amp;list_id=100436&amp;plugin_category=Anima%C3%A7%C3%A3o&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=animacao&amp;list_id=100436&amp;list_type=user_lists&amp;name=Anima%C3%A7%C3%A3o&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -337,7 +342,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">bestever-imdb</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Best+ever&amp;list_id=92577&amp;plugin_category=Best+ever&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=best-ever&amp;list_id=92577&amp;list_type=user_lists&amp;name=Best+ever&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -350,7 +355,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">fantasia</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Fantasia&amp;list_id=100439&amp;plugin_category=Fantasia&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=fantasia&amp;list_id=100439&amp;list_type=user_lists&amp;name=Fantasia&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -363,7 +369,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">ficcaocientifica</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Sci-Fi&amp;list_id=99440&amp;plugin_category=Sci-Fi&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=sci-fi&amp;list_id=99440&amp;list_type=user_lists&amp;name=Sci-Fi&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -376,7 +382,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">guerra</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=104716&amp;list_name=War+movies&amp;plugin_category=War+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=war-movies&amp;list_id=104716&amp;list_type=user_lists&amp;name=War+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -389,7 +396,7 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">horror</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Horror&amp;list_id=92573&amp;plugin_category=Horror&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=horror&amp;list_id=92573&amp;list_type=user_lists&amp;name=Horror&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -397,12 +404,12 @@
 		<item id="8">
 			<property name="id">$NUMBER[8]</property>
 			<property name="mainmenuid">3</property>
-			<label>Super Heróis</label>
+			<label>Supernatural</label>
 			<label2>Custom item</label2>
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
-			<property name="labelID">superherois</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Super+Her%C3%B3is&amp;list_id=99449&amp;plugin_category=Super+Her%C3%B3is&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="labelID">supernatural</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=supernatural&amp;list_id=120667&amp;list_type=user_lists&amp;name=Supernatural&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -410,12 +417,13 @@
 		<item id="9">
 			<property name="id">$NUMBER[9]</property>
 			<property name="mainmenuid">3</property>
-			<label>Suspense</label>
+			<label>Super Heróis</label>
 			<label2>Custom item</label2>
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
-			<property name="labelID">suspense</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Suspense&amp;list_id=99441&amp;plugin_category=Suspense&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="labelID">superherois</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=super-herois&amp;list_id=99449&amp;list_type=user_lists&amp;name=Super+Her%C3%B3is&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -423,12 +431,26 @@
 		<item id="10">
 			<property name="id">$NUMBER[10]</property>
 			<property name="mainmenuid">3</property>
+			<label>Suspense</label>
+			<label2>Custom item</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">suspense</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=user_lists&amp;name=Suspense&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
+			<onclick>noop</onclick>
+			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<property name="isSubmenu">True</property>
+			</item>
+		<item id="11">
+			<property name="id">$NUMBER[11]</property>
+			<property name="mainmenuid">3</property>
 			<label>Zombies and Outbreak</label>
 			<label2>Custom item</label2>
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">zombiesandoutbreak</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Zombies+and+Outbreak&amp;list_id=94403&amp;plugin_category=Zombies+and+Outbreak&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=zombies-and-outbreak&amp;list_id=94403&amp;list_type=user_lists&amp;name=Zombies+and+Outbreak&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -441,8 +463,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">netflix</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Netflix++filmes&amp;list_id=99492&amp;plugin_category=Netflix++filmes&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-filmes&amp;list_id=99492&amp;list_type=user_lists&amp;name=Netflix++filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -455,8 +477,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">amazonprime</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Amazon+filmes&amp;list_id=99493&amp;plugin_category=Amazon+filmes&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-filmes&amp;list_id=99493&amp;list_type=user_lists&amp;name=Amazon+filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -469,8 +491,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">hulu</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Hulu+Movies&amp;list_id=3096&amp;plugin_category=Hulu+Movies&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]</property>
-			<property name="widgetLimit">$NUMBER[15]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=garycrawfordgc&amp;slug=hulu-movies&amp;list_id=20764807&amp;list_type=liked_lists&amp;name=Hulu+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetLimit">$NUMBER[10]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -483,8 +505,8 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">starz</property>
-			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_userlist&amp;tmdb_type=both&amp;list_name=Starz+Movies&amp;list_slug=starz-movies&amp;user_slug=smoothtk09&amp;plugin_category=Starz+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=smoothtk09&amp;slug=starz-movies&amp;list_id=28266418&amp;list_type=liked_lists&amp;name=Starz+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="widgetLimit">$NUMBER[20]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -533,7 +555,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50102" />
 				<param name="widget_header" value="Para Assistir" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_collection&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_movie_list&amp;action=trakt_collection&amp;name=Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -556,10 +578,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50103" />
 				<param name="widget_header" value="Popular" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=112762&amp;list_name=Popular&amp;plugin_category=Popular&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=user_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[20]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -579,10 +601,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50104" />
 				<param name="widget_header" value="Em Alta" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=100314&amp;list_name=Trending+movies&amp;plugin_category=Trending+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[20]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -602,10 +624,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50105" />
 				<param name="widget_header" value="Lançamentos" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=101251&amp;list_name=Lastest+movie+releases&amp;plugin_category=Lastest+movie+releases&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=user_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[20]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -625,7 +647,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50106" />
 				<param name="widget_header" value="Zombies" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=105566&amp;list_name=Zumbiesssssss&amp;plugin_category=Zumbiesssssss&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=zumbiesssssss&amp;list_id=105566&amp;list_type=user_lists&amp;name=Zumbiesssssss&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -648,7 +670,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50107" />
 				<param name="widget_header" value="Can't go Wrong" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=101652&amp;list_name=Can%27t+go+wrong+movies&amp;plugin_category=Can%27t+go+wrong+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=cant-go-wrong-movies&amp;list_id=101652&amp;list_type=user_lists&amp;name=Can%27t+go+wrong+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -671,7 +693,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50108" />
 				<param name="widget_header" value="Combina com Você" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=104379&amp;list_name=Combina+com+Voc%C3%AA&amp;plugin_category=Combina+com+Voc%C3%AA&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=combina-com-voce&amp;list_id=104379&amp;list_type=user_lists&amp;name=Combina+com+Voc%C3%AA&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -694,10 +716,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50109" />
 				<param name="widget_header" value="Assistidos Recentemente" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -791,7 +813,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50202" />
 				<param name="widget_header" value="Próximos Episódios" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?name=32483&amp;iconImage=next_episodes.png&amp;mode=build_next_episode&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -814,7 +836,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50203" />
 				<param name="widget_header" value="Para Assistir" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_collection&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_tvshow_list&amp;action=trakt_collection&amp;name=TV+Shows&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -837,10 +859,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50204" />
 				<param name="widget_header" value="Em Alta" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trending_week&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[20]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -860,7 +882,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50205" />
 				<param name="widget_header" value="As Melhores" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Series+can%27t+go+wrong&amp;list_id=101250&amp;plugin_category=Series+can%27t+go+wrong&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=series-cant-go-wrong&amp;list_id=101250&amp;list_type=user_lists&amp;name=Series+can%27t+go+wrong&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -883,10 +905,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50206" />
 				<param name="widget_header" value="Netflix" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Netflix+Series&amp;list_id=99489&amp;plugin_category=Netflix+Series&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-series&amp;list_id=99489&amp;list_type=user_lists&amp;name=Netflix+Series&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -906,10 +928,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50207" />
 				<param name="widget_header" value="Amazon Prime" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Amazon+Prime&amp;list_id=99490&amp;plugin_category=Amazon+Prime&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-prime&amp;list_id=99490&amp;list_type=user_lists&amp;name=Amazon+Prime&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -929,10 +951,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50208" />
 				<param name="widget_header" value="Assistidos Recentemente" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=tv&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?name=32475&amp;iconImage=watched.png&amp;mode=build_tvshow_list&amp;action=watched_tvshows&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1003,10 +1025,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50301" />
 				<param name="widget_header" value="Ação e Aventura" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=A%C3%A7%C3%A3o+e+Aventura&amp;list_id=99442&amp;plugin_category=A%C3%A7%C3%A3o+e+Aventura&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=user_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1026,10 +1048,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50302" />
 				<param name="widget_header" value="Animação" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Anima%C3%A7%C3%A3o&amp;list_id=100436&amp;plugin_category=Anima%C3%A7%C3%A3o&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=animacao&amp;list_id=100436&amp;list_type=user_lists&amp;name=Anima%C3%A7%C3%A3o&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1049,7 +1071,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50303" />
 				<param name="widget_header" value="Best Ever - IMDB" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Best+ever&amp;list_id=92577&amp;plugin_category=Best+ever&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=best-ever&amp;list_id=92577&amp;list_type=user_lists&amp;name=Best+ever&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -1072,10 +1094,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50304" />
 				<param name="widget_header" value="Fantasia" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Fantasia&amp;list_id=100439&amp;plugin_category=Fantasia&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=fantasia&amp;list_id=100439&amp;list_type=user_lists&amp;name=Fantasia&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1095,7 +1117,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50305" />
 				<param name="widget_header" value="Ficção Científica" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Sci-Fi&amp;list_id=99440&amp;plugin_category=Sci-Fi&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=sci-fi&amp;list_id=99440&amp;list_type=user_lists&amp;name=Sci-Fi&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -1118,10 +1140,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50306" />
 				<param name="widget_header" value="Guerra" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=104716&amp;list_name=War+movies&amp;plugin_category=War+movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=war-movies&amp;list_id=104716&amp;list_type=user_lists&amp;name=War+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1141,7 +1163,7 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50307" />
 				<param name="widget_header" value="Horror" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Horror&amp;list_id=92573&amp;plugin_category=Horror&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=horror&amp;list_id=92573&amp;list_type=user_lists&amp;name=Horror&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -1163,8 +1185,8 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50308" />
-				<param name="widget_header" value="Super Heróis" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Super+Her%C3%B3is&amp;list_id=99449&amp;plugin_category=Super+Her%C3%B3is&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="widget_header" value="Supernatural" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=supernatural&amp;list_id=120667&amp;list_type=user_lists&amp;name=Supernatural&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -1186,11 +1208,11 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50309" />
-				<param name="widget_header" value="Suspense" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Suspense&amp;list_id=99441&amp;plugin_category=Suspense&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="widget_header" value="Super Heróis" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=super-herois&amp;list_id=99449&amp;list_type=user_lists&amp;name=Super+Her%C3%B3is&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1209,8 +1231,31 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50310" />
+				<param name="widget_header" value="Suspense" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=user_lists&amp;name=Suspense&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
+				<param name="sortby" value="" />
+				<param name="sortorder" value="" />
+				<param name="limit" value="$NUMBER[25]" />
+				<param name="widget_target" value="videos" />
+				<param name="width" value="212" />
+				<param name="height" value="322" />
+				<param name="widget_width" value="225" />
+				<param name="widget_height" value="430" />
+				<param name="aspect_ratio" value="stretch" />
+				<param name="display_titles" value="false" />
+				<param name="display_type" value="posters" />
+				<param name="display_type_isposters" value="true" />
+				<param name="display_type_issquares" value="false" />
+				<param name="display_type_islandscape" value="false" />
+				<param name="pvr_tv_rec_status" value="false" />
+				<param name="w_cond" value="false" />
+				<param name="w_hour" value="false" />
+				<param name="w_forc" value="false" />
+				</include>
+			<include content="ds_widgetPanelList">
+				<param name="list_id" value="50311" />
 				<param name="widget_header" value="Zombies and Outbreak" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Zombies+and+Outbreak&amp;list_id=94403&amp;plugin_category=Zombies+and+Outbreak&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=zombies-and-outbreak&amp;list_id=94403&amp;list_type=user_lists&amp;name=Zombies+and+Outbreak&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
@@ -1284,10 +1329,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50401" />
 				<param name="widget_header" value="Netflix" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Netflix++filmes&amp;list_id=99492&amp;plugin_category=Netflix++filmes&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-filmes&amp;list_id=99492&amp;list_type=user_lists&amp;name=Netflix++filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1307,10 +1352,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50402" />
 				<param name="widget_header" value="Amazon Prime" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Amazon+filmes&amp;list_id=99493&amp;plugin_category=Amazon+filmes&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-filmes&amp;list_id=99493&amp;list_type=user_lists&amp;name=Amazon+filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1330,10 +1375,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50403" />
 				<param name="widget_header" value="Hulu +" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_name=Hulu+Movies&amp;list_id=3096&amp;plugin_category=Hulu+Movies&amp;dynamic=true&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=garycrawfordgc&amp;slug=hulu-movies&amp;list_id=20764807&amp;list_type=liked_lists&amp;name=Hulu+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[15]" />
+				<param name="limit" value="$NUMBER[10]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1353,10 +1398,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50404" />
 				<param name="widget_header" value="Starz" />
-				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_userlist&amp;tmdb_type=both&amp;list_name=Starz+Movies&amp;list_slug=starz-movies&amp;user_slug=smoothtk09&amp;plugin_category=Starz+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=smoothtk09&amp;slug=starz-movies&amp;list_id=28266418&amp;list_type=liked_lists&amp;name=Starz+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[20]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />

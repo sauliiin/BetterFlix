@@ -2,7 +2,7 @@
 <window>
 	<defaultcontrol>9000</defaultcontrol>
 	<backgroundcolor>background</backgroundcolor>
-	<controls>
+    <controls>
 		<include>DefaultBackground</include>
 		<control type="group">
 			<centerleft>50%</centerleft>

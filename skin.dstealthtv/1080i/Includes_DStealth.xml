@@ -9,16 +9,13 @@
 		<!-- Skin Settings: General -->
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(autoscroll, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(hide_mediaflags)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_weatherinfo, true)</onload>
+		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_weatherinfo, false)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(touchmode)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_dont_handle_trailers)</onload>
 		<!-- Skin Settings: Main Menu -->
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_btn_addons, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_btn_power)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_btn_settings, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_profileavatar)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_browsewidget)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(show_emptywidgets)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(show_widget_titles, false)</onload>
 		<!-- Skin Settings: Visuals -->
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(background_overlay, 2)</onload>
@@ -28,12 +25,11 @@
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(fade_widgets, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(dstv_menu_items_text_case, titlecase)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(dstv_menu_widgets_text_case, titlecase)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_preload_fanart)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(no_fanart, false)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_use_clearlogo_titles)</onload>
+		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(dstv_setting_use_clearlogo_titles, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(netflix_bg, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(netflix_small_diffuse)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(no_slide_animations)</onload>
+		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(no_slide_animations, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_smaller_watched)</onload>
 		<!-- Force Locked ViewType Settings for Movies, TV, & Videos to Shift: -->
 		<onload condition="!Skin.HasSetting(ds-settings-init) | Integer.IsLess($NUMBER[Skin.String(ds_settings_vers)],1210300)">Skin.SetString(Skin.ForcedView.movies,$LOCALIZE[31100])</onload>

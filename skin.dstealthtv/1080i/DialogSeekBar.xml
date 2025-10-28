@@ -189,6 +189,7 @@
 				<height>60</height>
 				<label>Duração: $INFO[Player.Duration]</label>
 				<font>fontOSD</font>
+				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label" id="40000">

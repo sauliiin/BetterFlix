@@ -1,76 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
-	<animation effect="fade" end="100" time="560">WindowOpen</animation>
-	<animation effect="fade" start="100" end="0" time="240">WindowClose</animation>
 	<controls>
 		<control type="group">
-			<visible>String.IsEmpty(Window(Home).Property(script.cinemavision.running))</visible>
-			<animation effect="fade" time="400">VisibleChange</animation>
-			<visible>!Window.IsActive(startup) + !Player.Caching</visible>
-			<control type="image">
-				<texture>colors/black.png</texture>
-				<include>FullScreenDimensions</include>
-				<animation effect="fade" start="100" end="70" time="0" condition="true">Conditional</animation>
-				<animation effect="fade" start="100" end="0" time="0" condition="Window.IsVisible(fullscreenvideo) | Window.IsVisible(FullscreenGame)">Conditional</animation>
-			</control>
+			<visible>!Window.IsActive(startup) + !Player.Caching</visible>		
 			<control type="group">
 				<centerleft>50%</centerleft>
 				<centertop>50%</centertop>
 				<control type="image">
 					<centerleft>50%</centerleft>
-					<centertop>46.2%</centertop>
-					<width>75</width>
-					<height>75</height>
+					<centertop>46.4%</centertop>
+					<width>70</width>
+					<height>70</height>
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="2000" /> 
+					</animation>	
 					<animation effect="rotate"
-									center="auto"
-									start="360" end="0"
-									time="1000i"
-									loop="true"
-									condition="true">Conditional</animation>
-									<animation effect="fade" start="100" end="40" time="600" delay="0" pulse="true" condition="true">Conditional</animation>
-					<animation effect="fade" start="0" end="100" time="900">VisibleChange</animation>	
+						center="auto"
+						start="360" end="0"
+						time="700"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="90" end="40" time="300" pulse="true" condition="true">Conditional</animation>
 				</control>
 				<control type="image">
 					<centerleft>50%</centerleft>
-					<centertop>46.2%</centertop>
-					<width>75</width>
-					<height>75</height>
+					<centertop>46.4%</centertop>
+					<width>68</width>
+					<height>68</height>
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix2.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3000" /> 
+					</animation>
 					<animation effect="rotate"
-									center="auto"
-									start="0" end="350"
-									time="800"
-									loop="true"
-									condition="true">Conditional</animation>
-									<animation effect="fade" start="100" end="40" time="600" delay="0" pulse="true" condition="true">Conditional</animation>
-					<animation effect="fade" start="0" end="100" time="900">VisibleChange</animation>	
+						center="auto"
+						start="0" end="350"
+						time="600"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="90" end="40" time="300" pulse="true" condition="true">Conditional</animation>
 				</control>
 				<control type="label" id="$PARAM[list_id]2">
-					<animation effect="fade" start="90" end="0" time="900" delay="700" pulse="true" condition="true">Conditional</animation>
-					<animation effect="fade" start="0" end="90" time="700">VisibleChange</animation>	
-					<left>46.6%</left>
-					<top>52.8%</top>
-					<width>100%</width>
-					<height>50</height>
-					<font>netBb</font>
-					<textcolor>black</textcolor>
-					<label>Loading ...</label>
-				</control>
-				<control type="label" id="$PARAM[list_id]2">
-					<animation effect="fade" start="90" end="0" time="900" delay="600" pulse="true" condition="true">Conditional</animation>
-					<animation effect="fade" start="0" end="90" time="600">VisibleChange</animation>	
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="4000" /> 
+					</animation>
+					<animation effect="fade" start="100" end="0" time="800" pulse="true" condition="true">Conditional</animation>			
 					<left>46.7%</left>
-					<top>52.6%</top>
+					<top>52.1%</top>
 					<width>100%</width>
 					<height>50</height>
 					<font>netBb</font>
 					<textcolor>white</textcolor>
 					<label>Loading ...</label>
 				</control>
-
 			</control>
 		</control>
 	</controls>

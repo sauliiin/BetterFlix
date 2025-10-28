@@ -245,18 +245,18 @@
 				<visible>!Window.IsVisible(extendedprogressdialog)</visible>
 				<animation effect="fade" time="150">VisibleChange</animation>
 				<control type="label">
-					<font>font_clock</font>
+					<font>font_clockOSD</font>
 					<shadowcolor>text_shadow</shadowcolor>
-					<top>0</top>
-					<right>20</right>
+					<top>15</top>
+					<right>35</right>
 					<height>200</height>
 					<width>600</width>
 					<align>right</align>
-					<label>$INFO[System.Time]</label>
+					<label>$INFO[System.Time(hh:mm)]</label>
 				</control>
 				<control type="grouplist">
-					<right>24</right>
-					<top>74</top>
+					<right>39</right>
+					<top>85</top>
 					<width>800</width>
 					<height>100</height>
 					<align>right</align>
@@ -268,6 +268,8 @@
 						<shadowcolor>text_shadow</shadowcolor>
 						<height>100</height>
 						<width>auto</width>
+						<font>fontOSDs</font>
+						<shadowcolor>black</shadowcolor>
 						<visible>!String.isempty(Player.Duration)</visible>
 						<visible>Player.HasVideo + ![Player.HasGame | VideoPlayer.HasEpg]</visible>
 					</control>
