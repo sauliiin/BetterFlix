@@ -68,7 +68,7 @@
 				<aspectratio aligny="top">stretch</aspectratio>
 				<texture colordiffuse="primary_background">dstv/netflix_blank.png</texture>
 			</control>
-			<!-- Large Fanart corner image - PRINCIPAL CORREÇÃO AQUI -->
+			<!-- Large Fanart corner image -->
 			<control type="image">
 				<!-- Adicionada animação de fadeout APENAS na fanart -->
 				<animation effect="fade" start="100" end="0" time="300" reversible="false">Hidden</animation>
