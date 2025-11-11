@@ -31,14 +31,14 @@
 				<visible>Control.IsVisible(50) | Control.Isvisible(54) | [Control.IsVisible(501) + String.IsEqual(Skin.AspectRatio,21:9)]</visible>
 				<include>Visible_Left</include>
 				<include content="ContentPanel">
-					<param name="width" value="656" />
+					<param name="width" value="500" />
 				</include>
 				<control type="group">
-					<width>550</width>
+					<width>400</width>
 					<control type="textbox">
 						<top>120</top>
 						<left>30</left>
-						<width>550</width>
+						<width>400</width>
 						<aligny>center</aligny>
 						<height>110</height>
 						<font>font36_title</font>
@@ -47,17 +47,18 @@
 					<control type="textbox">
 						<left>30</left>
 						<top>240</top>
-						<width>525</width>
+						<width>400</width>
 						<bottom>100</bottom>
 						<visible>![ListItem.IsCollection + String.IsEmpty(ListItem.Plot)]</visible>
 						<!-- DSTV: added Premiered and Genre -->
 						<label>$INFO[ListItem.Premiered,,[CR]]$INFO[ListItem.Genre,,[CR][CR]]$INFO[ListItem.Tagline,[I],[/I][CR][CR]]$INFO[ListItem.Plot][CR][CR]</label>
+						<font>netS</font>
 						<autoscroll delay="10000" time="3000" repeat="10000">Skin.HasSetting(autoscroll)</autoscroll>
 					</control>
 					<control type="textbox">
 						<left>30</left>
 						<top>360</top>
-						<width>530</width>
+						<width>400</width>
 						<height>413</height>
 						<align>center</align>
 						<aligny>center</aligny>

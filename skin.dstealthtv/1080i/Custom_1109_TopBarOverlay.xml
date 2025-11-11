@@ -252,7 +252,7 @@
 					<height>200</height>
 					<width>600</width>
 					<align>right</align>
-					<label>$INFO[System.Time(hh:mm)]</label>
+					<label>$INFO[System.Time]</label>
 				</control>
 				<control type="grouplist">
 					<right>39</right>

@@ -28,13 +28,17 @@
 	<property property="widgetSortBy" label="Random">random</property>
 	<!-- widgetLimit options -->
 	<propertySettings property="widgetLimit" buttonID="9104" title="Display Limit" showNone="true" requires="widgetPath" />
-	<property property="widgetLimit" label="$NUMBER[5]">$NUMBER[5]</property>
 	<property property="widgetLimit" label="$NUMBER[10]">$NUMBER[10]</property>
 	<property property="widgetLimit" label="$NUMBER[15]">$NUMBER[15]</property>
 	<property property="widgetLimit" label="$NUMBER[20]">$NUMBER[20]</property>
 	<property property="widgetLimit" label="$NUMBER[25]">$NUMBER[25]</property>
+	<property property="widgetLimit" label="$NUMBER[30]">$NUMBER[30]</property>
+	<property property="widgetLimit" label="$NUMBER[40]">$NUMBER[40]</property>
 	<property property="widgetLimit" label="$NUMBER[50]">$NUMBER[50]</property>
-	<property property="widgetLimit" label="$NUMBER[75]">$NUMBER[75]</property>
+	<property property="widgetLimit" label="$NUMBER[60]">$NUMBER[60]</property>
+	<property property="widgetLimit" label="$NUMBER[70]">$NUMBER[70]</property>
+	<property property="widgetLimit" label="$NUMBER[80]">$NUMBER[80]</property>
+	<property property="widgetLimit" label="$NUMBER[90]">$NUMBER[90]</property>
 	<property property="widgetLimit" label="$NUMBER[100]">$NUMBER[100]</property>
 	
 	<!-- Remove any default menu item properties that we don't need -->
@@ -92,32 +96,12 @@
 	<propertydefault group="tvshows"		labelID="tvgenres"				property="displayType">squares</propertydefault>
 	<propertydefault group="tvshows"		labelID="tvgenres"				property="displayTitles">true</propertydefault>
 
-	<!-- My Movies submenu widgets -->
-	<widgetdefaultnode group="mymovies"		labelID="moviesinprogress"		label="In Progress Movies"		target="videos"		path="special://skin/playlists/movies_inprogress.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="recentlyaddedmovies"	label="Recently Added Movies"	target="videos"		path="videodb://recentlyaddedmovies/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="moviesets"				label="Movie Sets"				target="videos"		path="videodb://movies/sets/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mymovies"		labelID="moviesbytitle"			label="Movies by Title"			target="videos"		path="videodb://movies/titles/">ss_arbitrary_widget_name</widgetdefaultnode>
-	
-	<widgetdefaultnode group="mymovies"		labelID="genres"				label="Movie Genres"			target="videos"		path="videodb://movies/genres/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mymovies"		labelID="genres"				property="displayType">squares</propertydefault>
-	<propertydefault group="mymovies"		labelID="genres"				property="displayTitles">true</propertydefault>
+	<!-- Streaming -->
+	<widgetdefaultnode group="streaming"		labelID="netflix"			label="Netflix"				target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3093&amp;list_name=Netflix+Movies&amp;plugin_category=Netflix+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="amazon"				label="Amazon Prime"				target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3094&amp;list_name=Amazon+Prime+Movies&amp;plugin_category=Amazon+Prime+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="disney"		label="Disney+"		target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=3095&amp;list_name=Disney%2B+Movies&amp;plugin_category=Disney%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
+	<widgetdefaultnode group="streaming"		labelID="apple"			label="Apple TV+"			target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=mdblist_userlist&amp;list_id=2538&amp;list_name=Apple+TV%2B+Movies&amp;plugin_category=Apple+TV%2B+Movies&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>
 
-	<!-- My TV Shows submenu widgets -->
-	<widgetdefaultnode group="mytvshows"	labelID="unwatchedepisodes"		label="Unwatched Episodes"		target="videos"		path="special://skin/playlists/tvshows_unwatched_episodes.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="unwatchedepisodes"		property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="unwatchedepisodes"		property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="mytvshows"	labelID="showsinprogress"		label="Shows In Progress"		target="videos"		path="special://skin/playlists/tvshows_inprogress.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mytvshows"	labelID="unwatchedshows"		label="Unwatched Shows"			target="videos"		path="special://skin/playlists/tvshows_unwatched.xsp">ss_arbitrary_widget_name</widgetdefaultnode>
-	<widgetdefaultnode group="mytvshows"	labelID="showsbytitle"			label="Shows by Title"			target="videos"		path="videodb://tvshows/titles/">ss_arbitrary_widget_name</widgetdefaultnode>
-	
-	<widgetdefaultnode group="mytvshows"	labelID="genres"				label="TV Genres"				target="videos"		path="videodb://tvshows/genres/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="genres"				property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="genres"				property="displayTitles">true</propertydefault>
-
-	<widgetdefaultnode group="mytvshows"	labelID="studios"				label="TV Studios"				target="videos"		path="videodb://tvshows/studios/">ss_arbitrary_widget_name</widgetdefaultnode>
-	<propertydefault group="mytvshows"		labelID="studios"				property="displayType">squares</propertydefault>
-	<propertydefault group="mytvshows"		labelID="studios"				property="displayTitles">true</propertydefault>
 
 	<!-- Search submenu wigets -->
 	<widgetdefaultnode group="search"		labelID="search"				label="Search"					target="videos"		path="plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None&amp;widget=true&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]">ss_arbitrary_widget_name</widgetdefaultnode>

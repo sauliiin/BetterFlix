@@ -217,17 +217,39 @@
 				<centertop>50%</centertop>
 				<control type="image">
 					<centerleft>50%</centerleft>
-					<centertop>50%</centertop>
-					<width>100</width>
-					<height>100</height>
+					<centertop>46.4%</centertop>
+					<width>70</width>
+					<height>70</height>
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="2500" /> 
+					</animation>	
 					<animation effect="rotate"
-							center="auto"
-							start="0" end="360"
-							time="1000"
-							loop="true"
-							condition="true">Conditional</animation>
+						center="auto"
+						start="360" end="0"
+						time="600"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>38</width>
+					<height>38</height>
+					<aspectratio>keep</aspectratio>
+					<texture>special://skin/gif/netflix2.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3500" /> 
+					</animation>
+					<animation effect="rotate"
+						center="auto"
+						start="0" end="360"
+						time="500"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
 				</control>
 			</control>
 		</control>

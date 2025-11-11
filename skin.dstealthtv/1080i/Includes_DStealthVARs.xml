@@ -189,10 +189,10 @@
 	</variable>
 	<variable name="ds_WidgetLimitVar">
 		<value condition="String.IsEmpty(Container(211).ListItem.Property(widgetLimit))">None</value>
-		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),5)">5</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),10)">10</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),15)">15</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),20)">20</value>
+		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),25)">25</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),30)">30</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),40)">40</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),50)">50</value>

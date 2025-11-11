@@ -65,7 +65,7 @@
 			<property name="labelID">assistindo</property>
 			<property name="widget">Addon</property>
 			<property name="widgetName">TMDb Helper - Sua Lista de Em Andamento - Classificar por: Padrão</property>
-			<property name="widgetType">movies</property>
+			<property name="widgetType">mixed</property>
 			<property name="widgetTarget">videos</property>
 			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=movie&amp;list_name=Sua+Lista+de+Em+Andamento&amp;tmdb_id=None&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
 			<property name="displayType">posters</property>
@@ -103,7 +103,7 @@
 			<thumb />
 			<property name="labelID">popular</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=user_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[20]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -122,14 +122,14 @@
 			<property name="widgetTarget">videos</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="widgetLimit">$NUMBER[20]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
-			<property name="id">$NUMBER[5]</property>
+			<property name="id">$NUMBER[10]</property>
 			<property name="mainmenuid">1</property>
 			<label>Lançamentos</label>
 			<label2>Custom item</label2>
@@ -137,7 +137,7 @@
 			<thumb />
 			<property name="labelID">lancamentos</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=user_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="widgetLimit">$NUMBER[20]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
@@ -191,7 +191,7 @@
 			<thumb />
 			<property name="labelID">assistidosrecentemente</property>
 			<property name="widgetPath">plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
@@ -245,14 +245,14 @@
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
 			<property name="labelID">emalta</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
-			<property name="widgetLimit">$NUMBER[20]</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?name=32458&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
+			<property name="widgetLimit">$NUMBER[25]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
-			<property name="id">$NUMBER[5]</property>
+			<property name="id">$NUMBER[10]</property>
 			<property name="mainmenuid">2</property>
 			<label>As Melhores</label>
 			<label2>Custom item</label2>
@@ -273,7 +273,7 @@
 			<thumb />
 			<property name="labelID">netflix</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-series&amp;list_id=99489&amp;list_type=user_lists&amp;name=Netflix+Series&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -287,7 +287,7 @@
 			<thumb />
 			<property name="labelID">amazonprime</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-prime&amp;list_id=99490&amp;list_type=user_lists&amp;name=Amazon+Prime&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
@@ -315,7 +315,7 @@
 			<thumb />
 			<property name="labelID">acaoeaventura</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=user_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetLimit">$NUMBER[50]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -356,13 +356,13 @@
 			<thumb />
 			<property name="labelID">fantasia</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=fantasia&amp;list_id=100439&amp;list_type=user_lists&amp;name=Fantasia&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetLimit">$NUMBER[50]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
-			<property name="id">$NUMBER[5]</property>
+			<property name="id">$NUMBER[10]</property>
 			<property name="mainmenuid">3</property>
 			<label>Ficção Científica</label>
 			<label2>Custom item</label2>
@@ -383,7 +383,7 @@
 			<thumb />
 			<property name="labelID">guerra</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=war-movies&amp;list_id=104716&amp;list_type=user_lists&amp;name=War+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetLimit">$NUMBER[50]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -437,7 +437,7 @@
 			<thumb />
 			<property name="labelID">suspense</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=user_lists&amp;name=Suspense&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[25]</property>
+			<property name="widgetLimit">$NUMBER[50]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
@@ -464,7 +464,7 @@
 			<thumb />
 			<property name="labelID">netflix</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-filmes&amp;list_id=99492&amp;list_type=user_lists&amp;name=Netflix++filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -478,7 +478,7 @@
 			<thumb />
 			<property name="labelID">amazonprime</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-filmes&amp;list_id=99493&amp;list_type=user_lists&amp;name=Amazon+filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -492,7 +492,7 @@
 			<thumb />
 			<property name="labelID">hulu</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=garycrawfordgc&amp;slug=hulu-movies&amp;list_id=20764807&amp;list_type=liked_lists&amp;name=Hulu+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="widgetLimit">$NUMBER[10]</property>
+			<property name="widgetLimit">$NUMBER[15]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -506,7 +506,7 @@
 			<thumb />
 			<property name="labelID">starz</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=smoothtk09&amp;slug=starz-movies&amp;list_id=28266418&amp;list_type=liked_lists&amp;name=Starz+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="widgetLimit">$NUMBER[20]</property>
+			<property name="widgetLimit">$NUMBER[50]</property>
 			<onclick>noop</onclick>
 			<visible>[String.IsEqual(System.ProfileName,Mestre Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),streammy)</visible>
 			<property name="isSubmenu">True</property>
@@ -581,7 +581,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=user_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[20]" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -604,7 +604,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=user_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[20]" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -627,7 +627,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=user_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[20]" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -719,7 +719,7 @@
 				<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=trakt_history&amp;tmdb_type=movie&amp;reload=%24INFO%5BWindow%28Home%29.Property%28TMDbHelper.Widgets.Reload%29%5D&amp;widget=true" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -859,10 +859,10 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50204" />
 				<param name="widget_header" value="Em Alta" />
-				<param name="content_path" value="plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?name=32458&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[20]" />
+				<param name="limit" value="$NUMBER[25]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -908,7 +908,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-series&amp;list_id=99489&amp;list_type=user_lists&amp;name=Netflix+Series&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -931,7 +931,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-prime&amp;list_id=99490&amp;list_type=user_lists&amp;name=Amazon+Prime&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1028,7 +1028,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=user_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1097,7 +1097,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=fantasia&amp;list_id=100439&amp;list_type=user_lists&amp;name=Fantasia&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1143,7 +1143,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=war-movies&amp;list_id=104716&amp;list_type=user_lists&amp;name=War+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1235,7 +1235,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=user_lists&amp;name=Suspense&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[25]" />
+				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1332,7 +1332,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=netflix-filmes&amp;list_id=99492&amp;list_type=user_lists&amp;name=Netflix++filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1355,7 +1355,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdb_list&amp;user=mestreyodarossi&amp;slug=amazon-filmes&amp;list_id=99493&amp;list_type=user_lists&amp;name=Amazon+filmes&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1378,7 +1378,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=garycrawfordgc&amp;slug=hulu-movies&amp;list_id=20764807&amp;list_type=liked_lists&amp;name=Hulu+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[10]" />
+				<param name="limit" value="$NUMBER[15]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />
@@ -1401,7 +1401,7 @@
 				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=smoothtk09&amp;slug=starz-movies&amp;list_id=28266418&amp;list_type=liked_lists&amp;name=Starz+Movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
-				<param name="limit" value="$NUMBER[20]" />
+				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="212" />
 				<param name="height" value="322" />

@@ -68,14 +68,14 @@
 				<aspectratio aligny="top">stretch</aspectratio>
 				<texture colordiffuse="primary_background">dstv/netflix_blank.png</texture>
 			</control>
-			<!-- Large Fanart corner image -->
+			<!-- Large Fanart corner image - PRINCIPAL CORREÇÃO AQUI -->
 			<control type="image">
 				<!-- Adicionada animação de fadeout APENAS na fanart -->
 				<animation effect="fade" start="100" end="0" time="300" reversible="false">Hidden</animation>
 				<right>0</right>
 				<top>0</top>
-				<width>78%</width>
-				<height>75%</height>
+				<width>75%</width>
+				<height>70%</height>
 				<aspectratio aligny="top">stretch</aspectratio>
 				<texture>$VAR[ds_infoFanart]</texture>
 				<fadetime>600</fadetime>
@@ -84,8 +84,8 @@
 			<control type="image">
 				<right>0</right>
 				<top>0</top>
-				<width>93%</width>
-				<height>95%</height>
+				<width>100%</width>
+				<height>85%</height>
 				<fadetime>600</fadetime>
 				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
 			</control>
@@ -107,17 +107,16 @@
 				<depth>DepthContentPopout</depth>
 				<right>-25</right>
 				<top>0</top>
-				<width>70%</width>
-				<height>70%</height>
+				<width>75%</width>
+				<height>71%</height>
 				<!-- Só exibe o vídeo quando estiver tocando -->
 				<visible>!Player.Paused</visible>
 			</control>		
-			<!-- Netflix corner display fade (IGUAL À FANART) -->
 			<control type="image">
 				<right>0</right>
 				<top>0</top>
-				<width>82%</width>
-				<height>88%</height>
+				<width>97%</width>
+				<height>82%</height>
 				<fadetime>600</fadetime>
 				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
 			</control>
@@ -715,8 +714,8 @@
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="93" time="200" easing="in" center="200,150" />
-							<effect type="zoom" start="100" end="108" time="200" easing="out" center="200,150" delay="175" />
+							<effect type="zoom" start="100" end="95" time="220" easing="in" center="200,150" />
+							<effect type="zoom" start="100" end="105" time="220" easing="out" center="200,150" delay="175" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
