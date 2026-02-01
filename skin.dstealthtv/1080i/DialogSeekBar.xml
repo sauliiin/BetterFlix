@@ -468,7 +468,7 @@
 				<font>font10</font>
 				<textcolor>white</textcolor>
 				<label>$INFO[Window(Home).Property(ds_cast_bios)]</label>
-				<autoscroll delay="3000" repeat="5000" time="4000"></autoscroll>
+				<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
 			</control>
 		</control>
 		<!-- Título do Elenco -->
