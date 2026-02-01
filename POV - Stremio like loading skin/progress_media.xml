@@ -1,7 +1,6 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<controls>
-		<!-- Background -->
 		<control type="group">
 			<animation effect="zoom" start="0" end="100" time="200" center="auto" tween="quadratic" easing="out">WindowOpen</animation>
 			<control type="image">
@@ -20,49 +19,80 @@
 				<animation effect="fade" start="0" end="75" time="0" tween="sine">WindowOpen</animation>
 			</control>
 		</control>
-        <control type="image">
-            <animation effect="fade" start="100" end="0" time="1000" pulse="true" condition="true">Conditional</animation>
-            <width>40%</width>
-            <height>400</height>
+
+		<control type="image">
+            <animation effect="fade" start="100" end="0" time="1200" pulse="true" condition="true">Conditional</animation>
+            <width>35%</width>
+            <height>290</height>
             <aspectratio>keep</aspectratio>
-            <texture>$INFO[Window.Property(tikiskins.source_progress.clearlogo)]</texture>
-            <visible>!String.IsEmpty(Window.Property(tikiskins.source_progress.clearlogo))</visible>
+            <texture>$INFO[Window(Home).Property(ds_info_clearlogo)]</texture>
+            <visible>!Player.HasVideo</visible>
             <centerleft>50%</centerleft>
-            <centertop>36%</centertop>
+            <centertop>35%</centertop>
+        </control>
+        <control type="image">
+            <animation effect="fade" start="100" end="0" time="1200" pulse="true" condition="true">Conditional</animation>
+            <width>35%</width>
+            <height>290</height>
+            <aspectratio>keep</aspectratio>
+            <texture>$VAR[PlayerClearLogoVar]</texture>
+            <visible>Player.HasVideo</visible>
+            <centerleft>50%</centerleft>
+            <centertop>35%</centertop>
+        </control>
+
+        <control type="label">
+            <centerleft>50%</centerleft>
+            <centertop>74.4%</centertop>
+            <visible>!Player.HasVideo</visible>
+            <label>$VAR[ds_infoTagline]</label>
+            <font>netBb</font>
+            <align>center</align>
         </control>
         <control type="label">
             <centerleft>50%</centerleft>
             <centertop>74.4%</centertop>
+            <visible>Player.HasVideo + String.IsEmpty(VideoPlayer.Season)</visible>
+            <label>$INFO[VideoPlayer.Tagline]</label>
+            <font>netBb</font>
+            <align>center</align>
+        </control>
+
+        <control type="label">
+            <centerleft>50%</centerleft>
+            <centertop>74.4%</centertop>
             <visible>Player.HasVideo + !String.IsEmpty(VideoPlayer.Season)</visible>
-		        <label>Temporada $INFO[VideoPlayer.Season]  •  Episódio $INFO[VideoPlayer.Episode]</label>
+		    <label>Temporada $INFO[VideoPlayer.Season]  •  Episódio $INFO[VideoPlayer.Episode]</label>
             <font>netS</font>
             <align>center</align>
         </control>
+
         <control type="textbox">
-            <visible>String.IsEmpty(VideoPlayer.Season)</visible>
+            <visible>!Player.HasVideo</visible>
             <label>$VAR[ds_infoDescription]</label>
             <centerleft>50%</centerleft>
             <centertop>69.1%</centertop>
             <width>915</width>
             <height>350</height>
-            <font>netS</font>
+            <font>netSpov</font>
             <shadowcolor>FF000000</shadowcolor> 
             <shadowoffsetx>3</shadowoffsetx> 
             <shadowoffsety>3</shadowoffsety> 
             <align>center</align> 
         </control>
-		    <control type="textbox">
+		<control type="textbox">
             <visible>Player.HasVideo</visible>
             <label>$INFO[VideoPlayer.Plot]</label>
             <centerleft>50%</centerleft>
             <centertop>69.1%</centertop>
             <width>915</width>
             <height>350</height>
-            <font>netS</font>
+            <font>netSpov</font>
             <shadowcolor>FF000000</shadowcolor> 
             <shadowoffsetx>3</shadowoffsetx> 
             <shadowoffsety>3</shadowoffsety> 
             <align>center</align> 
         </control>
+
 	</controls>
 </window>

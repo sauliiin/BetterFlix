@@ -2,8 +2,6 @@
 <includes>
 	<!-- DEFAULT SKIN SETTINGS -->
 	<include name="ds_customsettings">
-		<!-- These will run when ds-settings-init hasnt been set yet (a.k.a. on first run) -->
-		<onload>Skin.SetBool(dstv_debug, false)</onload>
 		<!-- Estuary Settings we want to enable by default: -->
 		<onload>Skin.SetBool(circle_rating, true)</onload>
 		<!-- Skin Settings: General -->
@@ -26,7 +24,6 @@
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(dstv_menu_items_text_case, titlecase)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(dstv_menu_widgets_text_case, titlecase)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(no_fanart, false)</onload>
-		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(dstv_setting_use_clearlogo_titles, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(netflix_bg, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(netflix_small_diffuse)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(no_slide_animations, true)</onload>
@@ -50,21 +47,24 @@
 	</include>
 	<!-- CUSTOM ANIMATIONS -->
 	<include name="dsa_delayed_menuicon_slideout">
-		<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-			<effect type="slide" start="0,0" end="372,0" time="180" tween="sine" />
-		</animation>
-		<animation type="Conditional" condition="!String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="true">
-			<effect type="slide" start="0,0" end="20,0" time="180" tween="sine" />
-		</animation>
-	</include>
-	<include name="dsa_delayed_menulabel_fadeout">
-		<animation type="Conditional" condition="String.IsEqual(Window().Property(ds_mainmenu_hidden),true)" reversible="false">
-			<effect type="fade" start="100" end="0" time="250" />
-		</animation>
-	</include>
-	<include name="dsa_quick_fade_on_change">
-		<animation effect="fade" start="0" end="100" time="200" tween="sine">VisibleChange</animation>
-	</include>
+        <animation type="Conditional" condition="!String.IsEmpty(Window(home).Property(ds_active_widget_id))" reversible="true">
+            <effect type="slide" start="0,0" end="372,0" time="180" tween="sine" />
+        </animation>
+
+        <animation type="Conditional" condition="String.IsEmpty(Window(home).Property(ds_active_widget_id))" reversible="true">
+            <effect type="slide" start="0,0" end="20,0" time="180" tween="sine" />
+        </animation>
+    </include>
+
+    <include name="dsa_delayed_menulabel_fadeout">
+        <animation type="Conditional" condition="!String.IsEmpty(Window(home).Property(ds_active_widget_id))" reversible="false">
+            <effect type="fade" start="100" end="0" time="250" />
+        </animation>
+    </include>
+    
+    <include name="dsa_quick_fade_on_change">
+        <animation effect="fade" start="0" end="100" time="200" tween="sine">VisibleChange</animation>
+    </include>
 	<!-- CUSTOM CONTROLS -->
 	<!-- Copy of Includes_Buttons.ButtonMenuList but Horizontal. -->
 	<include name="ButtonMenuListHorizontal">
@@ -306,8 +306,8 @@
 				<texturenofocus />
 				<radioposx>40</radioposx>
 				<radioposy>0</radioposy>
-				<radiowidth>29</radiowidth>
-				<radioheight>29</radioheight>
+				<radiowidth>36</radiowidth>
+				<radioheight>36</radioheight>
 				<textureradioonfocus colordiffuse="selected">$PARAM[icon]</textureradioonfocus>
 				<textureradioonnofocus colordiffuse="disabled">$PARAM[icon]</textureradioonnofocus>
 				<textureradioofffocus colordiffuse="selected">$PARAM[icon]</textureradioofffocus>

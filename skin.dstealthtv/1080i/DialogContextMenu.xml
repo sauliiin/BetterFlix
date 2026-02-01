@@ -27,6 +27,7 @@
 					<usecontrolcoords>true</usecontrolcoords>
 					<control type="button" id="8002">
 						<!-- Play Trailer button - list views -->
+						<visible>!Skin.HasSetting(dstv_enable_auto_trailer)</visible>
 						<font>font32b</font>
 						<textcolor>red</textcolor>
 						<shadowcolor>black</shadowcolor>

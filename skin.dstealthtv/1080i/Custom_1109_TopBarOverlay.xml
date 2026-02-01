@@ -27,7 +27,7 @@
 				<shadowcolor>black</shadowcolor>
 			</control>
 			<control type="label">
-				<top>944</top>
+				<top>941</top>
 				<left>235</left>
 				<width>134</width>
 				<height>60</height>
@@ -38,7 +38,7 @@
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label">
-				<top>944</top>
+				<top>941</top>
 				<left>1529</left>
 				<width>134</width>
 				<height>60</height>
@@ -62,7 +62,7 @@
 				<left>390</left>
 				<top>960</top>
 				<width>58%</width>
-				<height>10</height>
+				<height>9</height>
 				<info>Player.ProgressCache</info>
 				<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
 				<midtexture>colors/white50.png</midtexture>
@@ -72,7 +72,7 @@
 				<left>390</left>
 				<top>960</top>
 				<width>58%</width>
-				<height>10</height>
+				<height>9</height>
 				<info>Player.Progress</info>
 				<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
 				<midtexture colordiffuse="FFE50914">colors/white.png</midtexture>
@@ -82,7 +82,7 @@
 				<left>390</left>
 				<top>960</top>
 				<width>58%</width>
-				<height>10</height>
+				<height>9</height>
 				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 				<!-- DSTV Change: colordiffuse for nib -->
 				<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
@@ -143,7 +143,7 @@
 				<left>0</left>
 				<top>50</top>
 				<width>100%</width>
-				<height>10</height>
+				<height>9</height>
 				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 				<!-- DSTV Change: colordiffuse for nib -->
 				<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
@@ -184,21 +184,21 @@
 		<control type="group">
 			<animation effect="fade" start="0" end="100" time="300" condition="$EXP[infodialog_active]">conditional</animation>
 			<animation effect="fade" start="0" end="100" time="300">VisibleChange</animation>
-			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) + ![Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
+			<visible>Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) + ![Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
 			<depth>DepthBars</depth>
 			<control type="image">
 				<left>0</left>
 				<top>0</top>
-				<width>100%</width>
-				<height>170</height>
+				<width>120%</width>
+				<height>150</height>
 				<texture>frame/osdfade.png</texture>
 			</control>
 			<control type="group">
 				<animation effect="fade" start="0" end="100" time="300" condition="Skin.HasSetting(touchmode)">conditional</animation>
 				<control type="grouplist">
 					<visible>!String.IsEmpty(Player.Art(tvshow.clearlogo)) | !String.IsEmpty(Player.Art(clearlogo))</visible>
-					<top>-945</top>
-					<width>100%</width>
+					<top>20</top>
+					<height>10%</height>
 					<align>center</align>
 					<aligny>center</aligny>
 					<itemgap>10</itemgap>
@@ -210,12 +210,11 @@
 					</control>
 				</control>
 				<control type="label">
-					<top>-805</top>
+					<top>-800</top>
 					<width>100%</width>
 					<align>center</align>
 					<aligny>center</aligny>
-					<font>fontOSD</font>
-					<shadowcolor>black</shadowcolor>
+					<font>fontOSDt</font>
 					<visible>!String.IsEmpty(VideoPlayer.Season)</visible>
 					<label>Temporada $INFO[VideoPlayer.Season]  •  Episódio $INFO[VideoPlayer.Episode]</label>
 				</control>
@@ -245,7 +244,7 @@
 				<visible>!Window.IsVisible(extendedprogressdialog)</visible>
 				<animation effect="fade" time="150">VisibleChange</animation>
 				<control type="label">
-					<font>font_clockOSD</font>
+					<font>font_clock</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<top>15</top>
 					<right>35</right>
@@ -256,7 +255,7 @@
 				</control>
 				<control type="grouplist">
 					<right>39</right>
-					<top>85</top>
+					<top>98</top>
 					<width>800</width>
 					<height>100</height>
 					<align>right</align>
@@ -268,7 +267,7 @@
 						<shadowcolor>text_shadow</shadowcolor>
 						<height>100</height>
 						<width>auto</width>
-						<font>fontOSDs</font>
+						<font>font27l</font>
 						<shadowcolor>black</shadowcolor>
 						<visible>!String.isempty(Player.Duration)</visible>
 						<visible>Player.HasVideo + ![Player.HasGame | VideoPlayer.HasEpg]</visible>

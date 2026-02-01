@@ -8,7 +8,7 @@
     <include>DefaultBackground</include>
     <control type="multiimage">
       <depth>DepthBackground</depth>
-      <include>FullScreenDimensions</include>
+      
       <aspectratio>scale</aspectratio>
       <fadetime>600</fadetime>
       <animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
@@ -326,6 +326,14 @@
                   <label2>[COLOR grey]$INFO[Container(211).ListItem.Property(widgetName)][/COLOR]</label2>
                   <enable>!String.IsEqual(Container(211).ListItem.Label,&lt;None&gt;)</enable>
                 </control>
+                <!-- Widget Display -->
+                <control type="button" id="9101">
+                  <include>DefaultSettingButton</include>
+                  <label>Widget Display</label>
+                  <onfocus>SetProperty(ds_setdesc, "Set the widget to display content as Posters or Landscape.")</onfocus>
+                  <label2>[COLOR selected]$VAR[ds_WidgetDisplayVar][/COLOR]</label2>
+                  <enable>!String.IsEmpty(Container(211).ListItem.Property(widgetPath))</enable>
+                </control>
                 <!-- Sort By -->
                 <control type="button" id="9102">
                   <include>DefaultSettingButton</include>
@@ -417,7 +425,7 @@
 
     <control type="group">
       <!-- Loading Spinner for when skinshortcuts is loading the Edit Menu section -->
-      <include>FullscreenDimensions</include>
+      
       <animation effect="fade" start="0" end="100" time="300">Visible</animation>
       <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
       <visible>!String.IsEmpty(Window(home).Property(skinshortcuts-loading))</visible>

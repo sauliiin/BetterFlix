@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<onload>ReplaceWindow($INFO[System.StartupWindow])</onload>
-	<onload>Skin.SetBool(TMDbHelper.Service)</onload>
-	<onload>Skin.SetString(TMDbHelper.MonitorContainer,9143)</onload>
-	<onload>Skin.Reset(TMDbHelper.DirectCallAuto)</onload>
 	<controls />
 </window>

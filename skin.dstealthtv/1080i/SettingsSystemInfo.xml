@@ -5,7 +5,7 @@
 		<include>DefaultBackground</include>
 		<control type="multiimage">
 			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
+			
 			<aspectratio>scale</aspectratio>
 			<fadetime>600</fadetime>
 			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>

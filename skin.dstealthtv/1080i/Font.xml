@@ -22,7 +22,7 @@
 		<font>
 			<name>netN</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>26</size>
+			<size>24</size>
 		</font>
 		<font>
 			<name>netteste</name>
@@ -32,8 +32,7 @@
 		<font>
 			<name>netB</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>26</size>
-			<style>bold</style>
+			<size>24</size>
 		</font>
 		<font>
 			<name>netBb</name>
@@ -44,7 +43,12 @@
 		<font>
 			<name>netS</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>27</size>
+			<size>25</size>
+		</font>
+		<font>
+			<name>netSpov</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>26</size>
 		</font>
 		<font>
 			<name>netSd</name>
@@ -59,12 +63,17 @@
 		</font>
 		<font>
 			<name>fontOSD</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>28</size>
+		</font>
+		<font>
+			<name>fontOSDt</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>29</size>
+			<size>27</size>
 		</font>
 		<font>
 			<name>fontOSDs</name>
-			<filename>Netflix-sans-medium.ttf</filename>
+			<filename>Netflix-sans-light.ttf</filename>
 			<size>25</size>
 		</font>
 		<font>
@@ -81,7 +90,7 @@
 		<font>
 			<name>netSsT</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>20</size>
+			<size>19</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -95,9 +104,14 @@
 			<size>17</size>
 		</font>
 		<font>
+			<name>netSssph</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>19</size>
+		</font>
+		<font>
 			<name>netSa</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>18</size>
+			<size>21</size>
 		</font>
 		<font>
 			<name>netSp</name>
@@ -107,7 +121,7 @@
 		</font>
 		<font>
 			<name>netuser</name>
-			<filename>Netflix-sans-medium.ttf</filename>
+			<filename>Netflix-sans-light.ttf</filename>
 			<size>21</size>
 			<style>bold</style>
 		</font>
@@ -158,7 +172,7 @@
 		<font>
 			<name>font27l</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>24</size>
+			<size>25</size>
 		</font>
 		<font>
 			<name>font27_narrow</name>
@@ -200,7 +214,7 @@
 		<font>
 			<name>font_clockOSD</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>55</size>
+			<size>58</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>
@@ -211,7 +225,7 @@
 		<font>
 			<name>widget_label</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>27</size>
+			<size>26</size>
 		</font>
 		<font>
 			<name>font15_title</name>

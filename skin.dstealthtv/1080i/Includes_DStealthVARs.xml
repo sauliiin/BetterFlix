@@ -62,16 +62,28 @@
 		<value></value>
 	</variable>
 	<variable name="ds_infoDuration">
-		<value condition="!String.IsEmpty(ListItem.Duration)">$INFO[ListItem.Duration(hh:mm:ss)]</value>
-		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">$INFO[Window(home).Property(ds_info_duration)]</value>
-		<value condition="!Control.HasFocus(9000) + !Control.HasFocus(59999)">--:--:--</value>
+        <value condition="!String.IsEmpty(ListItem.Duration) + !String.StartsWith(ListItem.Duration,00:0) + !String.IsEqual(ListItem.Duration,0)">[COLOR red]•[/COLOR] $INFO[ListItem.Duration(h)] hr $INFO[ListItem.Duration(mm)] mins</value>
+        <value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">[COLOR red]•[/COLOR] $INFO[Window(home).Property(ds_info_duration)]</value>
+        <value></value>
+    </variable>
+	<variable name="ds_dayweek">
+		<value condition="!String.IsEmpty(Window(10000).Property(dsWeekDay))">$INFO[Window(10000).Property(dsWeekDay)], $INFO[ListItem.Premiered] [COLOR red]•[/COLOR] </value>
 		<value></value>
 	</variable>
 	<variable name="ds_infoRow">
-		<value condition="String.IsEmpty(ListItem.Duration)">$VAR[ds_infoDate] • $VAR[ds_infoGenre]</value>
-		<value condition="!String.IsEmpty(ListItem.Duration)">$VAR[ds_infoDate] • $VAR[ds_infoDuration] • $VAR[ds_infoGenre]</value>
-		<value></value>
-	</variable>
+        <value condition="String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] [COLOR red]•[/COLOR]</value>
+        <value condition="String.IsEqual(ListItem.DBType,episode)">$VAR[ds_dayweek]Temporada $INFO[ListItem.Season]: Episódio $INFO[ListItem.Episode]</value>
+		<value condition="String.IsEqual(ListItem.DBType,tvshow)">$INFO[ListItem.Year] [COLOR red]•[/COLOR] Total de temporadas: $INFO[ListItem.Property(TotalSeasons)] [COLOR red]•[/COLOR]</value>
+        <value condition="!String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] $VAR[ds_infoDuration] [COLOR red]•[/COLOR]</value>
+        <value></value>
+    </variable>
+	<variable name="ds_infoRow2">
+        <value condition="String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] [COLOR red]•[/COLOR] $VAR[ds_infoGenre]</value>
+        <value condition="String.IsEqual(ListItem.DBType,episode)">$VAR[ds_dayweek]Temporada $INFO[ListItem.Season]: Episódio $INFO[ListItem.Episode]</value>
+		<value condition="String.IsEqual(ListItem.DBType,tvshow)">$INFO[ListItem.Year] [COLOR red]•[/COLOR] Total de temporadas: $INFO[ListItem.Property(TotalSeasons)] [COLOR red]•[/COLOR] $VAR[ds_infoGenre]</value>
+        <value condition="!String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] $VAR[ds_infoDuration] [COLOR red]•[/COLOR] $VAR[ds_infoGenre]</value>
+        <value></value>
+    </variable>
 	<variable name="ds_infoFanart">
 		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(fanart))">$INFO[ListItem.Property(fanart)]</value>
@@ -145,6 +157,28 @@
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_title))">$INFO[Window(home).Property(ds_info_title)]</value>
 		<value></value>
 	</variable>
+
+  <variable name="WatchedImageVar">
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,96)"></value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,84)">special://skin/gif/watched/96.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,72)">special://skin/gif/watched/84.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,60)">special://skin/gif/watched/72.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,48)">special://skin/gif/watched/60.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,36)">special://skin/gif/watched/48.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,24)">special://skin/gif/watched/36.png</value>
+    <value condition="Integer.IsGreater(ListItem.PercentPlayed,12)">special://skin/gif/watched/24.png</value>
+    <value condition="!String.IsEmpty(ListItem.PercentPlayed)+!String.IsEqual(ListItem.PercentPlayed,0)">special://skin/gif/watched/12.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),96)"></value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),84)">special://skin/gif/watched/96.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),72)">special://skin/gif/watched/84.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),60)">special://skin/gif/watched/72.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),48)">special://skin/gif/watched/60.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),36)">special://skin/gif/watched/48.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),24)">special://skin/gif/watched/36.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+Integer.IsGreater(ListItem.Property(watchedprogress),12)">special://skin/gif/watched/24.png</value>
+    <value condition="[String.IsEqual(ListItem.DBType,movie)|String.IsEqual(ListItem.DBType,episode)]+!String.IsEmpty(ListItem.Property(watchedprogress))+!String.IsEqual(ListItem.Property(watchedprogress),0)">special://skin/gif/watched/12.png</value>
+  </variable>
+
 	<variable name="ds_infoWeather">
 		<value condition="!String.IsEmpty(ListItem.Property(weather))">$INFO[ListItem.Property(weather)]</value>
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_weather))">$INFO[Window(home).Property(ds_info_weather)]</value>
@@ -179,7 +213,6 @@
 	</variable>
 	<variable name="ds_WidgetDisplayVar">
 		<value condition="String.IsEqual(Container(211).ListItem.Property(displayType),posters)">Posters</value>
-		<value condition="String.IsEqual(Container(211).ListItem.Property(displayType),squares)">Squares</value>
 		<value condition="String.IsEqual(Container(211).ListItem.Property(displayType),landscape)">Landscape</value>
 		<value>Posters</value>
 	</variable>
@@ -203,20 +236,7 @@
 		<value condition="String.IsEqual(Container(211).ListItem.Property(widgetLimit),100)">100</value>
 		<value>ERR:UNKNOWN</value>
 	</variable>
-	<variable name="ds_WidgetPanelSquare">
-		<value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
-		<value condition="String.IsEqual(listitem.dbtype,genre) + System.AddonIsEnabled(resource.images.moviegenreicons.transparent)">$INFO[ListItem.Label,resource://resource.images.moviegenreicons.transparent/,.png]</value>
-		<value condition="String.IsEqual(listitem.dbtype,studio) + System.AddonIsEnabled(resource.images.studios.white)">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
-		<value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(keyart))">$INFO[ListItem.Art(keyart)]</value>
-		<value condition="!String.IsEmpty(ListItem.Property(keyart))">$INFO[ListItem.Property(keyart)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
-		<value condition="!String.IsEmpty(ListItem.Property(landscape))">$INFO[ListItem.Property(landscape)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
-		<value condition="!String.IsEmpty(ListItem.Property(fanart))">$INFO[ListItem.Property(fanart)]</value>
-		<value>dstv/kodi.png</value>
-	</variable>
+
 	<variable name="ds_WidgetPanelPoster">
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>
@@ -236,14 +256,6 @@
 	</variable>
 	<variable name="ds_WidgetPanelClearArt">
 		<value condition="!String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>
-		<value></value>
-	</variable>
-	<variable name="ds_WidgetPanelClearLogo">
-		<value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
-		<value condition="String.IsEqual(listitem.dbtype,genre) + System.AddonIsEnabled(resource.images.moviegenreicons.transparent)">$INFO[ListItem.Label,resource://resource.images.moviegenreicons.transparent/,.png]</value>
-		<value condition="String.IsEqual(listitem.dbtype,studio) + System.AddonIsEnabled(resource.images.studios.white)">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</value>
-		<value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
-		<value>dstv/kodi_landscape.png</value>
 		<value></value>
 	</variable>
 	<variable name="ds_WidgetSortByVar">

@@ -44,88 +44,6 @@
 			</control>
 		</definition>
 	</include>
-	<include name="InfoWallMusicLayout">
-		<param name="fallback_image">DefaultFolder.png</param>
-		<param name="main_label">$INFO[ListItem.Artist]</param>
-		<param name="sub_label">$INFO[ListItem.Title]</param>
-		<param name="single_label">$INFO[ListItem.Label]</param>
-		<param name="focused">false</param>
-		<definition>
-			<control type="image">
-				<top>0</top>
-				<width>316</width>
-				<height>386</height>
-				<texture>dialogs/dialog-bg-nobo.png</texture>
-				<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-				<bordersize>20</bordersize>
-			</control>
-			<control type="image">
-				<top>-4</top>
-				<left>-4</left>
-				<width>324</width>
-				<height>394</height>
-				<!-- DSTV: colordiffuse selected, bordersize 20 > 15. -->
-				<texture colordiffuse="selected">colors/grey.png</texture>
-				<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-				<bordersize>15</bordersize>
-				<visible>$PARAM[focused]</visible>
-				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
-			</control>
-			<control type="image">
-				<left>0</left>
-				<top>0</top>
-				<width>316</width>
-				<height>316</height>
-				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
-				<aspectratio>keep</aspectratio>
-				<bordersize>20</bordersize>
-			</control>
-			<!-- DSTV: control image: text darker bg. -->
-			<control type="image">
-				<left>11</left>
-				<top>295</top>
-				<width>294</width>
-				<height>80</height>
-				<texture colordiffuse="border_alpha">colors/black.png</texture>
-				<visible>$PARAM[focused]</visible>
-				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
-			</control>
-			<control type="textbox">
-				<left>28</left>
-				<top>289</top>
-				<width>262</width>
-				<height>80</height>
-				<font>font12</font>
-				<align>center</align>
-				<aligny>center</aligny>
-				<label>$PARAM[single_label]</label>
-				<visible>!String.IsEqual(ListItem.DBType,album)</visible>
-			</control>
-			<control type="group">
-				<visible>String.IsEqual(ListItem.DBType,album)</visible>
-				<control type="label">
-					<left>29</left>
-					<top>300</top>
-					<width>260</width>
-					<label>$PARAM[sub_label]</label>
-					<font>font10</font>
-					<shadowcolor>text_shadow</shadowcolor>
-					<scroll>$PARAM[focused]</scroll>
-					<align>center</align>
-				</control>
-				<control type="label">
-					<left>29</left>
-					<top>328</top>
-					<width>260</width>
-					<label>$PARAM[main_label]</label>
-					<font>font12</font>
-					<shadowcolor>text_shadow</shadowcolor>
-					<scroll>$PARAM[focused]</scroll>
-					<align>center</align>
-				</control>
-			</control>
-		</definition>
-	</include>
 	<include name="InfoWallEpisodeLayout">
 		<param name="main_label">$INFO[ListItem.Title]</param>
 		<param name="sub_label">$INFO[ListItem.TVShowTitle]</param>
@@ -229,15 +147,6 @@
 		<definition>
 			<control type="group">
 				<visible>String.IsEmpty(ListItem.Art(poster))</visible>
-				<control type="image">
-					<left>15</left>
-					<top>-80</top>
-					<width>212</width>
-					<height>322</height>
-					<texture>dialogs/dialog-bg-nobo.png</texture>
-					<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-					<bordersize>4</bordersize>
-				</control>
 				<control type="textbox">
 					<left>40</left>
 					<top>235</top>
@@ -253,8 +162,8 @@
 				<control type="image">
 					<left>15</left>
 					<top>-80</top>
-					<width>212</width>
-					<height>322</height>
+					<width>220</width>
+					<height>330</height>
 					<texture fallback="DefaultMovies.png" background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio>stretch</aspectratio>
 					<bordersize>4</bordersize>
@@ -263,14 +172,12 @@
 			<control type="group">
 				<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 				<control type="image">
-					<left>11</left>
-					<top>-84</top>
-					<width>222</width>
-					<height>332</height>
-					<!-- DSTV: colordiffuse selected. -->
+					<left>10</left>
+					<top>-85</top>
+					<width>230</width>
+					<height>340</height>
 					<texture colordiffuse="selected">colors/grey.png</texture>
 					<bordertexture border="4" infill="false">overlays/shadow.png</bordertexture>
-					<!-- DSTV: bordersize 20 > 15. -->
 					<bordersize>4</bordersize>
 					<visible>$PARAM[focused]</visible>
 					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -278,8 +185,8 @@
 				<control type="image">
 					<left>15</left>
 					<top>-80</top>
-					<width>212</width>
-					<height>322</height>
+					<width>220</width>
+					<height>330</height>
 					<texture background="true">$INFO[ListItem.Art(poster)]</texture>
 					<aspectratio>stretch</aspectratio>
 					<bordertexture border="4" infill="false">overlays/shadow.png</bordertexture>
@@ -288,7 +195,7 @@
 				<control type="group">
 					<visible>String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,10) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)</visible>
 					<control type="image">
-						<left>176</left>
+						<left>183</left>
 						<top>-75</top>
 						<width>35</width>
 						<height>40</height>
@@ -300,7 +207,7 @@
 						</animation>
 					</control>
 					<control type="image">
-						<left>177</left>
+						<left>184</left>
 						<top>-74</top>
 						<width>35</width>
 						<height>40</height>
@@ -308,7 +215,7 @@
 						<texture>special://skin/gif/truefire.gif</texture>
 					</control>
 					<control type="image">
-						<left>177</left>
+						<left>184</left>
 						<top>-74</top>
 						<width>35</width>
 						<height>40</height>
@@ -321,7 +228,7 @@
 				</control>
 				<control type="label">
 					<top>-70</top>
-					<left>160</left>
+					<left>167</left>
 					<width>47</width>
 					<height>41</height>
 					<align>right</align>
@@ -332,7 +239,7 @@
 				</control>
 				<control type="label">
 					<top>-69</top>
-					<left>159</left>
+					<left>168</left>
 					<width>47</width>
 					<height>41</height>
 					<align>right</align>
@@ -340,14 +247,6 @@
 					<font>netSssp</font>
 					<textcolor>white</textcolor>
 					<label>$VAR[ds_infoRat]</label>
-				</control>
-				<control type="image">
-					<left>35</left>
-					<top>235</top>
-					<width>80</width>
-					<height>80</height>
-					<texture>overlays/overlay-bg.png</texture>
-					<visible>Listitem.IsCollection | ListItem.IsPlaying | Integer.IsGreater(ListItem.Playcount,0)</visible>
 				</control>
 			</control>
 		</definition>

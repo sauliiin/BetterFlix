@@ -365,13 +365,6 @@
 		<value condition="!String.IsEmpty(Skin.String(OSDAutoCloseTime))">$INFO[Skin.String(OSDAutoCloseTime)]</value>
 		<value condition="String.IsEmpty(Skin.String(OSDAutoCloseTime))">4</value> <!-- Default value -->
 	</variable>
-	<variable name="VolumeIconVar">
-		<value condition="Player.Muted">dialogs/volume/mute.png</value>
-		<value condition="Integer.IsGreater(Player.Volume,66)">dialogs/volume/volume.png</value>
-		<value condition="Integer.IsGreater(Player.Volume,33)">dialogs/volume/volume2.png</value>
-		<value condition="player.passthrough">dialogs/volume/volume.png</value>
-		<value>dialogs/volume/volume1.png</value>
-	</variable>
 	<variable name="ListSubLabelVar">
 		<value condition="ListItem.IsCollection"></value>
 		<value>[COLOR grey]$INFO[ListItem.Year, (,)][/COLOR]</value>
@@ -416,10 +409,8 @@
 	<variable name="OSDSubLabelVar">
 		<value condition="Window.IsActive(visualisation) + Integer.IsGreater(Playlist.Length(music),1) + Integer.IsGreater(Playlist.Position(music),0)">$LOCALIZE[554] $INFO[Playlist.Position] / $INFO[Playlist.Length]</value>
 		<value condition="VideoPlayer.Content(musicvideos)">$VAR[NowPlayingSublabelVar,,[CR]]$INFO[player.chapter,[COLOR button_focus]$LOCALIZE[21396]: [/COLOR]]$INFO[Player.ChapterCount,/]$INFO[Player.ChapterName, - ]</value>
-		<value condition="VideoPlayer.Content(episodes) + !player.chaptercount">$INFO[VideoPlayer.Season,[COLOR button_focus][CAPITALIZE]$LOCALIZE[36906][/CAPITALIZE]:[/COLOR] S]$INFO[VideoPlayer.Episode,E,: ]$INFO[VideoPlayer.Title]</value>
-		<value condition="VideoPlayer.Content(episodes) + player.chaptercount">$INFO[VideoPlayer.Season,[COLOR button_focus][CAPITALIZE]$LOCALIZE[36906][/CAPITALIZE]:[/COLOR] S]$INFO[VideoPlayer.Episode,E, - ]$INFO[VideoPlayer.Title,,[CR]]$INFO[player.chapter,[COLOR button_focus]$LOCALIZE[21396]:[/COLOR] ]$INFO[Player.ChapterCount,/]$INFO[Player.ChapterName, - ]</value>
+		<value condition="VideoPlayer.Content(episodes)">$INFO[VideoPlayer.Title]</value>
 		<value condition="VideoPlayer.Content(LiveTV) | PVR.IsPlayingRecording | PVR.IsPlayingEpgTag">$INFO[VideoPlayer.Season,[COLOR button_focus][CAPITALIZE]$LOCALIZE[36906][/CAPITALIZE]:[/COLOR] S]$INFO[VideoPlayer.Episode,E, - ]$INFO[VideoPlayer.EpisodeName]</value>
-		<value condition="player.chaptercount + [!VideoPlayer.Content(episodes) + !VideoPlayer.Content(LiveTV)]">$INFO[player.chapter,[COLOR button_focus]$LOCALIZE[21396]:[/COLOR] ]$INFO[Player.ChapterCount,/]$INFO[Player.ChapterName, - ]</value>
 		<value>$INFO[VideoPlayer.Genre]</value>
 	</variable>
 	<variable name="OSDNextLabelVar">
@@ -701,5 +692,10 @@
 		<value condition="Control.HasFocus(50)">$INFO[Container(50).ListItem.FileNameAndPath]</value>
 	    <value condition="Control.HasFocus(51)">$INFO[Container(51).ListItem.FileNameAndPath]</value>
 		<value>$INFO[ListItem.FileNameAndPath]</value>
+	</variable>
+	<variable name="CastContentVar">
+		<value condition="VideoPlayer.Content(episodes)">plugin://script.embuary.info/?mode=cast&amp;type=tv&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+		<value condition="Player.HasVideo">plugin://script.embuary.info/?mode=cast&amp;type=movie&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+		<value></value>
 	</variable>
 </includes>

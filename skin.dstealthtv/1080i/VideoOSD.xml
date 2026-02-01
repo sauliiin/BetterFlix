@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
+	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
 	<onload condition="!Player.PauseEnabled">SetFocus(603)</onload>
 	<defaultcontrol always="true">602</defaultcontrol>
 	<depth>DepthOSD</depth>
@@ -76,12 +77,12 @@
 					</control>
 				</control>
 				<control type="grouplist" id="202">
-					<left>-120</left>
+					<left>-130</left>
 					<top>-860</top>
 					<width>500</width>
 					<height>135</height>
 					<align>right</align>
-					<itemgap>10</itemgap>
+					<itemgap>8</itemgap>
 					<scrolltime tween="sine">200</scrolltime>
 					<orientation>horizontal</orientation>
 					<ondown>602</ondown>
@@ -91,7 +92,7 @@
 							<param name="texture" value="osd/fullscreen/buttons/home.png"/>
 						</include>
 						<onclick>PlayerControl(ShowVideoMenu)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(804)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(804)">Conditional</animation>
 						<visible>VideoPlayer.HasMenu</visible>
 					</control>
 					<control type="radiobutton" id="70041">
@@ -100,36 +101,36 @@
 						</include>
 						<onclick>Dialog.Close(VideoOSD)</onclick>
 						<onclick>ActivateWindow(pvrchannelguide)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70041)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70041)">Conditional</animation>
 						<visible>VideoPlayer.Content(livetv) + VideoPlayer.HasEPG</visible>
-					</control>
-					<control type="radiobutton" id="70042">
-						<include content="OSDButton">
-							<param name="texture" value="osd/fullscreen/buttons/back.png"/>
-						</include>
-						<onclick>PlayerControl(Stop)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70042)">Conditional</animation>
 					</control>
 					<control type="radiobutton" id="70043">
 						<include content="OSDButton">
 							<param name="texture" value="osd/fullscreen/buttons/settings-subtitle.png"/>
 						</include>
 						<onclick>ActivateWindow(osdsubtitlesettings)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500"  tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500"  tween="back" condition="Control.HasFocus(70043)">Conditional</animation>
 					</control>
 					<control type="radiobutton" id="70046">
 						<include content="OSDButton">
 							<param name="texture" value="osd/fullscreen/buttons/audio.png"/>
 						</include>
 						<onclick>ActivateWindow(osdaudiosettings)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500"  tween="back" condition="Control.HasFocus(70046)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500"  tween="back" condition="Control.HasFocus(70046)">Conditional</animation>
 					</control>
 					<control type="radiobutton" id="70048">
+						<include content="OSDButton">
+							<param name="texture" value="special://skin/gif/info.png"/>
+						</include>
+						<onclick>Info</onclick>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500"  tween="back" condition="Control.HasFocus(70048)">Conditional</animation>
+					</control>
+					<control type="radiobutton" id="70049">
 						<include content="OSDButton">
 							<param name="texture" value="osd/fullscreen/buttons/video.png"/>
 						</include>
 						<onclick>ActivateWindow(osdvideosettings)</onclick>
-						<animation center="38,38" effect="zoom" end="135" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70048)">Conditional</animation>
+						<animation center="38,38" effect="zoom" end="140" reversible="false" start="80" time="500" tween="back" condition="Control.HasFocus(70049)">Conditional</animation>
 					</control>
 				</control>
 			</control>

@@ -8,12 +8,12 @@
 			<!-- inner background -->
 			<control type="image">
 				<include>Visible_Fade</include>
-				<include>FullscreenDimensions</include>
+				
 				<texture background="true" colordiffuse="background">colors/white.png</texture>
 			</control>
 			<!-- outer background -->
 			<control type="image">
-				<include>FullscreenDimensions</include>
+				
 				<texture background="true" border="50" colordiffuse="secondary_background">dstv/background_square.png</texture>
 			</control>
 			<control type="scrollbar" id="3000">

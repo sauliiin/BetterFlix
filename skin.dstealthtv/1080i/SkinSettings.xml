@@ -12,7 +12,7 @@
 		<include>DefaultBackground</include>
 		<control type="multiimage">
 			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
+			
 			<aspectratio>scale</aspectratio>
 			<fadetime>600</fadetime>
 			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
@@ -110,13 +110,14 @@
 						<onup>8100</onup>
 						<ondown>8100</ondown>
 						<visible>Container(9000).HasFocus(1)</visible>
-						<control type="button" id="8107">
-							<include>DefaultSettingButton</include>
-							<label>Configure MDBList Ratings</label>
-							<onfocus>SetProperty(ds_setdesc, "Opens the add-on settings to enter the API key.")</onfocus>
-							<onclick>Addon.OpenSettings(script.showimdb)</onclick>
-							<description>To improve visibility, all ratings have been converted to a 0–10 scale.</description>
-						</control>
+						<!-- Trailer stuff -->
+						<control type="radiobutton" id="8260">
+                            <include>DefaultSettingButton</include>
+                            <label>Ativar Trailer Automático</label>
+                            <onfocus>SetProperty(ds_setdesc, "Ativa a reprodução automática de trailers após 3.5s de foco.")</onfocus>
+                            <onclick>Skin.ToggleSetting(dstv_enable_auto_trailer)</onclick>
+                            <selected>Skin.HasSetting(dstv_enable_auto_trailer)</selected>
+                        </control>
 						<!-- enable auto scrolling plot & reviews -->
 						<control type="radiobutton" id="8110">
 							<include>DefaultSettingButton</include>
@@ -144,11 +145,11 @@
 						</control>
 						<!-- show media flags -->
 						<control type="radiobutton" id="8130">
-							<include>DefaultSettingButton</include>
-							<label>Mostrar flags das midias</label>
-							<onfocus>SetProperty(ds_setdesc, "Show/Hide media flags.")</onfocus>
-							<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
-							<selected>!Skin.HasSetting(hide_mediaflags)</selected>
+						  <include>DefaultSettingButton</include>
+						  <label>Mostrar Notas e TrueFire</label>
+						  <onfocus>SetProperty(ds_setdesc, "Disable infoRat and TrueFire.")</onfocus>
+						  <onclick>Skin.ToggleSetting(hide_ratings_fire)</onclick>
+						  <selected>!Skin.HasSetting(hide_ratings_fire)</selected>
 						</control>					
 					</control>
 					<!-- MENUS & WIDGETS Submenu -->
@@ -182,15 +183,6 @@
 						<onup>8300</onup>
 						<ondown>8300</ondown>
 						<visible>Container(9000).HasFocus(3)</visible>
-						<!-- fade background when Main Menu -->
-						<control type="radiobutton" id="8330">
-							<include>DefaultSettingButton</include>
-							<label>Fade Background when Main Menu</label>
-							<onfocus>SetProperty(ds_setdesc, "Enabled: Fades the background while the main menu is visible.")</onfocus>
-							<selected>Skin.HasSetting(fade_widgets)</selected>
-							<onclick condition="Skin.HasSetting(fade_widgets)">Skin.Reset(fade_widgets)</onclick>
-							<onclick condition="!Skin.HasSetting(fade_widgets)">Skin.SetBool(fade_widgets)</onclick>
-						</control>
 						<!-- Menu Item text case -->
 						<control type="button" id="8335">
 							<include>DefaultSettingButton</include>
@@ -210,14 +202,6 @@
 							<onclick condition="String.IsEqual(Skin.String(dstv_menu_widgets_text_case),titlecase)">Skin.SetString(dstv_menu_widgets_text_case,allcaps)</onclick>
 							<onclick condition="String.IsEqual(Skin.String(dstv_menu_widgets_text_case),allcaps)">Skin.Reset(dstv_menu_widgets_text_case)</onclick>
 							<onclick condition="String.IsEmpty(Skin.String(dstv_menu_widgets_text_case))">Skin.SetString(dstv_menu_widgets_text_case,titlecase)</onclick>
-						</control>
-						<!-- Use ClearLogo's when applicable instead of text on Home Screen -->
-						<control type="radiobutton" id="8350">
-							<include>DefaultSettingButton</include>
-							<label>Use ClearLogo's when available instead of text on Home Screen</label>
-							<onfocus>SetProperty(ds_setdesc, "Toggle whether to display a ClearLogo art instead of text-labels for media info. Enabling this setting will increase widget load times.")</onfocus>
-							<onclick>Skin.ToggleSetting(dstv_setting_use_clearlogo_titles)</onclick>
-							<selected>Skin.HasSetting(dstv_setting_use_clearlogo_titles)</selected>
 						</control>
 						<!-- Use solid background with fanart in corner in Home screen -->
 						<control type="radiobutton" id="8360">
@@ -367,7 +351,7 @@
     
 		<control type="group">
 			<!-- Loading Spinner for when skinshortcuts is loading the Edit Menu section -->
-			<include>FullscreenDimensions</include>
+			
 			<animation effect="fade" start="0" end="100" time="300">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
 			<visible>!String.IsEmpty(Window(home).Property(skinshortcuts-loading))</visible>
@@ -382,17 +366,39 @@
 				<centertop>50%</centertop>
 				<control type="image">
 					<centerleft>50%</centerleft>
-					<centertop>50%</centertop>
-					<width>100</width>
-					<height>100</height>
+					<centertop>46.4%</centertop>
+					<width>70</width>
+					<height>70</height>
 					<aspectratio>keep</aspectratio>
 					<texture>special://skin/gif/netflix.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="2500" /> 
+					</animation>	
 					<animation effect="rotate"
-							center="auto"
-							start="0" end="360"
-							time="1000"
-							loop="true"
-							condition="true">Conditional</animation>
+						center="auto"
+						start="360" end="0"
+						time="600"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>38</width>
+					<height>38</height>
+					<aspectratio>keep</aspectratio>
+					<texture>special://skin/gif/netflix2.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3500" /> 
+					</animation>
+					<animation effect="rotate"
+						center="auto"
+						start="0" end="360"
+						time="500"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
 				</control>
 			</control>
 		</control>

@@ -25,11 +25,11 @@
 		</control>
 		<control type="videowindow">
 			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
+			
 			<visible>Player.HasVideo</visible>
 		</control>
 		<control type="visualisation">
-			<include>FullScreenDimensions</include>
+			
 			<visible>Player.HasAudio</visible>
 		</control>
 		<control type="group">
@@ -40,7 +40,7 @@
 		</control>
 		<control type="multiimage">
 			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
+			
 			<aspectratio>scale</aspectratio>
 			<fadetime>400</fadetime>
 			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
@@ -209,7 +209,7 @@
 			<animation effect="fade" time="400">VisibleChange</animation>
 			<control type="image">
 				<texture>colors/black.png</texture>
-				<include>FullScreenDimensions</include>
+				
 				<animation effect="fade" start="100" end="70" time="0" condition="true">Conditional</animation>
 			</control>
 			<control type="group">

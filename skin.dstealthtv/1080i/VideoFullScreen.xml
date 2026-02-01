@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
+	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
 	<defaultcontrol></defaultcontrol>
 	<controls>
 		<control type="group" id="0">
@@ -53,13 +54,6 @@
 				<width>92</width>
 				<height>92</height>
 				<texture>dialogs/extendedprogress/loading-back.png</texture>
-			</control>
-			<control type="image" id="1">
-				<centerleft>50%</centerleft>
-				<centertop>50%</centertop>
-				<width>92</width>
-				<height>92</height>
-				<texture colordiffuse="button_focus">$INFO[Player.CacheLevel,dialogs/volume/progress/p,.png]</texture>
 			</control>
 			<control type="label" id="1">
 				<description>buffering value</description>

@@ -15,7 +15,6 @@
 	<!-- displayType options -->
 	<propertySettings property="displayType" buttonID="9101" title="Widget Display Type" showNone="false" requires="widgetPath" />
 	<property property="displayType" icon="dstv/skinshortcuts/displaytype/poster.png" label="Posters">posters</property>
-	<property property="displayType" icon="dstv/skinshortcuts/displaytype/square.png" label="Squares">squares</property>
 	<property property="displayType" icon="dstv/skinshortcuts/displaytype/landscape.png" label="Landscape">landscape</property>
 	<!-- widgetSortBy options -->
 	<!-- additional sort options: https://codedocs.xyz/AlwinEsch/kodi/group__List__of__sort__methods.html -->

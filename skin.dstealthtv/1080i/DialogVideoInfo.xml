@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol always="true">138</defaultcontrol>
-	<onload>Container.Update(videodb://video/-1/,replace)</onload>
-	<onload>SetProperty(ActorList.State,loading)</onload>
-	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
-	<onload condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast)">AlarmClock(ShowActorsTimer,SetProperty(ActorList.State,ready), 00:05, silent)</onload>
-	<onload condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">AlarmClock(ShowActorsTimer,SetProperty(ActorList.State,ready), 00:05, silent)</onload>
-	<onunload>ClearProperty(ActorList.State)</onunload>
-	<onunload>ClearProperty(infobackground,home)</onunload>
+    <onload>Container.Update(videodb://video/-1/,replace)</onload>
+    <onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
+    <onload>SetProperty(CurrentMovieID,$INFO[ListItem.UniqueID(tmdb)]$INFO[ListItem.IMDBNumber])</onload>
+
+    <onload>RunScript(script.embuary.info, mode=reset_scroll)</onload>
+    <onunload>ClearProperty(ActorList.State)</onunload>
+    <onunload>ClearProperty(CurrentMovieID)</onunload>
+    <onunload>ClearProperty(infobackground,home)</onunload>
+
+    <onunload>ClearProperty(TextViewer_Header,home)</onunload>
+    <onunload>ClearProperty(TextViewer_Text,home)</onunload>
     <controls>
         <control type="group">
             <centertop>50%</centertop>
@@ -229,8 +233,8 @@
                     </include>
                     <include content="InfoDialogMetadata">
                         <param name="control_id" value="149" />
-                        <param name="label" value="[COLOR red]$LOCALIZE[563]: [/COLOR]$INFO[ListItem.RatingAndVotes]" />
-                        <param name="altlabel" value="$LOCALIZE[563]: $INFO[ListItem.RatingAndVotes]" />
+                        <param name="label" value="[COLOR red]TMDB: [/COLOR]$INFO[ListItem.RatingAndVotes]" />
+                        <param name="altlabel" value="TMDB: $INFO[ListItem.RatingAndVotes]" />
                         <param name="visible" value="!String.IsEmpty(ListItem.RatingAndVotes)" />
                     </include>
                     <include content="InfoDialogMetadata">
@@ -275,10 +279,10 @@
                         <param name="visible" value="!String.IsEmpty(ListItem.Episode) + String.IsEqual(ListItem.DBType,season)" />
                     </include>
                     <include content="InfoDialogMetadata">
-                        <param name="control_id" value="157" />
-                        <param name="label" value="[COLOR red]$LOCALIZE[31017]: [/COLOR]$INFO[ListItem.Mpaa]" />
-                        <param name="altlabel" value="$LOCALIZE[31017]: $INFO[ListItem.Mpaa]" />
-                        <param name="visible" value="!String.IsEmpty(ListItem.Mpaa)" />
+                        <param name="control_id" value="168" />
+                        <param name="label" value="[COLOR red]Classificação: [/COLOR]$INFO[Window(Home).Property(mpaa)]" />
+                        <param name="altlabel" value="Classificação: $INFO[Window(Home).Property(mpaa)]" />
+                        <param name="visible" value="!String.IsEmpty(Window(Home).Property(mpaa)) + String.IsEqual(ListItem.DBType,movie)" />
                     </include>
                     <include content="InfoDialogMetadata">
                         <param name="control_id" value="158" />
@@ -317,10 +321,16 @@
                         <param name="visible" value="!String.IsEmpty(ListItem.LastPlayed)" />
                     </include>
                     <include content="InfoDialogMetadata">
-                        <param name="control_id" value="165" />
-                        <param name="label" value="[COLOR red]$LOCALIZE[564]: [/COLOR]$INFO[ListItem.DBType]" />
-                        <param name="altlabel" value="$LOCALIZE[564]: $INFO[ListItem.DBType]" />
-                        <param name="visible" value="!String.IsEmpty(ListItem.DBType)" />
+                        <param name="control_id" value="166" />
+                        <param name="label" value="[COLOR red]Orçamento: [/COLOR]$INFO[Window(Home).Property(budget)]" />
+                        <param name="altlabel" value="Orçamento: $INFO[Window(Home).Property(budget)]" />
+                        <param name="visible" value="!String.IsEmpty(Window(Home).Property(budget)) + String.IsEqual(ListItem.DBType,movie)" />
+                    </include>
+                    <include content="InfoDialogMetadata">
+                        <param name="control_id" value="167" />
+                        <param name="label" value="[COLOR red]Receita: [/COLOR]$INFO[Window(Home).Property(revenue)]" />
+                        <param name="altlabel" value="Receita: $INFO[Window(Home).Property(revenue)]" />
+                        <param name="visible" value="!String.IsEmpty(Window(Home).Property(revenue)) + String.IsEqual(ListItem.DBType,movie)" />
                     </include>
                 </control>
 
@@ -329,11 +339,11 @@
                     <top>165</top>
                     <width>800</width>
                     <height>280</height>
-                    <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+                    <texture fallback="$INFO[ListItem.Art(clearlogo)]">$INFO[Window(Home).Property(ds_info_clearlogo)]</texture>
                     <aspectratio>keep</aspectratio>
                     <align>center</align>
                     <aligny>center</aligny>
-                    <visible>!Container.Content(Sets) + !String.IsEqual(Window.Property(ActorList.State),ready)</visible>
+                    <visible>Container(50).IsEmpty | Container(50).IsUpdating</visible>
                     <animation effect="fade" time="400">Visible</animation>
                     <animation effect="fade" time="200">Hidden</animation>
                     <animation effect="fade" start="80" end="0" time="800" tween="sine" pulse="true" condition="true">Conditional</animation>
@@ -348,34 +358,25 @@
 
                 <control type="panel" id="50">
                     <visible>Container.Content(Sets) | String.IsEqual(Window.Property(ActorList.State),ready)</visible>
-                    <animation effect="fade" time="400">Visible</animation>
-                    <animation effect="fade" time="200">Hidden</animation>
+                    <autofocus>true</autofocus>
+                    <defaultcontrol>0</defaultcontrol>
                     <top>153</top>
                     <width>1235</width>
                     <height>370</height>
-                    <onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
-                    <onup>AlarmClock(close_busydialog,Dialog.Close(busydialog),00:04,silent)</onup>
-                    <onup>ActivateWindow(busydialog)</onup>
                     <onleft>50</onleft>
                     <onright>50</onright>
+                    <onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
                     <ondown>140</ondown>
-                    <scrolltime>200</scrolltime>
+                    <scrolltime tween="cubic" easing="out">500</scrolltime>
                     <orientation>horizontal</orientation>
-                    
+                    <limit>10</limit>
+                    <preloaditems>2</preloaditems>
                     <content target="videos" condition="Container.Content(Sets)">videodb://movies/sets/$INFO[ListItem.SetId]/</content>
-                    
-                    <content target="videos" condition="!Container.Content(Sets) + !String.IsEmpty(ListItem.Cast)">$INFO[ListItem.Cast]</content>
-                    
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;tmdb_type=movie</content>
-                    
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;imdb_id=$INFO[ListItem.IMDBNumber]&amp;tmdb_type=movie</content>
-                    
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))">plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;tmdb_type=tv</content>
-                    
-                    <content target="videos" condition="!Container.Content(Sets) + String.IsEmpty(ListItem.Cast) + !String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;imdb_id=$INFO[ListItem.IMDBNumber]&amp;tmdb_type=tv</content>
-                    
+                    <content target="videos" condition="!Container.Content(Sets) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]">plugin://script.embuary.info/?mode=cast&amp;type=$INFO[ListItem.DBType]&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;imdb_id=$INFO[ListItem.IMDBNumber]</content>
+
                     <itemlayout height="317" width="245" condition="!Container.Content(Sets)">
                         <control type="group">
+                            <visible>!Container(50).IsUpdating</visible>
                             <top>10</top>
                             <control type="image">
                                 <top>0</top>
@@ -391,17 +392,10 @@
                                 <left>20</left>
                                 <width>224</width>
                                 <height>277</height>
-                                <texture background="true">$INFO[ListItem.Thumb]</texture>
+                                <texture background="true">$INFO[ListItem.Icon]</texture>
                                 <aspectratio aligny="center">scale</aspectratio>
                             </control>
-                            <control type="image">
-                                <left>20</left>
-                                <width>224</width>
-                                <height>80</height>
-                                <bottom>10</bottom>
-                                <texture>overlays/overlayfade.png</texture>
-                                <animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
-                            </control>
+
                             <control type="label">
                                 <left>25</left>
                                 <width>214</width>
@@ -410,6 +404,7 @@
                                 <align>center</align>
                                 <aligny>center</aligny>
                                 <font>font12</font>
+                                <scroll>true</scroll>
                                 <label>$INFO[ListItem.Label]</label>
                             </control>
                             <control type="label">
@@ -421,12 +416,14 @@
                                 <aligny>center</aligny>
                                 <font>font12</font>
                                 <textcolor>grey</textcolor>
+                                <scroll>true</scroll>
                                 <label>$INFO[ListItem.Label2]</label>
                             </control>
                         </control>
                     </itemlayout>
                     <focusedlayout height="317" width="245" condition="!Container.Content(Sets)">
                         <control type="group">
+                            <visible>!Container(50).IsUpdating</visible>
                             <left>0</left>
                             <top>10</top>
                             <control type="image">
@@ -443,7 +440,7 @@
                                 <left>20</left>
                                 <width>224</width>
                                 <height>277</height>
-                                <texture background="true">$INFO[ListItem.Thumb]</texture>
+                                <texture background="true">$INFO[ListItem.Icon]</texture>
                                 <aspectratio aligny="center">scale</aspectratio>
                             </control>
                             <control type="image">
@@ -462,7 +459,6 @@
                                 <align>center</align>
                                 <aligny>center</aligny>
                                 <font>font12</font>
-                                <scroll>true</scroll>
                                 <label>$INFO[ListItem.Label]</label>
                             </control>
                             <control type="label">
@@ -474,7 +470,6 @@
                                 <aligny>center</aligny>
                                 <font>font12</font>
                                 <textcolor>grey</textcolor>
-                                <scroll>true</scroll>
                                 <label>$INFO[ListItem.Label2]</label>
                             </control>
                             <control type="image">
@@ -584,7 +579,7 @@
                             </control>
                         </control>
                     </focusedlayout>
-                </control>
+                 </control>
                 
                 <control type="grouplist" id="5000">
                     <left>800</left>
@@ -612,21 +607,8 @@
                         <param name="id" value="11" />
                         <param name="icon" value="icons/infodialogs/trailer.png" />
                         <param name="label" value="$LOCALIZE[20410]" />
-                        
-                        <!-- ✅ MÉTODO 1: PlayMedia direto via YouTube (ListItem.Trailer) -->
-                        <param name="onclick_2_condition" value="!String.IsEmpty(ListItem.Trailer)" />
-                        <param name="onclick_2" value="Dialog.Close(movieinformation)" />
-                        <param name="onclick_2b" value="PlayMedia($INFO[ListItem.Trailer],1)" />
-                        
-                        <!-- ✅ MÉTODO 2: TMDb Helper (fallback final) -->
-                        <param name="onclick_3_condition" value="String.IsEmpty(ListItem.Trailer) + System.AddonIsEnabled(plugin.video.themoviedb.helper) + !String.IsEmpty(ListItem.Property(tmdb_id))" />
-                        <param name="onclick_3" value="Dialog.Close(movieinformation)" />
-                        <param name="onclick_3b_condition" value="String.IsEqual(ListItem.DBType,movie)" />
-                        <param name="onclick_3b" value="PlayMedia(plugin://plugin.video.themoviedb.helper/?info=play&amp;type=movie&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;trailer=true,1)" />
-                        <param name="onclick_3c_condition" value="!String.IsEqual(ListItem.DBType,movie)" />
-                        <param name="onclick_3c" value="PlayMedia(plugin://plugin.video.themoviedb.helper/?info=play&amp;type=tv&amp;tmdb_id=$INFO[ListItem.Property(tmdb_id)]&amp;trailer=true,1)" />
-                        
-                        <param name="visible" value="!String.IsEmpty(ListItem.Trailer) | [System.AddonIsEnabled(plugin.video.themoviedb.helper) + !String.IsEmpty(ListItem.Property(tmdb_id))]" />
+                        <onclick>RunScript(script.showimdb, ?action=play_trailer&id=$INFO[Window(home).Property(ContextMenuTargetID)]&dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
+                        <param name="visible" value="true" />
                     </include>
                     <include content="InfoDialogButton">
                         <param name="id" value="441" />
@@ -639,42 +621,16 @@
                     <include content="InfoDialogButton">
                         <param name="id" value="14" />
                         <param name="icon" value="icons/infodialogs/info.png" />
-                        <param name="label" value="$LOCALIZE[207]" />
-                        <param name="visible" value="true" />
-                        <param name="onclick_1" value="SetProperty(TextViewer_Header,$LOCALIZE[207],home)" />
-                        <param name="onclick_2" value="SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)" />
-                        <param name="onclick_3" value="ActivateWindow(1102)" />
-                    </include>
-                    <include content="InfoDialogButton">
-                        <param name="id" value="101" />
-                        <param name="icon" value="icons/infodialogs/info.png" />
-                        <param name="label" value="$LOCALIZE[31034]" />
-                        <param name="onclick_1_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)" />
-                        <param name="onclick_1" value="RunScript(script.embuary.info,call=movie,dbid=$INFO[ListItem.DBID])" />
-                        <param name="onclick_2_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,tvshow)" />
-                        <param name="onclick_2" value="RunScript(script.embuary.info,call=tv,dbid=$INFO[ListItem.DBID])" />
-                        <param name="onclick_3_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,episode)" />
-                        <param name="onclick_3" value="RunScript(script.embuary.info,call=tv,query='$ESCINFO[ListItem.TVShowTitle]',year=$INFO[ListItem.Year])" />
-                        <param name="visible" value="System.AddonIsEnabled(script.embuary.info) + !String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)]" />
-                    </include>
-                    <include content="InfoDialogButton">
-                        <param name="id" value="102" />
-                        <param name="icon" value="icons/infodialogs/image.png" />
-                        <param name="label" value="$LOCALIZE[31028]" />
-                        <param name="onclick_1" value="SetProperty(fanart,$ESCINFO[ListItem.Art(fanart)],home)" />
-                        <param name="onclick_2" value="ActivateWindow(1104)" />
-                        <param name="visible" value="!String.IsEmpty(ListItem.Art(fanart))" />
-                    </include>
-                    <include content="InfoDialogButton">
-                        <param name="id" value="10" />
-                        <param name="icon" value="icons/infodialogs/choose_image.png" />
-                        <param name="label" value="$LOCALIZE[13511]" />
-                    </include>
-                    <include content="InfoDialogButton">
-                        <param name="id" value="6" />
-                        <param name="icon" value="icons/infodialogs/update.png" />
-                        <param name="label" value="$LOCALIZE[184]" />
-                        <param name="visible" value="Control.IsEnabled(6)" />
+                        <param name="label" value="Detalhes" />
+                        <param name="onclick_1_condition" value="String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
+                        <param name="onclick_1" value="RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
+                        <param name="onclick_2_condition" value="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
+                        <param name="onclick_2" value="RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
+                        <param name="onclick_3_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
+                        <param name="onclick_3" value="RunScript(script.embuary.info,call=movie,dbid=$INFO[ListItem.DBID])" />
+                        <param name="onclick_4_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
+                        <param name="onclick_4" value="RunScript(script.embuary.info,call=tv,dbid=$INFO[ListItem.DBID])" />
+                        <param name="visible" value="System.AddonIsEnabled(script.embuary.info) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]" />
                     </include>
                 </control>
                 <include content="LeftRightArrows">

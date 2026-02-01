@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- DSTV Changes! -->
 <window>
+	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
+
 	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
 	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
 	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | !String.IsEmpty(Player.SeekNumeric) | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
@@ -65,10 +67,7 @@
 					<itemgap>5</itemgap>
 					<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !Player.ChannelPreviewActive + Window.IsActive(fullscreenvideo)</visible>
 					<animation effect="fade" start="0" end="100" time="200" delay="1000">Visible</animation>
-					<include content="MediaFlag">
-						<param name="texture" value="$INFO[VideoPlayer.VideoCodec,flags/videocodec/,.png]" />
-						<param name="visible" value="!String.IsEmpty(VideoPlayer.VideoCodec)" />
-					</include>
+
 					<include content="MediaFlag">
 						<param name="texture" value="$INFO[VideoPlayer.VideoResolution,flags/videoresolution/,.png]" />
 						<param name="visible" value="!String.IsEmpty(VideoPlayer.VideoResolution)" />
@@ -77,10 +76,7 @@
 						<param name="texture" value="$INFO[VideoPlayer.HdrType,flags/videohdr/,.png]" />
 						<param name="visible" value="!String.IsEmpty(VideoPlayer.HdrType)" />
 					</include>
-					<include content="MediaFlag">
-						<param name="texture" value="$INFO[VideoPlayer.VideoAspect,flags/aspectratio/,.png]" />
-						<param name="visible" value="!String.IsEmpty(VideoPlayer.VideoAspect)" />
-					</include>
+
 					<include content="MediaFlag">
 						<param name="texture" value="$INFO[VideoPlayer.AudioCodec,flags/audiocodec/,.png]" />
 						<param name="visible" value="!String.IsEmpty(VideoPlayer.AudioCodec)" />
@@ -161,7 +157,7 @@
 				</control>
 			</control>
 			<control type="label">
-				<top>54</top>
+				<top>51</top>
 				<left>235</left>
 				<width>134</width>
 				<height>60</height>
@@ -172,7 +168,7 @@
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label">
-				<top>54</top>
+				<top>51</top>
 				<left>1529</left>
 				<width>134</width>
 				<height>60</height>
@@ -183,13 +179,13 @@
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label">
-				<top>110</top>
+				<top>107</top>
 				<width>260</width>
 				<centerleft>50%</centerleft>
 				<height>60</height>
-				<label>Duração: $INFO[Player.Duration]</label>
+				<label>$INFO[Player.Duration]</label>
+				<align>center</align>
 				<font>fontOSD</font>
-				<shadowcolor>black</shadowcolor>
 				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
 			</control>
 			<control type="label" id="40000">
@@ -236,7 +232,7 @@
 					<left>0</left>
 					<top>65</top>
 					<width>100%</width>
-					<height>10</height>
+					<height>9</height>
 					<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 					<!-- DSTV: colordiffuse. -->
 					<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
@@ -250,7 +246,7 @@
 					<left>390</left>
 					<top>70</top>
 					<width>58%</width>
-					<height>10</height>
+					<height>9</height>
 					<info>Player.ProgressCache</info>
 					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
 					<midtexture>colors/white50.png</midtexture>
@@ -259,7 +255,7 @@
 					<left>390</left>
 					<top>70</top>
 					<width>58%</width>
-					<height>10</height>
+					<height>9</height>
 					<info>Player.Progress</info>
 					<texturebg border="3" colordiffuse="60FFFFFF">colors/white50.png</texturebg>
 					<midtexture colordiffuse="FFE50914">colors/white.png</midtexture>
@@ -268,7 +264,7 @@
 					<left>390</left>
 					<top>65</top>
 					<width>58%</width>
-					<height>10</height>
+					<height>9</height>
 					<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
 					<!-- DSTV: colordiffuse. -->
 					<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
@@ -283,7 +279,6 @@
 			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding | !Player.Paused</visible>
 			<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
-
 			<bottom>0</bottom>
 			<height>380</height>
 			<control type="label">
@@ -363,60 +358,281 @@
 				<visible>RDS.HasRadioText</visible>
 			</control>
 		</control>
-		<control type="group">
-			<visible>!Window.IsVisible(playerprocessinfo)</visible>
-			<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)</visible>
-			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding | !Player.Paused</visible>
-			<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
-			<bottom>0</bottom>
+	<!-- PAINEL DE INFORMAÇÕES -->
+	<control type="group">
+		<visible>!Window.IsVisible(playerprocessinfo)</visible>
+		<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)</visible>
+		<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking | !Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding | !Player.Paused</visible>
+		<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
+		<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
+		<bottom>0</bottom>
+		<height>620</height>
+		<control type="image">
+			<left>0</left>
+			<width>100%</width>
+			<height>480</height>
+			<texture>dialogs/dialog-bg-nobo.png</texture>
+		</control>
+		<control type="image">
+			<depth>DepthOSD+</depth>
+			<left>0</left>
+			<bottom>145</bottom>
+			<width>330</width>
 			<height>470</height>
-			<control type="image">
-				<left>0</left>
-				<width>100%</width>
-				<height>330</height>
-				<texture>dialogs/dialog-bg-nobo.png</texture>
-			</control>
-			<control type="image">
-				<depth>DepthOSD+</depth>
-				<left>10</left>
-				<bottom>145</bottom>
-				<width>400</width>
-				<height>600</height>
-				<aspectratio aligny="bottom">keep</aspectratio>
-				<texture fallback="DefaultVideo.png" background="true">$VAR[NowPlayingPosterVar]</texture>
-				<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-				<bordersize>20</bordersize>
-				<include>OpenClose_Left</include>
-			</control>
-			<control type="grouplist">
-				<left>420</left>
-				<top>10</top>
-				<right>20</right>
-				<height>300</height>
+			<aspectratio aligny="bottom">keep</aspectratio>
+			<texture fallback="DefaultVideo.png" background="true">$VAR[NowPlayingPosterVar]</texture>
+			<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+			<bordersize>20</bordersize>
+			<include>OpenClose_Left</include>
+		</control>
+		<!-- Sinopse -->
+		<control type="grouplist">
+			<left>325</left>
+			<top>15</top>
+			<width>620</width>
+			<height>200</height>
+			<align>left</align>
+			<orientation>vertical</orientation>
+			<itemgap>5</itemgap>
+			<control type="textbox">
+				<height>200</height>
+				<label fallback="10005">$INFO[VideoPlayer.Tagline,[B],[/B][CR]]$INFO[VideoPlayer.Plot]</label>
 				<align>left</align>
-				<orientation>vertical</orientation>
-				<itemgap>10</itemgap>
-				<control type="textbox">
-					<height>294</height>
-					<label fallback="10005">$INFO[VideoPlayer.Tagline,[B],[/B][CR]]$INFO[VideoPlayer.Plot]</label>
-					<align>left</align>
-					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
-					<visible>Integer.IsGreaterOrEqual(Playlist.Position(video), Playlist.Length(video))</visible>
-				</control>
-				<control type="textbox">
-					<height>250</height>
-					<label fallback="10005">$INFO[VideoPlayer.Tagline,[B],[/B][CR]]$INFO[VideoPlayer.Plot]</label>
-					<align>left</align>
-					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
-					<visible>Integer.IsLess(Playlist.Position(video), Playlist.Length(video))</visible>
-				</control>
-				<control type="label">
-					<height>50</height>
-					<label>$VAR[OSDNextLabelVar]</label>
-					<visible>Integer.IsLess(Playlist.Position(video), Playlist.Length(video))</visible>
-				</control>
+				<font>font12</font>
+				<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 			</control>
 		</control>
+		<!-- Metadados do filme -->
+		<control type="grouplist">
+			<left>970</left>
+			<top>10</top>
+			<width>400</width>
+			<height>180</height>
+			<align>left</align>
+			<orientation>vertical</orientation>
+			<itemgap>2</itemgap>
+			<control type="label">
+				<height>28</height>
+				<font>font12</font>
+				<label>[COLOR red]Gênero: [/COLOR]$INFO[VideoPlayer.Genre]</label>
+				<visible>!String.IsEmpty(VideoPlayer.Genre)</visible>
+			</control>
+			<control type="label">
+				<height>28</height>
+				<font>font12</font>
+				<label>[COLOR red]Ano: [/COLOR]$INFO[VideoPlayer.Year]</label>
+				<visible>!String.IsEmpty(VideoPlayer.Year)</visible>
+			</control>
+			<control type="label">
+				<height>28</height>
+				<font>font12</font>
+				<label>[COLOR red]Nota IMDB: [/COLOR]$VAR[ds_infoRatIMDB]</label>
+				<visible>!String.IsEmpty(Window(Home).Property(ds_info_imdb_rating))</visible>
+			</control>
+			<control type="label">
+				<height>28</height>
+				<font>font12</font>
+				<label>[COLOR red]Classificação: [/COLOR]$INFO[Window(Home).Property(mpaa)]</label>
+				<visible>!String.IsEmpty(Window(Home).Property(mpaa))</visible>
+			</control>
+            <control type="label">
+                <height>28</height>
+                <font>font12</font>
+                <label>[COLOR red]Orçamento: [/COLOR]$INFO[Window(Home).Property(budget)]</label>
+                <visible>!String.IsEmpty(Window(Home).Property(budget))</visible>
+            </control>
+            <control type="label">
+                <height>28</height>
+                <font>font12</font>
+                <label>[COLOR red]Receita: [/COLOR]$INFO[Window(Home).Property(revenue)]</label>
+                <visible>!String.IsEmpty(Window(Home).Property(revenue))</visible>
+            </control>
+			<control type="label">
+				<height>28</height>
+				<font>font12</font>
+				<label>[COLOR red]País: [/COLOR]$INFO[Window(Home).Property(country)]</label>
+				<visible>!String.IsEmpty(Window(Home).Property(country))</visible>
+			</control>
+		</control>
+		<!-- Reviews do Trakt -->
+		<control type="group">
+			<left>1400</left>
+			<top>10</top>
+			<right>20</right>
+			<height>250</height>
+			<visible>!String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+			<control type="textbox">
+				<right>0</right>
+				<width>100%</width>
+				<height>230</height>
+				<font>font10</font>
+				<textcolor>white</textcolor>
+				<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+				<autoscroll delay="3000" repeat="5000" time="4000"></autoscroll>
+			</control>
+		</control>
+		<!-- Título do Elenco -->
+		<control type="label">
+			<left>325</left>
+			<top>225</top>
+			<width>400</width>
+			<height>30</height>
+			<font>font12_title</font>
+			<label>[COLOR red]Elenco[/COLOR]</label>
+			<visible>!String.IsEmpty(VideoPlayer.Title)</visible>
+		</control>
+		<!-- Painel de Elenco (Cast) -->
+		<control type="panel" id="9050">
+			<left>318</left>
+			<top>255</top>
+			<right>20</right>
+			<height>260</height>
+			<orientation>horizontal</orientation>
+			<scrolltime tween="cubic" easing="out">500</scrolltime>
+			<preloaditems>2</preloaditems>
+			<content>$VAR[CastContentVar]</content>
+			<itemlayout height="235" width="160">
+				<control type="group">
+					<top>5</top>
+					<control type="image">
+						<top>0</top>
+						<width>159</width>
+						<height>194</height>
+						<texture>DefaultActorSolid.png</texture>
+						<aspectratio aligny="center">scale</aspectratio>
+						<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+						<bordersize>12</bordersize>
+					</control>
+					<control type="image">
+						<top>10</top>
+						<left>10</left>
+						<width>140</width>
+						<height>185</height>
+						<texture background="true">$INFO[ListItem.Icon]</texture>
+						<aspectratio aligny="center">scale</aspectratio>
+					</control>
+					<control type="label">
+						<left>11</left>
+						<width>131</width>
+						<height>25</height>
+						<top>151</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>black</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>11</left>
+						<width>131</width>
+						<height>25</height>
+						<top>173</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>black</textcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+					<control type="label">
+						<left>12</left>
+						<width>131</width>
+						<height>25</height>
+						<top>150</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>12</left>
+						<width>131</width>
+						<height>25</height>
+						<top>172</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+				</control>
+			</itemlayout>
+			<focusedlayout height="235" width="160">
+				<control type="group">
+					<top>5</top>
+					<control type="image">
+						<top>0</top>
+						<width>157</width>
+						<height>192</height>
+						<texture>DefaultActorSolid.png</texture>
+						<aspectratio aligny="center">scale</aspectratio>
+						<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+						<bordersize>12</bordersize>
+					</control>
+					<control type="image">
+						<top>10</top>
+						<left>10</left>
+						<width>140</width>
+						<height>185</height>
+						<texture background="true">$INFO[ListItem.Icon]</texture>
+						<aspectratio aligny="center">scale</aspectratio>
+					</control>
+					<control type="label">
+						<left>11</left>
+						<width>131</width>
+						<height>25</height>
+						<top>151</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>black</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>11</left>
+						<width>131</width>
+						<height>25</height>
+						<top>173</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>black</textcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+					<control type="label">
+						<left>12</left>
+						<width>131</width>
+						<height>25</height>
+						<top>150</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>12</left>
+						<width>131</width>
+						<height>25</height>
+						<top>172</top>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font10</font>
+						<textcolor>white</textcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+				</control>
+			</focusedlayout>
+		</control>
+		<!-- Label próximo vídeo -->
+		<control type="label">
+			<left>310</left>
+			<bottom>155</bottom>
+			<right>20</right>
+			<height>40</height>
+			<label>$VAR[OSDNextLabelVar]</label>
+			<visible>Integer.IsLess(Playlist.Position(video), Playlist.Length(video))</visible>
+		</control>
+	</control>
 	</controls>
 </window>

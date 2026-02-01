@@ -5,12 +5,12 @@
 	<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
 	<controls>
 		<control type="image">
-			<include>FullScreenDimensions</include>
+			
 			<aspectratio>scale</aspectratio>
 			<texture>colors/black.png</texture>
 		</control>
 		<control type="image">
-			<include>FullScreenDimensions</include>
+			
 			<aspectratio>keep</aspectratio>
 			<texture>$INFO[Window(home).Property(fanart)]</texture>
 		</control>
