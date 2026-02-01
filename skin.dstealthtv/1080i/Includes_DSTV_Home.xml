@@ -798,6 +798,8 @@
               <onfocus>SetProperty(ds_info_dbtype, $INFO[ListItem.DBType], home)</onfocus>
               <onfocus>SetProperty(ContextMenuTargetID, $INFO[ListItem.IMDBNumber], home)</onfocus>
               <onfocus>SetProperty(ContextMenuTargetDBType, $INFO[ListItem.DBType], home)</onfocus>
+              <onfocus>SetProperty(ds_imdb_id, $INFO[ListItem.IMDBNumber], home)</onfocus>
+    <onfocus>SetProperty(ds_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
               <onclick condition="Player.HasVideo">PlayerControl(Stop)</onclick>
               <onfocus>SetProperty(ds_last_check, $INFO[ListItem.Label], home)</onfocus>
             </control>

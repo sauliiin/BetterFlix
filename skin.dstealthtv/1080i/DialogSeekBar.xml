@@ -454,20 +454,20 @@
 				<visible>!String.IsEmpty(Window(Home).Property(country))</visible>
 			</control>
 		</control>
-		<!-- Reviews do Trakt -->
+		<!-- BIOGRAFIAS DOS ATORES (Substituiu Trakt Reviews) -->
 		<control type="group">
 			<left>1400</left>
 			<top>10</top>
 			<right>20</right>
 			<height>250</height>
-			<visible>!String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+			<visible>!String.IsEmpty(Window(Home).Property(ds_cast_bios))</visible>
 			<control type="textbox">
 				<right>0</right>
 				<width>100%</width>
 				<height>230</height>
 				<font>font10</font>
 				<textcolor>white</textcolor>
-				<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+				<label>$INFO[Window(Home).Property(ds_cast_bios)]</label>
 				<autoscroll delay="3000" repeat="5000" time="4000"></autoscroll>
 			</control>
 		</control>
