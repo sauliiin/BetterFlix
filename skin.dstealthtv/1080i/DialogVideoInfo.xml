@@ -12,6 +12,16 @@
 
     <onunload>ClearProperty(TextViewer_Header,home)</onunload>
     <onunload>ClearProperty(TextViewer_Text,home)</onunload>
+    <onload>ClearProperty(Cast.0.Name,Home)</onload>
+    <onload>ClearProperty(Cast.1.Name,Home)</onload>
+    <onload>ClearProperty(Cast.2.Name,Home)</onload>
+    <onload>ClearProperty(Cast.3.Name,Home)</onload>
+    <onload>ClearProperty(Cast.4.Name,Home)</onload>
+    <onload>ClearProperty(Cast.5.Name,Home)</onload>
+    <onload>ClearProperty(Cast.6.Name,Home)</onload>
+    <onload>ClearProperty(Cast.7.Name,Home)</onload>
+    <onload>ClearProperty(Cast.8.Name,Home)</onload>
+    <onload>ClearProperty(Cast.9.Name,Home)</onload>
     <controls>
         <control type="group">
             <centertop>50%</centertop>
@@ -113,7 +123,7 @@
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
-                        <onup>50</onup>
+                        <onup>SetFocus(50,0)</onup>
                         <onleft>4000</onleft>
                         <onright>4000</onright>
                         <ondown>5000</ondown>
@@ -131,7 +141,7 @@
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
                         <onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
-                        <onup>50</onup>
+                        <onup>SetFocus(50,0)</onup>
                         <onleft>4000</onleft>
                         <onright>4000</onright>
                         <ondown>5000</ondown>
@@ -233,15 +243,11 @@
                     </include>
                     <include content="InfoDialogMetadata">
                         <param name="control_id" value="149" />
-                        <param name="label" value="[COLOR red]TMDB: [/COLOR]$INFO[ListItem.RatingAndVotes]" />
-                        <param name="altlabel" value="TMDB: $INFO[ListItem.RatingAndVotes]" />
-                        <param name="visible" value="!String.IsEmpty(ListItem.RatingAndVotes)" />
+                        <param name="label" value="[COLOR red]IMDB: [/COLOR]$INFO[Window(Home).Property(imdb_combined)]" />
+                        <param name="altlabel" value="IMDB: $INFO[Window(Home).Property(imdb_combined)]" />
+                        <param name="visible" value="!String.IsEmpty(Window(Home).Property(imdb_combined))" />
                     </include>
-                    <include content="InfoDialogMetadata">
-                        <param name="control_id" value="151" />
-                        <param name="label" value="[COLOR red]IMDB: [/COLOR]$VAR[ds_infoRatIMDB]" />
-                        <param name="altlabel" value="IMDB: $VAR[ds_infoRatIMDB]" />
-                    </include>
+
                     <include content="InfoDialogMetadata">
                         <param name="control_id" value="150" />
                         <param name="label" value="[COLOR red]$LOCALIZE[515]: [/COLOR]$INFO[ListItem.Genre]" />
@@ -343,10 +349,9 @@
                     <aspectratio>keep</aspectratio>
                     <align>center</align>
                     <aligny>center</aligny>
-                    <visible>Container(50).IsEmpty | Container(50).IsUpdating</visible>
-                    <animation effect="fade" time="400">Visible</animation>
-                    <animation effect="fade" time="200">Hidden</animation>
-                    <animation effect="fade" start="80" end="0" time="800" tween="sine" pulse="true" condition="true">Conditional</animation>
+                    <animation type="WindowOpen" reversible="false">
+                        <effect type="fade" start="100" end="0" tween="sine" time="2800" />
+                    </animation>
                 </control>
 
                 <control type="group">
@@ -356,10 +361,11 @@
                     <visible>!Container.Content(Sets) + !String.IsEqual(Window.Property(ActorList.State),ready)</visible>
                 </control>
 
-                <control type="panel" id="50">
-                    <visible>Container.Content(Sets) | String.IsEqual(Window.Property(ActorList.State),ready)</visible>
-                    <autofocus>true</autofocus>
-                    <defaultcontrol>0</defaultcontrol>
+                <control type="fixedlist" id="50">
+                    <animation type="WindowOpen" reversible="false">
+                        <effect type="fade" start="0" end="100" time="600" delay="2600" />
+                    </animation>
+                    <left>0</left>
                     <top>153</top>
                     <width>1235</width>
                     <height>370</height>
@@ -367,219 +373,189 @@
                     <onright>50</onright>
                     <onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
                     <ondown>140</ondown>
-                    <scrolltime tween="cubic" easing="out">500</scrolltime>
+                    <scrolltime>500</scrolltime>
                     <orientation>horizontal</orientation>
-                    <limit>10</limit>
-                    <preloaditems>2</preloaditems>
-                    <content target="videos" condition="Container.Content(Sets)">videodb://movies/sets/$INFO[ListItem.SetId]/</content>
-                    <content target="videos" condition="!Container.Content(Sets) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]">plugin://script.embuary.info/?mode=cast&amp;type=$INFO[ListItem.DBType]&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;imdb_id=$INFO[ListItem.IMDBNumber]</content>
+                    <focusposition>0</focusposition>
+                    <visible>!Container.Content(Sets) + !String.IsEmpty(Window(Home).Property(Cast.0.Name))</visible>
 
-                    <itemlayout height="317" width="245" condition="!Container.Content(Sets)">
+                    <content>
+                        <!-- Cast 0 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.0.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.0.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.0.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.0.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 1 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.1.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.1.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.1.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.1.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 2 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.2.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.2.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.2.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.2.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 3 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.3.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.3.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.3.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.3.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 4 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.4.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.4.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.4.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.4.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 5 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.5.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.5.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.5.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.5.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 6 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.6.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.6.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.6.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.6.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 7 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.7.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.7.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.7.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.7.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 8 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.8.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.8.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.8.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.8.Role)]</label2>
+                        </item>
+
+                        <!-- Cast 9 -->
+                        <item>
+                            <visible>!String.IsEmpty(Window(Home).Property(Cast.9.Name))</visible>
+                            <icon>$INFO[Window(Home).Property(Cast.9.Thumb)]</icon>
+                            <label>$INFO[Window(Home).Property(Cast.9.Name)]</label>
+                            <label2>$INFO[Window(Home).Property(Cast.9.Role)]</label2>
+                        </item>
+                    </content>
+
+
+                    <!-- Itemlayout -->
+                    <itemlayout height="317" width="245">
                         <control type="group">
-                            <visible>!Container(50).IsUpdating</visible>
-                            <top>10</top>
+                            <visible>!String.IsEmpty(ListItem.Label)</visible>
                             <control type="image">
-                                <top>0</top>
-                                <width>264</width>
-                                <height>317</height>
-                                <texture>DefaultActorSolid.png</texture>
-                                <aspectratio aligny="center">scale</aspectratio>
-                                <bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-                                <bordersize>20</bordersize>
-                            </control>
-                            <control type="image">
-                                <top>20</top>
-                                <left>20</left>
+                                <left>10</left>
+                                <top>30</top>
                                 <width>224</width>
                                 <height>277</height>
-                                <texture background="true">$INFO[ListItem.Icon]</texture>
+                                <texture fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
                                 <aspectratio aligny="center">scale</aspectratio>
-                            </control>
-
-                            <control type="label">
-                                <left>25</left>
-                                <width>214</width>
-                                <height>67</height>
-                                <top>218</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
-                                <font>font12</font>
-                                <scroll>true</scroll>
-                                <label>$INFO[ListItem.Label]</label>
+                                <bordertexture border="21">colors/black.png</bordertexture>
                             </control>
                             <control type="label">
                                 <left>25</left>
-                                <width>214</width>
-                                <height>67</height>
                                 <top>245</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
+                                <width>195</width>
+                                <height>20</height>
                                 <font>font12</font>
-                                <textcolor>grey</textcolor>
+                                <align>center</align>
+                                <shadowcolor>FF000000</shadowcolor>
+                                <shadowoffsetx>3</shadowoffsetx>
+                                <shadowoffsety>3</shadowoffsety>
+                                <label>$INFO[ListItem.Label]</label>
                                 <scroll>true</scroll>
+                            </control>
+                            <control type="label">
+                                <left>25</left>
+                                <top>270</top>
+                                <width>195</width>
+                                <height>20</height>
+                                <font>font12</font>
+                                <align>center</align>
+                                <shadowcolor>FF000000</shadowcolor>
+                                <shadowoffsetx>3</shadowoffsetx>
+                                <shadowoffsety>3</shadowoffsety>
                                 <label>$INFO[ListItem.Label2]</label>
+                                <scroll>true</scroll>
                             </control>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="317" width="245" condition="!Container.Content(Sets)">
+
+                    <!-- Focusedlayout (igual + glow) -->
+                    <focusedlayout height="317" width="245">
                         <control type="group">
-                            <visible>!Container(50).IsUpdating</visible>
-                            <left>0</left>
-                            <top>10</top>
+                            <visible>!String.IsEmpty(ListItem.Label)</visible>
                             <control type="image">
-                                <top>0</top>
-                                <width>264</width>
-                                <height>317</height>
-                                <texture>DefaultActorSolid.png</texture>
-                                <aspectratio aligny="center">scale</aspectratio>
-                                <bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-                                <bordersize>20</bordersize>
+                                <left>1</left>
+                                <top>22</top>
+                                <width>241</width>
+                                <height>293</height>
+                                <texture colordiffuse="CCB20710">colors/white.png</texture>
+                                <bordersize>2</bordersize>
+                                <aspectratio>scale</aspectratio>
                             </control>
                             <control type="image">
-                                <top>20</top>
-                                <left>20</left>
+                                <left>10</left>
+                                <top>30</top>
                                 <width>224</width>
                                 <height>277</height>
-                                <texture background="true">$INFO[ListItem.Icon]</texture>
+                                <texture fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
                                 <aspectratio aligny="center">scale</aspectratio>
+                                <bordertexture border="21">colors/black.png</bordertexture>
                             </control>
-                            <control type="image">
-                                <left>20</left>
-                                <width>224</width>
-                                <height>80</height>
-                                <bottom>10</bottom>
-                                <texture>overlays/overlayfade.png</texture>
-                                <animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
-                            </control>
+
+                            <!-- Labels iguais -->
                             <control type="label">
                                 <left>25</left>
-                                <width>214</width>
-                                <height>67</height>
-                                <top>218</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
+                                <top>245</top>
+                                <width>195</width>
+                                <height>20</height>
                                 <font>font12</font>
+                                <align>center</align>
+                                <shadowcolor>FF000000</shadowcolor>
+                                <shadowoffsetx>3</shadowoffsetx>
+                                <shadowoffsety>3</shadowoffsety>
                                 <label>$INFO[ListItem.Label]</label>
                             </control>
                             <control type="label">
                                 <left>25</left>
-                                <width>214</width>
-                                <height>67</height>
-                                <top>245</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
+                                <top>270</top>
+                                <width>195</width>
+                                <height>20</height>
                                 <font>font12</font>
-                                <textcolor>grey</textcolor>
+                                <align>center</align>
+                                <shadowcolor>FF000000</shadowcolor>
+                                <shadowoffsetx>3</shadowoffsetx>
+                                <shadowoffsety>3</shadowoffsety>
                                 <label>$INFO[ListItem.Label2]</label>
                             </control>
-                            <control type="image">
-                                <left>16</left>
-                                <top>16</top>
-                                <width>232</width>
-                                <height>285</height>
-                                <texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>
-                            </control>
-                            <control type="image">
-                                <left>110</left>
-                                <top>0</top>
-                                <width>50</width>
-                                <height>50</height>
-                                <texture>buttons/spinctrl/arrow-light-up.png</texture>
-                            </control>
                         </control>
                     </focusedlayout>
-                    <itemlayout height="317" width="210" condition="Container.Content(Sets)">
-                        <control type="group">
-                            <left>-10</left>
-                            <top>10</top>
-                            <control type="image">
-                                <top>0</top>
-                                <width>224</width>
-                                <height>317</height>
-                                <texture>DefaultMovies.png</texture>
-                                <aspectratio aligny="center">scale</aspectratio>
-                                <bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-                                <bordersize>20</bordersize>
-                            </control>
-                            <control type="image">
-                                <top>20</top>
-                                <left>20</left>
-                                <width>204</width>
-                                <height>277</height>
-                                <texture background="true">$INFO[ListItem.Art(poster)]</texture>
-                                <aspectratio aligny="center">keep</aspectratio>
-                            </control>
-                            <control type="image">
-                                <left>30</left>
-                                <width>184</width>
-                                <height>180</height>
-                                <bottom>10</bottom>
-                                <texture>overlays/overlayfade.png</texture>
-                                <animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
-                            </control>
-                            <control type="textbox">
-                                <left>30</left>
-                                <width>182</width>
-                                <height>84</height>
-                                <top>210</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
-                                <font>font23_narrow</font>
-                                <label>$INFO[ListItem.Label]</label>
-                                <visible>String.IsEmpty(ListItem.Art(poster))</visible>
-                            </control>
-                        </control>
-                    </itemlayout>
-                    <focusedlayout height="317" width="210" condition="Container.Content(Sets)">
-                        <control type="group">
-                            <left>-10</left>
-                            <top>10</top>
-                            <control type="image">
-                                <top>0</top>
-                                <width>224</width>
-                                <height>317</height>
-                                <texture>DefaultMovies.png</texture>
-                                <aspectratio aligny="center">scale</aspectratio>
-                                <bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
-                                <bordersize>20</bordersize>
-                            </control>
-                            <control type="image">
-                                <top>20</top>
-                                <left>20</left>
-                                <width>204</width>
-                                <height>277</height>
-                                <texture background="true">$INFO[ListItem.Art(poster)]</texture>
-                                <aspectratio aligny="center">keep</aspectratio>
-                            </control>
-                            <control type="image">
-                                <left>30</left>
-                                <width>184</width>
-                                <height>180</height>
-                                <bottom>10</bottom>
-                                <texture>overlays/overlayfade.png</texture>
-                                <animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
-                            </control>
-                            <control type="textbox">
-                                <left>30</left>
-                                <width>182</width>
-                                <height>84</height>
-                                <top>210</top>
-                                <align>center</align>
-                                <aligny>center</aligny>
-                                <font>font23_narrow</font>
-                                <label>$INFO[ListItem.Label]</label>
-                                <visible>String.IsEmpty(ListItem.Art(poster))</visible>
-                            </control>
-                            <control type="image">
-                                <left>27</left>
-                                <top>16</top>
-                                <width>190</width>
-                                <height>285</height>
-                                <texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>
-                            </control>
-                        </control>
-                    </focusedlayout>
-                 </control>
+                    <defaultcontrol always="true">50</defaultcontrol>
+                </control>
+
                 
                 <control type="grouplist" id="5000">
                     <left>800</left>
@@ -589,8 +565,7 @@
                     <onleft>5000</onleft>
                     <onright>5000</onright>
                     <onup>140</onup>
-                    <ondown condition="!Integer.IsGreater(Container(5000).Position,4)">SetFocus(50,$INFO[Container(5000).Position])</ondown>
-                    <ondown condition="Integer.IsGreater(Container(5000).Position,4)">SetFocus(50,4)</ondown>
+                    <ondown>SetFocus(50,0)</ondown>
                     <itemgap>-18</itemgap>
                     <align>center</align>
                     <orientation>horizontal</orientation>
@@ -682,21 +657,15 @@
             <control type="group">
                 <visible>Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)</visible>
                 <animation effect="fade" time="200">VisibleChange</animation>
-                <top>10</top>
-                <left>0</left>
-                <control type="image">
-                    <left>21</left>
-                    <width>36</width>
-                    <height>36</height>
-                    <animation effect="rotate" end="-90" center="36,19" time="0" condition="true">Conditional</animation>
-                    <texture colordiffuse="grey">frame/menu-nofo.png</texture>
-                </control>
+                <top>-920</top>
+                <left>20</left>
                 <control type="label">
                     <left>74</left>
                     <width>500</width>
                     <height>44</height>
+                    <font>font12</font>
                     <shadowcolor>text_shadow</shadowcolor>
-                    <label>$LOCALIZE[31125]</label>
+                    <label>Pressione ↑ para mais detalhes sobre o ator</label>
                 </control>
             </control>
         </control>

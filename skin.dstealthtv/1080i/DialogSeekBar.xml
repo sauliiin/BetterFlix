@@ -407,51 +407,79 @@
 			<left>970</left>
 			<top>10</top>
 			<width>400</width>
-			<height>180</height>
+			<height>280</height>
 			<align>left</align>
 			<orientation>vertical</orientation>
 			<itemgap>2</itemgap>
-			<control type="label">
+			<control type="grouplist">
 				<height>28</height>
-				<font>font12</font>
-				<label>[COLOR red]Gênero: [/COLOR]$INFO[VideoPlayer.Genre]</label>
+				<width>400</width>
+				<orientation>horizontal</orientation>
+				<itemgap>5</itemgap>
 				<visible>!String.IsEmpty(VideoPlayer.Genre)</visible>
+				<control type="label">
+					<width>auto</width>
+					<height>28</height>
+					<font>font12</font>
+					<label>[COLOR red]Gênero: [/COLOR]</label>
+				</control>
+				<control type="label">
+					<height>28</height>
+					<width>310</width>
+					<font>font12</font>
+					<label>$INFO[VideoPlayer.Genre]</label>
+					<scroll>true</scroll>
+				</control>
 			</control>
 			<control type="label">
 				<height>28</height>
 				<font>font12</font>
-				<label>[COLOR red]Ano: [/COLOR]$INFO[VideoPlayer.Year]</label>
-				<visible>!String.IsEmpty(VideoPlayer.Year)</visible>
+				<label>[COLOR red]Estreia: [/COLOR]$INFO[VideoPlayer.Premiered]</label>
+				<visible>!String.IsEmpty(VideoPlayer.Premiered)</visible>
 			</control>
 			<control type="label">
 				<height>28</height>
 				<font>font12</font>
-				<label>[COLOR red]Nota IMDB: [/COLOR]$VAR[ds_infoRatIMDB]</label>
-				<visible>!String.IsEmpty(Window(Home).Property(ds_info_imdb_rating))</visible>
+				<label>[COLOR red]IMDB: [/COLOR]$INFO[Window(12005).Property(imdb_combined)]</label>
+				<visible>!String.IsEmpty(Window(12005).Property(imdb_combined))</visible>
 			</control>
 			<control type="label">
 				<height>28</height>
 				<font>font12</font>
-				<label>[COLOR red]Classificação: [/COLOR]$INFO[Window(Home).Property(mpaa)]</label>
-				<visible>!String.IsEmpty(Window(Home).Property(mpaa))</visible>
+				<label>[COLOR red]Classificação: [/COLOR]$INFO[Window(12005).Property(mpaa)]</label>
+				<visible>!String.IsEmpty(Window(12005).Property(mpaa))</visible>
 			</control>
             <control type="label">
                 <height>28</height>
                 <font>font12</font>
-                <label>[COLOR red]Orçamento: [/COLOR]$INFO[Window(Home).Property(budget)]</label>
-                <visible>!String.IsEmpty(Window(Home).Property(budget))</visible>
+                <label>[COLOR red]Orçamento: [/COLOR]$INFO[Window(12005).Property(budget)]</label>
+                <visible>!String.IsEmpty(Window(12005).Property(budget))</visible>
             </control>
             <control type="label">
                 <height>28</height>
                 <font>font12</font>
-                <label>[COLOR red]Receita: [/COLOR]$INFO[Window(Home).Property(revenue)]</label>
-                <visible>!String.IsEmpty(Window(Home).Property(revenue))</visible>
+                <label>[COLOR red]Receita: [/COLOR]$INFO[Window(12005).Property(revenue)]</label>
+                <visible>!String.IsEmpty(Window(12005).Property(revenue))</visible>
             </control>
-			<control type="label">
+			<control type="grouplist">
 				<height>28</height>
-				<font>font12</font>
-				<label>[COLOR red]País: [/COLOR]$INFO[Window(Home).Property(country)]</label>
-				<visible>!String.IsEmpty(Window(Home).Property(country))</visible>
+				<width>400</width>
+				<orientation>horizontal</orientation>
+				<itemgap>5</itemgap>
+				<visible>!String.IsEmpty(VideoPlayer.Country)</visible>
+				<control type="label">
+					<width>auto</width>
+					<height>28</height>
+					<font>font12</font>
+					<label>[COLOR red]País: [/COLOR]</label>
+				</control>
+				<control type="label">
+					<height>28</height>
+					<width>330</width>
+					<font>font12</font>
+					<label>$INFO[VideoPlayer.Country]</label>
+					<scroll>true</scroll>
+				</control>
 			</control>
 		</control>
 		<!-- BIOGRAFIAS DOS ATORES (Substituiu Trakt Reviews) -->
@@ -460,14 +488,14 @@
 			<top>10</top>
 			<right>20</right>
 			<height>250</height>
-			<visible>!String.IsEmpty(Window(Home).Property(ds_cast_bios))</visible>
+			<visible>!String.IsEmpty(Window(12005).Property(ds_cast_bios))</visible>
 			<control type="textbox">
 				<right>0</right>
 				<width>100%</width>
 				<height>230</height>
 				<font>font10</font>
 				<textcolor>white</textcolor>
-				<label>$INFO[Window(Home).Property(ds_cast_bios)]</label>
+				<label>$INFO[Window(12005).Property(ds_cast_bios)]</label>
 				<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
 			</control>
 		</control>
@@ -488,9 +516,63 @@
 			<right>20</right>
 			<height>260</height>
 			<orientation>horizontal</orientation>
-			<scrolltime tween="cubic" easing="out">500</scrolltime>
 			<preloaditems>2</preloaditems>
-			<content>$VAR[CastContentVar]</content>
+			<!-- Só mostra se tiver Cast -->
+			<visible>!String.IsEmpty(Window(12005).Property(Cast.0.Name))</visible>
+			<content>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.0.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.0.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.0.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.1.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.1.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.1.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.2.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.2.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.2.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.3.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.3.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.3.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.4.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.4.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.4.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.5.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.5.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.5.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.6.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.6.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.6.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.7.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.7.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.7.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.8.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.8.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.8.Role)]</label2>
+				</item>
+				<item>
+					<icon>$INFO[Window(12005).Property(Cast.9.Thumb)]</icon>
+					<label>$INFO[Window(12005).Property(Cast.9.Name)]</label>
+					<label2>$INFO[Window(12005).Property(Cast.9.Role)]</label2>
+				</item>
+			</content>
+
+			<!-- ITEMLAYOUT -->
 			<itemlayout height="235" width="160">
 				<control type="group">
 					<top>5</top>
@@ -502,6 +584,7 @@
 						<aspectratio aligny="center">scale</aspectratio>
 						<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
 						<bordersize>12</bordersize>
+						<visible>!String.IsEmpty(ListItem.Label)</visible>
 					</control>
 					<control type="image">
 						<top>10</top>
@@ -512,51 +595,33 @@
 						<aspectratio aligny="center">scale</aspectratio>
 					</control>
 					<control type="label">
-						<left>11</left>
-						<width>131</width>
-						<height>25</height>
-						<top>151</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>black</textcolor>
+						<left>11</left><width>131</width><height>25</height><top>151</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>black</textcolor>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
 					<control type="label">
-						<left>11</left>
-						<width>131</width>
-						<height>25</height>
-						<top>173</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>black</textcolor>
+						<left>11</left><width>131</width><height>25</height><top>173</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>black</textcolor>
 						<label>$INFO[ListItem.Label2]</label>
 					</control>
 					<control type="label">
-						<left>12</left>
-						<width>131</width>
-						<height>25</height>
-						<top>150</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>white</textcolor>
+						<left>12</left><width>131</width><height>25</height><top>150</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>white</textcolor>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
 					<control type="label">
-						<left>12</left>
-						<width>131</width>
-						<height>25</height>
-						<top>172</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>white</textcolor>
+						<left>12</left><width>131</width><height>25</height><top>172</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>white</textcolor>
 						<label>$INFO[ListItem.Label2]</label>
 					</control>
 				</control>
 			</itemlayout>
+
+			<!-- FOCUSEDLAYOUT -->
 			<focusedlayout height="235" width="160">
 				<control type="group">
 					<top>5</top>
@@ -568,6 +633,7 @@
 						<aspectratio aligny="center">scale</aspectratio>
 						<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
 						<bordersize>12</bordersize>
+						<visible>!String.IsEmpty(ListItem.Label)</visible>
 					</control>
 					<control type="image">
 						<top>10</top>
@@ -578,52 +644,34 @@
 						<aspectratio aligny="center">scale</aspectratio>
 					</control>
 					<control type="label">
-						<left>11</left>
-						<width>131</width>
-						<height>25</height>
-						<top>151</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>black</textcolor>
+						<left>11</left><width>131</width><height>25</height><top>151</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>black</textcolor>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
 					<control type="label">
-						<left>11</left>
-						<width>131</width>
-						<height>25</height>
-						<top>173</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>black</textcolor>
+						<left>11</left><width>131</width><height>25</height><top>173</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>black</textcolor>
 						<label>$INFO[ListItem.Label2]</label>
 					</control>
+
 					<control type="label">
-						<left>12</left>
-						<width>131</width>
-						<height>25</height>
-						<top>150</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>white</textcolor>
+						<left>12</left><width>131</width><height>25</height><top>150</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>white</textcolor>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
 					<control type="label">
-						<left>12</left>
-						<width>131</width>
-						<height>25</height>
-						<top>172</top>
-						<align>center</align>
-						<aligny>center</aligny>
-						<font>font10</font>
-						<textcolor>white</textcolor>
+						<left>12</left><width>131</width><height>25</height><top>172</top>
+						<align>center</align><aligny>center</aligny>
+						<font>font10</font><textcolor>white</textcolor>
 						<label>$INFO[ListItem.Label2]</label>
 					</control>
 				</control>
 			</focusedlayout>
 		</control>
+
 		<!-- Label próximo vídeo -->
 		<control type="label">
 			<left>310</left>
