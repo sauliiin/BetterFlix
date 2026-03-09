@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<controls>
+		<control type="group">
+			<visible>String.IsEmpty(Window(home).Property(ds_is_trailer_playing))</visible>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+	  			<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>70</width>
+					<height>70</height>
+					<aspectratio>keep</aspectratio>
+					<texture>dstv/jedi/netflix.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="1500" />
+					</animation>
+					<animation effect="rotate"
+						center="auto"
+						start="360" end="0"
+						time="500"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>38</width>
+					<height>38</height>
+					<aspectratio>keep</aspectratio>
+					<texture>dstv/jedi/netflix2.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="2500" />
+					</animation>
+					<animation effect="rotate"
+						center="auto"
+						start="0" end="360"
+						time="700"
+						loop="true"
+						condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="label" id="$PARAM[list_id]2">
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3500" />
+					</animation>
+					<animation effect="fade" start="100" end="30" time="800" pulse="true" condition="true">Conditional</animation>
+					<left>46.7%</left>
+					<top>52.1%</top>
+					<width>100%</width>
+					<height>50</height>
+					<font>netBb</font>
+					<textcolor>white</textcolor>
+					<label>Loading</label>
+				</control>
+				<control type="image">
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3500" />
+					</animation>
+					<animation effect="fade" start="100" end="40" time="800" pulse="true" condition="true">Conditional</animation>
+					<left>6.3%</left>
+					<top>51.6%</top>
+					<height>70</height>
+					<aspectratio>keep</aspectratio>
+					<texture>special://skin/gif/dots.gif</texture>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol>996</defaultcontrol>
+	<controls>
+		<control type="button">
+			<font>font32b</font>
+			<textcolor>red</textcolor>
+			<shadowcolor>black</shadowcolor>
+			<shadowoffsetx>4</shadowoffsetx>
+			<shadowoffsety>4</shadowoffsety>
+			<focusedcolor>black</focusedcolor>
+			<texturefocus colordiffuse="00FFFFFF">masks/focus.png</texturefocus>
+			<texturenofocus />
+			<onup>Control.SetFocus(996,-1)</onup>
+			<ondown>Control.SetFocus(996,-1)</ondown>
+		</control>
+		<control type="group">
+			<include>Animation_DialogPopupOpenClose</include>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>450</width>
+				<height>650</height>
+				<control type="grouplist" id="996">
+					<!-- Set max Height at 10 items (x65). -->
+					<height max="650">auto</height>
+					<usecontrolcoords>true</usecontrolcoords>
+					<control type="group" id="8001">
+						<visible>!Skin.HasSetting(hide_trakt_ratings)</visible>
+						<height>65</height>
+						<width>450</width>
+						<control type="button" id="80011">
+							<left>150</left>
+							<width>45</width>
+							<height>65</height>
+							<align>center</align>
+							<focusedcolor>background</focusedcolor>
+							<texturefocus colordiffuse="red">dstv/4.png</texturefocus>
+							<aspectratio>keep</aspectratio>
+							<texturenofocus>dstv/4.png</texturenofocus>
+							<onclick>RunScript(script.showimdb, ?action=rate_trakt&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;rating=4)</onclick>
+							<onright>80012</onright>
+							<ondown>8002</ondown>
+						</control>
+						<control type="button" id="80012">
+							<left>225</left>
+							<width>65</width>
+							<height>65</height>
+							<align>center</align>
+							<focusedcolor>background</focusedcolor>
+							<texturefocus colordiffuse="red">dstv/8.png</texturefocus>
+							<texturenofocus>dstv/8.png</texturenofocus>
+							<aspectratio>keep</aspectratio>
+							<onclick>RunScript(script.showimdb, ?action=rate_trakt&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;rating=8)</onclick>
+							<onleft>80011</onleft>
+							<ondown>8002</ondown>
+						</control>
+					</control>
+					<control type="button" id="8002">
+						<!-- Play Trailer button - list views -->
+						<visible>!Skin.HasSetting(dstv_enable_auto_trailer)</visible>
+						<font>font32b</font>
+						<textcolor>red</textcolor>
+						<shadowcolor>black</shadowcolor>
+						<shadowoffsetx>4</shadowoffsetx>
+						<shadowoffsety>4</shadowoffsety>
+						<focusedcolor>black</focusedcolor>
+						<height>65</height>
+						<align>center</align>
+						<label>Play Trailer</label>
+						<focusedcolor>background</focusedcolor>
+						<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
+						<texturenofocus colordiffuse="00FFFFFF">colors/white.png</texturenofocus>
+						<onclick>RunScript(script.showimdb, ?action=play_trailer&id=$INFO[Window(home).Property(ContextMenuTargetID)]&dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
+					</control>
+				</control>
+				<include content="UpDownArrows">
+					<!-- arrow dimensions are 48x24 -->
+					<param name="container_id" value="996" />
+					<param name="posx" value="201" />
+					<param name="up_posy" value="-40" />
+					<param name="down_posy" value="666" />
+				</include>
+				<control type="button" id="1000">
+					<!-- button template -->
+					<font>font32b</font>
+					<textcolor>red</textcolor>
+					<shadowcolor>black</shadowcolor>
+					<shadowoffsetx>4</shadowoffsetx>
+					<shadowoffsety>4</shadowoffsety>
+					<focusedcolor>black</focusedcolor>
+					<height>66</height>
+					<align>center</align>
+					<focusedcolor>background</focusedcolor>
+					<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
+					<texturenofocus colordiffuse="00FFFFFF">colors/white.png</texturenofocus>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

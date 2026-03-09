@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<onload>ClearProperty(FSInfo.ShowTraktReviews)</onload>
+	<onunload>ClearProperty(FSInfo.ShowTraktReviews)</onunload>
+	<controls>
+		<control type="group">
+			<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)</visible>
+			<animation effect="fade" start="0" end="100" time="600">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="600">WindowClose</animation>
+			<animation effect="fade" start="0" end="100" time="600" delay="250">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="600">Hidden</animation>
+			<bottom>0</bottom>
+			<height>620</height>
+			<!-- Background -->
+			<control type="image">
+				<left>0</left>
+				<width>100%</width>
+				<height>480</height>
+				<texture>dialogs/dialog-bg-nobo.png</texture>
+			</control>
+			<!-- Poster -->
+			<control type="image">
+				<depth>DepthOSD+</depth>
+				<left>0</left>
+				<bottom>145</bottom>
+				<width>330</width>
+				<height>470</height>
+				<aspectratio aligny="bottom">keep</aspectratio>
+				<texture fallback="DefaultVideo.png" background="true">$INFO[VideoPlayer.Art(poster)]</texture>
+				<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+				<bordersize>20</bordersize>
+				<include>OpenClose_Left</include>
+			</control>
+			<!-- Sinopse -->
+			<control type="image">
+				<left>325</left>
+				<top>15</top>
+				<width>620</width>
+				<height>200</height>
+				<texture colordiffuse="4D000000">colors/black.png</texture>
+				<visible>!String.IsEmpty(VideoPlayer.Plot)</visible>
+			</control>
+			<control type="grouplist">
+				<left>330</left>
+				<top>20</top>
+				<width>610</width>
+				<height>190</height>
+				<align>left</align>
+				<orientation>vertical</orientation>
+				<itemgap>5</itemgap>
+				<control type="textbox">
+					<height>200</height>
+					<label fallback="10005">$INFO[VideoPlayer.Tagline,[B],[/B][CR]]$INFO[VideoPlayer.Plot]</label>
+					<align>left</align>
+					<font>font12</font>
+					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
+				</control>
+			</control>
+			<!-- Metadados do filme -->
+			<control type="image">
+				<left>965</left>
+				<top>10</top>
+				<width>410</width>
+				<height>240</height>
+				<texture colordiffuse="4D000000">colors/black.png</texture>
+			</control>
+			<control type="grouplist">
+				<left>970</left>
+				<top>15</top>
+				<width>400</width>
+				<height>230</height>
+				<align>left</align>
+				<orientation>vertical</orientation>
+				<itemgap>2</itemgap>
+
+				<control type="grouplist">
+					<height>30</height>
+					<width>400</width>
+					<orientation>horizontal</orientation>
+					<itemgap>5</itemgap>
+					<visible>!String.IsEmpty(VideoPlayer.Genre)</visible>
+					<control type="label">
+						<width>auto</width>
+						<height>30</height>
+						<font>font12</font>
+						<label>[COLOR FFE50914]Gênero: [/COLOR]</label>
+					</control>
+					<control type="label">
+						<height>30</height>
+						<width>310</width>
+						<font>font12</font>
+						<label>$INFO[VideoPlayer.Genre]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+
+				<control type="label">
+					<height>30</height>
+					<font>font12</font>
+					<label>[COLOR FFE50914]Estreia: [/COLOR]$INFO[VideoPlayer.Premiered]</label>
+					<visible>!String.IsEmpty(VideoPlayer.Premiered)</visible>
+				</control>
+
+				<control type="label">
+					<height>30</height>
+					<font>font12</font>
+					<label>[COLOR FFE50914]IMDB: [/COLOR]$INFO[Window(12005).Property(imdb_combined)]</label>
+					<visible>!String.IsEmpty(Window(12005).Property(imdb_combined))</visible>
+				</control>
+
+				<control type="label">
+					<height>30</height>
+					<font>font12</font>
+					<label>[COLOR FFE50914]Classificação: [/COLOR]$INFO[Window(12005).Property(mpaa)]</label>
+					<visible>!String.IsEmpty(Window(12005).Property(mpaa))</visible>
+				</control>
+
+				<control type="label">
+					<height>30</height>
+					<font>font12</font>
+					<label>[COLOR FFE50914]Orçamento: [/COLOR]$INFO[Window(12005).Property(budget)]</label>
+					<visible>!String.IsEmpty(Window(12005).Property(budget))</visible>
+				</control>
+
+				<control type="label">
+					<height>30</height>
+					<font>font12</font>
+					<label>[COLOR FFE50914]Receita: [/COLOR]$INFO[Window(12005).Property(revenue)]</label>
+					<visible>!String.IsEmpty(Window(12005).Property(revenue))</visible>
+				</control>
+
+				<control type="grouplist">
+					<height>30</height>
+					<width>400</width>
+					<orientation>horizontal</orientation>
+					<itemgap>5</itemgap>
+					<visible>!String.IsEmpty(VideoPlayer.Country)</visible>
+					<control type="label">
+						<width>auto</width>
+						<height>30</height>
+						<font>font12</font>
+						<label>[COLOR FFE50914]País: [/COLOR]</label>
+					</control>
+					<control type="label">
+						<height>30</height>
+						<width>330</width>
+						<font>font12</font>
+						<label>$INFO[VideoPlayer.Country]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+			</control>
+			<!-- BIOGRAFIAS DOS ATORES (Dual: default e focado) -->
+			<control type="group">
+				<left>1400</left>
+				<top>10</top>
+				<right>20</right>
+				<height>240</height>
+				<control type="image">
+					<width>100%</width>
+					<height>100%</height>
+					<texture colordiffuse="4D000000">colors/black.png</texture>
+					<visible>!String.IsEmpty(Window(12005).Property(ds_cast_bios)) | !String.IsEmpty(Container(50).ListItem.Property(Bio)) | [String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))]</visible>
+				</control>
+
+
+				<!-- Default Bio (Bio resumida) - Visible quando Cast Panel NÃO focado E ator NÃO tem biography completa -->
+				<control type="textbox">
+					<visible>!Control.HasFocus(50) + !String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)</visible>
+					<visible>!String.IsEmpty(Window(12005).Property(ds_cast_bios))</visible>
+					<animation effect="fade" time="200">VisibleChange</animation>
+					<left>10</left>
+					<top>5</top>
+					<width>480</width>
+					<height>230</height>
+					<align>justify</align>
+					<font>font9</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[Window(12005).Property(ds_cast_bios)]</label>
+					<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
+				</control>
+
+				<!-- Focused Actor Biography - Biography completa quando Cast Panel focado -->
+				<control type="textbox">
+					<visible>Control.HasFocus(50) + !String.IsEmpty(Container(50).ListItem.Property(Biography)) + !String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)</visible>
+					<animation effect="fade" time="200">VisibleChange</animation>
+					<left>10</left>
+					<top>5</top>
+					<width>480</width>
+					<height>230</height>
+					<align>justify</align>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[Container(50).ListItem.Property(Bio)][CR][CR]$INFO[Container(50).ListItem.Property(Biography)]</label>
+					<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
+				</control>
+
+				<!-- Focused Actor Bio (resumida) - Só aparece se NÃO tiver Biography completa -->
+				<control type="textbox">
+					<visible>Control.HasFocus(50) + String.IsEmpty(Container(50).ListItem.Property(Biography)) + !String.IsEmpty(Container(50).ListItem.Property(Bio)) + !String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)</visible>
+					<animation effect="fade" time="200">VisibleChange</animation>
+					<left>10</left>
+					<top>5</top>
+					<width>480</width>
+					<height>230</height>
+					<align>justify</align>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[Container(50).ListItem.Property(Bio)]</label>
+					<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
+				</control>
+
+				<!-- Reviews do Trakt (estado alternativo via seta para cima) -->
+				<control type="textbox">
+					<visible>String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+					<animation effect="fade" time="200">VisibleChange</animation>
+					<left>10</left>
+					<top>5</top>
+					<width>480</width>
+					<height>230</height>
+					<align>justify</align>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+					<autoscroll delay="2000" repeat="3500" time="2000"></autoscroll>
+				</control>
+			</control>
+			<!-- Título do Elenco -->
+			<control type="label">
+				<left>325</left>
+				<top>222</top>
+				<width>400</width>
+				<height>30</height>
+				<font>font12_title</font>
+				<label>[COLOR FFE50914]Elenco[/COLOR]</label>
+				<visible>!String.IsEmpty(VideoPlayer.Title)</visible>
+			</control>
+			<control type="group">
+				<left>510</left>
+				<top>222</top>
+				<width>520</width>
+				<height>30</height>
+				<visible>Control.HasFocus(50) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)</visible>
+				<control type="label">
+					<left>0</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font11</font>
+					<textcolor>white</textcolor>
+					<label>Pressione </label>
+				</control>
+				<control type="label">
+					<left>113</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font12</font>
+					<textcolor>white</textcolor>
+					<label>[B]↑[/B]</label>
+					<animation effect="slide" start="0,0" end="0,-5" time="300" tween="sine" easing="inout" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="label">
+					<left>132</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font11</font>
+					<textcolor>white</textcolor>
+					<label> para Reviews</label>
+				</control>
+			</control>
+			<control type="group">
+				<left>510</left>
+				<top>222</top>
+				<width>520</width>
+				<height>30</height>
+				<visible>Control.HasFocus(50) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)</visible>
+				<control type="label">
+					<left>0</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font11</font>
+					<textcolor>white</textcolor>
+					<label>Pressione </label>
+				</control>
+				<control type="label">
+					<left>113</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font12</font>
+					<textcolor>white</textcolor>
+					<label>[B]↓[/B]</label>
+					<animation effect="slide" start="0,0" end="0,5" time="300" tween="sine" easing="inout" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="label">
+					<left>132</left>
+					<width>auto</width>
+					<height>30</height>
+					<font>font11</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<label> para Elenco</label>
+				</control>
+			</control>
+			<!-- Painel de Elenco (Cast) FUNCIONAL -->
+			<control type="list" id="50">
+				<left>318</left>
+				<top>260</top>
+				<width>1600</width>
+				<height>260</height>
+				<onclick>Dialog.Close(fullscreeninfo)</onclick>
+				<onleft>50</onleft>
+				<onright>50</onright>
+				<ondown condition="String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)">ClearProperty(FSInfo.ShowTraktReviews)</ondown>
+				<ondown>noop</ondown>
+				<onup condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEqual(Window.Property(FSInfo.ShowTraktReviews),true)">SetProperty(FSInfo.ShowTraktReviews,true)</onup>
+				<onup>noop</onup>
+				<scrolltime>300</scrolltime>
+				<orientation>horizontal</orientation>
+				<visible>!String.IsEmpty(Window(12005).Property(Cast.0.Name))</visible>
+
+				<content>
+					<!-- Cast 0-9 Content - No changes needed here -->
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.0.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.0.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.0.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.0.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.0.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.0.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.1.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.1.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.1.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.1.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.1.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.1.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.2.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.2.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.2.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.2.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.2.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.2.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.3.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.3.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.3.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.3.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.3.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.3.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.4.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.4.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.4.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.4.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.4.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.4.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.5.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.5.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.5.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.5.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.5.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.5.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.6.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.6.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.6.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.6.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.6.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.6.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.7.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.7.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.7.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.7.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.7.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.7.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.8.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.8.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.8.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.8.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.8.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.8.Biography)]</property>
+					</item>
+					<item>
+						<visible>!String.IsEmpty(Window(12005).Property(Cast.9.Name))</visible>
+						<icon>$INFO[Window(12005).Property(Cast.9.Thumb)]</icon>
+						<label>$INFO[Window(12005).Property(Cast.9.Name)]</label>
+						<label2>$INFO[Window(12005).Property(Cast.9.Role)]</label2>
+						<property name="Bio">$INFO[Window(12005).Property(Cast.9.Bio)]</property>
+						<property name="Biography">$INFO[Window(12005).Property(Cast.9.Biography)]</property>
+					</item>
+				</content>
+
+				<!-- Itemlayout -->
+				<itemlayout height="235" width="160">
+					<control type="group">
+						<visible>!String.IsEmpty(ListItem.Label)</visible>
+						<!-- Borda/Sombra Ajustada -->
+						<control type="image">
+							<left>-5</left>
+							<top>-5</top>
+							<width>156</width>
+							<height>196</height>
+							<texture>colors/black.png</texture>
+							<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+							<bordersize>12</bordersize>
+						</control>
+						<!-- Foto do Ator (Size original) -->
+						<control type="image">
+							<left>5</left>
+							<top>5</top>
+							<width>150</width>
+							<height>185</height>
+							<texture fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+							<aspectratio aligny="center">scale</aspectratio>
+						</control>
+						<!-- Labels (Posição Original) -->
+						<control type="label">
+							<left>10</left>
+							<top>138</top>
+							<width>140</width>
+							<height>18</height>
+							<font>font9</font>
+							<align>center</align>
+							<shadowcolor>FF000000</shadowcolor>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<top>162</top>
+							<width>140</width>
+							<height>18</height>
+							<font>font9</font>
+							<align>center</align>
+							<textcolor>grey</textcolor>
+							<shadowcolor>FF000000</shadowcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</control>
+				</itemlayout>
+
+				<!-- Focusedlayout -->
+				<focusedlayout height="235" width="160">
+					<control type="group">
+						<animation effect="zoom" center="auto" start="100" end="105" time="200" tween="sine" easing="out">Focus</animation>
+						<animation effect="zoom" center="auto" start="105" end="100" time="200" tween="sine" easing="in">UnFocus</animation>
+						<visible>!String.IsEmpty(ListItem.Label)</visible>
+						<!-- Borda Vermelha Focada -->
+						<control type="image">
+							<left>0</left>
+							<top>0</top>
+							<width>160</width>
+							<height>195</height>
+							<texture border="4" colordiffuse="white">colors/white.png</texture>
+						</control>
+						<!-- Foto do Ator -->
+						<control type="image">
+							<left>5</left>
+							<top>5</top>
+							<width>150</width>
+							<height>185</height>
+							<texture fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+							<aspectratio aligny="center">scale</aspectratio>
+						</control>
+						<!-- Labels -->
+						<control type="label">
+							<left>10</left>
+							<top>138</top>
+							<width>140</width>
+							<height>18</height>
+							<font>font9</font>
+							<align>center</align>
+							<shadowcolor>FF000000</shadowcolor>
+							<label>$INFO[ListItem.Label]</label>
+							<scroll>true</scroll>
+						</control>
+						<control type="label">
+							<left>10</left>
+							<top>162</top>
+							<width>140</width>
+							<height>18</height>
+							<font>font9</font>
+							<align>center</align>
+							<textcolor>grey</textcolor>
+							<shadowcolor>FF000000</shadowcolor>
+							<label>$INFO[ListItem.Label2]</label>
+							<scroll>true</scroll>
+						</control>
+					</control>
+				</focusedlayout>
+			</control>
+
+			<!-- Media Flags -->
+			<control type="grouplist">
+				<right>20</right>
+				<bottom>40</bottom>
+				<width>800</width>
+				<height>50</height>
+				<align>right</align>
+				<include>Animation_BottomSlide</include>
+				<orientation>horizontal</orientation>
+				<itemgap>5</itemgap>
+				<visible>!Player.ChannelPreviewActive + Window.IsActive(fullscreenvideo)</visible>
+				<animation effect="fade" start="0" end="100" time="200" delay="1000">Visible</animation>
+				<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.VideoResolution,flags/videoresolution/,.png]" />
+					<param name="visible" value="!String.IsEmpty(VideoPlayer.VideoResolution)" />
+				</include>
+				<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.HdrType,flags/videohdr/,.png]" />
+					<param name="visible" value="!String.IsEmpty(VideoPlayer.HdrType)" />
+				</include>
+				<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.AudioCodec,flags/audiocodec/,.png]" />
+					<param name="visible" value="!String.IsEmpty(VideoPlayer.AudioCodec)" />
+				</include>
+				<include content="MediaFlag">
+					<param name="texture" value="$INFO[VideoPlayer.AudioChannels,flags/audiochannel/,.png]" />
+					<param name="visible" value="!String.IsEmpty(VideoPlayer.AudioChannels)" />
+				</include>
+			</control>
+
+		</control>
+		<include condition="Skin.HasSetting(touchmode)">TouchBackButton</include>
+	</controls>
+</window>

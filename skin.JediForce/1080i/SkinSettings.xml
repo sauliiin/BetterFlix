@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DSTV Changes! -->
+<!-- DSTV: whole file. -->
+<window>
+	<include>ds_customsettings</include>
+	<defaultcontrol>9001</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<onload condition="String.IsEmpty(Skin.String(background_overlay))">Skin.SetString(background_overlay,1)</onload>
+	<onload>SetFocus(9001)</onload>
+	<!-- Use DS-Helper to retrieve Kodi Convenience Settings Values into Window(skinsettings).Property(prop) -->
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+
+			<aspectratio>scale</aspectratio>
+			<fadetime>600</fadetime>
+			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control>
+		<!-- Left Side -->
+		<control type="group" id="9001">
+			<depth>DepthContentPanel</depth>
+			<left>0</left>
+			<include>OpenClose_Left</include>
+			<!-- Solid Background -->
+			<include content="ContentPanel">
+				<param name="width" value="530" />
+			</include>
+			<!-- Left Menu -->
+			<control type="list" id="9000">
+				<description>button area</description>
+				<top>160</top>
+				<width>470</width>
+				<height>800</height>
+				<onleft>8001</onleft>
+				<onright>8001</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<itemlayout height="90" width="470">
+					<control type="label">
+						<textoffsetx>30</textoffsetx>
+						<height>90</height>
+						<label>$INFO[ListItem.Label]</label>
+						<font>font37</font>
+						<aligny>center</aligny>
+					</control>
+				</itemlayout>
+				<focusedlayout height="90" width="470">
+					<control type="image">
+						<width>470</width>
+						<height>90</height>
+						<texture colordiffuse="button_focus">lists/focus.png</texture>
+						<animation effect="fade" start="100" end="50" time="40" condition="!Control.HasFocus(9000)">Conditional</animation>
+					</control>
+					<control type="label">
+						<textoffsetx>30</textoffsetx>
+						<height>90</height>
+						<font>font37</font>
+						<textcolor>background</textcolor>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</focusedlayout>
+				<!-- Main Menu Items -->
+				<content>
+					<item id="1">
+						<label>General</label>
+						<onclick>noop</onclick>
+						<property name="description">General settings applying to all areas of the skin.</property>
+					</item>
+					<item id="2">
+						<label>Menus & Widgets</label>
+						<onclick>noop</onclick>
+						<property name="description">Main menu-related settings: Configure the home screen to your likings.</property>
+					</item>
+					<item id="3">
+						<label>Visuals</label>
+						<onclick>noop</onclick>
+						<property name="description">Adjust visual settings.</property>
+					</item>
+				</content>
+			</control>
+		</control>
+		<!-- Right Side -->
+		<control type="group">
+			<left>470</left>
+			<include>OpenClose_Right</include>
+			<control type="group">
+				<top>160</top>
+				<left>0</left>
+				<right>0</right>
+				<bottom>0</bottom>
+				<control type="image">
+					<top>0</top>
+					<right>0</right>
+					<bottom>144</bottom>
+					<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+					<bordersize>20</bordersize>
+				</control>
+				<!-- Top Horizontal Line-->
+				<control type="image">
+					<height>3</height>
+					<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				</control>
+				<!-- Submenus -->
+				<control type="group" id="8001">
+					<bottom>150</bottom>
+					<!-- GENERAL Submenu -->
+					<control type="grouplist" id="8100">
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>8100</onup>
+						<ondown>8100</ondown>
+						<visible>Container(9000).HasFocus(1)</visible>
+						<!-- Trailer stuff -->
+						<control type="radiobutton" id="8260">
+							<include>DefaultSettingButton</include>
+							<label>Ativar Trailer Automático</label>
+							<onfocus>SetProperty(ds_setdesc, "Ativa a reprodução automática de trailers após 3.5s de foco.")</onfocus>
+							<onclick>Skin.ToggleSetting(dstv_enable_auto_trailer)</onclick>
+							<selected>Skin.HasSetting(dstv_enable_auto_trailer)</selected>
+						</control>
+						<control type="button" id="8263">
+							<include>DefaultSettingButton</include>
+							<label>Delay do Auto Trailer (seg)</label>
+							<label2>$VAR[SkinSettingAutoTrailerDelay]s</label2>
+							<visible>Skin.HasSetting(dstv_enable_auto_trailer)</visible>
+							<onfocus>SetProperty(ds_setdesc, "Define o atraso em segundos antes do Auto Trailer iniciar.")</onfocus>
+							<onclick>Skin.SetNumeric(dstv_trailer_delay_slow)</onclick>
+						</control>
+						<control type="radiobutton" id="8261">
+							<include>DefaultSettingButton</include>
+							<label>Resolução Trailer IMDB: 1080p</label>
+							<visible>Skin.HasSetting(dstv_enable_auto_trailer)</visible>
+							<onfocus>SetProperty(ds_setdesc, "Qualidade padrão de trailer IMDb em 1080p com fallback interno para 720p.")</onfocus>
+							<onclick>Skin.Reset(dstv_imdb_trailer_720p)</onclick>
+							<selected>!Skin.HasSetting(dstv_imdb_trailer_720p)</selected>
+						</control>
+						<control type="radiobutton" id="8262">
+							<include>DefaultSettingButton</include>
+							<label>Resolução Trailer IMDB: 720p</label>
+							<visible>Skin.HasSetting(dstv_enable_auto_trailer)</visible>
+							<onfocus>SetProperty(ds_setdesc, "Força trailer IMDb em 720p para reduzir consumo e tempo de início.")</onfocus>
+							<onclick>Skin.SetBool(dstv_imdb_trailer_720p)</onclick>
+							<selected>Skin.HasSetting(dstv_imdb_trailer_720p)</selected>
+						</control>
+						<!-- On screen display: Automatically close video OSD -->
+						<control type="radiobutton" id="8120">
+							<include>DefaultSettingButton</include>
+							<label>Fechar automaticamente o OSD de vídeo</label>
+							<onfocus>SetProperty(ds_setdesc, $LOCALIZE[31171])</onfocus>
+							<selected>Skin.HasSetting(OSDAutoClose)</selected>
+							<onclick>Skin.ToggleSetting(OSDAutoClose)</onclick>
+						</control>
+						<!-- On screen display: Video OSD autoclose time (seconds) -->
+						<control type="button" id="8121">
+							<include>DefaultSettingButton</include>
+							<label>Tempo de fechamento automático</label>
+							<label2>$VAR[SkinSettingOSDAutoCloseTime]</label2>
+							<onfocus>SetProperty(ds_setdesc, $LOCALIZE[31171])</onfocus>
+							<onclick>Skin.SetNumeric(OSDAutoCloseTime)</onclick>
+							<enable>Skin.HasSetting(OSDAutoClose)</enable>
+						</control>
+						<!-- show media flags -->
+						<control type="radiobutton" id="8130">
+							<include>DefaultSettingButton</include>
+							<label>Mostrar Notas e TrueFire</label>
+							<onfocus>SetProperty(ds_setdesc, "Disable infoRat and TrueFire.")</onfocus>
+							<onclick>Skin.ToggleSetting(hide_ratings_fire)</onclick>
+							<selected>!Skin.HasSetting(hide_ratings_fire)</selected>
+						</control>
+						<!-- toggle trakt rating context menu -->
+						<control type="radiobutton" id="8131">
+							<include>DefaultSettingButton</include>
+							<label>Ativar Avaliação Trakt 4 ou 8 no Contexto</label>
+							<onfocus>SetProperty(ds_setdesc, "Mostra ou oculta os botões rápidos de Nota 4 e 8 no Menu de Contexto.")</onfocus>
+							<onclick>Skin.ToggleSetting(hide_trakt_ratings)</onclick>
+							<selected>!Skin.HasSetting(hide_trakt_ratings)</selected>
+						</control>
+					</control>
+					<!-- MENUS & WIDGETS Submenu -->
+					<control type="grouplist" id="8200">
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>8200</onup>
+						<ondown>8200</ondown>
+						<visible>Container(9000).HasFocus(2)</visible>
+						<!-- Edit main menu -->
+						<control type="button" id="8201">
+							<include>DefaultSettingButton</include>
+							<label>Edit Main Menu</label>
+							<onfocus>SetProperty(ds_setdesc, "Edit the Main Menu items and widgets.")</onfocus>
+							<onclick condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=manage&group=mainmenu)</onclick>
+							<onclick condition="!System.HasAddon(script.skinshortcuts)">InstallAddon(script.skinshortcuts)</onclick>
+						</control>
+						<!-- show Titles on widget-items for all widgets -->
+						<control type="radiobutton" id="8250">
+							<include>DefaultSettingButton</include>
+							<label>Show Titles on widget-items for all widgets (global override)</label>
+							<onfocus>SetProperty(ds_setdesc, "Toggle whether to display the widget-item's title over the item thumbnail.")</onfocus>
+							<onclick>Skin.ToggleSetting(show_widget_titles)</onclick>
+							<selected>Skin.HasSetting(show_widget_titles)</selected>
+						</control>
+					</control>
+					<!-- VISUALS Submenu -->
+					<control type="grouplist" id="8300">
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>8300</onup>
+						<ondown>8300</ondown>
+						<visible>Container(9000).HasFocus(3)</visible>
+						<!-- Menu Item text case -->
+						<control type="button" id="8335">
+							<include>DefaultSettingButton</include>
+							<label>Menu Items Text Case</label>
+							<onfocus>SetProperty(ds_setdesc, "Toggle display case of Menu Items text.")</onfocus>
+							<label2>$VAR[ds_menu_item_case]</label2>
+							<onclick condition="String.IsEqual(Skin.String(dstv_menu_items_text_case),titlecase)">Skin.SetString(dstv_menu_items_text_case,allcaps)</onclick>
+							<onclick condition="String.IsEqual(Skin.String(dstv_menu_items_text_case),allcaps)">Skin.Reset(dstv_menu_items_text_case)</onclick>
+							<onclick condition="String.IsEmpty(Skin.String(dstv_menu_items_text_case))">Skin.SetString(dstv_menu_items_text_case,titlecase)</onclick>
+						</control>
+						<!-- Menu Widget Headers text case -->
+						<control type="button" id="8336">
+							<include>DefaultSettingButton</include>
+							<label>Menu Widget Headers Text Case</label>
+							<onfocus>SetProperty(ds_setdesc, "Toggle display case of Menu Widget Headers text.")</onfocus>
+							<label2>$VAR[ds_menu_widget_case]</label2>
+							<onclick condition="String.IsEqual(Skin.String(dstv_menu_widgets_text_case),titlecase)">Skin.SetString(dstv_menu_widgets_text_case,allcaps)</onclick>
+							<onclick condition="String.IsEqual(Skin.String(dstv_menu_widgets_text_case),allcaps)">Skin.Reset(dstv_menu_widgets_text_case)</onclick>
+							<onclick condition="String.IsEmpty(Skin.String(dstv_menu_widgets_text_case))">Skin.SetString(dstv_menu_widgets_text_case,titlecase)</onclick>
+						</control>
+						<!-- Layout Menu (Wide or Standard Toggle) -->
+						<control type="radiobutton" id="8380">
+							<include>DefaultSettingButton</include>
+							<label>Menu Layout Style: $VAR[LayoutStyleLabelVar]</label>
+							<onfocus>SetProperty(ds_setdesc, "Alterne entre o layout Standard ou Wide para os atalhos e widgets da Home.")</onfocus>
+							<!-- Se for wide, ao clicar vira standard -->
+							<onclick condition="System.HasAddon(script.showimdb) + String.IsEqual(Skin.String(dstv_layout),wide)">RunScript(special://home/addons/script.showimdb/resources/lib/layout_switcher.py, standard)</onclick>
+							<!-- Se não for wide (logo é standard), ao clicar vira wide -->
+							<onclick condition="System.HasAddon(script.showimdb) + !String.IsEqual(Skin.String(dstv_layout),wide)">RunScript(special://home/addons/script.showimdb/resources/lib/layout_switcher.py, wide)</onclick>
+							<onclick condition="!System.HasAddon(script.showimdb)">Notification("DStealthTV", "script.showimdb não encontrado", 3000)</onclick>
+							<!-- Fica "marcado" (Toggle Ativo) quando o Wide for o Layout Escolhido -->
+							<selected>String.IsEqual(Skin.String(dstv_layout),wide)</selected>
+						</control>
+					</control>
+					<!-- CONVENIENCE SETTINGS Submenu -->
+					<control type="list" id="8800">
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>8800</onup>
+						<ondown>8800</ondown>
+						<visible>Container(9000).HasFocus(8)</visible>
+						<itemlayout height="70">
+							<!-- unselected and unfocused -->
+							<control type="label">
+								<textoffsetx>30</textoffsetx>
+								<label>$INFO[ListItem.Label]</label>
+								<aligny>center</aligny>
+							</control>
+							<control type="label">
+								<textoffsetx>30</textoffsetx>
+								<label>$INFO[ListItem.Label2]</label>
+								<aligny>center</aligny>
+								<align>right</align>
+								<textcolor>button_focus</textcolor>
+							</control>
+							<control type="image">
+								<height>3</height>
+								<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+								<visible>ListItem.Property(topline)</visible>
+							</control>
+						</itemlayout>
+						<focusedlayout height="70">
+							<!-- unselected but still focused -->
+							<control type="group">
+								<visible>!Control.HasFocus(8800)</visible>
+								<control type="label">
+									<textoffsetx>30</textoffsetx>
+									<label>$INFO[ListItem.Label]</label>
+									<aligny>center</aligny>
+									<visible>!ListItem.Property(section)</visible>
+								</control>
+								<control type="label">
+									<textoffsetx>30</textoffsetx>
+									<label>$INFO[ListItem.Label2]</label>
+									<aligny>center</aligny>
+									<align>right</align>
+									<textcolor>button_focus</textcolor>
+								</control>
+								<control type="image">
+									<height>3</height>
+									<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+									<visible>ListItem.Property(topline)</visible>
+								</control>
+							</control>
+							<!-- selected and focused -->
+							<control type="group">
+								<visible>Control.HasFocus(8800)</visible>
+								<control type="image">
+									<texture colordiffuse="button_focus">lists/focus.png</texture>
+								</control>
+								<control type="label">
+									<textoffsetx>30</textoffsetx>
+									<label>$INFO[ListItem.Label]</label>
+									<aligny>center</aligny>
+									<textcolor>background</textcolor>
+								</control>
+								<control type="label">
+									<textoffsetx>30</textoffsetx>
+									<label>$INFO[ListItem.Label2]</label>
+									<aligny>center</aligny>
+									<align>right</align>
+									<textcolor>background</textcolor>
+								</control>
+							</control>
+						</focusedlayout>
+						<!-- The following link has a list of all system settings: -->
+						<!-- https://github.com/xbmc/xbmc/blob/master/system/settings/settings.xml -->
+					</control>
+					<!-- RESET SETTINGS Submenu -->
+					<control type="grouplist" id="8900">
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>8900</onup>
+						<ondown>8900</ondown>
+						<visible>Container(9000).HasFocus(9)</visible>
+						<!-- reset skin settings -->
+						<control type="button" id="8901">
+							<include>DefaultSettingButton</include>
+							<label>!!! Reset skin settings to default !!!</label>
+							<onfocus>SetProperty(ds_setdesc, "Reset all menu settings back to default.")</onfocus>
+							<onclick>ActivateWindow(1131)</onclick>
+						</control>
+						<!-- reset 1st run -->
+						<control type="button" id="8902">
+							<include>DefaultSettingButton</include>
+							<label>!!! Reset Home screen 1st Run Prompt !!!</label>
+							<onfocus>SetProperty(ds_setdesc, "Make it so that the 1st-time-run message appears at the home screen.")</onfocus>
+							<onclick>ActivateWindow(1132)</onclick>
+						</control>
+						<!-- reset main menu -->
+						<control type="button" id="8903">
+							<include>DefaultSettingButton</include>
+							<label>!!! Reset Main Menu to default !!!</label>
+							<onfocus>SetProperty(ds_setdesc, "Reset Main Menu items and widgets back to default.")</onfocus>
+							<onclick>ActivateWindow(1133)</onclick>
+						</control>
+					</control>
+				</control>
+				<!-- Bottom Horizontal Line -->
+				<control type="image">
+					<bottom>144</bottom>
+					<height>3</height>
+					<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				</control>
+			</control>
+		</control>
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[5] / $LOCALIZE[20077]" />
+		</include>
+		<control type="textbox" id="6">
+			<include>OpenClose_Right</include>
+			<description>description area</description>
+			<left>510</left>
+			<bottom>5</bottom>
+			<width>1350</width>
+			<height>140</height>
+			<font>font14</font>
+			<align>justify</align>
+			<textcolor>button_focus</textcolor>
+			<label>$VAR[ds_DescriptionVar]</label>
+			<autoscroll time="3000" delay="3000" repeat="5000">true</autoscroll>
+		</control>
+
+		<!-- Dynamic Thumbnail to show Wide or Standard option -->
+		<control type="image">
+			<include>OpenClose_Right</include>
+			<left>510</left>
+			<top>160</top>
+			<width>600</width>
+			<height>340</height>
+			<aspectratio>keep</aspectratio>
+			<texture>$VAR[ThumbnailLayoutVar]</texture>
+			<!-- Show only if button 8380 is focused -->
+			<visible>Control.HasFocus(8380)</visible>
+			<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+		</control>
+
+		<control type="group">
+			<!-- Loading Spinner for when skinshortcuts is loading the Edit Menu section -->
+
+			<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+			<visible>!String.IsEmpty(Window(home).Property(skinshortcuts-loading))</visible>
+			<control type="button">
+				<texturefocus colordiffuse="D0FFFFFF">colors/black.png</texturefocus>
+				<texturenofocus colordiffuse="D0FFFFFF">colors/black.png</texturenofocus>
+				<onclick>noop</onclick>
+				<label>$INFO[Window(home).Property(skinshortcuts-loading)]</label>
+			</control>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>70</width>
+					<height>70</height>
+					<aspectratio>keep</aspectratio>
+					<texture>dstv/jedi/netflix.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="2500" />
+					</animation>
+					<animation effect="rotate" center="auto" start="360" end="0" time="600" loop="true" condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
+				</control>
+				<control type="image">
+					<centerleft>50%</centerleft>
+					<centertop>46.4%</centertop>
+					<width>38</width>
+					<height>38</height>
+					<aspectratio>keep</aspectratio>
+					<texture>dstv/jedi/netflix2.png</texture>
+					<animation type="WindowOpen">
+						<effect type="fade" start="0" end="100" time="600" delay="3500" />
+					</animation>
+					<animation effect="rotate" center="auto" start="0" end="360" time="500" loop="true" condition="true">Conditional</animation>
+					<animation effect="fade" start="100" end="40" time="250" pulse="true" condition="true">Conditional</animation>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DSTV Changes! -->
+<window type="dialog" id="1109">
+	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
+	<visible>Window.IsActive(seekbar) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(fullscreeninfo) | Window.IsActive(videoosd)</visible>
+	<depth>DepthOSD</depth>
+	<animation type="WindowOpen" reversible="False">
+		<effect type="fade" start="0" end="100" time="300"/>
+	</animation>
+	<animation type="WindowClose" reversible="False">
+		<effect type="fade" start="100" end="0" time="350"/>
+	</animation>
+	<zorder>0</zorder>
+	<controls>
+		<control type="group">
+			<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
+				<effect type="fade" start="0" end="100" time="400"/>
+				<effect type="slide" start="0,200" end="0,0" time="400" tween="sine" easing="inout" />
+			</animation>
+			<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
+				<effect type="fade" start="100" end="0" time="400"/>
+				<effect type="slide" start="0,0" end="0,200" time="500" tween="sine" easing="inout" />
+			</animation>
+
+			<!-- Fade when Paused -->
+			<animation type="WindowOpen" reversible="False" condition="Player.Paused | Window.IsActive(fullscreeninfo)">
+				<effect type="fade" start="0" end="100" time="300"/>
+			</animation>
+			<animation type="WindowClose" condition="Player.Paused | Window.IsActive(fullscreeninfo)" reversible="False">
+				<effect type="fade" start="100" end="0" time="300"/>
+			</animation>
+			<visible>[Window.IsActive(fullscreeninfo) | Player.ShowInfo | Player.ShowTime | !String.IsEmpty(Player.SeekNumeric) | Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused | !String.IsEmpty(PVR.ChannelNumberInput)] + ![Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(1110) | Window.IsActive(videoosd)]</visible>
+			<control type="label">
+				<top>941</top>
+				<left>235</left>
+				<width>134</width>
+				<height>60</height>
+				<label>$INFO[Player.Time]</label>
+				<font>fontOSD</font>
+				<align>center</align>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
+			</control>
+			<control type="label">
+				<top>941</top>
+				<left>1529</left>
+				<width>134</width>
+				<height>60</height>
+				<label>$INFO[Player.TimeRemaining]</label>
+				<font>fontOSD</font>
+				<align>center</align>
+				<shadowcolor>black</shadowcolor>
+				<visible>!Player.ChannelPreviewActive | VideoPlayer.HasEpg</visible>
+			</control>
+			<control type="label">
+				<right>25</right>
+				<top>6</top>
+				<width>700</width>
+				<height>60</height>
+				<align>right</align>
+				<font>font30_title</font>
+				<label>[COLOR button_focus]$LOCALIZE[31026][/COLOR] $INFO[PVR.TimeshiftCur] (-$INFO[PVR.TimeshiftOffset])</label>
+				<visible>VideoPlayer.Content(LiveTV) + PVR.IsTimeShift</visible>
+			</control>
+			<control type="group">
+				<visible>VideoPlayer.Content(LiveTV)</visible>
+				<control type="group">
+					<visible>Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="ts_bar_top" value="55"/>
+						<param name="epg_bar_top" value="63"/>
+						<param name="ts_bar_height" value="8"/>
+						<param name="epg_bar_height" value="8"/>
+					</include>
+				</control>
+				<control type="group">
+					<visible>Player.SeekEnabled + !VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="ts_bar_top" value="55"/>
+						<param name="ts_bar_height" value="16"/>
+					</include>
+				</control>
+				<control type="group">
+					<visible>!Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+					<include content="PVRProgress">
+						<param name="epg_bar_top" value="55"/>
+						<param name="epg_bar_height" value="16"/>
+					</include>
+				</control>
+			</control>
+			<control type="slider">
+				<left>0</left>
+				<top>50</top>
+				<width>100%</width>
+				<height>9</height>
+				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_bar.png</texturesliderbar>
+				<!-- DSTV Change: colordiffuse for nib -->
+				<textureslidernib colordiffuse="selected">osd/progress/nub_bar.png</textureslidernib>
+				<textureslidernibfocus colordiffuse="button_focus">colors/white.png</textureslidernibfocus>
+				<info>PVR.TimeShiftSeekbar</info>
+				<visible>VideoPlayer.Content(LiveTV) + [Player.Seeking | Player.HasPerformedSeek(3) | Player.Paused] + !Player.ChannelPreviewActive</visible>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>55</top>
+				<width>100%</width>
+				<height>8</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<lefttexture>colors/white.png</lefttexture>
+				<midtexture colordiffuse="FFFF0000">colors/white.png</midtexture>
+				<righttexture>colors/white.png</righttexture>
+				<info>Player.Editlist</info>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>67</top>
+				<width>100%</width>
+				<height>8</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/red50.png</texturebg>
+				<righttexture>colors/red.png</righttexture>
+				<info>Player.Cuts</info>
+			</control>
+			<control type="ranges">
+				<left>0</left>
+				<top>67</top>
+				<width>100%</width>
+				<height>4</height>
+				<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+				<righttexture>colors/white.png</righttexture>
+				<info>Player.SceneMarkers</info>
+			</control>
+		</control>
+		<control type="group">
+			<!-- Slide when Playing -->
+			<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
+				<effect type="fade" start="0" end="100" time="300"/>
+				<effect type="slide" start="0,-200" end="0,0" time="300" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
+				<effect type="fade" start="100" end="0" time="300"/>
+				<effect type="slide" start="0,0" end="0,-200" time="300" tween="cubic" easing="out" />
+			</animation>
+
+			<!-- Fade when Paused -->
+			<animation type="WindowOpen" reversible="False" condition="Player.Paused | Window.IsActive(fullscreeninfo)">
+				<effect type="fade" start="0" end="100" time="300"/>
+			</animation>
+			<animation type="WindowClose" condition="Player.Paused | Window.IsActive(fullscreeninfo)" reversible="False">
+				<effect type="fade" start="100" end="0" time="300"/>
+			</animation>
+			<animation effect="fade" time="200">VisibleChange</animation>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>120%</width>
+				<height>150</height>
+				<texture>frame/osdfade.png</texture>
+			</control>
+			<control type="group">
+				<animation effect="fade" start="0" end="100" time="300" condition="Skin.HasSetting(touchmode)">conditional</animation>
+				<control type="group">
+					<visible>!Window.IsActive(pvrosdchannels) + !Window.IsActive(pvrchannelguide)</visible>
+					<visible>String.IsEmpty(Player.Art(clearlogo))</visible>
+					<visible>String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+					<animation effect="fade" time="150">VisibleChange</animation>
+					<width>100%</width>
+					<control type="label">
+						<label>$VAR[NowPlayingBreadcrumbsVar]</label>
+						<font>font45</font>
+						<shadowcolor>text_shadow</shadowcolor>
+						<top>7</top>
+						<height>50</height>
+						<align>center</align>
+					</control>
+					<control type="label">
+						<top>60</top>
+						<label>$VAR[OSDSubLabelVar]</label>
+						<shadowcolor>text_shadow</shadowcolor>
+						<height>60</height>
+						<align>center</align>
+					</control>
+				</control>
+			</control>
+			<control type="group">
+				<visible>!Window.IsVisible(extendedprogressdialog)</visible>
+				<animation effect="fade" time="150">VisibleChange</animation>
+				<control type="grouplist">
+					<right>39</right>
+					<top>98</top>
+					<width>800</width>
+					<height>100</height>
+					<align>right</align>
+					<itemgap>5</itemgap>
+					<orientation>horizontal</orientation>
+					<usecontrolcoords>true</usecontrolcoords>
+					<control type="image">
+						<top>2</top>
+						<left>0</left>
+						<width>60</width>
+						<height>40</height>
+						<fadetime>300</fadetime>
+						<aspectratio aligny="center" align="right">keep</aspectratio>
+						<texture>dialogs/volume/mute.png</texture>
+						<visible>Player.Muted</visible>
+					</control>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

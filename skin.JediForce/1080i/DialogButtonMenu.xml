@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DSTV Changes! -->
+<!-- DSTV: Whole file. -->
+<window>
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<onunload>ClearProperty(ds_shutdownmenu_control,shutdownmenu)</onunload>
+	<onunload>ClearProperty(ds_shutdownmenu_back,shutdownmenu)</onunload>
+	<controls>
+		<!-- Fundo completamente transparente -->
+		<control type="button">
+			<include>FullScreenDimensions</include>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+			<texturefocus>-</texturefocus>
+			<texturenofocus>-</texturenofocus>
+			<onup>Control.SetFocus(9000,-1)</onup>
+			<ondown>Control.SetFocus(9000,-1)</ondown>
+		</control>
+		<control type="group">
+			<include>FullScreenDimensions</include>
+			<include>Animation_DialogPopupOpenClose</include>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>600</width>
+				<height>400</height>
+				<!-- MENU PRINCIPAL (sem cabeçalho, fundo transparente) -->
+				<control type="group">
+					<control type="panel" id="9000">
+						<!-- Menu List com fundo transparente e barra de seleção vermelha -->
+						<left>0</left>
+						<top>0</top>
+						<width>600</width>
+						<height>400</height>
+						<onleft>9000</onleft>
+						<onright>9000</onright>
+						<onup>9000</onup>
+						<ondown>9000</ondown>
+						<orientation>vertical</orientation>
+						<itemlayout height="70" width="600">
+							<!-- Sem fundo - transparente -->
+							<control type="label">
+								<left>0</left>
+								<top>0</top>
+								<width>600</width>
+								<height>70</height>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font32b</font>
+								<textcolor>red</textcolor>
+								<shadowcolor>black</shadowcolor>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+						</itemlayout>
+						<focusedlayout height="70" width="600">
+							<!-- Barra de seleção vermelha arredondada -->
+							<control type="image">
+								<left>125</left>
+								<top>0</top>
+								<width>350</width>
+								<height>70</height>
+								<texture colordiffuse="red">masks/focus.png</texture>
+							</control>
+							<control type="label">
+								<left>0</left>
+								<top>0</top>
+								<width>600</width>
+								<height>70</height>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font32b</font>
+								<!-- Texto preto quando selecionado -->
+								<textcolor>black</textcolor>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+						</focusedlayout>
+						<content>
+							<item>
+								<!-- Parar Reprodução - visível apenas quando há Player ativo -->
+								<label>Parar Reprodução</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>PlayerControl(Stop)</onclick>
+								<visible>Player.HasMedia</visible>
+							</item>
+							<item>
+								<!-- Reload Skin -->
+								<label>$LOCALIZE[20183]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ReloadSkin()</onclick>
+							</item>
+							<item>
+								<!-- Kodi Settings -->
+								<label>$LOCALIZE[13000]</label>
+								<onclick>dialog.close(all,true)</onclick>
+								<onclick>ActivateWindow(settings)</onclick>
+							</item>
+							<item>
+								<!-- Exit Kodi / Sair do Kodi -->
+								<label>$LOCALIZE[13012] Kodi</label>
+								<onclick>Quit()</onclick>
+								<visible>System.ShowExitButton</visible>
+							</item>
+						</content>
+					</control>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>
