@@ -433,7 +433,8 @@ class ShowImdbService(xbmc.Monitor):
     def _clear_all_properties_on_thread(self):
         props = {
             "dsWeekDay": "", 
-            "ds_is_trailer_playing": ""
+            "ds_is_trailer_playing": "",
+            "ds_ai_tip": ""
         }
         self._update_skin_props_batch(props)
 
@@ -569,6 +570,62 @@ class ShowImdbService(xbmc.Monitor):
                 "ds_info_trakt_rating": tr_rating,
                 "ds_info_imdb_votes": data.get("imdb_votes", "")
             })
+            self._process_ai_tip(data, session_id, item_id)
+
+    def _process_ai_tip(self, ratings_data, session_id, item_id):
+        if not self._is_session_valid(session_id, item_id): return
+        try:
+            year = xbmc.getInfoLabel("ListItem.Year")
+            genre = xbmc.getInfoLabel("ListItem.Genre")
+            imdb_rating_str = ratings_data.get("imdb_rating", "")
+
+            tip = ""
+            try:
+                imdb_rating = float(imdb_rating_str) if imdb_rating_str else 0.0
+            except ValueError:
+                imdb_rating = 0.0
+
+            if imdb_rating >= 8.5:
+                tip = f"[B][COLOR FFE50914]\u2605[/COLOR][/B] IMDB {imdb_rating_str} \u2014 Um dos melhores! Imperd\u00edvel."
+            elif imdb_rating >= 7.5:
+                tip = f"[B][COLOR FFE50914]\u2605[/COLOR][/B] IMDB {imdb_rating_str} \u2014 Muito bem avaliado. Vale muito!"
+            elif imdb_rating >= 6.0:
+                tip = f"[B][COLOR FFE50914]\u2605[/COLOR][/B] IMDB {imdb_rating_str} \u2014 Uma escolha s\u00f3lida para hoje."
+
+            if not tip and year:
+                try:
+                    yr = int(year)
+                    age = date.today().year - yr
+                    if age >= 30:
+                        tip = f"[B][COLOR FFE50914]\ud83c\udfac[/COLOR][/B] Cl\u00e1ssico de {year}! Atemporal e indispens\u00e1vel."
+                    elif age >= 10:
+                        tip = f"[B][COLOR FFE50914]\ud83c\udfac[/COLOR][/B] Lan\u00e7ado em {year} \u2014 ainda muito amado!"
+                except ValueError:
+                    pass
+
+            if not tip and genre:
+                genre_tips = [
+                    (("action", "a\u00e7\u00e3o"),              "[B][COLOR FFE50914]\U0001f680[/COLOR][/B] A\u00e7\u00e3o garantida! Prepare a pipoca."),
+                    (("comedy", "com\u00e9dia"),                 "[B][COLOR FFE50914]\U0001f602[/COLOR][/B] Prepare-se para rir muito!"),
+                    (("horror", "terror"),                       "[B][COLOR FFE50914]\U0001f631[/COLOR][/B] Cuidado... pode assustar!"),
+                    (("thriller",),                              "[B][COLOR FFE50914]\U0001f3af[/COLOR][/B] Suspense de deixar a cadeira de lado!"),
+                    (("science fiction",),                       "[B][COLOR FFE50914]\U0001f680[/COLOR][/B] Fic\u00e7\u00e3o cient\u00edfica de outro mundo!"),
+                    (("documentary", "document\u00e1rio"),       "[B][COLOR FFE50914]\U0001f4da[/COLOR][/B] Conhecimento que entret\u00e9m!"),
+                    (("animation", "anima\u00e7\u00e3o"),        "[B][COLOR FFE50914]\U0001f3a8[/COLOR][/B] Divers\u00e3o para toda a fam\u00edlia!"),
+                    (("romance",),                               "[B][COLOR FFE50914]\u2764[/COLOR][/B] Um bom romance para a noite!"),
+                    (("drama",),                                 "[B][COLOR FFE50914]\U0001f3ad[/COLOR][/B] Drama intenso. Prepare os len\u00e7os!"),
+                ]
+                g = genre.lower()
+                for keywords, msg in genre_tips:
+                    if any(kw in g for kw in keywords):
+                        tip = msg
+                        break
+
+            if self._is_session_valid(session_id, item_id):
+                self._update_skin_props_batch({"ds_ai_tip": tip})
+        except Exception:
+            if self._is_session_valid(session_id, item_id):
+                self._update_skin_props_batch({"ds_ai_tip": ""})
 
     def _process_reviews(self, imdb_id, media_type, session_id, item_id):
         if not self._is_session_valid(session_id, item_id): return

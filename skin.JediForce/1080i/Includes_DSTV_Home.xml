@@ -323,6 +323,36 @@
       </control>
     </control>
 
+    <!-- BetterFlix AI Tip: visible when not actively playing video, hidden during playback -->
+    <control type="group">
+      <!-- Show when: tip is available AND (not playing video OR paused OR early in playback) -->
+      <visible>!String.IsEmpty(Window(10000).Property(ds_ai_tip)) + [!Player.HasVideo | Player.Paused | Integer.IsLess(Player.Time,2)]</visible>
+      <animation effect="fade" start="30" end="100" time="1200" condition="!Player.HasVideo | Player.Paused | Integer.IsLess(Player.Time,2)" reversible="true">Conditional</animation>
+      <left>110</left>
+      <top>435</top>
+      <height>42</height>
+      <width>660</width>
+      <control type="image">
+        <width>660</width>
+        <height>42</height>
+        <texture colordiffuse="44000000">colors/black.png</texture>
+      </control>
+      <control type="label">
+        <left>8</left>
+        <height>42</height>
+        <width>644</width>
+        <font>font27_narrow</font>
+        <textcolor>white</textcolor>
+        <shadowcolor>FF000000</shadowcolor>
+        <shadowoffsety>2</shadowoffsety>
+        <label>$INFO[Window(10000).Property(ds_ai_tip)]</label>
+        <align>left</align>
+        <aligny>center</aligny>
+        <scroll>true</scroll>
+        <autoscroll delay="3000" time="4000" repeat="6000">true</autoscroll>
+      </control>
+    </control>
+
   </include>
 
   <include name="InfoAreaRatingsOverlay">
