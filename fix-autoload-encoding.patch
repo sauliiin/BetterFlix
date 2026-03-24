@@ -1,0 +1,22 @@
+--- a/app.js	2026-03-24 15:22:37.224247054 +0000
++++ b/app.js	2026-03-24 15:23:11.774477074 +0000
+@@ -53,8 +53,8 @@
+                     });
+             })
+             .then(function (buffer) {
+-                // Decode as ISO-8859-1 to preserve accented characters
+-                var decoder = new TextDecoder("iso-8859-1");
++                // Decode as UTF-8 to correctly render accented characters
++                var decoder = new TextDecoder("utf-8");
+                 var csvText = decoder.decode(buffer);
+                 var results = Papa.parse(csvText, {
+                     delimiter: ";",
+@@ -146,7 +146,7 @@
+                 delimiter: ";",
+                 header: false,
+                 skipEmptyLines: true,
+-                encoding: "ISO-8859-1",
++                encoding: "UTF-8",
+                 complete: function (results) {
+                     var rows = results.data;
+                     if (rows.length < 2) {
