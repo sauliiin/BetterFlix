@@ -1,10 +1,10 @@
-# Pobreflix 🎬
+# Jediflix 🎬
 
 Repositório com recursos e customizações para o **Kodi**, trazendo skins e scripts para aprimorar sua experiência.
 
 ## 📂 Estrutura do Projeto
 
-- **POV FEN FENLAM – Stremio-like Loading Skin**  
+- **POV – Stremio-like Loading Skin**  
   Personalização visual inspirada no **Stremio**, trazendo uma experiência de carregamento mais clean.
 
 - **script.showimdb**  
