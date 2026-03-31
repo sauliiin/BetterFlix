@@ -99,6 +99,12 @@
 			<style>bold</style>
 		</font>
 		<font>
+			<name>netSsTs</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>18</size>
+			<style>bold</style>
+		</font>
+		<font>
 			<name>netSss</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>16</size>
@@ -199,6 +205,11 @@
 			<name>font32</name>
 			<filename>Netflix-sans-medium.ttf</filename>
 			<size>30</size>
+		</font>
+		<font>
+			<name>font_keyboard_input</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>32</size>
 		</font>
 		<font>
 			<name>font32b</name>
@@ -524,6 +535,11 @@
 			<name>font32</name>
 			<filename>arial.ttf</filename>
 			<size>30</size>
+		</font>
+		<font>
+			<name>font_keyboard_input</name>
+			<filename>arial.ttf</filename>
+			<size>32</size>
 		</font>
 		<font>
 			<name>font32b</name>

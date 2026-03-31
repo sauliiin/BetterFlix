@@ -5,7 +5,7 @@
 	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
 	<onload>SetProperty(CurrentMovieID,$INFO[ListItem.UniqueID(tmdb)]$INFO[ListItem.IMDBNumber])</onload>
 
-	<onload>RunScript(script.embuary.info, mode=reset_scroll)</onload>
+	<onload>RunScript(script.embuaryEnhanced.info, mode=reset_scroll)</onload>
 	<onunload>ClearProperty(ActorList.State)</onunload>
 	<onunload>ClearProperty(CurrentMovieID)</onunload>
 	<onunload>ClearProperty(infobackground,home)</onunload>
@@ -120,7 +120,7 @@
 					<param name="id" value="11" />
 					<param name="icon" value="icons/infodialogs/trailer.png" />
 					<param name="label" value="$LOCALIZE[20410]" />
-					<onclick>RunScript(script.showimdb, ?action=play_trailer&id=$INFO[Window(home).Property(ContextMenuTargetID)]&dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
+					<onclick>RunScript(script.showimdb, ?action=play_trailer&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
 					<param name="visible" value="true" />
 				</include>
 				<include content="InfoDialogButton">
@@ -136,14 +136,14 @@
 					<param name="icon" value="icons/infodialogs/info.png" />
 					<param name="label" value="Detalhes" />
 					<param name="onclick_1_condition" value="String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_1" value="RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
+					<param name="onclick_1" value="RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
 					<param name="onclick_2_condition" value="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_2" value="RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
+					<param name="onclick_2" value="RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
 					<param name="onclick_3_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_3" value="RunScript(script.embuary.info,call=movie,dbid=$INFO[ListItem.DBID])" />
+					<param name="onclick_3" value="RunScript(script.embuaryEnhanced.info,call=movie,dbid=$INFO[ListItem.DBID])" />
 					<param name="onclick_4_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_4" value="RunScript(script.embuary.info,call=tv,dbid=$INFO[ListItem.DBID])" />
-					<param name="visible" value="System.AddonIsEnabled(script.embuary.info) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]" />
+					<param name="onclick_4" value="RunScript(script.embuaryEnhanced.info,call=tv,dbid=$INFO[ListItem.DBID])" />
+					<param name="visible" value="System.AddonIsEnabled(script.embuaryEnhanced.info) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]" />
 				</include>
 			</control>
 			<include content="LeftRightArrows">
@@ -307,10 +307,10 @@
 						<param name="control_id" value="147" />
 						<param name="label" value="$INFO[ListItem.Director,[B][COLOR red]$LOCALIZE[20339]: [/COLOR][/B]]" />
 						<param name="altlabel" value="$INFO[ListItem.Director,$LOCALIZE[20339]: ]" />
-						<param name="onclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
-						<param name="onclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Director]')" />
-						<param name="altclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
-						<param name="altclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Director]')" />
+						<param name="onclick_condition" value="System.AddonIsEnabled(script.embuaryEnhanced.info)" />
+						<param name="onclick" value="RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[ListItem.Director]')" />
+						<param name="altclick_condition" value="System.AddonIsEnabled(script.embuaryEnhanced.info)" />
+						<param name="altclick" value="RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[ListItem.Director]')" />
 						<param name="visible" value="!String.IsEmpty(ListItem.Director)" />
 					</include>
 					<include content="InfoDialogMetadata">
@@ -672,8 +672,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.0.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.0.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.0.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.0.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.0.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.0.MediaType)]</property>
@@ -683,8 +683,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.1.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.1.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.1.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.1.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.1.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.1.MediaType)]</property>
@@ -694,8 +694,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.2.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.2.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.2.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.2.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.2.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.2.MediaType)]</property>
@@ -705,8 +705,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.3.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.3.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.3.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.3.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.3.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.3.MediaType)]</property>
@@ -716,8 +716,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.4.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.4.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.4.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.4.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.4.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.4.MediaType)]</property>
@@ -727,8 +727,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.5.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.5.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.5.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.5.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.5.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.5.MediaType)]</property>
@@ -738,8 +738,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.6.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.6.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.6.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.6.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.6.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.6.MediaType)]</property>
@@ -749,8 +749,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.7.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.7.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.7.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.7.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.7.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.7.MediaType)]</property>
@@ -760,8 +760,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.8.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.8.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.8.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.8.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.8.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.8.MediaType)]</property>
@@ -771,8 +771,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.9.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.9.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.9.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),movie)">RunScript(script.embuary.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),tv)">RunScript(script.embuary.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.9.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.9.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.9.MediaType)]</property>

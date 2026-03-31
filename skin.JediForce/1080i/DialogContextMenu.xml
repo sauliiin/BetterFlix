@@ -71,7 +71,7 @@
 						<focusedcolor>background</focusedcolor>
 						<texturefocus colordiffuse="red">masks/focus.png</texturefocus>
 						<texturenofocus colordiffuse="00FFFFFF">colors/white.png</texturenofocus>
-						<onclick>RunScript(script.showimdb, ?action=play_trailer&id=$INFO[Window(home).Property(ContextMenuTargetID)]&dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
+						<onclick>RunScript(script.showimdb, ?action=play_trailer&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
 					</control>
 				</control>
 				<include content="UpDownArrows">

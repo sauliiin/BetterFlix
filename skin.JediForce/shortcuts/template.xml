@@ -49,11 +49,11 @@
     <property name="height" tag="property" attribute="name|displayType" value="landscape">150</property>
     <property name="height">256</property>
     <property name="widget_width" tag="property" attribute="name|displayType" value="squares">180</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">271</property>
-    <property name="widget_width">190</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">265</property>
+    <property name="widget_width">186</property>
     <property name="widget_height" tag="property" attribute="name|displayType" value="squares">224</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">235</property>
-    <property name="widget_height">340</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">245</property>
+    <property name="widget_height">350</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">stretch</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
     <property name="aspect_ratio">stretch</property>
@@ -86,14 +86,14 @@
     <propertyGroup>MainMenuProps</propertyGroup>
 
     <controls>
-      <control type="grouplist" id="50000">
+      <control type="grouplist" id="50$SKINSHORTCUTS[menuid]000">
         <include>Visible_Right</include>
-        <!-- only one of "50000" will be visible at any time -->
+        <!-- only one widgets grouplist will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
-        <left>0</left>
-        <top>38%</top>
+        <left>114</left>
+        <top>30</top>
         <width>120%</width>
-        <height>672</height>
+        <height>1015</height>
         <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>vertical</orientation>
         <wrap>true</wrap>
@@ -105,9 +105,9 @@
         <!-- Widget Panels -->
         <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
         <!-- Empty Menu Item button -->
-        <control type="button" id="59999">
-          <visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
-          <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+        <control type="button" id="50$SKINSHORTCUTS[menuid]999">
+          <visible>Integer.IsLess(Container(50$SKINSHORTCUTS[menuid]000).NumItems,2)</visible>
+          <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(50$SKINSHORTCUTS[menuid]999)">Conditional</animation>
           <left>500</left>
           <right>400</right>
           <height>150</height>
@@ -115,8 +115,8 @@
           <aligny>center</aligny>
           <label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
           <wrapmultiline>true</wrapmultiline>
-          <onup>50000</onup>
-          <ondown>50000</ondown>
+          <onup>50$SKINSHORTCUTS[menuid]000</onup>
+          <ondown>50$SKINSHORTCUTS[menuid]000</ondown>
           <onleft>9000</onleft>
           <onright>9000</onright>
           <onback>9000</onback>

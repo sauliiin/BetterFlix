@@ -70,7 +70,6 @@
 						<onclick>ActivateWindow(SystemSettings)</onclick>
 						<icon>dstv/w.png</icon>
 					</item>
-
 				</content>
 			</control>
 			<!-- <control type="panel" id="9001">

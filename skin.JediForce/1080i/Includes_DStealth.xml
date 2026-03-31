@@ -41,11 +41,6 @@
 		<!-- At the end of first run, set the ds-settings-init value to true so the above dont trigger again -->
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(ds-settings-init, true)</onload>
 	</include>
-	<include name="TMDbHelperContentList">
-		<control type="list" id="9143">
-			<include>HiddenList</include>
-		</control>
-	</include>
 	<!-- CUSTOM ANIMATIONS -->
 	<include name="dsa_delayed_menuicon_slideout">
 		<animation type="Conditional" condition="!String.IsEmpty(Window(home).Property(ds_active_widget_id))" reversible="true">
@@ -286,7 +281,7 @@
 			</control>
 		</definition>
 	</include>
-		<include name="ds_power">
+	<include name="ds_power">
 		<param name="height">100</param>
 		<param name="onunfocus">SetProperty(ds_setdesc,)</param>
 		<param name="enable">true</param>
@@ -304,8 +299,8 @@
 					<effect type="zoom" start="120" end="100" center="auto" time="200" tween="sine" easing="inout" />
 				</animation>
 				<animation type="Conditional" condition="Control.HasFocus($PARAM[control_id])" loop="true">
-					<effect type="rotate" start="0" end="360" center="58,50" time="600" delay="1000" tween="sine" easing="inout" />
-					<effect type="rotate" start="360" end="0" center="58,50" time="600" delay="2600" tween="sine" easing="inout" />
+					<effect type="rotate" start="0" end="360" center="58,50" time="800" delay="800" tween="sine" easing="inout" />
+					<effect type="rotate" start="360" end="0" center="58,50" time="800" delay="1600" tween="sine" easing="inout" />
 				</animation>
 				<onfocus>$PARAM[onfocus]</onfocus>
 				<onunfocus>$PARAM[onunfocus]</onunfocus>

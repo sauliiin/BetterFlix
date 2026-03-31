@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash Video Window — exibe splash.mp4 em tela cheia durante o boot.
+     Usa videowindow embutido para evitar a transição para VideoFullScreen.xml
+     que mata o player durante a inicialização do Kodi. -->
+<window type="dialog" id="1140">
+	<zorder>99</zorder>
+	<animation type="WindowOpen" reversible="false">
+		<effect type="fade" start="0" end="100" time="200"/>
+	</animation>
+	<animation type="WindowClose" reversible="false">
+		<effect type="fade" start="100" end="0" time="300"/>
+	</animation>
+	<controls>
+		<!-- Fundo preto fullscreen -->
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<texture>colors/black.png</texture>
+		</control>
+		<!-- VideoWindow embutido — renderiza o player dentro desta janela -->
+		<control type="videowindow" id="1">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<visible>Player.HasVideo</visible>
+		</control>
+	</controls>
+</window>

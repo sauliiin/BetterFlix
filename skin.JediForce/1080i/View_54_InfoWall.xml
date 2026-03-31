@@ -320,7 +320,9 @@
 					<control type="group">
 						<top>150</top>
 						<left>40</left>
-						<include>InfoWallMusicLayout</include>
+						<include content="InfoWallSquareLayout">
+							<param name="fallback_image" value="DefaultAudio.png" />
+						</include>
 					</control>
 				</itemlayout>
 				<focusedlayout height="410" width="310" condition="Container.Content(artists) | Container.Content(albums)">
@@ -330,7 +332,8 @@
 						<animation effect="zoom" start="105" end="100" time="200" tween="sine" easing="inout" center="200,350">UnFocus</animation>
 						<top>150</top>
 						<left>40</left>
-						<include content="InfoWallMusicLayout">
+						<include content="InfoWallSquareLayout">
+							<param name="fallback_image" value="DefaultAudio.png" />
 							<param name="focused" value="true" />
 						</include>
 					</control>

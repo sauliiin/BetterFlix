@@ -181,6 +181,23 @@
 		<aligny>top</aligny>
 		<font>font45</font>
 	</include>
+	<include name="KeyboardButtonCompact">
+		<top>9</top>
+		<width>76</width>
+		<height>76</height>
+		<textoffsety>16</textoffsety>
+		<texturefocus border="16" colordiffuse="button_focus">buttons/dialogbutton-fo.png</texturefocus>
+		<texturenofocus />
+		<animation type="Focus" reversible="false">
+			<effect type="zoom" start="100" end="120" center="auto" time="140" tween="sine" easing="out" />
+		</animation>
+		<animation type="Unfocus" reversible="false">
+			<effect type="zoom" start="120" end="100" center="auto" time="140" tween="sine" easing="in" />
+		</animation>
+		<align>center</align>
+		<aligny>top</aligny>
+		<font>font43</font>
+	</include>
 	<include name="PlaylistWindowButton">
 		<param name="width">100%</param>
 		<definition>
@@ -406,3 +423,4 @@
 		</focusedlayout>
 	</include>
 </includes>
+

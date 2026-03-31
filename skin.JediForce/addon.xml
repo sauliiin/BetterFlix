@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.JediForce" version="2.0.0" name="JediForce" provider-name="Mestre Yoda Rossi" extension="true">
+<addon id="skin.JediForce" version="2.0.5" name="JediForce" provider-name="Mestre Yoda Rossi" extension="true">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.skinshortcuts" version="2.0.1" />
@@ -11,10 +11,10 @@
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<name lang="en_GB">DStealthTV</name>
-		<summary lang="en_GB">DStealth's changes to Estuary</summary>
-		<description lang="en_GB">This is a skin for Kodi 21-Omega. It attempts to be easy for first time Kodi users to understand and use but with a much more customizable main menu with widgets.</description>
-		<disclaimer lang="en_GB">This skin does not host any streaming content nor does the author take responsibility for any content found.</disclaimer>
+		<name lang="pt_BR">JediForce</name>
+		<summary lang="pt_BR">A interface despertar, agora deve</summary>
+		<description lang="pt_BR">Para o Kodi 21-Omega, esta skin é. Fácil para o Padawan aprender, ela será. Um menu personalizável com widgets, um Mestre Jedi terá. A Força nesta skin, poderosa é!</description>
+		<disclaimer lang="pt_BR">Conteúdo de streaming, aqui não há. Responsabilidade pelo que em galáxias distantes encontrar, o autor não tem. Paciência você deve ter.</disclaimer>
 		<platform>all</platform>
 		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
 		<forum>https://forum.kodi.tv/showthread.php?tid=371037</forum>

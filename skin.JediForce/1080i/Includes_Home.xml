@@ -214,6 +214,59 @@
 			</control>
 		</definition>
 	</include>
+	<include name="InfoWallSquareLayout">
+		<param name="focused">false</param>
+		<param name="fallback_image">DefaultAudio.png</param>
+		<param name="label">$INFO[ListItem.Label]</param>
+		<definition>
+			<control type="image">
+				<width>230</width>
+				<height>230</height>
+				<texture>dialogs/dialog-bg-nobo.png</texture>
+				<bordertexture border="18" infill="false">overlays/shadow.png</bordertexture>
+				<bordersize>18</bordersize>
+			</control>
+			<control type="image">
+				<left>-4</left>
+				<top>-4</top>
+				<width>238</width>
+				<height>238</height>
+				<texture colordiffuse="button_focus">colors/grey.png</texture>
+				<bordertexture border="18" infill="false">overlays/shadow.png</bordertexture>
+				<bordersize>18</bordersize>
+				<visible>$PARAM[focused]</visible>
+				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+			</control>
+			<control type="image">
+				<left>4</left>
+				<top>4</top>
+				<width>222</width>
+				<height>222</height>
+				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="image">
+				<left>4</left>
+				<top>158</top>
+				<width>222</width>
+				<height>68</height>
+				<texture>overlays/overlayfade.png</texture>
+				<visible>!ListItem.IsParentFolder</visible>
+			</control>
+			<control type="textbox">
+				<left>20</left>
+				<top>176</top>
+				<width>190</width>
+				<height>40</height>
+				<font>font12</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$PARAM[label]</label>
+				<autoscroll time="2000" delay="3000" repeat="5000">$PARAM[focused]</autoscroll>
+				<visible>!ListItem.IsParentFolder</visible>
+			</control>
+		</definition>
+	</include>
 	<include name="WidgetListSquare">
 		<param name="sub_label">$INFO[ListItem.Label]</param>
 		<param name="sortby"></param>
@@ -248,10 +301,9 @@
 				<itemlayout width="310" height="500">
 					<control type="group">
 						<left>70</left>
-						<include content="InfoWallMusicLayout">
-							<param name="main_label" value="$PARAM[main_label]" />
-							<param name="single_label" value="$PARAM[single_label]" />
-							<param name="sub_label" value="$PARAM[sub_label]" />
+						<include content="InfoWallSquareLayout">
+							<param name="fallback_image" value="$PARAM[fallback_icon]" />
+							<param name="label" value="$PARAM[sub_label]" />
 							<param name="focused" value="false" />
 						</include>
 					</control>
@@ -266,10 +318,9 @@
 						<animation type="Unfocus">
 							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="240,120" />
 						</animation>
-						<include content="InfoWallMusicLayout">
-							<param name="main_label" value="$PARAM[main_label]" />
-							<param name="single_label" value="$PARAM[single_label]" />
-							<param name="sub_label" value="$PARAM[sub_label]" />
+						<include content="InfoWallSquareLayout">
+							<param name="fallback_image" value="$PARAM[fallback_icon]" />
+							<param name="label" value="$PARAM[sub_label]" />
 							<param name="focused" value="true" />
 						</include>
 					</control>
@@ -392,15 +443,15 @@
 		<content>
 			<item>
 				<label>$LOCALIZE[31146]</label>
-				<onclick>ActivateWindow(videos,plugin://script.embuary.info/movie/now_playing,return)</onclick>
+				<onclick>ActivateWindow(videos,plugin://script.embuaryEnhanced.info/movie/now_playing,return)</onclick>
 				<thumb>DefaultStudios.png</thumb>
-				<visible>System.AddonIsEnabled(script.embuary.info)</visible>
+				<visible>System.AddonIsEnabled(script.embuaryEnhanced.info)</visible>
 			</item>
 			<item>
 				<label>$LOCALIZE[31147]</label>
-				<onclick>ActivateWindow(videos,plugin://script.embuary.info/movie/upcoming,return)</onclick>
+				<onclick>ActivateWindow(videos,plugin://script.embuaryEnhanced.info/movie/upcoming,return)</onclick>
 				<thumb>DefaultYear.png</thumb>
-				<visible>System.AddonIsEnabled(script.embuary.info)</visible>
+				<visible>System.AddonIsEnabled(script.embuaryEnhanced.info)</visible>
 			</item>
 		</content>
 	</include>
@@ -408,9 +459,9 @@
 		<content>
 			<item>
 				<label>$LOCALIZE[31027]</label>
-				<onclick>ActivateWindow(videos,plugin://script.embuary.info/nextaired,return)</onclick>
+				<onclick>ActivateWindow(videos,plugin://script.embuaryEnhanced.info/nextaired,return)</onclick>
 				<thumb>DefaultYear.png</thumb>
-				<visible>System.AddonIsEnabled(script.embuary.info)</visible>
+				<visible>System.AddonIsEnabled(script.embuaryEnhanced.info)</visible>
 			</item>
 		</content>
 	</include>

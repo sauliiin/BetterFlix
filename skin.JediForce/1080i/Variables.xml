@@ -714,16 +714,18 @@
 		<value>$INFO[ListItem.FileNameAndPath]</value>
 	</variable>
 	<variable name="CastContentVar">
-		<value condition="VideoPlayer.Content(episodes)">plugin://script.embuary.info/?mode=cast&amp;type=tv&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
-		<value condition="Player.HasVideo">plugin://script.embuary.info/?mode=cast&amp;type=movie&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+		<value condition="VideoPlayer.Content(episodes)">plugin://script.embuaryEnhanced.info/?mode=cast&amp;type=tv&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+		<value condition="Player.HasVideo">plugin://script.embuaryEnhanced.info/?mode=cast&amp;type=movie&amp;tmdb_id=$INFO[VideoPlayer.UniqueID(tmdb)]&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
 		<value></value>
 	</variable>
 	<variable name="ThumbnailLayoutVar">
 		<value condition="String.IsEqual(Skin.String(dstv_layout),wide)">dstv/wide.png</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">dstv/FENtasticLike.png</value>
 		<value>dstv/standard.png</value>
 	</variable>
 	<variable name="LayoutStyleLabelVar">
 		<value condition="String.IsEqual(Skin.String(dstv_layout),wide)">Wide</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">FENtasticLike</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),standard)">Standard</value>
 		<value>Standard</value>
 	</variable>

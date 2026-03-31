@@ -66,6 +66,11 @@
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">[COLOR red]•[/COLOR] $INFO[Window(home).Property(ds_info_duration)]</value>
 		<value></value>
 	</variable>
+	<variable name="ds_infoDurationF">
+		<value condition="!String.IsEmpty(ListItem.Duration) + !String.StartsWith(ListItem.Duration,00:0) + !String.IsEqual(ListItem.Duration,0)">[COLOR red]•[/COLOR] $INFO[ListItem.Duration(hh:mm:ss)]</value>
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">[COLOR red]•[/COLOR] $INFO[Window(home).Property(ds_info_duration)]</value>
+		<value></value>
+	</variable>
 	<variable name="ds_dayweek">
 		<value condition="!String.IsEmpty(Window(10000).Property(dsWeekDay))">$INFO[Window(10000).Property(dsWeekDay)], $INFO[ListItem.Premiered] [COLOR red]•[/COLOR] </value>
 		<value></value>
@@ -79,6 +84,17 @@
 		<value condition="String.IsEqual(Window(home).Property(ds_info_dbtype),tvshow)">$VAR[ds_infoDate] [COLOR red]•[/COLOR] Total de temporadas: $INFO[Window(home).Property(ds_info_totalseasons)] [COLOR red]•[/COLOR]</value>
 		<value condition="!String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] $VAR[ds_infoDuration] [COLOR red]•[/COLOR]</value>
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration)) + String.IsEqual(Window(home).Property(ds_info_dbtype),movie)">$VAR[ds_infoDate] $VAR[ds_infoDuration] [COLOR red]•[/COLOR]</value>
+		<value></value>
+	</variable>
+	<variable name="ds_infoRowF">
+		<value condition="String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] [COLOR red]•[/COLOR]</value>
+		<value condition="String.IsEmpty(Window(home).Property(ds_info_duration)) + String.IsEqual(Window(home).Property(ds_info_dbtype),movie)">$VAR[ds_infoDate] [COLOR red]•[/COLOR]</value>
+		<value condition="String.IsEqual(ListItem.DBType,episode)">$VAR[ds_dayweek]Temporada $INFO[ListItem.Season]: Episódio $INFO[ListItem.Episode]</value>
+		<value condition="String.IsEqual(Window(home).Property(ds_info_dbtype),episode)">$VAR[ds_dayweek]Temporada $INFO[Window(home).Property(ds_info_season)]: Episódio $INFO[Window(home).Property(ds_info_episode)]</value>
+		<value condition="String.IsEqual(ListItem.DBType,tvshow)">$INFO[ListItem.Year] [COLOR red]•[/COLOR] Total de temporadas: $INFO[ListItem.Property(TotalSeasons)] [COLOR red]•[/COLOR]</value>
+		<value condition="String.IsEqual(Window(home).Property(ds_info_dbtype),tvshow)">$VAR[ds_infoDate] [COLOR red]•[/COLOR] Total de temporadas: $INFO[Window(home).Property(ds_info_totalseasons)] [COLOR red]•[/COLOR]</value>
+		<value condition="!String.IsEmpty(ListItem.Duration) + String.IsEqual(ListItem.DBType,movie)">$VAR[ds_infoDate] $VAR[ds_infoDurationF] [COLOR red]•[/COLOR]</value>
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration)) + String.IsEqual(Window(home).Property(ds_info_dbtype),movie)">$VAR[ds_infoDate] $VAR[ds_infoDurationF] [COLOR red]•[/COLOR]</value>
 		<value></value>
 	</variable>
 	<variable name="ds_infoRow2">
@@ -335,7 +351,8 @@
 		<value condition="!String.IsEmpty(ListItem.Property(landscape))">$INFO[ListItem.Property(landscape)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(fanart))">$INFO[ListItem.Property(fanart)]</value>
-		<value></value>
+		<value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
+		<value>DefaultFolder.png</value>
 	</variable>
 	<variable name="ds_WidgetPanelClearArt">
 		<value condition="!String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>

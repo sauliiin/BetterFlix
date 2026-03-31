@@ -8,7 +8,7 @@
 			<thumb>special://skin/extras/icons/widg icons/homeS.png</thumb>
 			<property name="labelID">filmes</property>
 			<onclick>noop</onclick>
-			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<visible>String.IsEqual(System.ProfileName,Master Yoda)</visible>
 			<property name="submenuVisibility">filmes</property>
 			<property name="myCustomProperty">foo</property>
 			<property name="hasSubmenu">True</property>
@@ -21,7 +21,7 @@
 			<thumb>special://skin/extras/icons/widg icons/tv3.png</thumb>
 			<property name="labelID">series</property>
 			<onclick>noop</onclick>
-			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<visible>String.IsEqual(System.ProfileName,Master Yoda)</visible>
 			<property name="submenuVisibility">series</property>
 			<property name="myCustomProperty">foo</property>
 			<property name="hasSubmenu">True</property>
@@ -34,7 +34,7 @@
 			<thumb>special://skin/extras/icons/widg icons/categories2.png</thumb>
 			<property name="labelID">generos</property>
 			<onclick>noop</onclick>
-			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<visible>String.IsEqual(System.ProfileName,Master Yoda)</visible>
 			<property name="submenuVisibility">generos</property>
 			<property name="myCustomProperty">foo</property>
 			<property name="hasSubmenu">True</property>
@@ -47,7 +47,7 @@
 			<thumb>special://skin/extras/icons/widg icons/streammyB.png</thumb>
 			<property name="labelID">whatelse</property>
 			<onclick>noop</onclick>
-			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<visible>String.IsEqual(System.ProfileName,Master Yoda)</visible>
 			<property name="submenuVisibility">whatelse</property>
 			<property name="myCustomProperty">foo</property>
 			<property name="hasSubmenu">True</property>
@@ -58,53 +58,20 @@
 		<item id="1">
 			<property name="id">$NUMBER[1]</property>
 			<property name="mainmenuid">1</property>
-			<label>Assistindo</label>
+			<label>Lançamentos</label>
 			<label2>Custom item</label2>
 			<icon>DefaultShortcut.png</icon>
 			<thumb />
-			<property name="labelID">assistindo</property>
-			<property name="widget">Addon</property>
-			<property name="widgetName">POV - In Progress</property>
-			<property name="widgetType">videos</property>
-			<property name="widgetTarget">videos</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?name=32476&amp;iconImage=player.png&amp;mode=build_movie_list&amp;action=in_progress_movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="displayType">landscape</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?name=32476&amp;iconImage=player.png&amp;mode=build_movie_list&amp;action=in_progress_movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="labelID">lancamentos</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=my_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
+			<property name="displayType">posters</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="2">
 			<property name="id">$NUMBER[2]</property>
-			<property name="mainmenuid">1</property>
-			<label>Para Assistir</label>
-			<label2>Custom item</label2>
-			<icon>DefaultShortcut.png</icon>
-			<thumb />
-			<property name="labelID">paraassistir</property>
-			<property name="displayType">landscape</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_movie_list&amp;action=mdblist_collection&amp;name=My+Collection+Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Fmdblist.png&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
-			<property name="isSubmenu">True</property>
-			</item>
-		<item id="3">
-			<property name="id">$NUMBER[3]</property>
-			<property name="mainmenuid">1</property>
-			<label>Popular</label>
-			<label2>Custom item</label2>
-			<icon>DefaultShortcut.png</icon>
-			<thumb />
-			<property name="labelID">popular</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=my_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="displayType">posters</property>
-			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
-			<property name="isSubmenu">True</property>
-			</item>
-		<item id="4">
-			<property name="id">$NUMBER[4]</property>
 			<property name="mainmenuid">1</property>
 			<label>Em Alta</label>
 			<label2>Custom item</label2>
@@ -120,28 +87,38 @@
 			<property name="displayType">posters</property>
 			<property name="icon">DefaultShortcut.png</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<property name="isSubmenu">True</property>
+			</item>
+		<item id="3">
+			<property name="id">$NUMBER[3]</property>
+			<property name="mainmenuid">1</property>
+			<label>Popular</label>
+			<label2>Custom item</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">popular</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=my_lists&amp;name=Pop&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<property name="displayType">posters</property>
+			<onclick>noop</onclick>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<property name="isSubmenu">True</property>
+			</item>
+		<item id="4">
+			<property name="id">$NUMBER[4]</property>
+			<property name="mainmenuid">1</property>
+			<label>Think Fast</label>
+			<label2>Custom item</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">thinkfast</property>
+			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=fast-horror&amp;list_id=152693&amp;list_type=my_lists&amp;name=Fast+horror&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
+			<onclick>noop</onclick>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
 			<property name="id">$NUMBER[5]</property>
-			<property name="mainmenuid">1</property>
-			<label>Lançamentos</label>
-			<label2>Custom item</label2>
-			<icon>DefaultShortcut.png</icon>
-			<thumb />
-			<property name="labelID">lancamentos</property>
-			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=my_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="displayType">posters</property>
-			<property name="widgetSortBy">year</property>
-			<property name="widgetSortOrder">descending</property>
-			<property name="icon">DefaultShortcut.png</property>
-			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
-			<property name="isSubmenu">True</property>
-			</item>
-		<item id="6">
-			<property name="id">$NUMBER[6]</property>
 			<property name="mainmenuid">1</property>
 			<label>Surprise Me</label>
 			<label2>Custom item</label2>
@@ -150,11 +127,11 @@
 			<property name="labelID">surpriseme</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=surprise-me&amp;list_id=142498&amp;list_type=my_lists&amp;name=Surprise+me&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
-		<item id="7">
-			<property name="id">$NUMBER[7]</property>
+		<item id="6">
+			<property name="id">$NUMBER[6]</property>
 			<property name="mainmenuid">1</property>
 			<label>Combina com Você</label>
 			<label2>Custom item</label2>
@@ -162,13 +139,12 @@
 			<thumb />
 			<property name="labelID">combinacomvoce</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=combina-com-voce&amp;list_id=104379&amp;list_type=my_lists&amp;name=Combina+com+Voc%C3%AA&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
-			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
-		<item id="8">
-			<property name="id">$NUMBER[8]</property>
+		<item id="7">
+			<property name="id">$NUMBER[7]</property>
 			<property name="mainmenuid">1</property>
 			<label>Can't go Wrong</label>
 			<label2>Custom item</label2>
@@ -176,13 +152,12 @@
 			<thumb />
 			<property name="labelID">cantgowrong</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=cant-go-wrong-movies-new&amp;list_id=133010&amp;list_type=my_lists&amp;name=Can%27t+Go+Wrong+Movies+-+New&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
-			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
-		<item id="9">
-			<property name="id">$NUMBER[9]</property>
+		<item id="8">
+			<property name="id">$NUMBER[8]</property>
 			<property name="mainmenuid">1</property>
 			<label>Assistidos Recentemente</label>
 			<label2>Custom item</label2>
@@ -193,7 +168,7 @@
 			<property name="widgetLimit">$NUMBER[50]</property>
 			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="1">
@@ -207,7 +182,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?name=32482&amp;iconImage=player.png&amp;mode=build_in_progress_episode&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
 			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="2">
@@ -222,7 +197,7 @@
 			<property name="displayTitles">true</property>
 			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="3">
@@ -236,7 +211,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_tvshow_list&amp;action=mdblist_collection&amp;name=My+Collection+TV+Shows&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Fmdblist.png&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
 			<property name="displayType">landscape</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="4">
@@ -249,7 +224,7 @@
 			<property name="labelID">emalta</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?name=32458&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending&amp;reload=$INFO[Window(Home).Property(widgetreload-episodes)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
@@ -262,7 +237,7 @@
 			<property name="labelID">asmelhores</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=series-cant-go-wrong&amp;list_id=101250&amp;list_type=my_lists&amp;name=Series+can%27t+go+wrong&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="6">
@@ -277,7 +252,7 @@
 			<property name="displayType">landscape</property>
 			<property name="widgetLimit">$NUMBER[30]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="1">
@@ -290,7 +265,7 @@
 			<property name="labelID">bestever-imdb</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=best-ever&amp;list_id=92577&amp;list_type=my_lists&amp;name=Best+ever&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="2">
@@ -303,7 +278,7 @@
 			<property name="labelID">ficcaocientifica</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=sci-fi&amp;list_id=99440&amp;list_type=my_lists&amp;name=Sci-Fi&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="3">
@@ -316,7 +291,7 @@
 			<property name="labelID">horror</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=horror&amp;list_id=92573&amp;list_type=my_lists&amp;name=Horror&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="4">
@@ -329,7 +304,7 @@
 			<property name="labelID">supernatural</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=supernatural&amp;list_id=120667&amp;list_type=my_lists&amp;name=Supernatural&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
@@ -342,7 +317,7 @@
 			<property name="labelID">suspense</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=suspense&amp;list_id=99441&amp;list_type=my_lists&amp;name=Suspense&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="6">
@@ -355,7 +330,7 @@
 			<property name="labelID">zombiesandoutbreak</property>
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=zombies-and-outbreak&amp;list_id=94403&amp;list_type=my_lists&amp;name=Zombies+and+Outbreak&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="1">
@@ -369,7 +344,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=acao-e-aventura&amp;list_id=99442&amp;list_type=my_lists&amp;name=A%C3%A7%C3%A3o+e+Aventura&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<property name="displayType">posters</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="2">
@@ -383,7 +358,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=animation-2&amp;list_id=137061&amp;list_type=my_lists&amp;name=Animation&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<property name="displayType">posters</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="3">
@@ -397,7 +372,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=fantasia&amp;list_id=100439&amp;list_type=my_lists&amp;name=Fantasia&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<property name="displayType">posters</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="4">
@@ -411,7 +386,7 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=war-movies&amp;list_id=104716&amp;list_type=my_lists&amp;name=War+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]</property>
 			<property name="displayType">posters</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		<item id="5">
@@ -425,21 +400,21 @@
 			<property name="widgetPath">plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=best-of-super-heroe&amp;list_id=123815&amp;list_type=my_lists&amp;name=Best+of+super+heroe&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]</property>
 			<property name="displayType">posters</property>
 			<onclick>noop</onclick>
-			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
+			<visible>[String.IsEqual(System.ProfileName,Master Yoda)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<property name="isSubmenu">True</property>
 			</item>
 		</include>
 	<include name="skinshortcuts-template-ss_widgets">
-		<include condition="String.IsEqual(System.ProfileName,Master user)">skinshortcuts-template-ss_widgets-Master user</include>
+		<include condition="String.IsEqual(System.ProfileName,Master Yoda)">skinshortcuts-template-ss_widgets-Master Yoda</include>
 		</include>
-	<include name="skinshortcuts-template-ss_widgets-Master user">
-		<control type="grouplist" id="50000">
+	<include name="skinshortcuts-template-ss_widgets-Master Yoda">
+		<control type="grouplist" id="501000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
-			<left>0</left>
-			<top>38%</top>
+			<left>114</left>
+			<top>30</top>
 			<width>120%</width>
-			<height>672</height>
+			<height>1015</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>true</wrap>
@@ -449,23 +424,23 @@
 			<usecontrolcoords>true</usecontrolcoords>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50101" />
-				<param name="widget_header" value="Assistindo" />
-				<param name="content_path" value="plugin://plugin.video.pov/?name=32476&amp;iconImage=player.png&amp;mode=build_movie_list&amp;action=in_progress_movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
+				<param name="widget_header" value="Lançamentos" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=my_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="256" />
-				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="width" value="176" />
+				<param name="height" value="256" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="32" />
-				<param name="display_type" value="landscape" />
-				<param name="display_type_isposters" value="false" />
+				<param name="top_offset" value="37" />
+				<param name="display_type" value="posters" />
+				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
-				<param name="display_type_islandscape" value="true" />
+				<param name="display_type_islandscape" value="false" />
 				<param name="pvr_tv_rec_status" value="false" />
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
@@ -473,23 +448,23 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50102" />
-				<param name="widget_header" value="Para Assistir" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_movie_list&amp;action=mdblist_collection&amp;name=My+Collection+Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Fmdblist.png&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
+				<param name="widget_header" value="Em Alta" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=my_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="256" />
-				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="width" value="176" />
+				<param name="height" value="256" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="32" />
-				<param name="display_type" value="landscape" />
-				<param name="display_type_isposters" value="false" />
+				<param name="top_offset" value="37" />
+				<param name="display_type" value="posters" />
+				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
-				<param name="display_type_islandscape" value="true" />
+				<param name="display_type_islandscape" value="false" />
 				<param name="pvr_tv_rec_status" value="false" />
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
@@ -498,15 +473,15 @@
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50103" />
 				<param name="widget_header" value="Popular" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=my_lists&amp;name=Popular&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=popular&amp;list_id=112762&amp;list_type=my_lists&amp;name=Pop&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -521,16 +496,16 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50104" />
-				<param name="widget_header" value="Em Alta" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=trending-movies&amp;list_id=100314&amp;list_type=my_lists&amp;name=Trending+movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
+				<param name="widget_header" value="Think Fast" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=fast-horror&amp;list_id=152693&amp;list_type=my_lists&amp;name=Fast+horror&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -545,16 +520,16 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50105" />
-				<param name="widget_header" value="Lançamentos" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=lastest-movie-releases&amp;list_id=101251&amp;list_type=my_lists&amp;name=Lastest+movie+releases&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
-				<param name="sortby" value="year" />
-				<param name="sortorder" value="descending" />
+				<param name="widget_header" value="Surprise Me" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=surprise-me&amp;list_id=142498&amp;list_type=my_lists&amp;name=Surprise+me&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
+				<param name="sortby" value="" />
+				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -569,16 +544,16 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50106" />
-				<param name="widget_header" value="Surprise Me" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=surprise-me&amp;list_id=142498&amp;list_type=my_lists&amp;name=Surprise+me&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
+				<param name="widget_header" value="Combina com Você" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=combina-com-voce&amp;list_id=104379&amp;list_type=my_lists&amp;name=Combina+com+Voc%C3%AA&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -593,23 +568,23 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50107" />
-				<param name="widget_header" value="Combina com Você" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=combina-com-voce&amp;list_id=104379&amp;list_type=my_lists&amp;name=Combina+com+Voc%C3%AA&amp;reload=$INFO[Window(Home).Property(widgetreload)]$INFO[Window(Home).Property(widgetreload2)]" />
+				<param name="widget_header" value="Can't go Wrong" />
+				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=cant-go-wrong-movies-new&amp;list_id=133010&amp;list_type=my_lists&amp;name=Can%27t+Go+Wrong+Movies+-+New&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="256" />
-				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="width" value="176" />
+				<param name="height" value="256" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="32" />
-				<param name="display_type" value="landscape" />
-				<param name="display_type_isposters" value="false" />
+				<param name="top_offset" value="37" />
+				<param name="display_type" value="posters" />
+				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
-				<param name="display_type_islandscape" value="true" />
+				<param name="display_type_islandscape" value="false" />
 				<param name="pvr_tv_rec_status" value="false" />
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
@@ -617,30 +592,6 @@
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50108" />
-				<param name="widget_header" value="Can't go Wrong" />
-				<param name="content_path" value="plugin://plugin.video.pov/?mode=build_mdbl_list&amp;user=mestreyodarossi&amp;slug=cant-go-wrong-movies-new&amp;list_id=133010&amp;list_type=my_lists&amp;name=Can%27t+Go+Wrong+Movies+-+New&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
-				<param name="sortby" value="" />
-				<param name="sortorder" value="" />
-				<param name="limit" value="" />
-				<param name="widget_target" value="videos" />
-				<param name="width" value="256" />
-				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
-				<param name="aspect_ratio" value="stretch" />
-				<param name="display_titles" value="false" />
-				<param name="top_offset" value="32" />
-				<param name="display_type" value="landscape" />
-				<param name="display_type_isposters" value="false" />
-				<param name="display_type_issquares" value="false" />
-				<param name="display_type_islandscape" value="true" />
-				<param name="pvr_tv_rec_status" value="false" />
-				<param name="w_cond" value="false" />
-				<param name="w_hour" value="false" />
-				<param name="w_forc" value="false" />
-				</include>
-			<include content="ds_widgetPanelList">
-				<param name="list_id" value="50109" />
 				<param name="widget_header" value="Assistidos Recentemente" />
 				<param name="content_path" value="plugin://plugin.video.pov/?name=32475&amp;iconImage=watched.png&amp;mode=build_movie_list&amp;action=watched_movies&amp;reload=$INFO[Window(Home).Property(widgetreload-movies)]" />
 				<param name="sortby" value="" />
@@ -649,8 +600,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="256" />
 				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="widget_width" value="265" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="32" />
@@ -663,9 +614,9 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
-				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+			<control type="button" id="501999">
+				<visible>Integer.IsLess(Container(501000).NumItems,2)</visible>
+				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(501999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
 				<height>150</height>
@@ -673,8 +624,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>501000</onup>
+				<ondown>501000</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -699,13 +650,13 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="502000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
-			<left>0</left>
-			<top>38%</top>
+			<left>114</left>
+			<top>30</top>
 			<width>120%</width>
-			<height>672</height>
+			<height>1015</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>true</wrap>
@@ -723,8 +674,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="256" />
 				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="widget_width" value="265" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="32" />
@@ -747,8 +698,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="256" />
 				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="widget_width" value="265" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="true" />
 				<param name="top_offset" value="32" />
@@ -771,8 +722,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="256" />
 				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="widget_width" value="265" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="32" />
@@ -795,8 +746,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -819,8 +770,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -843,8 +794,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="256" />
 				<param name="height" value="150" />
-				<param name="widget_width" value="271" />
-				<param name="widget_height" value="235" />
+				<param name="widget_width" value="265" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="32" />
@@ -857,9 +808,9 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
-				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+			<control type="button" id="502999">
+				<visible>Integer.IsLess(Container(502000).NumItems,2)</visible>
+				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(502999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
 				<height>150</height>
@@ -867,8 +818,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>502000</onup>
+				<ondown>502000</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -893,13 +844,13 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="503000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
-			<left>0</left>
-			<top>38%</top>
+			<left>114</left>
+			<top>30</top>
 			<width>120%</width>
-			<height>672</height>
+			<height>1015</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>true</wrap>
@@ -917,8 +868,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -941,8 +892,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -965,8 +916,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -989,8 +940,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1013,8 +964,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1037,8 +988,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1051,9 +1002,9 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
-				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+			<control type="button" id="503999">
+				<visible>Integer.IsLess(Container(503000).NumItems,2)</visible>
+				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(503999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
 				<height>150</height>
@@ -1061,8 +1012,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>503000</onup>
+				<ondown>503000</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
@@ -1087,13 +1038,13 @@
 				<texturenofocus colordiffuse="disabled">dstv/test_small.png</texturenofocus>
 				</control>
 			</control>
-		<control type="grouplist" id="50000">
+		<control type="grouplist" id="504000">
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
-			<left>0</left>
-			<top>38%</top>
+			<left>114</left>
+			<top>30</top>
 			<width>120%</width>
-			<height>672</height>
+			<height>1015</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>true</wrap>
@@ -1111,8 +1062,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1135,8 +1086,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1159,8 +1110,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1183,8 +1134,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1207,8 +1158,8 @@
 				<param name="widget_target" value="videos" />
 				<param name="width" value="176" />
 				<param name="height" value="256" />
-				<param name="widget_width" value="190" />
-				<param name="widget_height" value="340" />
+				<param name="widget_width" value="186" />
+				<param name="widget_height" value="350" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
 				<param name="top_offset" value="37" />
@@ -1221,9 +1172,9 @@
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
 				</include>
-			<control type="button" id="59999">
-				<visible>Integer.IsLess(Container(50000).NumItems,2)</visible>
-				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(59999)">Conditional</animation>
+			<control type="button" id="504999">
+				<visible>Integer.IsLess(Container(504000).NumItems,2)</visible>
+				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(504999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
 				<height>150</height>
@@ -1231,8 +1182,8 @@
 				<aligny>center</aligny>
 				<label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
 				<wrapmultiline>true</wrapmultiline>
-				<onup>50000</onup>
-				<ondown>50000</ondown>
+				<onup>504000</onup>
+				<ondown>504000</ondown>
 				<onleft>9000</onleft>
 				<onright>9000</onright>
 				<onback>9000</onback>
