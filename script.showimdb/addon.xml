@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.showimdb"
        name="Script Show IMDb"
-       version="10.1.2"
+       version="10.1.3"
        provider-name="Mestre Yoda">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
@@ -9,10 +9,16 @@
     </requires>
     <extension point="xbmc.service" library="resources/lib/service.py" start="login"/>
     <extension point="xbmc.python.script" library="resources/lib/play_trailer_script.py"/>
-    <summary lang="en_GB">Serviço para exibir informações adicionais</summary>
-    <description lang="en_GB">Busca informações de APIs como Trakt e TMDB para exibir na skin.</description>
-    <platform>all</platform>
-    <assets>
-        <icon>icon.png</icon>
-    </assets>
+    <extension point="xbmc.python.pluginsource" library="resources/lib/plugin_entry.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <summary lang="en_GB">Serviço para exibir informações adicionais</summary>
+        <description lang="en_GB">Busca informações de APIs como Trakt e TMDB para exibir na skin.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
 </addon>
