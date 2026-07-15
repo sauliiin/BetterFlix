@@ -112,6 +112,8 @@
 		<value></value>
 	</variable>
 	<variable name="ds_infoGenre">
+		<value condition="!String.IsEmpty(Window(10000).Property(dsWeekDay)) + String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.Premiered)"></value>
+		<value condition="!String.IsEmpty(Window(10000).Property(dsWeekDay)) + String.IsEqual(Window(home).Property(ds_info_dbtype),episode) + !String.IsEmpty(Window(home).Property(ds_info_dt_premier))"></value>
 		<value condition="!String.IsEmpty(ListItem.Genre)">$INFO[ListItem.Genre]</value>
 		<value condition="!String.IsEmpty(Window(home).Property(ds_info_genre))">$INFO[Window(home).Property(ds_info_genre)]</value>
 		<value></value>
@@ -341,6 +343,16 @@
 		<value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(keyart))">$INFO[ListItem.Art(keyart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(keyart))">$INFO[ListItem.Property(keyart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(season.poster))">$INFO[ListItem.Art(season.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(season.poster))">$INFO[ListItem.Property(season.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(tvshow.poster))">$INFO[ListItem.Property(tvshow.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(thumb))">$INFO[ListItem.Property(thumb)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(landscape))">$INFO[ListItem.Property(landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(fanart))">$INFO[ListItem.Property(fanart)]</value>
 		<value condition="String.IsEqual(listitem.dbtype,genre) + System.AddonIsEnabled(resource.images.moviegenreicons.transparent)">$INFO[ListItem.Label,resource://resource.images.moviegenreicons.transparent/,.png]</value>
 		<value condition="String.IsEqual(listitem.dbtype,studio) + System.AddonIsEnabled(resource.images.studios.white)">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</value>
 		<value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
@@ -349,8 +361,22 @@
 	<variable name="ds_WidgetPanelLandscape">
 		<value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(landscape))">$INFO[ListItem.Property(landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(tvshow.landscape))">$INFO[ListItem.Property(tvshow.landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(season.landscape))">$INFO[ListItem.Art(season.landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(season.landscape))">$INFO[ListItem.Property(season.landscape)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(thumb))">$INFO[ListItem.Property(thumb)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(fanart))">$INFO[ListItem.Property(fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.fanart))">$INFO[ListItem.Art(tvshow.fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(tvshow.fanart))">$INFO[ListItem.Property(tvshow.fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(tvshow.poster))">$INFO[ListItem.Property(tvshow.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(season.poster))">$INFO[ListItem.Art(season.poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(season.poster))">$INFO[ListItem.Property(season.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
 		<value>DefaultFolder.png</value>
 	</variable>

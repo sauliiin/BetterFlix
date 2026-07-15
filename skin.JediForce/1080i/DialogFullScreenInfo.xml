@@ -458,10 +458,10 @@
 						<visible>!String.IsEmpty(ListItem.Label)</visible>
 						<!-- Borda Vermelha Focada -->
 						<control type="image">
-							<left>0</left>
-							<top>0</top>
-							<width>160</width>
-							<height>195</height>
+							<left>1</left>
+							<top>1</top>
+							<width>158</width>
+							<height>193</height>
 							<texture border="4" colordiffuse="white">colors/white.png</texture>
 						</control>
 						<!-- Foto do Ator -->

@@ -109,7 +109,7 @@
 						<control type="radiobutton" id="8260">
 							<include>DefaultSettingButton</include>
 							<label>Ativar Trailer Automático</label>
-							<onfocus>SetProperty(ds_setdesc, "Ativa a reprodução automática de trailers após foco. Quando não há trailer no IMDB, faz fallback para o youtube (dispensa plugin)")</onfocus>
+							<onfocus>SetProperty(ds_setdesc, "Ativa a reprodução automática de trailers após foco. Quando desligado, o script IMDb entra em modo econômico, pula a busca de trailer e mantém dia da semana, labels, reviews e badges/certified fresh.")</onfocus>
 							<onclick>Skin.ToggleSetting(dstv_enable_auto_trailer)</onclick>
 							<selected>Skin.HasSetting(dstv_enable_auto_trailer)</selected>
 						</control>
@@ -159,21 +159,6 @@
 							<onclick>Skin.ToggleSetting(hide_ratings_fire)</onclick>
 							<selected>!Skin.HasSetting(hide_ratings_fire)</selected>
 						</control>
-						<control type="radiobutton" id="8131">
-							<include>DefaultSettingButton</include>
-							<label>Ativar Avaliação Trakt 4 ou 8 no Contexto</label>
-							<onfocus>SetProperty(ds_setdesc, "Mostra ou oculta os botões rápidos de Nota 4 e 8 no Menu de Contexto.")</onfocus>
-							<onclick>Skin.ToggleSetting(hide_trakt_ratings)</onclick>
-							<selected>!Skin.HasSetting(hide_trakt_ratings)</selected>
-						</control>
-						<control type="radiobutton" id="8132">
-							<include>DefaultSettingButton</include>
-							<label>Prefetch MDBList: apenas clearlogos</label>
-							<onfocus>SetProperty(ds_setdesc, "Quando ativado, o prefetch de imagens do POV baixa e registra apenas clearlogos. Desative para voltar ao modo completo com poster, fanart e clearlogo.")</onfocus>
-							<onclick>Skin.ToggleSetting(dstv_prefetch_clearlogos_only)</onclick>
-							<selected>Skin.HasSetting(dstv_prefetch_clearlogos_only)</selected>
-							<visible>System.HasAddon(plugin.video.pov)</visible>
-						</control>
 					</control>
 					<control type="grouplist" id="8200">
 						<onleft>9000</onleft>
@@ -195,6 +180,13 @@
 							<onclick>Skin.ToggleSetting(show_widget_titles)</onclick>
 							<selected>Skin.HasSetting(show_widget_titles)</selected>
 						</control>
+						<control type="radiobutton" id="8251">
+							<include>DefaultSettingButton</include>
+							<label>Poster to Landscape Magic</label>
+							<onfocus>SetProperty(ds_setdesc, "Quando ativo, widgets em poster expandem o item focado para landscape usando landscape/fanart. Desligado mantém o comportamento padrão em poster.")</onfocus>
+							<onclick>Skin.ToggleSetting(dstv_disable_poster_landscape_magic)</onclick>
+							<selected>!Skin.HasSetting(dstv_disable_poster_landscape_magic)</selected>
+						</control>
 					</control>
 					<control type="grouplist" id="8300">
 						<onleft>9000</onleft>
@@ -202,6 +194,21 @@
 						<onup>8300</onup>
 						<ondown>8300</ondown>
 						<visible>Container(9000).HasFocus(3)</visible>
+						<control type="radiobutton" id="8334">
+							<include>DefaultSettingButton</include>
+							<label>Ativar Splash em MP4 no boot</label>
+							<onfocus>SetProperty(ds_setdesc, "Liga ou desliga o splash.mp4 no boot. Desativando, volta o splash.png com fade de 3 segundos.")</onfocus>
+							<onclick>Skin.ToggleSetting(dstv_enable_splash_mp4)</onclick>
+							<selected>Skin.HasSetting(dstv_enable_splash_mp4)</selected>
+						</control>
+						<control type="button" id="8337">
+							<include>DefaultSettingButton</include>
+							<label>Widgets prontos antes do Splash MP4</label>
+							<label2>$VAR[SkinSettingSplashVideoWidgetReadyCount]</label2>
+							<visible>Skin.HasSetting(dstv_enable_splash_mp4)</visible>
+							<onfocus>SetProperty(ds_setdesc, "Define quantos widgets precisam ter conteúdo real antes do splash.mp4 iniciar no boot.")</onfocus>
+							<onclick>Skin.SetNumeric(dstv_splash_video_widget_ready_count)</onclick>
+						</control>
 						<control type="button" id="8335">
 							<include>DefaultSettingButton</include>
 							<label>Menu Items Text Case</label>
@@ -223,8 +230,16 @@
 						<control type="button" id="8380">
 							<include>DefaultSettingButton</include>
 							<label>Menu Layout Style: $VAR[LayoutStyleLabelVar]</label>
-							<onfocus>SetProperty(ds_setdesc, "Escolha entre os layouts Standard, Wide ou FENtasticLike para os atalhos e widgets da Home.")</onfocus>
+							<onfocus>SetProperty(ds_setdesc, "Escolha entre os layouts Standard, Wide, FENtasticLike ou OnlyFun para os atalhos e widgets da Home.")</onfocus>
 							<onclick>RunScript(special://home/addons/script.showimdb/resources/lib/layout_switcher.py, choose)</onclick>
+						</control>
+						<control type="radiobutton" id="8382">
+							<include>DefaultSettingButton</include>
+							<label>Wide: Mostrar IMDb, Letterboxd e Trakt</label>
+							<visible>String.IsEqual(Skin.String(dstv_layout),wide)</visible>
+							<onfocus>SetProperty(ds_setdesc, "Alterna a área de notas do layout Wide entre as estrelas e as três notas IMDb, Letterboxd e Trakt ao mesmo tempo.")</onfocus>
+							<onclick>Skin.ToggleSetting(dstv_wide_show_rating_logos)</onclick>
+							<selected>Skin.HasSetting(dstv_wide_show_rating_logos)</selected>
 						</control>
 					</control>
 					<control type="list" id="8800">

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- DSTV Changes! -->
 <window>
-	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
 	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
 	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
 	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(videoosd) | !String.IsEmpty(Player.SeekNumeric) | !String.IsEmpty(PVR.ChannelNumberInput)</visible>

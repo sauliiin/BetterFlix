@@ -3,7 +3,7 @@
 <window>
 	<defaultcontrol always="true">50</defaultcontrol>
 	<backgroundcolor>background</backgroundcolor>
-	<views>50,51,52,53,54,55,500,501,502</views>
+	<views>50,52,54,55,502</views>
 	<menucontrol>9000</menucontrol>
 	<controls>
 		<include>DefaultBackground</include>
@@ -11,7 +11,6 @@
 			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
 			<include>View_50_List</include>
 			<include>View_52_IconWall</include>
-			<include>View_53_Shift</include>
 			<include>View_54_InfoWall</include>
 			<include>View_55_WideList</include>
 			<include>View_502_FanArt</include>
@@ -25,7 +24,7 @@
 			<control type="group">
 				<depth>DepthContentPanel</depth>
 				<include>OpenClose_Left</include>
-				<visible>Control.IsVisible(50) | Control.Isvisible(54) | [Control.IsVisible(501) + String.IsEqual(Skin.AspectRatio,21:9)]</visible>
+				<visible>Control.IsVisible(50) | [Control.IsVisible(501) + String.IsEqual(Skin.AspectRatio,21:9)]</visible>
 				<include>Visible_Left</include>
 				<include content="ContentPanel">
 					<param name="width" value="500" />
@@ -51,30 +50,116 @@
 						<font>font36_title</font>
 						<label>$INFO[ListItem.Label]</label>
 					</control>
+					<control type="group">
+						<visible>String.IsEqual(Window(home).Property(ds_last_check),Container(54).ListItem.Label) + [!String.IsEmpty(Window(home).Property(ds_info_imdb_rating)) | [!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)] | !String.IsEmpty(Window(home).Property(ds_info_trakt_rating))]</visible>
+						<animation effect="fade" start="0" end="100" time="300" delay="500">Visible</animation>
+						<animation effect="fade" start="100" end="0" time="300" delay="500">Hidden</animation>
+						<left>68</left>
+						<top>220</top>
+						<width>370</width>
+						<height>55</height>
+						<control type="group">
+							<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
+							<animation effect="fade" start="0" end="100" time="300" delay="500">Visible</animation>
+							<animation effect="fade" start="100" end="0" time="300" delay="500">Hidden</animation>
+							<control type="image">
+								<left>-10</left>
+								<top>4</top>
+								<width>60</width>
+								<height>55</height>
+								<aspectratio>keep</aspectratio>
+								<texture>dstv/jedi/imdb.png</texture>
+							</control>
+							<control type="label">
+								<left>54</left>
+								<width>85</width>
+								<height>60</height>
+								<label>$VAR[ds_infoRatIMDB]</label>
+								<font>netBw</font>
+								<shadowcolor>FF000000</shadowcolor>
+								<shadowoffsetx>3</shadowoffsetx>
+								<shadowoffsety>3</shadowoffsety>
+								<textcolor>white</textcolor>
+								<aligny>center</aligny>
+							</control>
+						</control>
+						<control type="group">
+							<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)</visible>
+							<animation effect="fade" start="0" end="100" time="300" delay="500">Visible</animation>
+							<animation effect="fade" start="100" end="0" time="300" delay="500">Hidden</animation>
+							<control type="image">
+								<left>124</left>
+								<top>13</top>
+								<width>37</width>
+								<height>37</height>
+								<aspectratio>keep</aspectratio>
+								<texture>dstv/jedi/letter.png</texture>
+							</control>
+							<control type="label">
+								<left>166</left>
+								<width>85</width>
+								<height>60</height>
+								<label>$VAR[ds_info_letterboxd_rating]</label>
+								<font>netBw</font>
+								<shadowcolor>FF000000</shadowcolor>
+								<shadowoffsetx>3</shadowoffsetx>
+								<shadowoffsety>3</shadowoffsety>
+								<textcolor>white</textcolor>
+								<aligny>center</aligny>
+							</control>
+						</control>
+						<control type="group">
+							<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))</visible>
+							<animation effect="fade" start="0" end="100" time="300" delay="500">Visible</animation>
+							<animation effect="fade" start="100" end="0" time="300" delay="500">Hidden</animation>
+							<control type="image">
+								<left>235</left>
+								<top>14</top>
+								<width>35</width>
+								<height>35</height>
+								<aspectratio>keep</aspectratio>
+								<texture>dstv/jedi/trakt.png</texture>
+							</control>
+							<control type="label">
+								<left>277</left>
+								<width>85</width>
+								<height>60</height>
+								<label>$VAR[ds_info_trakt_rating]</label>
+								<font>netBw</font>
+								<shadowcolor>FF000000</shadowcolor>
+								<shadowoffsetx>3</shadowoffsetx>
+								<shadowoffsety>3</shadowoffsety>
+								<textcolor>white</textcolor>
+								<aligny>center</aligny>
+							</control>
+						</control>
+					</control>
 					<control type="textbox">
 						<visible>!String.IsEmpty(Container(54).ListItem.Genre)</visible>
 						<left>30</left>
-						<top>240</top>
+						<top>290</top>
 						<width>400</width>
 						<bottom>100</bottom>
+						<align>justify</align>
 						<label>$VAR[ds_infoRow2]</label>
 						<font>netSsT</font>
 						<autoscroll delay="10000" time="3000" repeat="10000"></autoscroll>
 					</control>
 					<control type="textbox">
 						<left>30</left>
-						<top>310</top>
+						<top>360</top>
 						<width>400</width>
 						<height>700</height>
 						<bottom>100</bottom>
 						<visible>![ListItem.IsCollection + String.IsEmpty(ListItem.Plot)]</visible>
+						<align>justify</align>
 						<label>$INFO[ListItem.Tagline,[I],[/I][CR][CR]]$INFO[ListItem.Plot][CR][CR]</label>
 						<font>netS</font>
 						<autoscroll delay="10000" time="3000" repeat="10000"></autoscroll>
 					</control>
 					<control type="textbox">
 						<left>30</left>
-						<top>360</top>
+						<top>410</top>
 						<width>400</width>
 						<height>413</height>
 						<align>center</align>
@@ -86,7 +171,7 @@
 					</control>
 					<control type="group">
 						<left>20</left>
-						<top>245</top>
+						<top>295</top>
 						<visible>ListItem.IsCollection + String.IsEmpty(ListItem.Plot)</visible>
 						<include content="InfoList">
 							<param name="bottom" value="108" />

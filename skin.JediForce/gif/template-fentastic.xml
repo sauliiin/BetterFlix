@@ -43,16 +43,16 @@
     <property name="padded_mmid">$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]</property>
 
     <property name="width" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="width" tag="property" attribute="name|displayType" value="landscape">256</property>
+    <property name="width" tag="property" attribute="name|displayType" value="landscape">300</property>
     <property name="width">176</property>
     <property name="height" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="height" tag="property" attribute="name|displayType" value="landscape">150</property>
+    <property name="height" tag="property" attribute="name|displayType" value="landscape">165</property>
     <property name="height">256</property>
     <property name="widget_width" tag="property" attribute="name|displayType" value="squares">180</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">265</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">316</property>
     <property name="widget_width">186</property>
     <property name="widget_height" tag="property" attribute="name|displayType" value="squares">224</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">245</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">240</property>
     <property name="widget_height">350</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">stretch</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
@@ -93,7 +93,7 @@
         <left>114</left>
         <top>30</top>
         <width>120%</width>
-        <height>1015</height>
+        <height>1020</height>
         <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>vertical</orientation>
         <wrap>true</wrap>
@@ -148,6 +148,7 @@
       <controls>
         <include content="ds_widgetPanelList">
           <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
+          <param name="section" value="$SKINSHORTCUTS[padded_mmid]"/>
           <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
           <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
           <param name="sortby" value="$SKINSHORTCUTS[sortby]" />

@@ -2,7 +2,7 @@
 <window>
 	<defaultcontrol always="true">301</defaultcontrol>
 	<backgroundcolor>background</backgroundcolor>
-	<onload condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;options=noGroups)</onload>
+	<onunload condition="System.HasAddon(script.skinshortcuts)">RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;options=noGroups)</onunload>
 	<onunload>ClearProperty(menuItemLabel,10000)</onunload>
 	<onload>SetProperty(DEBUG,0)</onload>
 	<controls>

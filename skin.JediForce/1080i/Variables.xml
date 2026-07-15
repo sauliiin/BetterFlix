@@ -15,6 +15,50 @@
 		<value>special://skin/gif/loadingL.gif</value>
 		<value>special://skin/gif/blank.png</value>
 	</variable>
+	<!-- DSTV: lazy-load de widgets por seção. Gate vazio = seção ativa (carrega); "-" = path inválido (não carrega). -->
+	<variable name="ds_widget_gate_open">
+		<value></value>
+	</variable>
+	<variable name="ds_widget_gate_01">
+		<value condition="Control.IsVisible(501000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_02">
+		<value condition="Control.IsVisible(502000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_03">
+		<value condition="Control.IsVisible(503000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_04">
+		<value condition="Control.IsVisible(504000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_05">
+		<value condition="Control.IsVisible(505000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_06">
+		<value condition="Control.IsVisible(506000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_07">
+		<value condition="Control.IsVisible(507000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_08">
+		<value condition="Control.IsVisible(508000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_09">
+		<value condition="Control.IsVisible(509000)"></value>
+		<value>-</value>
+	</variable>
+	<variable name="ds_widget_gate_10">
+		<value condition="Control.IsVisible(5010000)"></value>
+		<value>-</value>
+	</variable>
 	<variable name="PVRStatusImageVar">
 		<value condition="ListItem.IsRecording">windows/pvr/record.png</value>
 		<value condition="ListItem.HasTimer | ListItem.HasTimerSchedule">windows/pvr/timer.png</value>
@@ -27,6 +71,170 @@
 	</variable>
 	<variable name="AutoCompletionContentVar">
 		<value condition="System.AddonIsEnabled(plugin.program.autocompletion) + !System.HasHiddenInput">plugin://plugin.program.autocompletion?info=autocomplete&amp;&amp;id=$INFO[Control.GetLabel(312).index(1)]&amp;&amp;limit=9</value>
+	</variable>
+	<variable name="kb_key_a">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">A</value>
+		<value>a</value>
+	</variable>
+	<variable name="kb_key_b">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">B</value>
+		<value>b</value>
+	</variable>
+	<variable name="kb_key_c">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">C</value>
+		<value>c</value>
+	</variable>
+	<variable name="kb_key_d">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">D</value>
+		<value>d</value>
+	</variable>
+	<variable name="kb_key_e">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">E</value>
+		<value>e</value>
+	</variable>
+	<variable name="kb_key_f">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">F</value>
+		<value>f</value>
+	</variable>
+	<variable name="kb_key_g">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">G</value>
+		<value>g</value>
+	</variable>
+	<variable name="kb_key_h">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">H</value>
+		<value>h</value>
+	</variable>
+	<variable name="kb_key_i">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">I</value>
+		<value>i</value>
+	</variable>
+	<variable name="kb_key_j">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">J</value>
+		<value>j</value>
+	</variable>
+	<variable name="kb_key_k">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">K</value>
+		<value>k</value>
+	</variable>
+	<variable name="kb_key_l">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">L</value>
+		<value>l</value>
+	</variable>
+	<variable name="kb_key_m">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">M</value>
+		<value>m</value>
+	</variable>
+	<variable name="kb_key_n">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">N</value>
+		<value>n</value>
+	</variable>
+	<variable name="kb_key_o">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">O</value>
+		<value>o</value>
+	</variable>
+	<variable name="kb_key_p">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">P</value>
+		<value>p</value>
+	</variable>
+	<variable name="kb_key_q">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Q</value>
+		<value>q</value>
+	</variable>
+	<variable name="kb_key_r">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">R</value>
+		<value>r</value>
+	</variable>
+	<variable name="kb_key_s">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">S</value>
+		<value>s</value>
+	</variable>
+	<variable name="kb_key_t">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">T</value>
+		<value>t</value>
+	</variable>
+	<variable name="kb_key_u">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">U</value>
+		<value>u</value>
+	</variable>
+	<variable name="kb_key_v">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">V</value>
+		<value>v</value>
+	</variable>
+	<variable name="kb_key_w">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">W</value>
+		<value>w</value>
+	</variable>
+	<variable name="kb_key_x">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">X</value>
+		<value>x</value>
+	</variable>
+	<variable name="kb_key_y">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Y</value>
+		<value>y</value>
+	</variable>
+	<variable name="kb_key_z">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Z</value>
+		<value>z</value>
+	</variable>
+	<variable name="kb_key_a_acute">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Á</value>
+		<value>á</value>
+	</variable>
+	<variable name="kb_key_a_tilde">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Ã</value>
+		<value>ã</value>
+	</variable>
+	<variable name="kb_key_c_cedilla">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">Ç</value>
+		<value>ç</value>
+	</variable>
+	<variable name="kb_key_e_acute">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">É</value>
+		<value>é</value>
+	</variable>
+	<variable name="kb_caps_toggle_value">
+		<value condition="String.IsEmpty(Window(Home).Property(kb_caps_on))">true</value>
+		<value></value>
+	</variable>
+	<variable name="kb_num_symbol_1">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">-</value>
+		<value>$LOCALIZE[12311]</value>
+	</variable>
+	<variable name="kb_num_symbol_2">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">@</value>
+		<value>$LOCALIZE[12312]</value>
+	</variable>
+	<variable name="kb_num_symbol_3">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">:</value>
+		<value>$LOCALIZE[12313]</value>
+	</variable>
+	<variable name="kb_num_symbol_4">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">/</value>
+		<value>$LOCALIZE[12314]</value>
+	</variable>
+	<variable name="kb_num_symbol_5">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">|</value>
+		<value>$LOCALIZE[12315]</value>
+	</variable>
+	<variable name="kb_num_symbol_6">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">_</value>
+		<value>$LOCALIZE[12316]</value>
+	</variable>
+	<variable name="kb_num_symbol_7">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">&amp;</value>
+		<value>$LOCALIZE[12317]</value>
+	</variable>
+	<variable name="kb_num_symbol_8">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">.</value>
+		<value>$LOCALIZE[12318]</value>
+	</variable>
+	<variable name="kb_num_symbol_9">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">?</value>
+		<value>$LOCALIZE[12319]</value>
+	</variable>
+	<variable name="kb_num_symbol_0">
+		<value condition="!String.IsEmpty(Window(Home).Property(kb_caps_on))">!</value>
+		<value>$LOCALIZE[12310]</value>
 	</variable>
 	<variable name="InfoListPathVar">
 		<value condition="String.IsEmpty(Container.PluginName)">$INFO[ListItem.FolderPath]</value>
@@ -306,6 +514,22 @@
 		<value condition="!String.IsEmpty(ListItem.Art(season.poster))">$INFO[ListItem.Art(season.poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
 	</variable>
+	<!-- Classificacao etaria sempre no padrao brasileiro:
+	     1) valor ja traduzido pelo Embuary (Window(Home).Property(mpaa) via tmdb_get_cert)
+	     2) se ListItem.MPAA ja estiver no padrao BR, mantem
+	     3) traduz os codigos crus mais comuns (US/EU/numericos)
+	     4) ultimo caso: mostra o valor cru -->
+	<variable name="InfoDialogMpaaBrVar">
+		<value condition="!String.IsEmpty(Window(Home).Property(mpaa))">$INFO[Window(Home).Property(mpaa)]</value>
+		<value condition="String.IsEqual(ListItem.MPAA,Livre) | String.IsEqual(ListItem.MPAA,10 anos) | String.IsEqual(ListItem.MPAA,12 anos) | String.IsEqual(ListItem.MPAA,14 anos) | String.IsEqual(ListItem.MPAA,16 anos) | String.IsEqual(ListItem.MPAA,18 anos)">$INFO[ListItem.MPAA]</value>
+		<value condition="String.IsEqual(ListItem.MPAA,G) | String.IsEqual(ListItem.MPAA,L) | String.IsEqual(ListItem.MPAA,NR) | String.IsEqual(ListItem.MPAA,Unrated) | String.IsEqual(ListItem.MPAA,Not Rated) | String.IsEqual(ListItem.MPAA,Approved) | String.IsEqual(ListItem.MPAA,Passed) | String.IsEqual(ListItem.MPAA,TV-G) | String.IsEqual(ListItem.MPAA,TV-Y) | String.IsEqual(ListItem.MPAA,Públicos) | String.IsEqual(ListItem.MPAA,M/3) | String.IsEqual(ListItem.MPAA,M/4) | String.IsEqual(ListItem.MPAA,M/6)">Livre</value>
+		<value condition="String.IsEqual(ListItem.MPAA,PG) | String.IsEqual(ListItem.MPAA,TV-PG) | String.IsEqual(ListItem.MPAA,TV-Y7) | String.IsEqual(ListItem.MPAA,10)">10 anos</value>
+		<value condition="String.IsEqual(ListItem.MPAA,PG-13) | String.IsEqual(ListItem.MPAA,M/12) | String.IsEqual(ListItem.MPAA,12)">12 anos</value>
+		<value condition="String.IsEqual(ListItem.MPAA,M/14) | String.IsEqual(ListItem.MPAA,TV-14) | String.IsEqual(ListItem.MPAA,14)">14 anos</value>
+		<value condition="String.IsEqual(ListItem.MPAA,R) | String.IsEqual(ListItem.MPAA,M/16) | String.IsEqual(ListItem.MPAA,16)">16 anos</value>
+		<value condition="String.IsEqual(ListItem.MPAA,NC-17) | String.IsEqual(ListItem.MPAA,M/18) | String.IsEqual(ListItem.MPAA,TV-MA) | String.IsEqual(ListItem.MPAA,18)">18 anos</value>
+		<value>$INFO[ListItem.MPAA]</value>
+	</variable>
 	<variable name="WatchedStatusVar">
 		<value condition="String.IsEqual(Listitem.DBType,tvshow) | String.IsEqual(Listitem.DBType,season)">$INFO[ListItem.Property(WatchedEpisodes)]$INFO[ListItem.Property(TotalEpisodes), / ,]</value>
 		<value condition="String.IsEqual(Listitem.DBType,set)">$INFO[ListItem.Property(Watched)]$INFO[ListItem.Property(Total), / ,]</value>
@@ -383,6 +607,10 @@
 		<value condition="!String.IsEmpty(Skin.String(dstv_trailer_delay_slow))">$INFO[Skin.String(dstv_trailer_delay_slow)]</value>
 		<value condition="String.IsEmpty(Skin.String(dstv_trailer_delay_slow))">5</value>
 	</variable>
+	<variable name="SkinSettingSplashVideoWidgetReadyCount">
+		<value condition="!String.IsEmpty(Skin.String(dstv_splash_video_widget_ready_count))">$INFO[Skin.String(dstv_splash_video_widget_ready_count)]</value>
+		<value condition="String.IsEmpty(Skin.String(dstv_splash_video_widget_ready_count))">4</value>
+	</variable>
 	<variable name="ListSubLabelVar">
 		<value condition="ListItem.IsCollection"></value>
 		<value>[COLOR grey]$INFO[ListItem.Year, (,)][/COLOR]</value>
@@ -406,6 +634,14 @@
 	<variable name="VideoInfoBottomLabelVar">
 		<value condition="Control.HasFocus(8)">$INFO[ListItem.LastPlayed,$LOCALIZE[568]: ]</value>
 		<value condition="Control.HasFocus(6)">$INFO[ListItem.FileNameAndPath]</value>
+	</variable>
+	<variable name="VideoInfoRelatedMovieRecommendationsPath">
+		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=10&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
+		<value></value>
+	</variable>
+	<variable name="VideoInfoRelatedTVRecommendationsPath">
+		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=10&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
+		<value></value>
 	</variable>
 	<variable name="PictureInfoMainLabelVar">
 		<value condition="Window.IsActive(Slideshow)">$INFO[SlideShow.Filename]</value>
@@ -721,12 +957,14 @@
 	<variable name="ThumbnailLayoutVar">
 		<value condition="String.IsEqual(Skin.String(dstv_layout),wide)">dstv/wide.png</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">dstv/FENtasticLike.png</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun)">dstv/OnlyFun.png</value>
 		<value>dstv/standard.png</value>
 	</variable>
 	<variable name="LayoutStyleLabelVar">
 		<value condition="String.IsEqual(Skin.String(dstv_layout),wide)">Wide</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">FENtasticLike</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),standard)">Standard</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun)">OnlyFun</value>
 		<value>Standard</value>
 	</variable>
 </includes>

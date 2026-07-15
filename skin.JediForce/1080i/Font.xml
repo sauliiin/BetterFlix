@@ -48,7 +48,18 @@
 		<font>
 			<name>netS</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>25</size>
+			<size>26</size>
+		</font>
+		<font>
+			<name>netSspaced</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>26</size>
+			<linespacing>1.2</linespacing>
+		</font>
+		<font>
+			<name>netSw</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>24</size>
 		</font>
 		<font>
 			<name>netSpov</name>
@@ -63,7 +74,13 @@
 		<font>
 			<name>netSb</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>24</size>
+			<size>25</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>netSbw</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>23</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -95,7 +112,19 @@
 		<font>
 			<name>netSsT</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>19</size>
+			<size>21</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>netSsTb</name>
+			<filename>Netflix-sans-normal.ttf</filename>
+			<size>21</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>netSsTw</name>
+			<filename>Netflix-sans-light.ttf</filename>
+			<size>20</size>
 			<style>bold</style>
 		</font>
 		<font>

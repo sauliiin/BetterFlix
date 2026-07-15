@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
-	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
+	<onload condition="Player.HasVideo + [!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | !String.IsEmpty(Window(10000).Property(ds_ondemand_trailer_playing))]">Action(fullscreen)</onload>
+	<onload condition="Player.HasVideo + [Integer.IsLess(Player.Duration,600) | String.Contains(ListItem.Tag,trailer)]">PlayerControl(Stop)</onload>
 	<defaultcontrol></defaultcontrol>
 	<controls>
 		<control type="group" id="0">

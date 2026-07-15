@@ -97,11 +97,11 @@
         <include>Visible_Right</include>
         <!-- only one widgets grouplist will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
-        <left>0</left>
+        <left>-50</left>
         <top>55%</top>
-        <width>100%</width>
+        <width>120%</width>
         <height>460</height>
-        <scrolltime tween="sine" easing="inout">500</scrolltime>
+        <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>vertical</orientation>
         <wrap>true</wrap>
         <wraparound>true</wraparound>
@@ -156,6 +156,7 @@
       <controls>
           <include content="ds_widgetPanelList">
             <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
+            <param name="section" value="$SKINSHORTCUTS[padded_mmid]"/>
             <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
             <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
             <param name="sortby" value="$SKINSHORTCUTS[sortby]" />

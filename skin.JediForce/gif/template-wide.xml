@@ -43,17 +43,17 @@
     <property name="padded_mmid">$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]</property>
 
     <property name="width" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="width" tag="property" attribute="name|displayType" value="landscape">256</property>
-    <property name="width">176</property>
+    <property name="width" tag="property" attribute="name|displayType" value="landscape">300</property>
+    <property name="width">170</property>
     <property name="height" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="height" tag="property" attribute="name|displayType" value="landscape">150</property>
-    <property name="height">256</property>
+    <property name="height" tag="property" attribute="name|displayType" value="landscape">162</property>
+    <property name="height">236</property>
     <property name="widget_width" tag="property" attribute="name|displayType" value="squares">180</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">271</property>
-    <property name="widget_width">190</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">316</property>
+    <property name="widget_width">189</property>
     <property name="widget_height" tag="property" attribute="name|displayType" value="squares">224</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">235</property>
-    <property name="widget_height">340</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">228</property>
+    <property name="widget_height">310</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">stretch</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
     <property name="aspect_ratio">stretch</property>
@@ -62,9 +62,9 @@
     <property name="display_type" tag="property" attribute="name|displayType" value="squares">squares</property>
     <property name="display_type" tag="property" attribute="name|displayType" value="landscape">landscape</property>
     <property name="display_type">posters</property>
-    <property name="top_offset" tag="property" attribute="name|displayType" value="landscape">32</property>
+    <property name="top_offset" tag="property" attribute="name|displayType" value="landscape">26</property>
     <property name="top_offset" tag="property" attribute="name|displayType" value="squares">30</property>
-    <property name="top_offset">37</property>
+    <property name="top_offset">25</property>
     <property name="display_type_isposters" tag="property" attribute="name|displayType" value="squares">false</property>
     <property name="display_type_isposters" tag="property" attribute="name|displayType" value="landscape">false</property>
     <property name="display_type_isposters">true</property>
@@ -90,18 +90,19 @@
         <include>Visible_Right</include>
         <!-- only one widgets grouplist will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
-        <left>0</left>
-        <top>38%</top>
+        <left>-100</left>
+        <top>43.5%</top>
         <width>120%</width>
-        <height>672</height>
+        <height>612</height>
         <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>vertical</orientation>
-        <wrap>true</wrap>
-        <wraparound>true</wraparound>
+        <wrap>false</wrap>
+        <wraparound>false</wraparound>
         <!-- Negative value for containing widget header -->
         <itemgap>-40</itemgap>
         <focusposition>0</focusposition>
         <usecontrolcoords>true</usecontrolcoords>
+        <ondown>SetFocus(9000)</ondown>
         <!-- Widget Panels -->
         <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
         <!-- Empty Menu Item button -->
@@ -116,7 +117,7 @@
           <label>This menu item has no widgets or the widgets have no content.[CR]Press OK to edit your Main Menu widgets.[CR](Or hold BACK and select Skin Settings from the popup menu)</label>
           <wrapmultiline>true</wrapmultiline>
           <onup>50$SKINSHORTCUTS[menuid]000</onup>
-          <ondown>50$SKINSHORTCUTS[menuid]000</ondown>
+          <ondown>SetFocus(9000)</ondown>
           <onleft>9000</onleft>
           <onright>9000</onright>
           <onback>9000</onback>
@@ -148,6 +149,7 @@
       <controls>
         <include content="ds_widgetPanelList">
           <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
+          <param name="section" value="$SKINSHORTCUTS[padded_mmid]"/>
           <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
           <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
           <param name="sortby" value="$SKINSHORTCUTS[sortby]" />

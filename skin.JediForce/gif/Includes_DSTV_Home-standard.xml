@@ -5,21 +5,22 @@
 		<definition>
 			<include>ds_customsettings</include>
 			<onunload>ClearProperty(ds_prop_widgetpath, home)</onunload>
+			<onunload>ClearProperty(showimdb_home_splash_active, home)</onunload>
 			<onload>SetFocus(9000,0)</onload>
-			<defaultcontrol>9000</defaultcontrol>
+			<onload condition="String.IsEmpty(Window(home).Property(ds_active_widget_id))">SetFocus(9000,0)</onload>
+			<onload condition="!String.IsEmpty(Window(home).Property(ds_active_widget_id))">SetFocus($INFO[Window(home).Property(ds_active_widget_id)])</onload>
 			<backgroundcolor>background</backgroundcolor>
 
 			<controls>
 				<include>DefaultBackground</include>
 
-				<control type="multiimage">
+				<control type="image">
 					<depth>DepthBackground</depth>
 
 					<aspectratio>scale</aspectratio>
-					<fadetime>500</fadetime>
 					<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
 					<animation effect="fade" start="100" end="0" time="400">WindowClose</animation>
-					<imagepath background="true">$VAR[HomeFanartVar]</imagepath>
+					<texture background="true">$VAR[HomeFanartVar]</texture>
 					<visible>!Player.HasMedia</visible>
 				</control>
 
@@ -46,11 +47,61 @@
 					<top>0</top>
 					<width>1920</width>
 					<height>1080</height>
+					<texture>special://skin/gif/black.png</texture>
+					<visible>String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))</visible>
+					<animation effect="fade" start="100" end="0" delay="3500" time="0">Hidden</animation>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>1920</width>
+					<height>1080</height>
 					<texture>special://skin/gif/splash.png</texture>
 					<visible>String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))</visible>
 					<aspectratio>scale</aspectratio>
-					<animation effect="fade" start="100" end="0" time="500" condition="!String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))">Conditional</animation>
-					<animation effect="fade" start="100" end="0" time="500" delay="10000" condition="true">Conditional</animation>
+					<animation effect="fade" start="50" end="100" time="1500" tween="sine" easing="inout" pulse="true" condition="String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))">Conditional</animation>
+					<animation effect="fade" start="100" end="0" delay="500" time="3000">Hidden</animation>
+				</control>
+
+				<control type="group">
+					<visible>!String.IsEmpty(Window(Home).Property(showimdb_home_splash_active))</visible>
+					<animation effect="fade" start="0" end="100" time="2000">Visible</animation>
+					<animation effect="fade" start="100" end="0" time="2000">Hidden</animation>
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>1920</width>
+						<height>1080</height>
+						<texture>colors/black.png</texture>
+					</control>
+					<control type="videowindow">
+						<left>0</left>
+						<top>0</top>
+						<width>1920</width>
+						<height>1080</height>
+						<visible>Player.HasVideo</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>1920</width>
+						<height>1080</height>
+						<texture>special://skin/gif/splash.png</texture>
+						<visible>String.IsEmpty(Window(Home).Property(showimdb_splash_video_cover_done)) | [Player.HasVideo + Integer.IsLess(Player.Time,1)]</visible>
+						<aspectratio>scale</aspectratio>
+						<animation effect="fade" start="100" end="0" time="800">Hidden</animation>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>1920</width>
+						<height>1080</height>
+						<texture>special://skin/gif/splash.png</texture>
+						<visible>!String.IsEmpty(Window(Home).Property(showimdb_home_splash_active)) + Player.HasVideo</visible>
+						<aspectratio>scale</aspectratio>
+						<animation effect="fade" start="0" end="100" delay="6800" time="800">Visible</animation>
+						<animation effect="fade" start="100" end="0" time="800">Hidden</animation>
+					</control>
 				</control>
 
 			</controls>
@@ -83,7 +134,7 @@
 			</control>
 
 			<control type="videowindow">
-				<visible>Player.HasVideo + Integer.IsGreater(Player.Time,1) + !Player.Paused</visible>
+				<visible>Player.HasVideo + Integer.IsGreater(Player.Time,1) + !Player.Paused + String.IsEmpty(Window(Home).Property(showimdb_home_splash_active))</visible>
 				<hitrect>0,0,0,0</hitrect>
 				<nofocus>true</nofocus>
 				<animation effect="fade" start="0" end="100" time="800">Visible</animation>
@@ -95,10 +146,10 @@
 			</control>
 
 			<control type="image">
-				<visible>Player.HasVideo + Integer.IsGreater(Player.Time,1) + !Player.Paused</visible>
+				<visible>Player.HasVideo + Integer.IsGreater(Player.Time,1) + !Player.Paused + String.IsEmpty(Window(Home).Property(showimdb_home_splash_active))</visible>
 				<right>0</right>
 				<top>0</top>
-				<width>107%</width>
+				<width>105%</width>
 				<height>90%</height>
 				<fadetime>500</fadetime>
 				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
@@ -220,9 +271,9 @@
 				<left>105</left>
 				<top>258</top>
 				<width>700</width>
-				<height>318</height>
+				<height>325</height>
 				<control type="grouplist">
-					<visible>!String.IsEmpty(Window(10000).Property(ds_info_badges_cf))</visible>
+					<visible>!String.IsEmpty(Window(10000).Property(ds_info_badges_cf)) + !String.IsEmpty(ListItem.Rating)</visible>
 					<orientation>horizontal</orientation>
 					<itemgap>6</itemgap>
 					<width>700</width>
@@ -240,19 +291,16 @@
 					</control>
 					<control type="group">
 						<visible>!String.IsEmpty(Window(10000).Property(middle))</visible>
-						<width>120</width>
+						<width>140</width>
 						<height>36</height>
 						<control type="image">
-							<top>-3</top>
+							<top>3</top>
 							<left>0</left>
-							<width>110</width>
-							<height>25</height>
+							<width>130</width>
+							<height>30</height>
 							<aspectratio align="left">keep</aspectratio>
 							<texture>$VAR[ds_infoMiddleStars]</texture>
 							<aligny>center</aligny>
-							<animation type="Conditional" condition="true">
-								<effect type="slide" end="0,8" time="0" />
-							</animation>
 						</control>
 					</control>
 					<control type="label">
@@ -275,7 +323,7 @@
 					</control>
 				</control>
 				<control type="grouplist">
-					<visible>String.IsEmpty(Window(10000).Property(ds_info_badges_cf)) + [!String.IsEmpty(Window(10000).Property(ds_info_awards)) | !String.IsEmpty(Window(10000).Property(ds_info_oscars)) | !String.IsEmpty(Window(10000).Property(ds_info_badges))]</visible>
+					<visible>String.IsEmpty(Window(10000).Property(ds_info_badges_cf)) + [!String.IsEmpty(Window(10000).Property(ds_info_awards)) | !String.IsEmpty(Window(10000).Property(ds_info_oscars)) | !String.IsEmpty(Window(10000).Property(ds_info_badges))] + !String.IsEmpty(ListItem.Rating)</visible>
 					<orientation>horizontal</orientation>
 					<itemgap>6</itemgap>
 					<width>700</width>
@@ -304,19 +352,16 @@
 					</control>
 					<control type="group">
 						<visible>!String.IsEmpty(Window(10000).Property(middle))</visible>
-						<width>120</width>
+						<width>140</width>
 						<height>36</height>
 						<control type="image">
-							<top>-3</top>
+							<top>3</top>
 							<left>0</left>
-							<width>110</width>
-							<height>25</height>
+							<width>130</width>
+							<height>30</height>
 							<aspectratio align="left">keep</aspectratio>
 							<texture>$VAR[ds_infoMiddleStars]</texture>
 							<aligny>center</aligny>
-							<animation type="Conditional" condition="true">
-								<effect type="slide" end="0,8" time="0" />
-							</animation>
 						</control>
 					</control>
 					<control type="label">
@@ -367,7 +412,7 @@
 					</control>
 				</control>
 				<control type="grouplist">
-					<visible>String.IsEmpty(Window(10000).Property(ds_info_awards)) + String.IsEmpty(Window(10000).Property(ds_info_oscars)) + String.IsEmpty(Window(10000).Property(ds_info_badges)) + String.IsEmpty(Window(10000).Property(ds_info_badges_cf))</visible>
+					<visible>String.IsEmpty(Window(10000).Property(ds_info_awards)) + String.IsEmpty(Window(10000).Property(ds_info_oscars)) + String.IsEmpty(Window(10000).Property(ds_info_badges)) + String.IsEmpty(Window(10000).Property(ds_info_badges_cf)) + !String.IsEmpty(ListItem.Rating)</visible>
 					<orientation>horizontal</orientation>
 					<itemgap>6</itemgap>
 					<width>700</width>
@@ -385,19 +430,16 @@
 					</control>
 					<control type="group">
 						<visible>!String.IsEmpty(Window(10000).Property(middle))</visible>
-						<width>120</width>
+						<width>140</width>
 						<height>36</height>
 						<control type="image">
-							<top>-3</top>
+							<top>3</top>
 							<left>0</left>
-							<width>110</width>
-							<height>25</height>
+							<width>130</width>
+							<height>30</height>
 							<aspectratio align="left">keep</aspectratio>
 							<texture>$VAR[ds_infoMiddleStars]</texture>
 							<aligny>center</aligny>
-							<animation type="Conditional" condition="true">
-								<effect type="slide" end="0,8" time="0" />
-							</animation>
 						</control>
 					</control>
 					<control type="label">
@@ -428,7 +470,7 @@
 				<left>105</left>
 				<top>258</top>
 				<width>700</width>
-				<height>305</height>
+				<height>310</height>
 				<control type="textbox">
 					<label>$VAR[ds_infoDescription]</label>
 					<autoscroll delay="6000" time="6000" repeat="6000">Skin.HasSetting(autoscroll)</autoscroll>
@@ -443,16 +485,13 @@
 
 	<include name="InfoAreaRatings">
 		<control type="group">
-			<top>35</top>
-			<right>-20</right>
+			<top>20</top>
+			<right>0</right>
 			<animation effect="fade" start="30" end="100" time="1200" condition="!Player.HasVideo | Player.Paused | Player.HasVideo + Integer.IsLess(Player.Time,2) | Player.HasVideo + Integer.IsGreater(Player.Duration, 600) + Skin.HasSetting(dstv_enable_auto_trailer)" reversible="true">Conditional</animation>
 
 			<control type="group">
-				<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating)) | String.IsEqual(Window(home).Property(ds_last_check), ListItem.Label)</visible>
-				<animation effect="fade" start="100" end="0" time="300">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+				<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
 				<control type="image">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
 					<left>80%</left>
 					<align>left</align>
 					<top>546</top>
@@ -477,11 +516,8 @@
 			</control>
 
 			<control type="group">
-				<visible>[!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)] | String.IsEqual(Window(home).Property(ds_last_check), ListItem.Label)</visible>
-				<animation effect="fade" start="100" end="0" time="300">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+				<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)</visible>
 				<control type="image">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)</visible>
 					<left>87.3%</left>
 					<align>left</align>
 					<top>553</top>
@@ -491,7 +527,6 @@
 					<texture>dstv/jedi/letter.png</texture>
 				</control>
 				<control type="label">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) + !String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)</visible>
 					<left>89.7%</left>
 					<align>left</align>
 					<top>554</top>
@@ -507,11 +542,8 @@
 			</control>
 
 			<control type="group">
-				<visible>[String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) | String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)] + String.IsEqual(Window(home).Property(ds_last_check), ListItem.Label) + !String.IsEmpty(ListItem.Rating)</visible>
-				<animation effect="fade" start="100" end="0" time="300">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+				<visible>[String.IsEmpty(Window(home).Property(ds_info_letterboxd_rating)) | String.IsEqual(Window(home).Property(ds_info_letterboxd_rating),0.0)] + !String.IsEmpty(ListItem.Rating)</visible>
 				<control type="image">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
 					<left>87.3%</left>
 					<align>left</align>
 					<top>555</top>
@@ -521,7 +553,6 @@
 					<texture>dstv/jedi/tmdb1.png</texture>
 				</control>
 				<control type="label">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_imdb_rating))</visible>
 					<left>89.7%</left>
 					<align>left</align>
 					<top>554</top>
@@ -537,11 +568,8 @@
 			</control>
 
 			<control type="group">
-				<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating)) | String.IsEqual(Window(home).Property(ds_last_check), ListItem.Label)</visible>
-				<animation effect="fade" start="100" end="0" time="300">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+				<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))</visible>
 				<control type="image">
-					<visible>!String.IsEmpty(Window(home).Property(ds_info_trakt_rating))</visible>
 					<aspectratio>keep</aspectratio>
 					<left>93%</left>
 					<align>left</align>
@@ -583,9 +611,10 @@
 				<height>480</height>
 				<movement>6</movement>
 				<focusposition>2</focusposition>
-				<onfocus>ClearProperty(ds_active_widget_id, home)</onfocus>
-				<onfocus condition="Player.HasVideo + Integer.IsLess(Player.Duration, 600) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onfocus>
-				<onfocus>ClearProperty(listposition,home)</onfocus>
+				<onfocus condition="String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | String.IsEmpty(Window(home).Property(ds_active_widget_id))">ClearProperty(ds_active_widget_id, home)</onfocus>
+				<onfocus condition="!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) + !String.IsEmpty(Window(home).Property(ds_active_widget_id))">SetFocus($INFO[Window(home).Property(ds_active_widget_id)])</onfocus>
+				<onfocus condition="String.IsEmpty(Window(home).Property(ds_active_widget_id)) + Player.HasVideo + Integer.IsLess(Player.Duration, 600) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onfocus>
+				<onfocus condition="String.IsEmpty(Window(home).Property(ds_active_widget_id))">ClearProperty(listposition,home)</onfocus>
 				<onup>ClearProperty(ds_active_widget_id, home)</onup>
 				<onup>SetFocus(801,0,absolute)</onup>
 				<ondown>ClearProperty(ds_active_widget_id, home)</ondown>
@@ -661,7 +690,7 @@
 					<include content="ds_power">
 						<param name="control_id" value="804" />
 						<param name="icon" value="dstv/jedi/f.png" />
-						<param name="onclick" value="ActivateWindow(Videos,&quot;plugin://plugin.video.pov/?name=32450&iconImage=search.png&mode=navigator.search&quot;,return)" />
+						<param name="onclick" value="ActivateWindow(Videos,&quot;plugin://plugin.video.pov/?name=32450&amp;iconImage=search.png&amp;mode=navigator.search&quot;,return)" />
 					</include>
 				</control>
 
@@ -690,13 +719,14 @@
 	</include>
 
 	<include name="ds_widgetPanelList">
-		<param name="left_offset">100</param>
+		<param name="left_offset">150</param>
 		<param name="top_offset">40</param>
 		<param name="list_top">17</param>
 		<param name="display_titles">false</param>
 		<param name="list_id"/>
 		<param name="widget_header"/>
-		<param name="content_path"/>
+		<param name="content_path" />
+		<param name="section">open</param>
 		<param name="sortby"/>
 		<param name="sortorder"/>
 		<param name="limit"/>
@@ -712,7 +742,7 @@
 		<definition>
 			<control type="group" id="$PARAM[list_id]1">
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
-				<left>140</left>
+				<left>190</left>
 				<width>200%</width>
 				<height>43</height>
 				<control type="group">
@@ -773,14 +803,23 @@
 				<onback>ClearProperty(ds_active_widget_id, home)</onback>
 				<onback>9000</onback>
 				<onright>SetFocus($PARAM[list_id],0,absolute)</onright>
+				<ondown condition="String.IsEqual(Window(home).Property(ds_stack_tmdb_type),movie)">SetFocus($PARAM[list_id]91,0,absolute)</ondown>
+				<ondown condition="String.IsEqual(Window(home).Property(ds_stack_tmdb_type),tv)">SetFocus($PARAM[list_id]93,0,absolute)</ondown>
 				<onfocus>SetProperty(ds_prop_widgetpath, $PARAM[content_path], home)</onfocus>
 				<onfocus>SetProperty(ds_active_widget_id, $PARAM[list_id], home)</onfocus>
-				<scrolltime tween="sine" easing="inout">800</scrolltime>
+				<onclick condition="Player.HasVideo">PlayerControl(Stop)</onclick>
+				<onclick condition="!ListItem.IsFolder">PlayMedia($INFO[ListItem.FileNameAndPath])</onclick>
+				<onclick condition="ListItem.IsFolder">ActivateWindow($PARAM[widget_target],$INFO[ListItem.FileNameAndPath],return)</onclick>
+				
+				<scrolltime tween="sine" easing="inout">700</scrolltime>
 				<orientation>horizontal</orientation>
-				<preloaditems>16</preloaditems>
+				<preloaditems>4</preloaditems>
 				<focusposition>0</focusposition>
 				<itemlayout width="$PARAM[widget_width]">
 					<control type="group">
+						<animation type="Conditional" condition="!Skin.HasSetting(dstv_disable_poster_landscape_magic) + $PARAM[display_type_isposters] + [Control.HasFocus($PARAM[list_id]) | [String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + [!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | [Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused]]]]" reversible="true">
+							<effect type="slide" start="0,0" end="380,0" time="300" tween="sine" easing="inout" />
+						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
 						<width>$PARAM[width]</width>
@@ -967,15 +1006,168 @@
 						</control>
 					</control>
 				</itemlayout>
-				<content browse="auto" sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[widget_target]" limit="$PARAM[limit]">$PARAM[content_path]</content>
+				<content browse="auto" sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[widget_target]" limit="$PARAM[limit]">$VAR[ds_widget_gate_$PARAM[section]]$PARAM[content_path]</content>
 				<focusedlayout width="$PARAM[widget_width]">
+					<!-- Poster to Landscape Magic: landscape popout (focused) -->
 					<control type="group">
+						<visible>!Skin.HasSetting(dstv_disable_poster_landscape_magic) + $PARAM[display_type_isposters] + [Control.HasFocus($PARAM[list_id]) | [String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + [!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | [Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused]]]]</visible>
+						<depth>DepthContentPopout</depth>
+						<animation type="Focus" condition="String.IsEmpty(Window(10000).Property(ds_is_trailer_playing))">
+							<effect type="fade" start="0" end="100" time="300" tween="sine" easing="inout" />
+							<effect type="zoom" start="100" end="94" time="300" tween="sine" easing="in" center="auto" />
+							<effect type="zoom" start="100" end="106" time="300" tween="sine" easing="out" center="auto" delay="300" />
+						</animation>
+						<animation type="Unfocus" condition="String.IsEmpty(Window(10000).Property(ds_is_trailer_playing))" reversible="false">
+							<effect type="fade" start="100" end="0" time="300" delay="300" tween="sine" easing="inout" />
+						</animation>
+						<animation type="Conditional" condition="true">
+							<effect type="slide" start="0,-8" end="0,-8" time="0" />
+						</animation>
+						<left>$PARAM[left_offset]</left>
+						<top>$PARAM[top_offset]</top>
+						<width>600</width>
+						<height>336</height>
+						<control type="button">
+							<texturefocus>-</texturefocus>
+							<texturenofocus>-</texturenofocus>
+							<onfocus>SetProperty(ds_info_title, "$INFO[ListItem.Label]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_dt_premier, "$INFO[ListItem.Premiered]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_dt_date, "$INFO[ListItem.Date]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_dt_year, "$INFO[ListItem.Year]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_duration, "$INFO[ListItem.Duration(h)] hr $INFO[ListItem.Duration(mm)] mins", home)</onfocus>
+							<onfocus>SetProperty(ds_info_rating, "$INFO[ListItem.Rating]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_genre, "$INFO[ListItem.Genre]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_season, "$INFO[ListItem.Season]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_episode, "$INFO[ListItem.Episode]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_totalseasons, "$INFO[ListItem.Property(TotalSeasons)]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_tagline, "$INFO[ListItem.Tagline]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_desc, "$INFO[ListItem.Plot]", home)</onfocus>
+							<onfocus>SetProperty(ds_info_fanart_art, $INFO[ListItem.Art(fanart)], home)</onfocus>
+							<onfocus>SetProperty(ds_info_fanart_prop, $INFO[ListItem.Property(fanart)], home)</onfocus>
+							<onfocus>SetProperty(ds_info_clearlogo, $INFO[ListItem.Art(clearlogo)], home)</onfocus>
+							<onfocus>SetProperty(ds_info_dbtype, $INFO[ListItem.DBType], home)</onfocus>
+							<onfocus>SetProperty(ContextMenuTargetID, $INFO[ListItem.IMDBNumber], home)</onfocus>
+							<onfocus>SetProperty(ContextMenuTargetDBType, $INFO[ListItem.DBType], home)</onfocus>
+							<onfocus>SetProperty(ds_imdb_id, $INFO[ListItem.IMDBNumber], home)</onfocus>
+							<onfocus>SetProperty(ds_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="!String.IsEmpty(ListItem.UniqueID(tmdb))">SetProperty(ds_info_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">SetProperty(ds_info_tmdb_id, $INFO[ListItem.UniqueID(tvshow.tmdb)], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">SetProperty(ds_info_tmdb_id, $INFO[ListItem.IMDBNumber], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + String.IsEmpty(ListItem.IMDBNumber)">ClearProperty(ds_info_tmdb_id, home)</onfocus>
+							<onfocus>SetProperty(ds_stack_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">SetProperty(ds_stack_tmdb_id, $INFO[ListItem.UniqueID(tvshow.tmdb)], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">ClearProperty(ds_stack_tmdb_id, home)</onfocus>
+							<onfocus condition="String.IsEqual(ListItem.DBType,movie)">SetProperty(ds_stack_tmdb_type, movie, home)</onfocus>
+							<onfocus condition="String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)">SetProperty(ds_stack_tmdb_type, tv, home)</onfocus>
+							<onfocus condition="!String.IsEqual(ListItem.DBType,movie) + !String.IsEqual(ListItem.DBType,tvshow) + !String.IsEqual(ListItem.DBType,season) + !String.IsEqual(ListItem.DBType,episode)">ClearProperty(ds_stack_tmdb_type, home)</onfocus>
+							<onclick condition="Player.HasVideo">PlayerControl(Stop)</onclick>
+							<onfocus>SetProperty(ds_last_check, $INFO[ListItem.Label], home)</onfocus>
+						</control>
+						<control type="image">
+							<visible>Control.HasFocus($PARAM[list_id])</visible>
+							<animation type="Conditional" condition="true" loop="true">
+								<effect type="fade" start="30" end="85" time="600" tween="sine" easing="out" />
+								<effect type="fade" start="85" end="85" time="400" delay="600" />
+								<effect type="fade" start="85" end="30" time="550" delay="1000" tween="sine" easing="inout" />
+							</animation>
+							<left>-4</left>
+							<top>-4</top>
+							<right>-4</right>
+							<bottom>-4</bottom>
+							<texture colordiffuse="FFFFFFFF">dstv/jedi/maskl.png</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="image">
+							<visible>[!String.IsEmpty(ListItem.Art(landscape)) | !String.IsEmpty(ListItem.Property(landscape)) | !String.IsEmpty(ListItem.Art(fanart)) | !String.IsEmpty(ListItem.Property(fanart))]</visible>
+							<texture fallback="DefaultFolder.png" background="true" diffuse="dstv/jedi/maskL.png">$VAR[ds_WidgetPanelLandscape]</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="image">
+							<visible>String.IsEmpty(ListItem.Art(landscape)) + String.IsEmpty(ListItem.Property(landscape)) + String.IsEmpty(ListItem.Art(fanart)) + String.IsEmpty(ListItem.Property(fanart))</visible>
+							<texture fallback="DefaultFolder.png" background="true" diffuse="dstv/jedi/maskL.png">$VAR[ds_WidgetPanelLandscape]</texture>
+							<aspectratio>keep</aspectratio>
+						</control>
+						<control type="group">
+							<visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+							<control type="image">
+								<centerleft>50%</centerleft>
+								<bottom>12</bottom>
+								<width>80%</width>
+								<height>3.9%</height>
+								<texture>$VAR[WatchedImageVar]</texture>
+								<aspectratio>stretch</aspectratio>
+								<animation effect="fade" start="100" end="50" time="100" condition="true">Conditional</animation>
+							</control>
+						</control>
+						<control type="group">
+							<visible>ListItem.Property(weather) | Skin.HasSetting(show_widget_titles) | $PARAM[display_titles]</visible>
+							<top>$PARAM[height]</top>
+							<control type="label">
+								<top>-34</top>
+								<align>center</align>
+								<textoffsetx>7</textoffsetx>
+								<font>font12</font>
+								<textcolor>button_focus</textcolor>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+						</control>
+						<control type="image">
+							<left>20</left>
+							<visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
+							<width>42</width>
+							<height>42</height>
+							<texture>dstv/watched.png</texture>
+						</control>
+					</control>
+					<!-- Poster to Landscape Magic: poster (lista sem foco) -->
+					<control type="group">
+						<visible>!Skin.HasSetting(dstv_disable_poster_landscape_magic) + $PARAM[display_type_isposters] + !Control.HasFocus($PARAM[list_id]) + ![String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + [!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | [Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused]]]</visible>
+						<left>$PARAM[left_offset]</left>
+						<top>$PARAM[top_offset]</top>
+						<width>$PARAM[width]</width>
+						<height>$PARAM[height]</height>
+						<control type="image">
+							<visible>[!String.IsEmpty(ListItem.Art(poster)) | !String.IsEmpty(ListItem.Property(poster)) | !String.IsEmpty(ListItem.Art(keyart)) | !String.IsEmpty(ListItem.Property(keyart))]</visible>
+							<texture fallback="dstv/kodi_poster.png" background="true" diffuse="dstv/jedi/mask.png">$VAR[ds_WidgetPanelPoster]</texture>
+							<aspectratio>$PARAM[aspect_ratio]</aspectratio>
+							<colordiffuse>FFFFFFFF</colordiffuse>
+						</control>
+						<control type="image">
+							<visible>String.IsEmpty(ListItem.Art(poster)) + String.IsEmpty(ListItem.Property(poster)) + String.IsEmpty(ListItem.Art(keyart)) + String.IsEmpty(ListItem.Property(keyart))</visible>
+							<texture fallback="dstv/kodi_poster.png" background="true" diffuse="dstv/jedi/mask.png">$VAR[ds_WidgetPanelPoster]</texture>
+							<aspectratio>keep</aspectratio>
+							<colordiffuse>FFFFFFFF</colordiffuse>
+						</control>
+						<control type="group">
+							<visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+							<control type="image">
+								<centerleft>50%</centerleft>
+								<bottom>14</bottom>
+								<width>80%</width>
+								<height>1.7%</height>
+								<texture>$VAR[WatchedImageVar]</texture>
+								<aspectratio>stretch</aspectratio>
+								<animation effect="fade" start="100" end="50" time="100" condition="true">Conditional</animation>
+							</control>
+						</control>
+						<control type="image">
+							<left>23</left>
+							<top>2</top>
+							<visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
+							<width>42</width>
+							<height>42</height>
+							<texture>dstv/watched.png</texture>
+						</control>
+					</control>
+					<control type="group">
+						<visible>[!$PARAM[display_type_isposters] | Skin.HasSetting(dstv_disable_poster_landscape_magic)]</visible>
 						<depth>DepthContentPopout</depth>
 						<animation type="Focus" condition="[!String.IsEqual(Window(home).Property(ds_last_check),ListItem.Label)] + String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) + ![Player.HasVideo + !Player.Paused + [String.IsEmpty(Player.Duration) | Integer.IsLess(Player.Duration,600)]] + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)">
-							<effect type="zoom" start="100" end="115" center="auto" time="800" tween="sine" easing="inout" />
+							<effect type="zoom" start="104" end="98" time="350" tween="sine" easing="in" center="auto" />
+							<effect type="zoom" start="104" end="110" time="350" tween="sine" easing="out" center="auto" delay="350" />
 						</animation>
 						<animation type="unfocus" condition="[!String.IsEqual(Window(home).Property(ds_last_check),ListItem.Label)] + String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) + ![Player.HasVideo + !Player.Paused + [String.IsEmpty(Player.Duration) | Integer.IsLess(Player.Duration,600)]] + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)">
-							<effect type="zoom" start="115" end="100" center="auto" time="800" tween="sine" easing="inout" />
+							<effect type="zoom" start="110" end="104" center="auto" time="700" tween="sine" easing="inout" />
 						</animation>
 						<left>$PARAM[left_offset]</left>
 						<top>$PARAM[top_offset]</top>
@@ -1004,8 +1196,46 @@
 							<onfocus>SetProperty(ContextMenuTargetDBType, $INFO[ListItem.DBType], home)</onfocus>
 							<onfocus>SetProperty(ds_imdb_id, $INFO[ListItem.IMDBNumber], home)</onfocus>
 							<onfocus>SetProperty(ds_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="!String.IsEmpty(ListItem.UniqueID(tmdb))">SetProperty(ds_info_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">SetProperty(ds_info_tmdb_id, $INFO[ListItem.UniqueID(tvshow.tmdb)], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)">SetProperty(ds_info_tmdb_id, $INFO[ListItem.IMDBNumber], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + String.IsEmpty(ListItem.IMDBNumber)">ClearProperty(ds_info_tmdb_id, home)</onfocus>
+							<onfocus>SetProperty(ds_stack_tmdb_id, $INFO[ListItem.UniqueID(tmdb)], home)</onfocus>
+							<onfocus condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">SetProperty(ds_stack_tmdb_id, $INFO[ListItem.UniqueID(tvshow.tmdb)], home)</onfocus>
+							<onfocus condition="String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">ClearProperty(ds_stack_tmdb_id, home)</onfocus>
+							<onfocus condition="String.IsEqual(ListItem.DBType,movie)">SetProperty(ds_stack_tmdb_type, movie, home)</onfocus>
+							<onfocus condition="String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)">SetProperty(ds_stack_tmdb_type, tv, home)</onfocus>
+							<onfocus condition="!String.IsEqual(ListItem.DBType,movie) + !String.IsEqual(ListItem.DBType,tvshow) + !String.IsEqual(ListItem.DBType,season) + !String.IsEqual(ListItem.DBType,episode)">ClearProperty(ds_stack_tmdb_type, home)</onfocus>
 							<onclick condition="Player.HasVideo">PlayerControl(Stop)</onclick>
 							<onfocus>SetProperty(ds_last_check, $INFO[ListItem.Label], home)</onfocus>
+						</control>
+						<control type="image">
+							<visible>$PARAM[display_type_isposters] + Control.HasFocus($PARAM[list_id])</visible>
+							<animation type="Conditional" condition="true" loop="true">
+								<effect type="fade" start="40" end="95" time="550" tween="sine" easing="out" />
+								<effect type="fade" start="95" end="95" time="350" delay="550" />
+								<effect type="fade" start="95" end="40" time="500" delay="900" tween="sine" easing="inout" />
+							</animation>
+							<left>-4</left>
+							<top>-4</top>
+							<right>-4</right>
+							<bottom>-4</bottom>
+							<texture diffuse="dstv/jedi/mask.png" colordiffuse="FFFFFFFF">special://skin/media/white.png</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="image">
+							<visible>$PARAM[display_type_islandscape] + Control.HasFocus($PARAM[list_id])</visible>
+							<animation type="Conditional" condition="true" loop="true">
+								<effect type="fade" start="40" end="95" time="550" tween="sine" easing="out" />
+								<effect type="fade" start="95" end="95" time="350" delay="550" />
+								<effect type="fade" start="95" end="40" time="500" delay="900" tween="sine" easing="inout" />
+							</animation>
+							<left>-4</left>
+							<top>-4</top>
+							<right>-4</right>
+							<bottom>-4</bottom>
+							<texture diffuse="dstv/jedi/maskL.png" colordiffuse="FFFFFFFF">special://skin/media/white.png</texture>
+							<aspectratio>stretch</aspectratio>
 						</control>
 						<control type="image">
 							<visible>$PARAM[display_type_isposters] + [!String.IsEmpty(ListItem.Art(poster)) | !String.IsEmpty(ListItem.Property(poster)) | !String.IsEmpty(ListItem.Art(keyart)) | !String.IsEmpty(ListItem.Property(keyart))]</visible>
@@ -1217,7 +1447,7 @@
 				</focusedlayout>
 				<content>
 					<item>
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label) + String.IsEmpty(Window(10000).Property(ds_is_trailer_playing))</visible>
+						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label) + String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) + ![Player.HasVideo + [String.IsEmpty(Player.Duration) | Integer.IsLess(Player.Duration,600)]]</visible>
 						<icon>$VAR[ds_widget_loading_poster]</icon>
 						<property name="poster">$VAR[ds_widget_loading_poster]</property>
 						<property name="landscape">$VAR[ds_widget_loading_landscape]</property>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
-	<onload condition="Player.HasVideo + String.StartsWith(Player.Duration(hh:mm:ss), &quot;00:0&quot;) + Skin.HasSetting(dstv_enable_auto_trailer)">PlayerControl(Stop)</onload>
 	<onload condition="!Player.PauseEnabled">SetFocus(603)</onload>
 	<defaultcontrol always="true">602</defaultcontrol>
 	<depth>DepthOSD</depth>
@@ -70,12 +69,12 @@
 					</control>
 				</control>
 				<control type="image" id="70042">
-					<left>56</left>
-					<top>-823</top>
-					<width>46</width>
-					<height>46</height>
+					<left>58</left>
+					<top>-1805</top>
+					<width>50</width>
+					<aspectratio>keep</aspectratio>
 					<include>Animation_TopSlide</include>
-					<texture>dstv/jedi/cog.png</texture>
+					<texture>dstv/jedi/cogb1.png</texture>
 					<animation effect="rotate" start="0" end="360" condition="true" center="auto" time="1800" delay="2000" pulse="true">Conditional</animation>
 					<animation effect="fade" start="100" end="0" time="100" condition="Control.HasFocus(70043) | Control.HasFocus(70046) | Control.HasFocus(70048) | Control.HasFocus(70049)">Conditional</animation>
 				</control>

@@ -26,6 +26,9 @@
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetString(dstv_menu_widgets_text_case, titlecase)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.SetBool(no_fanart, false)</onload>
 		<onload>Skin.SetBool(netflix_bg, true)</onload>
+		<onload condition="!Skin.HasSetting(dstv-splash-mp4-setting-init)">Skin.SetBool(dstv_enable_splash_mp4, true)</onload>
+		<onload condition="!Skin.HasSetting(dstv-splash-mp4-setting-init)">Skin.SetBool(dstv-splash-mp4-setting-init, true)</onload>
+		<onload condition="String.IsEmpty(Skin.String(dstv_splash_video_widget_ready_count))">Skin.SetString(dstv_splash_video_widget_ready_count,4)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(netflix_small_diffuse)</onload>
 		<onload>Skin.SetBool(no_slide_animations, true)</onload>
 		<onload condition="!Skin.HasSetting(ds-settings-init)">Skin.Reset(dstv_setting_smaller_watched)</onload>

@@ -31,6 +31,7 @@
 		<param name="onclick">noop</param>
 		<param name="altclick_condition">false</param>
 		<param name="altclick">noop</param>
+		<param name="scroll">false</param>
 		<definition>
 			<control type="togglebutton" id="$PARAM[control_id]">
 				<width>482</width>
@@ -48,6 +49,7 @@
 				<altclick condition="$PARAM[altclick_condition]">$PARAM[altclick]</altclick>
 				<label>$PARAM[label]</label>
 				<altlabel>$PARAM[altlabel]</altlabel>
+				<scroll>$PARAM[scroll]</scroll>
 				<!-- DSTV: background. -->
 				<focusedcolor>black</focusedcolor>
 				<usealttexture>Control.HasFocus($PARAM[control_id])</usealttexture>
@@ -181,19 +183,34 @@
 		<aligny>top</aligny>
 		<font>font45</font>
 	</include>
+	<include name="KeyboardButtonFull">
+		<width>120</width>
+		<height>120</height>
+		<textoffsety>-3</textoffsety>
+		<texturefocus colordiffuse="button_focus">buttons/roundbutton-fo.png</texturefocus>
+		<texturenofocus />
+		<align>center</align>
+		<aligny>center</aligny>
+		<font>font45</font>
+	</include>
 	<include name="KeyboardButtonCompact">
 		<top>9</top>
 		<width>76</width>
 		<height>76</height>
 		<textoffsety>16</textoffsety>
-		<texturefocus border="16" colordiffuse="button_focus">buttons/dialogbutton-fo.png</texturefocus>
+		<texturefocus colordiffuse="button_focus">buttons/roundbutton-fo.png</texturefocus>
 		<texturenofocus />
-		<animation type="Focus" reversible="false">
-			<effect type="zoom" start="100" end="120" center="auto" time="140" tween="sine" easing="out" />
-		</animation>
-		<animation type="Unfocus" reversible="false">
-			<effect type="zoom" start="120" end="100" center="auto" time="140" tween="sine" easing="in" />
-		</animation>
+		<align>center</align>
+		<aligny>top</aligny>
+		<font>font43</font>
+	</include>
+	<include name="KeyboardButtonCompactBottom">
+		<top>9</top>
+		<width>76</width>
+		<height>76</height>
+		<textoffsety>16</textoffsety>
+		<texturefocus />
+		<texturenofocus />
 		<align>center</align>
 		<aligny>top</aligny>
 		<font>font43</font>
@@ -300,6 +317,14 @@
 		<param name="onclick_1_condition">true</param>
 		<param name="onclick_2_condition">true</param>
 		<param name="onclick_3_condition">true</param>
+		<param name="onclick_4_condition">false</param>
+		<param name="onclick_5_condition">false</param>
+		<param name="onclick_6_condition">false</param>
+		<param name="onclick_7_condition">false</param>
+		<param name="onclick_8_condition">false</param>
+		<param name="visible">true</param>
+		<param name="onup_condition">false</param>
+		<param name="onup"></param>
 		<definition>
 			<control type="radiobutton" id="$PARAM[id]">
 				<width>$PARAM[width]</width>
@@ -326,6 +351,29 @@
 				<onclick condition="$PARAM[onclick_1_condition]">$PARAM[onclick_1]</onclick>
 				<onclick condition="$PARAM[onclick_2_condition]">$PARAM[onclick_2]</onclick>
 				<onclick condition="$PARAM[onclick_3_condition]">$PARAM[onclick_3]</onclick>
+				<onclick condition="$PARAM[onclick_4_condition]">$PARAM[onclick_4]</onclick>
+				<onclick condition="$PARAM[onclick_5_condition]">$PARAM[onclick_5]</onclick>
+				<onclick condition="$PARAM[onclick_6_condition]">$PARAM[onclick_6]</onclick>
+				<onclick condition="$PARAM[onclick_7_condition]">$PARAM[onclick_7]</onclick>
+				<onclick condition="$PARAM[onclick_8_condition]">$PARAM[onclick_8]</onclick>
+				<onup condition="$PARAM[onup_condition]">$PARAM[onup]</onup>
+				<onfocus condition="String.IsEqual($PARAM[id],444) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">SetProperty(ds_pov_show_related,true)</onfocus>
+				<onunfocus condition="String.IsEqual($PARAM[id],444) + !String.IsEmpty(Window.Property(ds_pov_show_related)) + String.IsEmpty(Window.Property(ds_pov_keep_related))">ClearProperty(ds_pov_show_related)</onunfocus>
+				<onleft condition="String.IsEqual($PARAM[id],444)">ClearProperty(ds_pov_keep_related)</onleft>
+				<onleft condition="String.IsEqual($PARAM[id],444)">ClearProperty(ds_pov_show_related)</onleft>
+				<onleft condition="String.IsEqual($PARAM[id],444)">443</onleft>
+				<onright condition="String.IsEqual($PARAM[id],444)">SetProperty(ds_pov_show_related,true)</onright>
+				<onright condition="String.IsEqual($PARAM[id],444)">SetProperty(ds_pov_keep_related,true)</onright>
+				<onright condition="String.IsEqual($PARAM[id],444) + Control.IsVisible(98181)">SetFocus(98181,0,absolute)</onright>
+				<onright condition="String.IsEqual($PARAM[id],444) + Control.IsVisible(98183)">SetFocus(98183,0,absolute)</onright>
+				<onright condition="String.IsEqual($PARAM[id],441) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">SetProperty(ds_pov_show_related,true)</onright>
+				<onright condition="String.IsEqual($PARAM[id],441) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">SetProperty(ds_pov_keep_related,true)</onright>
+				<onright condition="String.IsEqual($PARAM[id],441) + String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie)">SetFocus(98181,0,absolute)</onright>
+				<onright condition="String.IsEqual($PARAM[id],441) + String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv)">SetFocus(98183,0,absolute)</onright>
+				<ondown condition="String.IsEqual($PARAM[id],444)">ClearProperty(ds_pov_keep_related)</ondown>
+				<ondown condition="String.IsEqual($PARAM[id],444)">ClearProperty(ds_pov_show_related)</ondown>
+				<ondown condition="String.IsEqual($PARAM[id],444) + Control.IsVisible(50)">SetFocus(50,0)</ondown>
+				<ondown condition="String.IsEqual($PARAM[id],444) + !Control.IsVisible(50)">140</ondown>
 				<visible>$PARAM[visible]</visible>
 				<animation effect="fade" start="100" end="0" time="300" delay="300">Hidden</animation>
 			</control>
@@ -333,6 +381,8 @@
 	</include>
 	<include name="InfoDialogToggleButton">
 		<param name="width">250</param>
+		<param name="onup_condition">false</param>
+		<param name="onup"></param>
 		<definition>
 			<control type="radiobutton" id="$PARAM[id]">
 				<width>$PARAM[width]</width>
@@ -359,6 +409,7 @@
 				<label>$PARAM[label]</label>
 				<onclick>$PARAM[onclick_1]</onclick>
 				<onclick>$PARAM[onclick_2]</onclick>
+				<onup condition="$PARAM[onup_condition]">$PARAM[onup]</onup>
 				<visible>$PARAM[visible]</visible>
 			</control>
 		</definition>
@@ -422,5 +473,171 @@
 			</control>
 		</focusedlayout>
 	</include>
+	<include name="VideoInfoRelatedStaticItem">
+		<param name="i" />
+		<definition>
+			<item>
+				<label>$INFO[Window(home).Property(ds_recs_$PARAM[i]_title)]</label>
+				<property name="poster">$INFO[Window(home).Property(ds_recs_$PARAM[i]_poster)]</property>
+				<property name="fanart">$INFO[Window(home).Property(ds_recs_$PARAM[i]_fanart)]</property>
+				<property name="tmdb_id">$INFO[Window(home).Property(ds_recs_$PARAM[i]_tmdb)]</property>
+				<property name="source_tmdb_id">$INFO[Window(home).Property(ds_recs_source_tmdb)]</property>
+				<property name="Plot">$INFO[Window(home).Property(ds_recs_$PARAM[i]_plot)]</property>
+				<property name="Overview">$INFO[Window(home).Property(ds_recs_$PARAM[i]_plot)]</property>
+				<property name="Year">$INFO[Window(home).Property(ds_recs_$PARAM[i]_year)]</property>
+				<property name="Rating">$INFO[Window(home).Property(ds_recs_$PARAM[i]_rating)]</property>
+				<visible>!String.IsEmpty(Window(home).Property(ds_recs_$PARAM[i]_tmdb))</visible>
+			</item>
+		</definition>
+	</include>
+	<include name="VideoInfoRelatedRow">
+		<param name="list_id" />
+		<param name="top">0</param>
+		<param name="header" />
+		<param name="visible">true</param>
+		<param name="up_id">138</param>
+		<param name="down_id">5000</param>
+		<param name="info_call">movie</param>
+		<param name="content_path" />
+		<definition>
+			<control type="fixedlist" id="$PARAM[list_id]">
+				<visible>$PARAM[visible]</visible>
+				<left>24</left>
+				<top>$PARAM[top]</top>
+				<width>1227</width>
+				<height>286</height>
+				<orientation>horizontal</orientation>
+				<onleft>SetFocus(444,0,absolute)</onleft>
+				<onright>$PARAM[list_id]</onright>
+				<onup>$PARAM[up_id]</onup>
+				<ondown>$PARAM[down_id]</ondown>
+				<onunfocus>ClearProperty(ds_pov_keep_related)</onunfocus>
+				<onunfocus>ClearProperty(ds_pov_show_related)</onunfocus>
+				<onback>ClearProperty(ds_pov_keep_related)</onback>
+				<onback>ClearProperty(ds_pov_show_related)</onback>
+				<onback>5000</onback>
+				<onclick condition="String.IsEqual(Container($PARAM[list_id]).ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(Container($PARAM[list_id]).ListItem.Property(tmdb_id))">RunScript(script.showimdb,?action=open_info&amp;dbtype=$PARAM[info_call]&amp;list_id=$PARAM[list_id]&amp;tmdb_id=$INFO[Container($PARAM[list_id]).ListItem.Property(tmdb_id)])</onclick>
+				<onclick condition="String.IsEqual(Container($PARAM[list_id]).ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id)) + String.IsEmpty(Container($PARAM[list_id]).ListItem.Property(tmdb_id)) + !String.IsEmpty(Container($PARAM[list_id]).ListItem.UniqueID(tmdb))">RunScript(script.showimdb,?action=open_info&amp;dbtype=$PARAM[info_call]&amp;list_id=$PARAM[list_id]&amp;tmdb_id=$INFO[Container($PARAM[list_id]).ListItem.UniqueID(tmdb)])</onclick>
+				<scrolltime tween="sine" easing="inout">450</scrolltime>
+				<preloaditems>4</preloaditems>
+				<focusposition>0</focusposition>
+				<itemlayout width="204" height="286">
+					<control type="group">
+						<visible>String.IsEqual(ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id))</visible>
+						<left>4</left>
+						<top>4</top>
+						<width>184</width>
+						<height>276</height>
+						<control type="image">
+							<width>184</width>
+							<height>276</height>
+							<texture fallback="dstv/kodi_poster.png" background="true" diffuse="dstv/jedi/mask.png">$VAR[ds_WidgetPanelPoster]</texture>
+							<aspectratio>scale</aspectratio>
+							<colordiffuse>DDFFFFFF</colordiffuse>
+						</control>
+						<control type="image">
+							<top>234</top>
+							<width>184</width>
+							<height>42</height>
+							<texture colordiffuse="99000000">colors/black.png</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="label">
+							<left>8</left>
+							<top>239</top>
+							<width>168</width>
+							<height>30</height>
+							<font>font9</font>
+							<textcolor>FFFFFFFF</textcolor>
+							<shadowcolor>black</shadowcolor>
+							<align>center</align>
+							<label>$INFO[ListItem.Label]</label>
+							<scroll>true</scroll>
+						</control>
+					</control>
+				</itemlayout>
+				<focusedlayout width="204" height="286">
+					<control type="group">
+						<visible>String.IsEqual(ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id))</visible>
+						<left>4</left>
+						<top>4</top>
+						<width>184</width>
+						<height>276</height>
+						<animation effect="zoom" center="auto" start="100" end="102" time="180" tween="sine" easing="out">Focus</animation>
+						<animation effect="zoom" center="auto" start="102" end="100" time="160" tween="sine" easing="in">UnFocus</animation>
+						<control type="image">
+							<animation type="Conditional" condition="true" loop="true">
+								<effect type="fade" start="40" end="95" time="550" tween="sine" easing="out" />
+								<effect type="fade" start="95" end="95" time="350" delay="550" />
+								<effect type="fade" start="95" end="40" time="500" delay="900" tween="sine" easing="inout" />
+							</animation>
+							<left>-4</left>
+							<top>-4</top>
+							<width>192</width>
+							<height>284</height>
+							<texture diffuse="dstv/jedi/mask.png" colordiffuse="FFFFFFFF">special://skin/media/white.png</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="image">
+							<width>184</width>
+							<height>276</height>
+							<texture fallback="dstv/kodi_poster.png" background="true" diffuse="dstv/jedi/mask.png">$VAR[ds_WidgetPanelPoster]</texture>
+							<aspectratio>scale</aspectratio>
+						</control>
+						<control type="image">
+							<top>234</top>
+							<width>184</width>
+							<height>42</height>
+							<texture colordiffuse="B3000000">colors/black.png</texture>
+							<aspectratio>stretch</aspectratio>
+						</control>
+						<control type="label">
+							<left>8</left>
+							<top>239</top>
+							<width>168</width>
+							<height>30</height>
+							<font>font9</font>
+							<textcolor>FFFFFFFF</textcolor>
+							<shadowcolor>black</shadowcolor>
+							<align>center</align>
+							<label>$INFO[ListItem.Label]</label>
+							<scroll>true</scroll>
+						</control>
+					</control>
+				</focusedlayout>
+				<content>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="0" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="1" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="2" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="3" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="4" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="5" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="6" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="7" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="8" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="9" /></include>
+				</content>
+			</control>
+			<control type="group">
+				<visible>$PARAM[visible] + [Container($PARAM[list_id]).IsUpdating | !Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | !String.IsEqual(Container($PARAM[list_id]).ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id))]</visible>
+				<left>24</left>
+				<top>$PARAM[top]</top>
+				<width>1227</width>
+				<height>286</height>
+				<control type="image">
+					<texture colordiffuse="FF000000">colors/black.png</texture>
+					<aspectratio>stretch</aspectratio>
+				</control>
+				<control type="label">
+					<width>1227</width>
+					<height>286</height>
+					<font>font12</font>
+					<align>center</align>
+					<aligny>center</aligny>
+					<textcolor>99FFFFFF</textcolor>
+					<label>Carregando...</label>
+				</control>
+			</control>
+		</definition>
+	</include>
 </includes>
-

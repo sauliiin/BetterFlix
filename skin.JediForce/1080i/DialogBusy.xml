@@ -1,72 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
-	<controls>
-		<control type="group">
-			<visible>String.IsEmpty(Window(home).Property(ds_is_trailer_playing))</visible>
-			<control type="group">
-				<centerleft>50%</centerleft>
-				<centertop>50%</centertop>
-	  			<control type="image">
-					<centerleft>50%</centerleft>
-					<centertop>46.4%</centertop>
-					<width>70</width>
-					<height>70</height>
-					<aspectratio>keep</aspectratio>
-					<texture>dstv/jedi/netflix.png</texture>
-					<animation type="WindowOpen">
-						<effect type="fade" start="0" end="100" time="600" delay="1500" />
-					</animation>
-					<animation effect="rotate"
-						center="auto"
-						start="360" end="0"
-						time="500"
-						loop="true"
-						condition="true">Conditional</animation>
-					<animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
-				</control>
-				<control type="image">
-					<centerleft>50%</centerleft>
-					<centertop>46.4%</centertop>
-					<width>38</width>
-					<height>38</height>
-					<aspectratio>keep</aspectratio>
-					<texture>dstv/jedi/netflix2.png</texture>
-					<animation type="WindowOpen">
-						<effect type="fade" start="0" end="100" time="600" delay="2500" />
-					</animation>
-					<animation effect="rotate"
-						center="auto"
-						start="0" end="360"
-						time="700"
-						loop="true"
-						condition="true">Conditional</animation>
-					<animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
-				</control>
-				<control type="label" id="$PARAM[list_id]2">
-					<animation type="WindowOpen">
-						<effect type="fade" start="0" end="100" time="600" delay="3500" />
-					</animation>
-					<animation effect="fade" start="100" end="30" time="800" pulse="true" condition="true">Conditional</animation>
-					<left>46.7%</left>
-					<top>52.1%</top>
-					<width>100%</width>
-					<height>50</height>
-					<font>netBb</font>
-					<textcolor>white</textcolor>
-					<label>Loading</label>
-				</control>
-				<control type="image">
-					<animation type="WindowOpen">
-						<effect type="fade" start="0" end="100" time="600" delay="3500" />
-					</animation>
-					<animation effect="fade" start="100" end="40" time="800" pulse="true" condition="true">Conditional</animation>
-					<left>6.3%</left>
-					<top>51.6%</top>
-					<height>70</height>
-					<aspectratio>keep</aspectratio>
-					<texture>special://skin/gif/dots.gif</texture>
-				</control>
-			</control>
-		</control>
-	</controls>
+    <controls>
+
+        <control type="group">
+            <visible>Window.IsActive(home)</visible>
+            <animation effect="fade" start="0" end="100" time="1500" delay="2500" tween="sine" easing="out">WindowOpen</animation>
+            <control type="button" id="9000">
+                <left>0</left>
+                <top>0</top>
+                <width>100%</width>
+                <height>100%</height>
+                <onleft>9000</onleft>
+                <onright>9000</onright>
+                <onup>9000</onup>
+                <ondown>9000</ondown>
+                <texturefocus />
+                <texturenofocus />
+                <onclick>noop</onclick>
+            </control>
+
+            <control type="group">
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>1920</width>
+                    <height>1080</height>
+                    <texture>black.png</texture>
+                </control>
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>1920</width>
+                    <height>1080</height>
+                    <texture>$VAR[ds_infoFanart]</texture>
+                    <animation effect="fade" start="0" end="100" time="800" tween="sine">WindowOpen</animation>
+                </control>
+                <control type="image">
+                    <visible>String.IsEmpty(Window(Home).Property(ds_infoFanart))</visible>
+                    <left>0</left>
+                    <top>0</top>
+                    <width>1920</width>
+                    <height>1080</height>
+                    <texture>$INFO[Window.Property(tikiskins.source_progress.fanart)]</texture>
+                    <animation effect="fade" start="0" end="100" time="800" tween="sine">WindowOpen</animation>
+                </control>
+            </control>
+            <control type="image">
+                <animation effect="fade" start="100" end="0" time="1200" pulse="true" condition="true">Conditional</animation>
+                <width>35%</width>
+                <height>290</height>
+                <aspectratio>keep</aspectratio>
+                <texture>$INFO[Window(Home).Property(ds_info_clearlogo)]</texture>
+                <visible>!Player.HasVideo | [Player.HasVideo + String.IsEmpty(Player.Art(tvshow.clearlogo)) + String.IsEmpty(Player.Art(clearlogo))]</visible>
+                <centerleft>50%</centerleft>
+                <centertop>35%</centertop>
+            </control>
+            <control type="image">
+                <animation effect="fade" start="100" end="0" time="1200" pulse="true" condition="true">Conditional</animation>
+                <width>35%</width>
+                <height>290</height>
+                <aspectratio>keep</aspectratio>
+                <texture>$VAR[PlayerClearLogoVar]</texture>
+                <visible>Player.HasVideo + [!String.IsEmpty(Player.Art(tvshow.clearlogo)) | !String.IsEmpty(Player.Art(clearlogo))]</visible>
+                <centerleft>50%</centerleft>
+                <centertop>35%</centertop>
+            </control>
+
+            <control type="label">
+                <centerleft>50%</centerleft>
+                <centertop>74.4%</centertop>
+                <visible>!Player.HasVideo | [Player.HasVideo + String.IsEmpty(VideoPlayer.Season) + String.IsEmpty(VideoPlayer.Tagline)]</visible>
+                <label>$VAR[ds_infoTagline]</label>
+                <font>netBb</font>
+                <align>center</align>
+            </control>
+            <control type="label">
+                <centerleft>50%</centerleft>
+                <centertop>74.4%</centertop>
+                <visible>Player.HasVideo + String.IsEmpty(VideoPlayer.Season) + !String.IsEmpty(VideoPlayer.Tagline)</visible>
+                <label>$INFO[VideoPlayer.Tagline]</label>
+                <font>netBb</font>
+                <align>center</align>
+            </control>
+
+            <control type="label">
+                <centerleft>50%</centerleft>
+                <centertop>74.4%</centertop>
+                <visible>Player.HasVideo + !String.IsEmpty(VideoPlayer.Season)</visible>
+                <label>Temporada $INFO[VideoPlayer.Season]  •  Episódio $INFO[VideoPlayer.Episode]</label>
+                <font>netS</font>
+                <align>center</align>
+            </control>
+
+            <control type="textbox">
+                <visible>!Player.HasVideo | [Player.HasVideo + String.IsEmpty(VideoPlayer.Plot)]</visible>
+                <label>$VAR[ds_infoDescription]</label>
+                <centerleft>50%</centerleft>
+                <centertop>69.1%</centertop>
+                <width>915</width>
+                <height>350</height>
+                <font>netSpov</font>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
+                <align>center</align>
+            </control>
+            <control type="textbox">
+                <visible>Player.HasVideo + !String.IsEmpty(VideoPlayer.Plot)</visible>
+                <label>$INFO[VideoPlayer.Plot]</label>
+                <centerleft>50%</centerleft>
+                <centertop>69.1%</centertop>
+                <width>915</width>
+                <height>350</height>
+                <font>netSpov</font>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
+                <align>center</align>
+            </control>
+
+        </control>
+
+        <control type="group">
+            <visible>!Window.IsActive(home) + String.IsEmpty(Window(10000).Property(ds_infowall_active)) + ![[Window.IsActive(videos) | Window.IsVisible(videos)] + Control.IsVisible(54)]</visible>
+            <animation effect="fade" start="0" end="100" time="1000" delay="2000" tween="sine" easing="out">WindowOpen</animation>
+            <control type="group">
+                <centerleft>50%</centerleft>
+                <centertop>50%</centertop>
+                <control type="image">
+                    <centerleft>50%</centerleft>
+                    <centertop>46.4%</centertop>
+                    <width>70</width>
+                    <height>70</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>dstv/jedi/netflix.png</texture>
+                    <animation type="WindowOpen">
+                        <effect type="fade" start="0" end="100" time="600" delay="3000" />
+                    </animation>
+                    <animation effect="rotate" center="auto" start="360" end="0" time="500" loop="true" condition="true">Conditional</animation>
+                    <animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
+                </control>
+                <control type="image">
+                    <centerleft>50%</centerleft>
+                    <centertop>46.4%</centertop>
+                    <width>38</width>
+                    <height>38</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>dstv/jedi/netflix2.png</texture>
+                    <animation type="WindowOpen">
+                        <effect type="fade" start="0" end="100" time="600" delay="4000" />
+                    </animation>
+                    <animation effect="rotate" center="auto" start="0" end="360" time="700" loop="true" condition="true">Conditional</animation>
+                    <animation effect="fade" start="100" end="60" time="200" pulse="true" condition="true">Conditional</animation>
+                </control>
+                <control type="label" id="$PARAM[list_id]2">
+                    <animation type="WindowOpen">
+                        <effect type="fade" start="0" end="100" time="600" delay="5000" />
+                    </animation>
+                    <animation effect="fade" start="100" end="30" time="800" pulse="true" condition="true">Conditional</animation>
+                    <left>46.7%</left>
+                    <top>52.1%</top>
+                    <width>100%</width>
+                    <height>50</height>
+                    <font>netBb</font>
+                    <textcolor>white</textcolor>
+                    <label>Loading</label>
+                </control>
+                <control type="image">
+                    <animation type="WindowOpen">
+                        <effect type="fade" start="0" end="100" time="600" delay="5000" />
+                    </animation>
+                    <animation effect="fade" start="100" end="40" time="800" pulse="true" condition="true">Conditional</animation>
+                    <left>6.3%</left>
+                    <top>51.6%</top>
+                    <height>70</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>special://skin/gif/dots.gif</texture>
+                </control>
+            </control>
+        </control>
+    </controls>
 </window>

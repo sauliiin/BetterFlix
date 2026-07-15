@@ -65,7 +65,7 @@
 				<effect type="slide" end="0,-20" time="60" tween="sine" />
 				<effect type="slide" end="0,20" time="180" tween="sine" delay="80" />
 			</animation>
-			<scrolltime tween="cubic" easing="out">500</scrolltime>
+			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<include>OpenClose_Right</include>
 			<itemgap>-160</itemgap>
 			<visible>!String.StartsWith(Weather.Temperature,$LOCALIZE[503])</visible>

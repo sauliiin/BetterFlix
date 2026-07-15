@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<defaultcontrol always="true">138</defaultcontrol>
-	<onload>Container.Update(videodb://video/-1/,replace)</onload>
+	<defaultcontrol always="true">5000</defaultcontrol>
+	<onload>SetFocus(5000,0)</onload>
 	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
 	<onload>SetProperty(CurrentMovieID,$INFO[ListItem.UniqueID(tmdb)]$INFO[ListItem.IMDBNumber])</onload>
+	<onload>ClearProperty(ds_dialog_tmdb_id)</onload>
+	<onload>ClearProperty(ds_dialog_tmdb_type)</onload>
+	<onload>ClearProperty(ds_pov_open_path,home)</onload>
+	<onload>ClearProperty(ds_pov_show_related)</onload>
+	<onload>ClearProperty(ds_pov_keep_related)</onload>
+	<onload>ClearProperty(ds_pov_item_title)</onload>
+	<onload>ClearProperty(ds_pov_item_plot)</onload>
+	<onload>SetProperty(ds_dialog_tmdb_id,$INFO[ListItem.UniqueID(tmdb)])</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(ListItem.Property(tmdb_id))">SetProperty(ds_dialog_tmdb_id,$INFO[ListItem.Property(tmdb_id)])</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(Window(Home).Property(ds_tmdb_id))">SetProperty(ds_dialog_tmdb_id,$INFO[Window(Home).Property(ds_tmdb_id)])</onload>
+	<onload condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))">SetProperty(ds_dialog_tmdb_id,$INFO[ListItem.UniqueID(tvshow.tmdb)])</onload>
+	<onload condition="String.IsEqual(ListItem.DBType,movie)">SetProperty(ds_dialog_tmdb_type,movie)</onload>
+	<onload condition="String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)">SetProperty(ds_dialog_tmdb_type,tv)</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_type)) + String.IsEqual(ListItem.Property(DBType),movie)">SetProperty(ds_dialog_tmdb_type,movie)</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_type)) + [String.IsEqual(ListItem.Property(DBType),tv) | String.IsEqual(ListItem.Property(DBType),tvshow) | String.IsEqual(ListItem.Property(DBType),season) | String.IsEqual(ListItem.Property(DBType),episode)]">SetProperty(ds_dialog_tmdb_type,tv)</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_type)) + String.IsEqual(Window(Home).Property(ds_info_dbtype),movie)">SetProperty(ds_dialog_tmdb_type,movie)</onload>
+	<onload condition="String.IsEmpty(Window.Property(ds_dialog_tmdb_type)) + [String.IsEqual(Window(Home).Property(ds_info_dbtype),tv) | String.IsEqual(Window(Home).Property(ds_info_dbtype),tvshow) | String.IsEqual(Window(Home).Property(ds_info_dbtype),season) | String.IsEqual(Window(Home).Property(ds_info_dbtype),episode)]">SetProperty(ds_dialog_tmdb_type,tv)</onload>
 
-	<onload>RunScript(script.embuaryEnhanced.info, mode=reset_scroll)</onload>
+	<onload>RunScript(script.embuaryEnhanced.info,mode=reset_scroll,focus_id=5000,focus_position=0)</onload>
 	<onunload>ClearProperty(ActorList.State)</onunload>
 	<onunload>ClearProperty(CurrentMovieID)</onunload>
+	<onunload>ClearProperty(ds_dialog_tmdb_id)</onunload>
+	<onunload>ClearProperty(ds_dialog_tmdb_type)</onunload>
+	<onunload>ClearProperty(ds_pov_show_related)</onunload>
+	<onunload>ClearProperty(ds_pov_keep_related)</onunload>
+	<onunload>ClearProperty(ds_pov_item_title)</onunload>
+	<onunload>ClearProperty(ds_pov_item_plot)</onunload>
 	<onunload>ClearProperty(infobackground,home)</onunload>
 
 	<onunload>ClearProperty(TextViewer_Header,home)</onunload>
@@ -15,7 +38,10 @@
 	<onunload>ClearProperty(mpaa,home)</onunload>
 	<onunload>ClearProperty(budget,home)</onunload>
 	<onunload>ClearProperty(revenue,home)</onunload>
+	<onunload>ClearProperty(awards,home)</onunload>
 	<onunload>ClearProperty(imdb_combined,home)</onunload>
+	<onunload>ClearProperty(trakt_combined,home)</onunload>
+	<onunload>ClearProperty(letterboxd_combined,home)</onunload>
 	<onunload>ClearProperty(ds_info_clearlogo,home)</onunload>
 	<!-- Cleanup Filmografia -->
 	<onunload>ClearProperty(ActorFilms.Name,Home)</onunload>
@@ -64,7 +90,7 @@
 					<left>4</left>
 					<top>4</top>
 					<width>520</width>
-					<height>816</height>
+					<height>960</height>
 					<aspectratio>scale</aspectratio>
 					<texture fallback="DefaultVideo.png" background="true">$VAR[InfoDialogPosterVar]</texture>
 				</control>
@@ -96,14 +122,18 @@
 			<!-- BOTÕES DE AÇÃO - Abaixo do poster -->
 			<!-- ======================================== -->
 			<control type="grouplist" id="5000">
-				<left>62</left>
-				<top>880</top>
+				<left>70</left>
+				<top>850</top>
 				<width>460</width>
 				<height>200</height>
 				<onleft>5000</onleft>
-				<onright>5000</onright>
+				<onright>SetProperty(ds_pov_show_related,true)</onright>
+				<onright>SetProperty(ds_pov_keep_related,true)</onright>
+				<onright condition="Control.IsVisible(98181)">SetFocus(98181,0,absolute)</onright>
+				<onright condition="Control.IsVisible(98183)">SetFocus(98183,0,absolute)</onright>
 				<onup>140</onup>
-				<ondown>SetFocus(50,0)</ondown>
+				<ondown condition="Control.IsVisible(50)">SetFocus(50,0)</ondown>
+				<ondown condition="!Control.IsVisible(50)">140</ondown>
 				<itemgap>-18</itemgap>
 				<align>center</align>
 				<orientation>horizontal</orientation>
@@ -111,46 +141,108 @@
 				<include content="InfoDialogToggleButton">
 					<param name="id" value="8" />
 					<param name="icon_on" value="icons/filemanager.png" />
-					<param name="icon_off" value="icons/infodialogs/play.png" />
+					<param name="icon_off" value="dstv/play.png" />
 					<param name="selected" value="!String.IsEmpty(ListItem.Path) + [String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)]" />
 					<param name="label" value="$VAR[VideoInfoPlayButtonLabelVar]" />
 					<param name="visible" value="true" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
+				</include>
+				<include content="InfoDialogButton">
+					<param name="id" value="445" />
+					<param name="icon" value="dstv/check.png" />
+					<param name="label" value="Assistir depois" />
+					<param name="onclick_1_condition" value="true" />
+					<param name="onclick_1" value="RunScript(script.showimdb, ?action=mdblist_collection&amp;collection_action=add&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;tmdb_id=$INFO[Window(home).Property(ds_info_tmdb_id)])" />
+					<param name="onclick_2_condition" value="false" />
+					<param name="onclick_3_condition" value="false" />
+					<param name="visible" value="true" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
 				</include>
 				<include content="InfoDialogButton">
 					<param name="id" value="11" />
-					<param name="icon" value="icons/infodialogs/trailer.png" />
+					<param name="icon" value="dstv/trailer.png" />
 					<param name="label" value="$LOCALIZE[20410]" />
-					<onclick>RunScript(script.showimdb, ?action=play_trailer&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)])</onclick>
+					<param name="onclick_1_condition" value="true" />
+					<param name="onclick_1" value="RunScript(script.showimdb, ?action=play_trailer)" />
+					<param name="onclick_2_condition" value="false" />
+					<param name="onclick_3_condition" value="false" />
 					<param name="visible" value="true" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
 				</include>
 				<include content="InfoDialogButton">
-					<param name="id" value="441" />
-					<param name="icon" value="icons/infodialogs/cinema.png" />
-					<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
-					<param name="onclick_2" value="RunScript(script.cinemavision,experience)" />
-					<param name="label" value="$LOCALIZE[31003]" />
-					<param name="visible" value="System.AddonIsEnabled(script.cinemavision) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]" />
-				</include>
-				<include content="InfoDialogButton">
-					<param name="id" value="14" />
-					<param name="icon" value="icons/infodialogs/info.png" />
+					<param name="id" value="442" />
+					<param name="icon" value="dstv/info.png" />
 					<param name="label" value="Detalhes" />
 					<param name="onclick_1_condition" value="String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
 					<param name="onclick_1" value="RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
 					<param name="onclick_2_condition" value="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
 					<param name="onclick_2" value="RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[ListItem.UniqueID(tmdb)])" />
-					<param name="onclick_3_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_3" value="RunScript(script.embuaryEnhanced.info,call=movie,dbid=$INFO[ListItem.DBID])" />
-					<param name="onclick_4_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb))" />
-					<param name="onclick_4" value="RunScript(script.embuaryEnhanced.info,call=tv,dbid=$INFO[ListItem.DBID])" />
-					<param name="visible" value="System.AddonIsEnabled(script.embuaryEnhanced.info) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]" />
+					<param name="onclick_3_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)" />
+					<param name="onclick_3" value="RunScript(script.embuaryEnhanced.info,call=movie,external_id=$INFO[ListItem.IMDBNumber])" />
+					<param name="onclick_4_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(ListItem.IMDBNumber)" />
+					<param name="onclick_4" value="RunScript(script.embuaryEnhanced.info,call=tv,external_id=$INFO[ListItem.IMDBNumber])" />
+					<param name="onclick_5_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.IMDBNumber) + !String.IsEmpty(ListItem.DBID)" />
+					<param name="onclick_5" value="RunScript(script.embuaryEnhanced.info,call=movie,dbid=$INFO[ListItem.DBID])" />
+					<param name="onclick_6_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.IMDBNumber) + !String.IsEmpty(ListItem.DBID)" />
+					<param name="onclick_6" value="RunScript(script.embuaryEnhanced.info,call=tv,dbid=$INFO[ListItem.DBID])" />
+					<param name="onclick_7_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.IMDBNumber) + String.IsEmpty(ListItem.DBID)" />
+					<param name="onclick_7" value="RunScript(script.embuaryEnhanced.info,call=movie,query='$ESCINFO[ListItem.Title]',year=$INFO[ListItem.Year])" />
+					<param name="onclick_8_condition" value="String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(ListItem.IMDBNumber) + String.IsEmpty(ListItem.DBID)" />
+					<param name="onclick_8" value="RunScript(script.embuaryEnhanced.info,call=tv,query='$ESCINFO[ListItem.Title]',year=$INFO[ListItem.Year])" />
+					<param name="visible" value="true" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
+				</include>
+				<include content="InfoDialogButton">
+					<param name="id" value="443" />
+					<param name="icon" value="dstv/recommended.png" />
+					<param name="label" value="Recomendados" />
+					<param name="onclick_1_condition" value="true" />
+					<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
+					<param name="onclick_2_condition" value="String.IsEqual(ListItem.DBType,movie) + !String.IsEmpty(ListItem.UniqueID(tmdb))" />
+					<param name="onclick_2" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[ListItem.UniqueID(tmdb)]&amp;limit=20&amp;reload=$INFO[ListItem.UniqueID(tmdb)],return)" />
+					<param name="onclick_3_condition" value="[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))" />
+					<param name="onclick_3" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[ListItem.UniqueID(tvshow.tmdb)]&amp;limit=20&amp;reload=$INFO[ListItem.UniqueID(tvshow.tmdb)],return)" />
+					<!-- fallback to ds_dialog_tmdb_id property when ListItem.UniqueID is empty (e.g., opened from some views) -->
+					<param name="onclick_4_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))" />
+					<param name="onclick_4" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=20&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)],return)" />
+					<!-- fallback to IMDB number when UniqueID and ds_dialog_tmdb_id are not available -->
+					<param name="onclick_6_condition" value="String.IsEqual(ListItem.DBType,movie) + String.IsEmpty(ListItem.UniqueID(tmdb)) + String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(ListItem.IMDBNumber)" />
+					<param name="onclick_6" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[ListItem.IMDBNumber]&amp;limit=20&amp;reload=$INFO[ListItem.IMDBNumber],return)" />
+					<param name="onclick_5_condition" value="[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))" />
+					<param name="onclick_5" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=20&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)],return)" />
+					<!-- fallback to IMDB number when UniqueID and ds_dialog_tmdb_id are not available -->
+					<param name="onclick_6_condition" value="[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + String.IsEmpty(ListItem.UniqueID(tvshow.tmdb)) + String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(ListItem.IMDBNumber)" />
+					<param name="onclick_6" value="ActivateWindow(Videos,plugin://plugin.video.pov/?mode=build_pov_recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[ListItem.IMDBNumber]&amp;limit=20&amp;reload=$INFO[ListItem.IMDBNumber],return)" />
+					<param name="visible" value="System.AddonIsEnabled(plugin.video.pov) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + [!String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.UniqueID(tvshow.tmdb))]" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
+				</include>
+				<include content="InfoDialogButton">
+					<param name="id" value="444" />
+					<param name="icon" value="dstv/support.png" />
+					<param name="label" value="Para Você" />
+					<param name="onclick_1_condition" value="true" />
+					<param name="onclick_1" value="SetProperty(ds_pov_show_related,true)" />
+					<param name="onclick_2_condition" value="true" />
+					<param name="onclick_2" value="SetProperty(ds_pov_keep_related,true)" />
+					<param name="onclick_3_condition" value="String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie)" />
+					<param name="onclick_3" value="SetFocus(98181,0,absolute)" />
+					<param name="onclick_4_condition" value="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv)" />
+					<param name="onclick_4" value="SetFocus(98183,0,absolute)" />
+					<param name="visible" value="!String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_type))" />
+					<param name="onup_condition" value="true" />
+					<param name="onup" value="140" />
 				</include>
 			</control>
 			<include content="LeftRightArrows">
 				<param name="list_id" value="5000" />
-				<param name="left_posx" value="30" />
-				<param name="right_posx" value="525" />
-				<param name="posy" value="935" />
+				<param name="left_posx" value="40" />
+				<param name="right_posx" value="530" />
+				<param name="posy" value="905" />
 				<param name="visible" value="true" />
 			</include>
 
@@ -173,7 +265,8 @@
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
-						<onup>SetFocus(50,0)</onup>
+						<onup condition="Control.IsVisible(50)">SetFocus(50,0)</onup>
+						<onup condition="!Control.IsVisible(50)">5000</onup>
 						<onleft>5000</onleft>
 						<onright>4000</onright>
 						<ondown>5000</ondown>
@@ -185,7 +278,14 @@
 						<height>735</height>
 						<left>-30</left>
 						<texture border="21">dialogs/dialog-bg.png</texture>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138)</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="image">
+						<width>785</width>
+						<height>353</height>
+						<left>-30</left>
+						<texture border="21">dialogs/dialog-bg.png</texture>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="image">
 						<width>775</width>
@@ -193,7 +293,15 @@
 						<left>-25</left>
 						<top>5</top>
 						<texture border="18" colordiffuse="B3FFFFFF">colors/white.png</texture>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138)</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="image">
+						<width>775</width>
+						<height>343</height>
+						<left>-25</left>
+						<top>5</top>
+						<texture border="18" colordiffuse="B3FFFFFF">colors/white.png</texture>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="button" id="139">
 						<width>1245</width>
@@ -205,12 +313,31 @@
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
 						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
-						<onup>SetFocus(50,0)</onup>
+						<onup condition="Control.IsVisible(50)">SetFocus(50,0)</onup>
+						<onup condition="!Control.IsVisible(50)">5000</onup>
 						<onleft>5000</onleft>
 						<onright>4000</onright>
 						<ondown>5000</ondown>
 						<texturenofocus border="21">dialogs/dialog-bg.png</texturenofocus>
-						<visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="button">
+						<width>1245</width>
+						<height>353</height>
+						<label></label>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Header,Críticas do Trakt,home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">SetProperty(TextViewer_Text,$ESCINFO[Window(Home).Property(Trakt.Reviews)],home)</onclick>
+						<onclick condition="!String.IsEmpty(Window(Home).Property(Trakt.Reviews))">ActivateWindow(1102)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
+						<onclick condition="String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
+						<onup condition="Control.IsVisible(50)">SetFocus(50,0)</onup>
+						<onup condition="!Control.IsVisible(50)">5000</onup>
+						<onleft>5000</onleft>
+						<onright>4000</onright>
+						<ondown>5000</ondown>
+						<texturenofocus border="21">dialogs/dialog-bg.png</texturenofocus>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>20</left>
@@ -221,7 +348,18 @@
 						<align>justify</align>
 						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<top>35</top>
+						<width>690</width>
+						<height>290</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>8</left>
@@ -232,7 +370,18 @@
 						<align>justify</align>
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="textbox">
+						<left>8</left>
+						<top>25</top>
+						<width>710</width>
+						<height>310</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label fallback="19055">$INFO[ListItem.Plot]</label>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + !Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>20</left>
@@ -244,7 +393,19 @@
 						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
 						<textcolor>background</textcolor>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<top>35</top>
+						<width>690</width>
+						<height>290</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<textcolor>background</textcolor>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>8</left>
@@ -256,7 +417,19 @@
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<textcolor>background</textcolor>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="textbox">
+						<left>8</left>
+						<top>25</top>
+						<width>710</width>
+						<height>310</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label fallback="19055">$INFO[ListItem.Plot]</label>
+						<textcolor>background</textcolor>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>Integer.IsGreater(Container(4000).NumItems,0) + Control.HasFocus(138) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>20</left>
@@ -267,7 +440,18 @@
 						<align>justify</align>
 						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<top>35</top>
+						<width>1145</width>
+						<height>290</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label>$INFO[Window(Home).Property(Trakt.Reviews)]</label>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + !String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
 					<control type="textbox">
 						<left>10</left>
@@ -278,8 +462,27 @@
 						<align>justify</align>
 						<label fallback="19055">$INFO[ListItem.Plot]</label>
 						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
-						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + String.IsEmpty(Window(Home).Property(Trakt.Reviews))</visible>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					</control>
+					<control type="textbox">
+						<left>10</left>
+						<top>25</top>
+						<width>1165</width>
+						<height>310</height>
+						<font>netSd</font>
+						<align>justify</align>
+						<label fallback="19055">$INFO[ListItem.Plot]</label>
+						<autoscroll delay="6000" time="3000" repeat="6000">Skin.HasSetting(AutoScroll)</autoscroll>
+						<visible>!Integer.IsGreater(Container(4000).NumItems,0) + String.IsEmpty(Window(Home).Property(Trakt.Reviews)) + !String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
+					</control>
+				</control>
+				<control type="image">
+					<left>775</left>
+					<top>335</top>
+					<width>482</width>
+					<height>695</height>
+					<texture colordiffuse="4D000000">colors/white.png</texture>
+					<visible>Control.IsVisible(4000)</visible>
 				</control>
 				<control type="image">
 					<left>775</left>
@@ -287,16 +490,16 @@
 					<width>482</width>
 					<height>313</height>
 					<texture colordiffuse="4D000000">colors/white.png</texture>
-					<visible>Control.IsVisible(4000)</visible>
+					<visible>Control.HasFocus(98181) | Control.HasFocus(98183)</visible>
 				</control>
 				<control type="grouplist" id="4000">
 					<orientation>vertical</orientation>
 					<left>775</left>
 					<top>335</top>
-					<height>310</height>
+					<height>690</height>
 					<itemgap>-16</itemgap>
 					<ondown>5000</ondown>
-					<visible>!Control.HasFocus(50) + !Control.HasFocus(6001)</visible>
+					<visible>!Control.HasFocus(50) + !Control.HasFocus(6001) + !Control.HasFocus(98181) + !Control.HasFocus(98183)</visible>
 					<animation effect="fade" start="0" end="100" time="300" reversed="false">Visible</animation>
 					<animation effect="fade" start="100" end="0" time="300" reversed="false">Hidden</animation>
 					<onup>50</onup>
@@ -316,9 +519,30 @@
 					<include content="InfoDialogMetadata">
 						<param name="font" value="font10" />
 						<param name="control_id" value="149" />
+						<param name="label" value="[B][COLOR red]IMDB: [/COLOR][/B]$INFO[ListItem.Rating(imdb)] / 10$INFO[ListItem.Votes(imdb), (, votos)]" />
+						<param name="altlabel" value="IMDB: $INFO[ListItem.Rating(imdb)] / 10$INFO[ListItem.Votes(imdb), (, votos)]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Rating(imdb))" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="172" />
 						<param name="label" value="[B][COLOR red]IMDB: [/COLOR][/B]$INFO[Window(Home).Property(imdb_combined)]" />
 						<param name="altlabel" value="IMDB: $INFO[Window(Home).Property(imdb_combined)]" />
-						<param name="visible" value="!String.IsEmpty(Window(Home).Property(imdb_combined))" />
+						<param name="visible" value="String.IsEmpty(ListItem.Rating(imdb)) + !String.IsEmpty(Window(Home).Property(imdb_combined))" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="169" />
+						<param name="label" value="[B][COLOR red]Trakt: [/COLOR][/B]$INFO[Window(Home).Property(trakt_combined)]" />
+						<param name="altlabel" value="Trakt: $INFO[Window(Home).Property(trakt_combined)]" />
+						<param name="visible" value="!String.IsEmpty(Window(Home).Property(trakt_combined))" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="170" />
+						<param name="label" value="[B][COLOR red]Letterboxd: [/COLOR][/B]$INFO[Window(Home).Property(letterboxd_combined)]" />
+						<param name="altlabel" value="Letterboxd: $INFO[Window(Home).Property(letterboxd_combined)]" />
+						<param name="visible" value="!String.IsEmpty(Window(Home).Property(letterboxd_combined))" />
 					</include>
 
 					<include content="InfoDialogMetadata">
@@ -326,6 +550,7 @@
 						<param name="control_id" value="150" />
 						<param name="label" value="[B][COLOR red]$LOCALIZE[515]: [/COLOR][/B]$INFO[ListItem.Genre]" />
 						<param name="altlabel" value="$LOCALIZE[515]: $INFO[ListItem.Genre]" />
+						<param name="scroll" value="true" />
 						<param name="visible" value="!String.IsEmpty(ListItem.Genre) + String.IsEqual(ListItem.DBType,movie)" />
 					</include>
 					<include content="InfoDialogMetadata">
@@ -366,9 +591,9 @@
 					<include content="InfoDialogMetadata">
 						<param name="font" value="font10" />
 						<param name="control_id" value="168" />
-						<param name="label" value="[B][COLOR red]Classificação: [/COLOR][/B]$INFO[Window(Home).Property(mpaa)]" />
-						<param name="altlabel" value="Classificação: $INFO[Window(Home).Property(mpaa)]" />
-						<param name="visible" value="!String.IsEmpty(Window(Home).Property(mpaa)) + String.IsEqual(ListItem.DBType,movie)" />
+						<param name="label" value="[B][COLOR red]Classificação: [/COLOR][/B]$VAR[InfoDialogMpaaBrVar]" />
+						<param name="altlabel" value="Classificação: $VAR[InfoDialogMpaaBrVar]" />
+						<param name="visible" value="[!String.IsEmpty(ListItem.MPAA) | !String.IsEmpty(Window(Home).Property(mpaa))] + String.IsEqual(ListItem.DBType,movie)" />
 					</include>
 					<include content="InfoDialogMetadata">
 						<param name="font" value="font10" />
@@ -394,19 +619,83 @@
 					<include content="InfoDialogMetadata">
 						<param name="font" value="font10" />
 						<param name="control_id" value="166" />
+						<param name="label" value="[B][COLOR red]Orçamento: [/COLOR][/B]$INFO[ListItem.Property(budget)]" />
+						<param name="altlabel" value="Orçamento: $INFO[ListItem.Property(budget)]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Property(budget)) + String.IsEqual(ListItem.DBType,movie)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="174" />
 						<param name="label" value="[B][COLOR red]Orçamento: [/COLOR][/B]$INFO[Window(Home).Property(budget)]" />
 						<param name="altlabel" value="Orçamento: $INFO[Window(Home).Property(budget)]" />
-						<param name="visible" value="!String.IsEmpty(Window(Home).Property(budget)) + String.IsEqual(ListItem.DBType,movie)" />
+						<param name="visible" value="String.IsEmpty(ListItem.Property(budget)) + !String.IsEmpty(Window(Home).Property(budget)) + String.IsEqual(ListItem.DBType,movie)" />
 					</include>
 					<include content="InfoDialogMetadata">
 						<param name="font" value="font10" />
 						<param name="control_id" value="167" />
+						<param name="label" value="[B][COLOR red]Receita: [/COLOR][/B]$INFO[ListItem.Property(revenue)]" />
+						<param name="altlabel" value="Receita: $INFO[ListItem.Property(revenue)]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Property(revenue)) + String.IsEqual(ListItem.DBType,movie)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="175" />
 						<param name="label" value="[B][COLOR red]Receita: [/COLOR][/B]$INFO[Window(Home).Property(revenue)]" />
 						<param name="altlabel" value="Receita: $INFO[Window(Home).Property(revenue)]" />
-						<param name="visible" value="!String.IsEmpty(Window(Home).Property(revenue)) + String.IsEqual(ListItem.DBType,movie)" />
+						<param name="visible" value="String.IsEmpty(ListItem.Property(revenue)) + !String.IsEmpty(Window(Home).Property(revenue)) + String.IsEqual(ListItem.DBType,movie)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="173" />
+						<param name="label" value="[B][COLOR red]Awards: [/COLOR][/B]$INFO[Window(Home).Property(awards)]" />
+						<param name="altlabel" value="Awards: $INFO[Window(Home).Property(awards)]" />
+						<param name="visible" value="!String.IsEmpty(Window(Home).Property(awards))" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="176" />
+						<param name="label" value="[B][COLOR red]Facts: [/COLOR][/B]$INFO[Window(Home).Property(ds_info_badges)]" />
+						<param name="altlabel" value="Facts: $INFO[Window(Home).Property(ds_info_badges)]" />
+						<param name="scroll" value="true" />
+						<param name="visible" value="!String.IsEmpty(Window(Home).Property(ds_info_badges))" />
 					</include>
 				</control>
-
+				<control type="textbox">
+					<left>790</left>
+					<top>360</top>
+					<width>450</width>
+					<height>250</height>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<align>justify</align>
+					<label>[B]$INFO[Window.Property(ds_pov_item_title)][/B][CR][CR]$INFO[Window.Property(ds_pov_item_plot)]</label>
+					<autoscroll delay="3500" repeat="5000" time="2500">true</autoscroll>
+					<visible>false</visible>
+				</control>
+				<control type="textbox">
+					<left>790</left>
+					<top>360</top>
+					<width>450</width>
+					<height>250</height>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<align>justify</align>
+					<label>[B]$INFO[Container(98181).ListItem.Label]$INFO[Container(98181).ListItem.Property(Year), (,)][/B][CR][CR]$INFO[Container(98181).ListItem.Plot]$INFO[Container(98181).ListItem.Property(Plot)]$INFO[Container(98181).ListItem.Property(Overview)]</label>
+					<autoscroll delay="3500" repeat="5000" time="2500">true</autoscroll>
+					<visible>Control.HasFocus(98181) + String.IsEqual(Container(98181).ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id))</visible>
+				</control>
+				<control type="textbox">
+					<left>790</left>
+					<top>360</top>
+					<width>450</width>
+					<height>250</height>
+					<font>font10</font>
+					<textcolor>white</textcolor>
+					<align>justify</align>
+					<label>[B]$INFO[Container(98183).ListItem.Label]$INFO[Container(98183).ListItem.Property(Year), (,)][/B][CR][CR]$INFO[Container(98183).ListItem.Plot]$INFO[Container(98183).ListItem.Property(Plot)]$INFO[Container(98183).ListItem.Property(Overview)]</label>
+					<autoscroll delay="3500" repeat="5000" time="2500">true</autoscroll>
+					<visible>Control.HasFocus(98183) + String.IsEqual(Container(98183).ListItem.Property(source_tmdb_id),Window.Property(ds_dialog_tmdb_id))</visible>
+				</control>
 				<control type="image">
 					<left>150</left>
 					<top>80</top>
@@ -417,7 +706,7 @@
 					<align>center</align>
 					<aligny>center</aligny>
 					<animation type="WindowOpen" reversible="false">
-						<effect type="fade" start="100" end="0" time="2000" />
+						<effect type="fade" start="100" end="0" delay="1500" time="3000" />
 					</animation>
 				</control>
 
@@ -453,6 +742,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.0.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.0.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.0.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.0.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.0.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.0.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.0.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 1 -->
@@ -463,6 +754,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.1.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.1.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.1.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.1.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.1.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.1.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.1.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 2 -->
@@ -473,6 +766,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.2.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.2.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.2.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.2.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.2.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.2.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.2.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 3 -->
@@ -483,6 +778,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.3.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.3.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.3.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.3.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.3.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.3.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.3.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 4 -->
@@ -493,6 +790,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.4.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.4.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.4.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.4.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.4.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.4.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.4.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 5 -->
@@ -503,6 +802,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.5.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.5.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.5.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.5.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.5.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.5.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.5.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 6 -->
@@ -513,6 +814,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.6.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.6.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.6.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.6.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.6.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.6.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.6.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 7 -->
@@ -523,6 +826,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.7.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.7.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.7.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.7.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.7.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.7.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.7.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 8 -->
@@ -533,6 +838,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.8.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.8.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.8.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.8.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.8.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.8.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.8.Name)]')</onclick>
 						</item>
 
 						<!-- Cast 9 -->
@@ -543,6 +850,8 @@
 							<label2>$INFO[Window(Home).Property(Cast.9.Role)]</label2>
 							<property name="Bio">$INFO[Window(Home).Property(Cast.9.Bio)]</property>
 							<property name="Biography">$INFO[Window(Home).Property(Cast.9.Biography)]</property>
+							<onclick condition="!String.IsEmpty(Window(Home).Property(Cast.9.ID))">RunScript(script.embuaryEnhanced.info,call=person,tmdb_id=$INFO[Window(Home).Property(Cast.9.ID)])</onclick>
+							<onclick condition="String.IsEmpty(Window(Home).Property(Cast.9.ID))">RunScript(script.embuaryEnhanced.info,call=person,query='$ESCINFO[Window(Home).Property(Cast.9.Name)]')</onclick>
 						</item>
 					</content>
 
@@ -595,12 +904,12 @@
 							<animation effect="zoom" center="auto" start="110" end="100" time="200" tween="sine" easing="in">UnFocus</animation>
 							<visible>!String.IsEmpty(ListItem.Label)</visible>
 							<control type="image">
-								<left>0</left>
-								<top>1.5</top>
-								<width>188</width>
-								<height>228</height>
+								<left>3</left>
+								<top>5</top>
+								<width>180</width>
+								<height>220</height>
 								<texture colordiffuse="FFE50914">colors/white.png</texture>
-								<bordersize>4</bordersize>
+								<bordersize>2</bordersize>
 								<aspectratio>scale</aspectratio>
 								<visible>Control.HasFocus(50)</visible>
 							</control>
@@ -672,8 +981,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.0.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.0.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.0.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.0.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.0.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.0.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.0.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.0.MediaType)]</property>
@@ -683,8 +992,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.1.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.1.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.1.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.1.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.1.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.1.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.1.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.1.MediaType)]</property>
@@ -694,8 +1003,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.2.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.2.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.2.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.2.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.2.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.2.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.2.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.2.MediaType)]</property>
@@ -705,8 +1014,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.3.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.3.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.3.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.3.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.3.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.3.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.3.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.3.MediaType)]</property>
@@ -716,8 +1025,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.4.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.4.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.4.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.4.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.4.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.4.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.4.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.4.MediaType)]</property>
@@ -727,8 +1036,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.5.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.5.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.5.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.5.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.5.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.5.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.5.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.5.MediaType)]</property>
@@ -738,8 +1047,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.6.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.6.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.6.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.6.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.6.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.6.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.6.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.6.MediaType)]</property>
@@ -749,8 +1058,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.7.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.7.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.7.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.7.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.7.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.7.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.7.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.7.MediaType)]</property>
@@ -760,8 +1069,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.8.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.8.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.8.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.8.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.8.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.8.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.8.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.8.MediaType)]</property>
@@ -771,8 +1080,8 @@
 							<icon>$INFO[Window(Home).Property(ActorFilms.9.Poster)]</icon>
 							<label>$INFO[Window(Home).Property(ActorFilms.9.Title)]</label>
 							<label2>$INFO[Window(Home).Property(ActorFilms.9.Year)]</label2>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),movie)">RunScript(script.embuaryEnhanced.info,call=movie,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
-							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),tv)">RunScript(script.embuaryEnhanced.info,call=tv,tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),movie)">RunScript(script.showimdb,?action=open_info&amp;dbtype=movie&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
+							<onclick condition="String.IsEqual(Window(Home).Property(ActorFilms.9.MediaType),tv)">RunScript(script.showimdb,?action=open_info&amp;dbtype=tv&amp;list_id=6001&amp;tmdb_id=$INFO[Window(Home).Property(ActorFilms.9.ID)])</onclick>
 							<property name="Overview">$INFO[Window(Home).Property(ActorFilms.9.Overview)]</property>
 							<property name="tmdb_id">$INFO[Window(Home).Property(ActorFilms.9.ID)]</property>
 							<property name="DBType">$INFO[Window(Home).Property(ActorFilms.9.MediaType)]</property>
@@ -813,12 +1122,12 @@
 							<animation effect="zoom" center="auto" start="108" end="100" time="200" tween="sine" easing="in">UnFocus</animation>
 							<visible>!String.IsEmpty(ListItem.Label)</visible>
 							<control type="image">
-								<left>1</left>
-								<top>26</top>
-								<width>237</width>
-								<height>337</height>
+								<left>5</left>
+								<top>30</top>
+								<width>230</width>
+								<height>330</height>
 								<texture colordiffuse="FFE50914">colors/white.png</texture>
-								<bordersize>3</bordersize>
+								<bordersize>2</bordersize>
 								<aspectratio>scale</aspectratio>
 								<visible>Control.HasFocus(6001)</visible>
 							</control>
@@ -846,11 +1155,9 @@
 					</focusedlayout>
 				</control>
 
-				<!-- ======================================== -->
-				<!-- BIO/BIOGRAFIA + SINOPSE OVERLAY -->
-				<!-- Abaixo dos posters, no mesmo espaço -->
-				<!-- ======================================== -->
+				<!-- Biografia do ator/filmografia: exibida somente durante o foco. -->
 				<control type="group">
+					<visible>String.IsEmpty(Window.Property(ds_pov_show_related))</visible>
 					<right>50</right>
 					<top>700</top>
 					<width>480</width>
@@ -861,24 +1168,11 @@
 						<width>490</width>
 						<height>330</height>
 						<texture colordiffuse="4D000000">colors/white.png</texture>
-						<visible>!String.IsEmpty(Window(Home).Property(ds_cast_bios)) | !String.IsEmpty(Container(50).ListItem.Property(Bio)) | !String.IsEmpty(Container(6001).ListItem.Property(Overview))</visible>
+						<visible>[Control.HasFocus(50) + !String.IsEmpty(Container(50).ListItem.Property(Bio))] | [Control.HasFocus(6001) + !String.IsEmpty(Container(6001).ListItem.Property(Overview))]</visible>
 					</control>
 
-					<!-- Estado 1: Bio resumida (cast sem foco, sem filme focado) -->
 					<control type="textbox">
-						<visible>!Control.HasFocus(50) + !Control.HasFocus(6001) + !String.IsEmpty(Window(Home).Property(ds_cast_bios))</visible>
-						<animation effect="fade" time="500">VisibleChange</animation>
-						<width>480</width>
-						<height>308</height>
-						<font>font9</font>
-						<textcolor>white</textcolor>
-						<label>$INFO[Window(Home).Property(ds_cast_bios)]</label>
-						<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
-					</control>
-
-					<!-- Estado 2: Bio do ator focado (cast COM foco) -->
-					<control type="textbox">
-						<visible>[Control.HasFocus(50) | Control.HasFocus(6001)] + !Control.HasFocus(6001) + !String.IsEmpty(Container(50).ListItem.Property(Bio))</visible>
+						<visible>Control.HasFocus(50) + !String.IsEmpty(Container(50).ListItem.Property(Bio))</visible>
 						<animation effect="fade" time="500">VisibleChange</animation>
 						<width>480</width>
 						<height>308</height>
@@ -889,7 +1183,6 @@
 						<autoscroll delay="3000" repeat="5000" time="2500"></autoscroll>
 					</control>
 
-					<!-- Estado 3: Sinopse do filme FILMOGRAFIA focado (se sobrepõe à bio) -->
 					<control type="textbox">
 						<visible>Control.HasFocus(6001) + !String.IsEmpty(Container(6001).ListItem.Property(Overview))</visible>
 						<animation effect="fade" time="600">VisibleChange</animation>
@@ -898,11 +1191,48 @@
 						<align>justify</align>
 						<font>font10</font>
 						<textcolor>white</textcolor>
-						<align>justify</align>
 						<label>[B]$INFO[Container(6001).ListItem.Label][/B][CR][CR]$INFO[Container(6001).ListItem.Property(Overview)]</label>
 						<autoscroll delay="4000" repeat="5000" time="3000"></autoscroll>
 					</control>
 				</control>
+			</control>
+			<control type="group" id="98180">
+				<visible>!String.IsEmpty(Window.Property(ds_pov_show_related)) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id)) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_type))</visible>
+				<left>600</left>
+				<top>665</top>
+				<width>1275</width>
+				<height>340</height>
+				<animation effect="fade" start="0" end="100" time="220">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="160">Hidden</animation>
+				<control type="image">
+					<texture colordiffuse="4D000000">colors/white.png</texture>
+					<aspectratio>stretch</aspectratio>
+				</control>
+				<control type="label">
+					<left>24</left>
+					<top>6</top>
+					<width>760</width>
+					<height>38</height>
+					<font>widget_label</font>
+					<shadowcolor>black</shadowcolor>
+					<label>Recomendados</label>
+				</control>
+				<include content="VideoInfoRelatedRow">
+					<param name="list_id" value="98181" />
+					<param name="top" value="46" />
+					<param name="header" value="Recomendados" />
+					<param name="info_call" value="movie" />
+					<param name="visible" value="String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie)" />
+					<param name="content_path" value="$VAR[VideoInfoRelatedMovieRecommendationsPath]" />
+				</include>
+				<include content="VideoInfoRelatedRow">
+					<param name="list_id" value="98183" />
+					<param name="top" value="46" />
+					<param name="header" value="Recomendados" />
+					<param name="info_call" value="tv" />
+					<param name="visible" value="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv)" />
+					<param name="content_path" value="$VAR[VideoInfoRelatedTVRecommendationsPath]" />
+				</include>
 			</control>
 			<control type="label">
 				<right>80</right>

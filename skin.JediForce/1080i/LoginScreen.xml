@@ -44,7 +44,7 @@
 				<ondown>20</ondown>
 				<focusposition>2</focusposition>
 				<orientation>horizontal</orientation>
-				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<scrolltime tween="sine" easing="inout">600</scrolltime>
 				<itemlayout width="384" height="300">
 					<control type="image">
 						<centerleft>50%</centerleft>

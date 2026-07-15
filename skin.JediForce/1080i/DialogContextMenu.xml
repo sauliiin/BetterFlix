@@ -26,39 +26,37 @@
 					<height max="650">auto</height>
 					<usecontrolcoords>true</usecontrolcoords>
 					<control type="group" id="8001">
-						<visible>!Skin.HasSetting(hide_trakt_ratings)</visible>
 						<height>65</height>
 						<width>450</width>
 						<control type="button" id="80011">
-							<left>150</left>
+							<left>158</left>
 							<width>45</width>
-							<height>65</height>
+							<height>45</height>
 							<align>center</align>
 							<focusedcolor>background</focusedcolor>
 							<texturefocus colordiffuse="red">dstv/4.png</texturefocus>
 							<aspectratio>keep</aspectratio>
 							<texturenofocus>dstv/4.png</texturenofocus>
-							<onclick>RunScript(script.showimdb, ?action=rate_trakt&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;rating=4)</onclick>
+							<onclick>RunScript(script.showimdb, ?action=mdblist_collection&amp;collection_action=remove&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;tmdb_id=$INFO[Window(home).Property(ds_info_tmdb_id)])</onclick>
 							<onright>80012</onright>
 							<ondown>8002</ondown>
 						</control>
 						<control type="button" id="80012">
-							<left>225</left>
-							<width>65</width>
-							<height>65</height>
+							<left>242</left>
+							<width>45</width>
+							<height>45</height>
 							<align>center</align>
 							<focusedcolor>background</focusedcolor>
 							<texturefocus colordiffuse="red">dstv/8.png</texturefocus>
 							<texturenofocus>dstv/8.png</texturenofocus>
 							<aspectratio>keep</aspectratio>
-							<onclick>RunScript(script.showimdb, ?action=rate_trakt&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;rating=8)</onclick>
+							<onclick>RunScript(script.showimdb, ?action=mdblist_collection&amp;collection_action=add&amp;dbtype=$INFO[Window(home).Property(ContextMenuTargetDBType)]&amp;id=$INFO[Window(home).Property(ContextMenuTargetID)]&amp;tmdb_id=$INFO[Window(home).Property(ds_info_tmdb_id)])</onclick>
 							<onleft>80011</onleft>
 							<ondown>8002</ondown>
 						</control>
 					</control>
 					<control type="button" id="8002">
 						<!-- Play Trailer button - list views -->
-						<visible>!Skin.HasSetting(dstv_enable_auto_trailer)</visible>
 						<font>font32b</font>
 						<textcolor>red</textcolor>
 						<shadowcolor>black</shadowcolor>
