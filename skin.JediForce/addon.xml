@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.JediForce" version="2.0.5" name="JediForce" provider-name="Mestre Yoda Rossi" extension="true">
+<addon id="skin.JediForce" version="2.1.0" name="JediForce" provider-name="Mestre Yoda Rossi" extension="true">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.skinshortcuts" version="2.0.1" />

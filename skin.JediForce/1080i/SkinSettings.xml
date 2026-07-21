@@ -230,7 +230,7 @@
 						<control type="button" id="8380">
 							<include>DefaultSettingButton</include>
 							<label>Menu Layout Style: $VAR[LayoutStyleLabelVar]</label>
-							<onfocus>SetProperty(ds_setdesc, "Escolha entre os layouts Standard, Wide, FENtasticLike ou OnlyFun para os atalhos e widgets da Home.")</onfocus>
+							<onfocus>SetProperty(ds_setdesc, "Escolha entre os layouts Standard, Wide, FENtasticLike, OnlyFun ou OnlyFun Wide para os atalhos e widgets da Home.")</onfocus>
 							<onclick>RunScript(special://home/addons/script.showimdb/resources/lib/layout_switcher.py, choose)</onclick>
 						</control>
 						<control type="radiobutton" id="8382">
@@ -360,18 +360,6 @@
 			<autoscroll time="3000" delay="3000" repeat="5000">true</autoscroll>
 		</control>
 
-		<control type="image">
-			<include>OpenClose_Right</include>
-			<left>510</left>
-			<top>160</top>
-			<width>600</width>
-			<height>340</height>
-			<aspectratio>keep</aspectratio>
-			<texture>$VAR[ThumbnailLayoutVar]</texture>
-			<visible>Control.HasFocus(8380)</visible>
-			<animation effect="fade" start="0" end="100" time="300">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
-		</control>
 
 		<control type="group">
 			<animation effect="fade" start="0" end="100" time="300">Visible</animation>

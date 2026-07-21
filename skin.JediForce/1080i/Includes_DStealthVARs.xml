@@ -67,8 +67,8 @@
 		<value></value>
 	</variable>
 	<variable name="ds_infoDurationF">
-		<value condition="!String.IsEmpty(ListItem.Duration) + !String.StartsWith(ListItem.Duration,00:0) + !String.IsEqual(ListItem.Duration,0)">[COLOR red]•[/COLOR] $INFO[ListItem.Duration(hh:mm:ss)]</value>
-		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">[COLOR red]•[/COLOR] $INFO[Window(home).Property(ds_info_duration)]</value>
+		<value condition="!String.IsEmpty(ListItem.Duration) + !String.StartsWith(ListItem.Duration,00:0) + !String.IsEqual(ListItem.Duration,0)">[COLOR red]•[/COLOR] $INFO[ListItem.Duration(h)]h $INFO[ListItem.Duration(mm)]</value>
+		<value condition="!String.IsEmpty(Window(home).Property(ds_info_duration))">[COLOR red]•[/COLOR] $INFO[Window(home).Property(ds_info_duration_compact)]</value>
 		<value></value>
 	</variable>
 	<variable name="ds_dayweek">
@@ -215,6 +215,73 @@
 		<value condition="String.StartsWith(Window(10000).Property(middle),2)">dstv/ratingStars/2.png</value>
 		<value condition="String.StartsWith(Window(10000).Property(middle),1)">dstv/ratingStars/1.png</value>
 		<value condition="!String.IsEmpty(Window(10000).Property(middle))">dstv/ratingStars/10.png</value>
+	</variable>
+	<!-- Mesmas faixas de ds_infoMiddleStars, usando a nota do item focado em Para Você. -->
+	<variable name="ds_infoFocusedMiddleStars">
+		<value condition="
+			[Control.HasFocus(98181) + [
+				String.StartsWith(Container(98181).ListItem.Property(Rating),10) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),9) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.1) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.2) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.3) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.4) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.5) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.6) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.7) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.8) |
+				String.StartsWith(Container(98181).ListItem.Property(Rating),8.9)
+			]] |
+			[Control.HasFocus(98183) + [
+				String.StartsWith(Container(98183).ListItem.Property(Rating),10) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),9) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.1) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.2) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.3) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.4) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.5) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.6) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.7) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.8) |
+				String.StartsWith(Container(98183).ListItem.Property(Rating),8.9)
+			]]
+		">dstv/ratingStars/10.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),8.0) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.4) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.5) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.6) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.7) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.8) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.9)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),8.0) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.4) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.5) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.6) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.7) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.8) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.9)]]
+		">dstv/ratingStars/9.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),7.0) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.1) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.2) | String.StartsWith(Container(98181).ListItem.Property(Rating),7.3) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.7) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.8) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.9)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),7.0) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.1) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.2) | String.StartsWith(Container(98183).ListItem.Property(Rating),7.3) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.7) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.8) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.9)]]
+		">dstv/ratingStars/8.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),6.1) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.2) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.3) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.4) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.5) | String.StartsWith(Container(98181).ListItem.Property(Rating),6.6)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),6.1) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.2) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.3) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.4) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.5) | String.StartsWith(Container(98183).ListItem.Property(Rating),6.6)]]
+		">dstv/ratingStars/7.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),6.0) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.5) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.6) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.7) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.8) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.9)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),6.0) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.5) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.6) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.7) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.8) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.9)]]
+		">dstv/ratingStars/6.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),4) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.0) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.1) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.2) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.3) | String.StartsWith(Container(98181).ListItem.Property(Rating),5.4)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),4) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.0) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.1) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.2) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.3) | String.StartsWith(Container(98183).ListItem.Property(Rating),5.4)]]
+		">dstv/ratingStars/5.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),3.5) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.6) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.7) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.8) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.9)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),3.5) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.6) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.7) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.8) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.9)]]
+		">dstv/ratingStars/4.png</value>
+		<value condition="
+			[Control.HasFocus(98181) + [String.StartsWith(Container(98181).ListItem.Property(Rating),3.0) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.1) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.2) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.3) | String.StartsWith(Container(98181).ListItem.Property(Rating),3.4)]] |
+			[Control.HasFocus(98183) + [String.StartsWith(Container(98183).ListItem.Property(Rating),3.0) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.1) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.2) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.3) | String.StartsWith(Container(98183).ListItem.Property(Rating),3.4)]]
+		">dstv/ratingStars/3.png</value>
+		<value condition="[Control.HasFocus(98181) + String.StartsWith(Container(98181).ListItem.Property(Rating),2)] | [Control.HasFocus(98183) + String.StartsWith(Container(98183).ListItem.Property(Rating),2)]">dstv/ratingStars/2.png</value>
+		<value condition="[Control.HasFocus(98181) + String.StartsWith(Container(98181).ListItem.Property(Rating),1)] | [Control.HasFocus(98183) + String.StartsWith(Container(98183).ListItem.Property(Rating),1)]">dstv/ratingStars/1.png</value>
+		<value></value>
+	</variable>
+	<variable name="ds_infoFocusedRating">
+		<value condition="Control.HasFocus(98181)">$INFO[Container(98181).ListItem.Property(Rating)]</value>
+		<value condition="Control.HasFocus(98183)">$INFO[Container(98183).ListItem.Property(Rating)]</value>
+		<value></value>
 	</variable>
 	<variable name="ds_infoRatfire">
 		<value condition="

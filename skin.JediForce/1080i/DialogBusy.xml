@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window>
+    <onload condition="Player.HasVideo + Integer.IsLess(Player.Duration(secs),600)">PlayerControl(Stop)</onload>
     <controls>
 
         <control type="group">

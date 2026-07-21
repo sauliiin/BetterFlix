@@ -5,12 +5,13 @@ import xbmcvfs
 import os
 import sys
 
-LAYOUT_CHOICES = ["standard", "wide", "fentastic", "onlyfun"]
+LAYOUT_CHOICES = ["standard", "wide", "fentastic", "onlyfun", "onlyfun_wide"]
 LAYOUT_LABELS = {
     "standard": "Standard",
     "wide": "Wide",
     "fentastic": "FENtasticLike",
     "onlyfun": "OnlyFun",
+    "onlyfun_wide": "OnlyFun Wide",
 }
 LAYOUT_ALIASES = {
     "fentasticlike": "fentastic",
@@ -18,6 +19,10 @@ LAYOUT_ALIASES = {
     "fentastic-like": "fentastic",
     "only_fun": "onlyfun",
     "only-fun": "onlyfun",
+    "onlyfunwide": "onlyfun_wide",
+    "onlyfun wide": "onlyfun_wide",
+    "onlyfun-wide": "onlyfun_wide",
+    "only_fun_wide": "onlyfun_wide",
 }
 
 
@@ -28,10 +33,24 @@ def normalize_layout(layout_type):
 
 def choose_layout(current_layout):
     dialog = xbmcgui.Dialog()
-    options = [LAYOUT_LABELS[key] for key in LAYOUT_CHOICES]
+    
+    thumb_map = {
+        "wide": "dstv/wide.png",
+        "fentastic": "dstv/FENtasticLike.png",
+        "onlyfun": "dstv/OnlyFun.png",
+        "onlyfun_wide": "dstv/print_onlyfunWide.png",
+        "standard": "dstv/standard.png"
+    }
+    
+    options = []
+    for key in LAYOUT_CHOICES:
+        item = xbmcgui.ListItem(LAYOUT_LABELS[key])
+        item.setArt({'icon': thumb_map.get(key, 'DefaultAddonNone.png')})
+        options.append(item)
+
     current = normalize_layout(current_layout)
     preselect = LAYOUT_CHOICES.index(current) if current in LAYOUT_CHOICES else 0
-    selected = dialog.select("Escolha o estilo do layout", options, 0, preselect)
+    selected = dialog.select("Escolha o estilo do layout", options, preselect=preselect, useDetails=True)
     if selected < 0:
         return None
     return LAYOUT_CHOICES[selected]
@@ -50,7 +69,7 @@ def copy_layout_files(layout_type):
     renomeando-os conforme esperado pela skin dstelthv.
     
     Args:
-        layout_type (str): 'standard', 'wide', 'fentastic' ou 'onlyfun'
+        layout_type (str): 'standard', 'wide', 'fentastic', 'onlyfun' ou 'onlyfun_wide'
     """
     skin_candidates = []
     active_skin = xbmc.getInfoLabel("System.SkinID")
@@ -143,6 +162,6 @@ if __name__ == '__main__':
             xbmc.executebuiltin("ReloadSkin()")
     else:
         xbmc.log(
-            f"layout_switcher.py: Argumento invalido '{layout}'. Use 'standard', 'wide', 'fentastic', 'onlyfun' ou 'choose'.",
+            f"layout_switcher.py: Argumento invalido '{layout}'. Use 'standard', 'wide', 'fentastic', 'onlyfun', 'onlyfun_wide' ou 'choose'.",
             xbmc.LOGERROR,
         )

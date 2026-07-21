@@ -636,11 +636,11 @@
 		<value condition="Control.HasFocus(6)">$INFO[ListItem.FileNameAndPath]</value>
 	</variable>
 	<variable name="VideoInfoRelatedMovieRecommendationsPath">
-		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=10&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
+		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),movie) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=movie&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=15&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
 		<value></value>
 	</variable>
 	<variable name="VideoInfoRelatedTVRecommendationsPath">
-		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=10&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
+		<value condition="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv) + !String.IsEmpty(Window.Property(ds_dialog_tmdb_id))">plugin://script.showimdb/?mode=recommendations&amp;mediatype=tvshow&amp;tmdb_id=$INFO[Window.Property(ds_dialog_tmdb_id)]&amp;limit=15&amp;reload=$INFO[Window.Property(ds_dialog_tmdb_id)]</value>
 		<value></value>
 	</variable>
 	<variable name="PictureInfoMainLabelVar">
@@ -958,6 +958,7 @@
 		<value condition="String.IsEqual(Skin.String(dstv_layout),wide)">dstv/wide.png</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">dstv/FENtasticLike.png</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun)">dstv/OnlyFun.png</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun_wide)">dstv/print_onlyfunWide.png</value>
 		<value>dstv/standard.png</value>
 	</variable>
 	<variable name="LayoutStyleLabelVar">
@@ -965,6 +966,7 @@
 		<value condition="String.IsEqual(Skin.String(dstv_layout),fentastic)">FENtasticLike</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),standard)">Standard</value>
 		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun)">OnlyFun</value>
+		<value condition="String.IsEqual(Skin.String(dstv_layout),onlyfun_wide)">OnlyFun Wide</value>
 		<value>Standard</value>
 	</variable>
 </includes>

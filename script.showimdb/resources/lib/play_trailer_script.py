@@ -343,6 +343,41 @@ def open_video_info(params):
     xbmcgui.Dialog().info(listitem)
 
 
+def load_playback_reviews(params):
+    """Publica no Home as reviews do vídeo em reprodução para o FullScreenInfo."""
+    home_window = xbmcgui.Window(10000)
+    home_window.clearProperty("Trakt.Reviews")
+
+    imdb_id = (params.get("imdb_id") or info_label("VideoPlayer.IMDBNumber")).strip()
+    tmdb_id = (params.get("tmdb_id") or info_label("VideoPlayer.UniqueID(tmdb)")).strip()
+    media_type = "tv" if xbmc.getCondVisibility("VideoPlayer.Content(episodes)") else "movie"
+
+    if not imdb_id and tmdb_id:
+        imdb_id = tmdb_api.fetch_imdb_id(tmdb_id, media_type) or ""
+    if not imdb_id:
+        xbmc.log("ShowIMDB: FullScreenInfo sem IMDb ID para buscar reviews.", xbmc.LOGWARNING)
+        return
+
+    try:
+        import trakt_api
+        import ui_bundle
+
+        reviews = trakt_api.get_reviews_by_imdb_id(imdb_id, media_type) or ""
+        if reviews:
+            home_window.setProperty("Trakt.Reviews", reviews)
+            ui_bundle.merge(imdb_id, props={"Trakt.Reviews": reviews}, reviews_ready=True)
+        else:
+            ui_bundle.merge(imdb_id, remove_keys=["Trakt.Reviews"], reviews_ready=False)
+        xbmc.log(
+            "ShowIMDB: reviews do FullScreenInfo carregadas para %s (%d caracteres)."
+            % (imdb_id, len(reviews)),
+            xbmc.LOGINFO,
+        )
+    except Exception as error:
+        home_window.clearProperty("Trakt.Reviews")
+        xbmc.log("ShowIMDB: erro ao carregar reviews do FullScreenInfo: %s" % error, xbmc.LOGERROR)
+
+
 def notify_mdblist(action, title, level=xbmcgui.NOTIFICATION_INFO):
     verb = "adicionado(a) à coleção" if action == "add" else "removido(a) da coleção"
     message = ("%s %s" % (title, verb)).strip() if title else verb.capitalize()
@@ -411,6 +446,10 @@ if __name__ == "__main__":
 
     if params.get("action") == "open_info":
         open_video_info(params)
+        sys.exit()
+
+    if params.get("action") == "load_playback_reviews":
+        load_playback_reviews(params)
         sys.exit()
 
     win.clearProperty("ds_ondemand_trailer_playing")

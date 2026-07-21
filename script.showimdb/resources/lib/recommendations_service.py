@@ -15,7 +15,7 @@ import threading
 import xbmc
 import xbmcgui
 
-MAX_SLOTS = 10
+MAX_SLOTS = 15
 ACTIVE_POLL_SECONDS = 0.25
 IDLE_POLL_SECONDS = 2.0
 _SUFFIXES = ('title', 'poster', 'fanart', 'tmdb', 'type', 'year', 'rating', 'plot')

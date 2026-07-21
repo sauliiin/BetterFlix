@@ -48,7 +48,7 @@
 		<font>
 			<name>netS</name>
 			<filename>Netflix-sans-medium.ttf</filename>
-			<size>26</size>
+			<size>26</size>	
 		</font>
 		<font>
 			<name>netSspaced</name>
@@ -117,8 +117,8 @@
 		</font>
 		<font>
 			<name>netSsTb</name>
-			<filename>Netflix-sans-normal.ttf</filename>
-			<size>21</size>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>22</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -130,7 +130,13 @@
 		<font>
 			<name>netSsTs</name>
 			<filename>Netflix-sans-light.ttf</filename>
-			<size>18</size>
+			<size>19</size>
+			<style>bold</style>
+		</font>
+		<font>
+			<name>netSsTsb</name>
+			<filename>Netflix-sans-bold.ttf</filename>
+			<size>21</size>
 			<style>bold</style>
 		</font>
 		<font>
@@ -146,7 +152,7 @@
 		<font>
 			<name>netSssph</name>
 			<filename>Netflix-sans-bold.ttf</filename>
-			<size>19</size>
+			<size>17</size>
 		</font>
 		<font>
 			<name>netSa</name>
@@ -269,6 +275,12 @@
 			<name>font_clockOSD</name>
 			<filename>Netflix-sans-light.ttf</filename>
 			<size>58</size>
+		</font>
+		<!-- DialogVideoInfo -->
+		<font>
+			<name>fontSDVI</name>
+			<filename>Netflix-sans-medium.ttf</filename>
+			<size>22</size>
 		</font>
 		<!-- Title Fonts -->
 		<font>
@@ -476,7 +488,7 @@
 		<font>
 			<name>netSssph</name>
 			<filename>arial.ttf</filename>
-			<size>19</size>
+			<size>18</size>
 		</font>
 		<font>
 			<name>netSa</name>

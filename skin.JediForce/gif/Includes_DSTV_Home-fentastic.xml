@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+	<expression name="ds_widget_rating_threshold">[[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</expression>
+	<expression name="ds_widget_has_progress">[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</expression>
 
   <include name="DSTVHome">
     <definition>
       <include>ds_customsettings</include>
       <onunload>ClearProperty(ds_prop_widgetpath, home)</onunload>
       <onunload>ClearProperty(showimdb_home_splash_active, home)</onunload>
-      <onload>SetFocus(9000,0)</onload>
-      <onload condition="String.IsEmpty(Window(home).Property(ds_active_widget_id))">SetFocus(9000,0)</onload>
-      <onload condition="!String.IsEmpty(Window(home).Property(ds_active_widget_id))">SetFocus($INFO[Window(home).Property(ds_active_widget_id)])</onload>
+      <onload>ClearProperty(ds_active_widget_id, home)</onload>
+      <onload>ClearProperty(listposition, home)</onload>
+      <onload>SetFocus(9000,0,absolute)</onload>
       <backgroundcolor>background</backgroundcolor>
 
       <controls>
@@ -18,8 +20,9 @@
           <depth>DepthBackground</depth>
 
           <aspectratio>scale</aspectratio>
-          <animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
-          <animation effect="fade" start="100" end="0" time="400">WindowClose</animation>
+          <animation effect="fade" start="0" end="100" time="250" tween="sine" easing="out">WindowOpen</animation>
+          <animation effect="slide" start="0,20" end="0,0" time="250" tween="cubic" easing="out">WindowOpen</animation>
+          <animation effect="fade" start="100" end="0" time="250" tween="sine" easing="in">WindowClose</animation>
           <texture background="true">$VAR[HomeFanartVar]</texture>
           <visible>!Player.HasMedia</visible>
         </control>
@@ -96,7 +99,7 @@
           <top>0</top>
           <width>1920</width>
           <height>1080</height>
-          <texture>special://skin/gif/splash.png</texture>
+          <texture>dstv/splash.png</texture>
           <visible>String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))</visible>
           <aspectratio>scale</aspectratio>
 					<animation effect="fade" start="50" end="100" time="1500" tween="sine" easing="inout" pulse="true" condition="String.IsEmpty(Window(Home).Property(showimdb_boot_cover_done))">Conditional</animation>
@@ -126,7 +129,7 @@
 	            <top>0</top>
 	            <width>1920</width>
 	            <height>1080</height>
-	            <texture>special://skin/gif/splash.png</texture>
+	            <texture>dstv/splash.png</texture>
 	            <visible>String.IsEmpty(Window(Home).Property(showimdb_splash_video_cover_done)) | [Player.HasVideo + Integer.IsLess(Player.Time,1)]</visible>
 	            <aspectratio>scale</aspectratio>
 	            <animation effect="fade" start="100" end="0" time="800">Hidden</animation>
@@ -136,7 +139,7 @@
 	            <top>0</top>
 	            <width>1920</width>
 	            <height>1080</height>
-	            <texture>special://skin/gif/splash.png</texture>
+	            <texture>dstv/splash.png</texture>
 	            <visible>!String.IsEmpty(Window(Home).Property(showimdb_home_splash_active)) + Player.HasVideo</visible>
 	            <aspectratio>scale</aspectratio>
 	            <animation effect="fade" start="0" end="100" delay="6800" time="800">Visible</animation>
@@ -349,6 +352,7 @@
           <animation type="Conditional" condition="!String.IsEmpty(Window(10000).Property(ds_info_awards)) | !String.IsEmpty(Window(10000).Property(ds_info_oscars)) | !String.IsEmpty(Window(10000).Property(ds_info_badges)) | !String.IsEmpty(Window(10000).Property(ds_info_badges_cf)) | !String.IsEmpty(Window(home).Property(ds_info_tagline)) | !String.IsEmpty(ListItem.Tagline)">
             <effect type="slide" end="0,50" time="0" />
           </animation>
+          
           <control type="label">
             <top>30</top>
             <width>380</width>
@@ -406,17 +410,16 @@
           <width>162</width>
           <height>40</height>
           <control type="image">
-            <top>-1</top>
-            <left>-8</left>
-            <width>108</width>
-            <height>27</height>
+            <top>-16</top>
+            <left>-23</left>
+            <width>122</width>
             <aspectratio align="left">keep</aspectratio>
             <texture>$VAR[ds_infoMiddleStars]</texture>
             <aligny>center</aligny>
           </control>
           <control type="label">
             <top>-7</top>
-            <left>108</left>
+            <left>105</left>
             <height>40</height>
             <font>netSsTs</font>
             <fadetime>500</fadetime>
@@ -497,10 +500,10 @@
             <width>64</width>
             <height>64</height>
             <animation type="Focus" reversible="false">
-              <effect type="zoom" start="100" end="130" center="auto" time="200" tween="sine" easing="inout" />
+              <effect type="zoom" start="100" end="115" center="auto" time="250" tween="cubic" easing="out" />
             </animation>
             <animation type="Unfocus" reversible="false">
-              <effect type="zoom" start="130" end="100" center="auto" time="200" tween="sine" easing="inout" />
+              <effect type="zoom" start="115" end="100" center="auto" time="250" tween="cubic" easing="in" />
             </animation>
             <control type="image">
               <width>55</width>
@@ -595,6 +598,7 @@
         <onfocus>SetProperty(ds_info_dt_date, "$INFO[ListItem.Date]", home)</onfocus>
         <onfocus>SetProperty(ds_info_dt_year, "$INFO[ListItem.Year]", home)</onfocus>
         <onfocus>SetProperty(ds_info_duration, "$INFO[ListItem.Duration(hh:mm:ss)]", home)</onfocus>
+        <onfocus>SetProperty(ds_info_duration_compact, "$INFO[ListItem.Duration(h)]h $INFO[ListItem.Duration(mm)]", home)</onfocus>
         <onfocus>SetProperty(ds_info_rating, "$INFO[ListItem.Rating]", home)</onfocus>
         <onfocus>SetProperty(ds_info_genre, "$INFO[ListItem.Genre]", home)</onfocus>
         <onfocus>SetProperty(ds_info_tagline, "$INFO[ListItem.Tagline]", home)</onfocus>
@@ -728,7 +732,7 @@
 				
         <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>horizontal</orientation>
-        <preloaditems>5</preloaditems>
+        <preloaditems>2</preloaditems>
         <focusposition>0</focusposition>
         <itemlayout width="$PARAM[widget_width]">
           <control type="group">
@@ -776,7 +780,7 @@
               <colordiffuse>FFFFFFFF</colordiffuse>
             </control>
             <control type="group">
-              <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+              <visible>$EXP[ds_widget_has_progress]</visible>
               <control type="image">
                 <centerleft>50%</centerleft>
                 <bottom>14</bottom>
@@ -811,14 +815,23 @@
               </control>
             </control>
             <control type="image">
+              <left>23</left>
+              <top>230</top>
+              <visible>$PARAM[display_type_isposters] + Integer.IsGreater(ListItem.Playcount,0)</visible>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
+            </control>
+            <control type="image">
               <left>20</left>
-              <visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
-              <width>36</width>
-              <height>36</height>
-              <texture>dstv/watched.png</texture>
+              <top>143</top>
+              <visible>$PARAM[display_type_islandscape] + Integer.IsGreater(ListItem.Playcount,0)</visible>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
             </control>
             <control type="group">
-              <visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
               <control type="image">
                 <left>76.5%</left>
                 <top>1</top>
@@ -844,7 +857,7 @@
               </control>
             </control>
             <control type="group">
-              <visible>$PARAM[display_type_isposters] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>$PARAM[display_type_isposters] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
               <control type="image">
                 <left>132</left>
                 <top>1</top>
@@ -870,54 +883,37 @@
               </control>
             </control>
             <control type="group">
-              <visible>!Skin.HasSetting(hide_ratings_fire) + !$PARAM[display_type_isposters] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
-              <left>8</left>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + !$PARAM[display_type_isposters] + $EXP[ds_widget_rating_threshold]</visible>
+              <left>6</left>
               <top>1</top>
               <control type="label">
-                <top>6%</top>
-                <left>71%</left>
-                <width>47</width>
-                <height>41</height>
-                <align>right</align>
-                <aligny>center</aligny>
-                <font>netSssph</font>
-                <textcolor>B3000000</textcolor>
-                <label>$VAR[ds_infoRat]</label>
-              </control>
-              <control type="label">
                 <top>5%</top>
-                <left>72.1%</left>
+                <left>71.5%</left>
                 <width>47</width>
                 <height>41</height>
                 <align>right</align>
                 <aligny>center</aligny>
                 <font>netSssph</font>
                 <textcolor>white</textcolor>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
                 <label>$VAR[ds_infoRat]</label>
               </control>
             </control>
             <control type="label">
-              <visible>!$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
-              <top>10</top>
-              <left>119</left>
-              <width>47</width>
-              <height>41</height>
-              <align>right</align>
-              <aligny>center</aligny>
-              <font>netSssph</font>
-              <textcolor>B3000000</textcolor>
-              <label>$VAR[ds_infoRat]</label>
-            </control>
-            <control type="label">
-              <visible>!$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>!$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
               <top>8</top>
-              <left>121</left>
+              <left>118</left>
               <width>47</width>
               <height>41</height>
               <align>right</align>
               <aligny>center</aligny>
               <font>netSssph</font>
               <textcolor>white</textcolor>
+              <shadowcolor>FF000000</shadowcolor>
+              <shadowoffsetx>3</shadowoffsetx>
+              <shadowoffsety>3</shadowoffsety>
               <label>$VAR[ds_infoRat]</label>
             </control>
           </control>
@@ -928,8 +924,8 @@
             <visible>Skin.HasSetting(dstv_disable_poster_landscape_magic) + $PARAM[display_type_isposters]</visible>
             <depth>DepthContentPopout</depth>
             <animation type="Focus">
-              <effect type="zoom" start="100" end="94" time="300" tween="sine" easing="in" center="auto" />
-              <effect type="zoom" start="100" end="106" time="300" tween="sine" easing="out" center="auto" delay="300" />
+              <effect type="zoom" start="100" end="94" time="250" tween="cubic" easing="in" center="auto" />
+              <effect type="zoom" start="100" end="106" time="250" tween="cubic" easing="out" center="auto" delay="250" />
             </animation>
             <animation type="Conditional" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused" reversible="true">
               <effect type="fade" start="100" end="0" time="1000" tween="sine" easing="inout" />
@@ -969,7 +965,7 @@
               <colordiffuse>FFFFFFFF</colordiffuse>
             </control>
             <control type="group">
-              <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+              <visible>$EXP[ds_widget_has_progress]</visible>
               <control type="image">
                 <centerleft>50%</centerleft>
                 <bottom>14</bottom>
@@ -993,23 +989,64 @@
               </control>
             </control>
             <control type="image">
-              <left>20</left>
+              <left>23</left>
+              <top>230</top>
               <visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
-              <width>36</width>
-              <height>36</height>
-              <texture>dstv/watched.png</texture>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
+            </control>
+            <control type="group">
+              <visible>!Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
+              <control type="image">
+                <left>132</left>
+                <top>1</top>
+                <width>38</width>
+                <height>43</height>
+                <aspectratio>stretch</aspectratio>
+                <texture>dstv/truefire.png</texture>
+                <colordiffuse>red</colordiffuse>
+                <animation type="Conditional" condition="true" loop="true">
+                  <effect type="fade" start="50" end="65" time="600" tween="sine" easing="inout" pulse="true" />
+                </animation>
+              </control>
+              <control type="image">
+                <left>133</left>
+                <top>2</top>
+                <width>38</width>
+                <height>43</height>
+                <aspectratio>stretch</aspectratio>
+                <texture>special://skin/gif/truefire.gif</texture>
+                <animation type="Conditional" condition="true" loop="true">
+                  <effect type="fade" start="65" end="100" time="800" tween="sine" easing="inout" pulse="true" />
+                </animation>
+              </control>
+              <control type="label">
+                <top>8</top>
+                <left>118</left>
+                <width>47</width>
+                <height>41</height>
+                <align>right</align>
+                <aligny>center</aligny>
+                <font>netSssph</font>
+                <textcolor>white</textcolor>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
+                <label>$VAR[ds_infoRat]</label>
+              </control>
             </control>
           </control>
           <control type="group">
             <visible>!Skin.HasSetting(dstv_disable_poster_landscape_magic) + $PARAM[display_type_isposters] + [Control.HasFocus($PARAM[list_id]) | [String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + [!String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) | [Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused]]]]</visible>
             <depth>DepthContentPopout</depth>
             <animation type="Focus">
-              <effect type="fade" start="0" end="100" time="300" tween="sine" easing="inout" />
-              <effect type="zoom" start="100" end="94" time="300" tween="sine" easing="in" center="auto" />
-              <effect type="zoom" start="100" end="106" time="300" tween="sine" easing="out" center="auto" delay="300" />
+              <effect type="fade" start="0" end="100" time="250" tween="cubic" easing="out" />
+              <effect type="zoom" start="100" end="94" time="250" tween="cubic" easing="in" center="auto" />
+              <effect type="zoom" start="100" end="106" time="250" tween="cubic" easing="out" center="auto" delay="250" />
             </animation>
             <animation type="Unfocus" reversible="false">
-              <effect type="fade" start="100" end="0" time="300" delay="300" tween="sine" easing="inout" />
+              <effect type="fade" start="100" end="0" time="250" delay="250" tween="cubic" easing="in" />
             </animation>
             <animation type="Conditional" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused" reversible="true">
               <effect type="fade" start="100" end="0" time="1000" tween="sine" easing="inout" />
@@ -1074,7 +1111,7 @@
               <aspectratio>keep</aspectratio>
             </control>
             <control type="group">
-              <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+              <visible>$EXP[ds_widget_has_progress]</visible>
               <control type="image">
                 <centerleft>50%</centerleft>
                 <bottom>14</bottom>
@@ -1110,13 +1147,14 @@
             </control>
             <control type="image">
               <left>20</left>
+              <top>143</top>
               <visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
-              <width>36</width>
-              <height>36</height>
-              <texture>dstv/watched.png</texture>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
             </control>
             <control type="group">
-              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + $EXP[ds_widget_rating_threshold]</visible>
               <control type="image">
                 <left>76.5%</left>
                 <top>1</top>
@@ -1142,7 +1180,7 @@
               </control>
             </control>
             <control type="group">
-              <visible>!Control.HasFocus($PARAM[list_id]) + !Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_isposters] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_isposters] + $EXP[ds_widget_rating_threshold]</visible>
               <control type="image">
                 <left>132</left>
                 <top>1</top>
@@ -1168,54 +1206,37 @@
               </control>
             </control>
             <control type="group">
-              <visible>!Skin.HasSetting(hide_ratings_fire) + !$PARAM[display_type_isposters] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
-              <left>8</left>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + !$PARAM[display_type_isposters] + $EXP[ds_widget_rating_threshold]</visible>
+              <left>6</left>
               <top>1</top>
               <control type="label">
-                <top>6%</top>
-                <left>71%</left>
-                <width>47</width>
-                <height>41</height>
-                <align>right</align>
-                <aligny>center</aligny>
-                <font>netSssph</font>
-                <textcolor>B3000000</textcolor>
-                <label>$VAR[ds_infoRat]</label>
-              </control>
-              <control type="label">
                 <top>5%</top>
-                <left>72.1%</left>
+                <left>71.5%</left>
                 <width>47</width>
                 <height>41</height>
                 <align>right</align>
                 <aligny>center</aligny>
                 <font>netSssph</font>
                 <textcolor>white</textcolor>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
                 <label>$VAR[ds_infoRat]</label>
               </control>
             </control>
             <control type="label">
-              <visible>!Control.HasFocus($PARAM[list_id]) + !$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
-              <top>10</top>
-              <left>119</left>
-              <width>47</width>
-              <height>41</height>
-              <align>right</align>
-              <aligny>center</aligny>
-              <font>netSssph</font>
-              <textcolor>B3000000</textcolor>
-              <label>$VAR[ds_infoRat]</label>
-            </control>
-            <control type="label">
-              <visible>!Control.HasFocus($PARAM[list_id]) + !$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>!Control.HasFocus($PARAM[list_id]) + !$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
               <top>8</top>
-              <left>121</left>
+              <left>118</left>
               <width>47</width>
               <height>41</height>
               <align>right</align>
               <aligny>center</aligny>
               <font>netSssph</font>
               <textcolor>white</textcolor>
+              <shadowcolor>FF000000</shadowcolor>
+              <shadowoffsetx>3</shadowoffsetx>
+              <shadowoffsety>3</shadowoffsety>
               <label>$VAR[ds_infoRat]</label>
             </control>
           </control>
@@ -1244,7 +1265,7 @@
               <colordiffuse>FFFFFFFF</colordiffuse>
             </control>
             <control type="group">
-              <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.PercentPlayed) + !String.IsEqual(ListItem.PercentPlayed,0)] | [!String.IsEmpty(ListItem.Property(watchedprogress)) + !String.IsEqual(ListItem.Property(watchedprogress),0)]]</visible>
+              <visible>$EXP[ds_widget_has_progress]</visible>
               <control type="image">
                 <centerleft>50%</centerleft>
                 <bottom>14</bottom>
@@ -1256,19 +1277,20 @@
               </control>
             </control>
             <control type="image">
-              <left>20</left>
+              <left>23</left>
+              <top>230</top>
               <visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
-              <width>36</width>
-              <height>36</height>
-              <texture>dstv/watched.png</texture>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
             </control>
           </control>
           <control type="group">
             <visible>$PARAM[display_type_islandscape]</visible>
             <depth>DepthContentPopout</depth>
             <animation type="Focus">
-              <effect type="zoom" start="100" end="94" time="300" tween="sine" easing="in" center="auto" />
-              <effect type="zoom" start="100" end="106" time="300" tween="sine" easing="out" center="auto" delay="300" />
+              <effect type="zoom" start="100" end="94" time="250" tween="cubic" easing="in" center="auto" />
+              <effect type="zoom" start="100" end="106" time="250" tween="cubic" easing="out" center="auto" delay="250" />
             </animation>
             <animation type="Conditional" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused" reversible="true">
               <effect type="fade" start="100" end="0" time="1000" tween="sine" easing="inout" />
@@ -1305,15 +1327,28 @@
               <texture fallback="DefaultFolder.png" background="true" diffuse="dstv/jedi/maskL.png">$VAR[ds_WidgetPanelLandscape]</texture>
               <aspectratio>keep</aspectratio>
             </control>
+            <control type="group">
+              <visible>$EXP[ds_widget_has_progress]</visible>
+              <control type="image">
+                <centerleft>50%</centerleft>
+                <bottom>12</bottom>
+                <width>85%</width>
+                <height>4.8%</height>
+                <texture>$VAR[WatchedImageVar]</texture>
+                <aspectratio>stretch</aspectratio>
+                <animation effect="fade" start="100" end="50" time="100" condition="true">Conditional</animation>
+              </control>
+            </control>
             <control type="image">
               <left>20</left>
+              <top>143</top>
               <visible>Integer.IsGreater(ListItem.Playcount,0)</visible>
-              <width>36</width>
-              <height>36</height>
-              <texture>dstv/watched.png</texture>
+              <width>30</width>
+              <height>30</height>
+              <texture>dstv/watched_i.png</texture>
             </control>
             <control type="group">
-              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + $EXP[ds_widget_rating_threshold]</visible>
               <control type="image">
                 <left>76.5%</left>
                 <top>1</top>
@@ -1339,29 +1374,21 @@
               </control>
             </control>
             <control type="group">
-              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + [[String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9) | String.StartsWith(ListItem.Rating,7.4) | String.StartsWith(ListItem.Rating,7.5) | String.StartsWith(ListItem.Rating,7.6) | String.StartsWith(ListItem.Rating,7.7) | String.StartsWith(ListItem.Rating,7.8) | String.StartsWith(ListItem.Rating,7.9)]] | [!String.IsEqual(ListItem.DBType,movie) + [String.StartsWith(ListItem.Rating,8) | String.StartsWith(ListItem.Rating,9)]]]</visible>
-              <left>8</left>
+              <visible>!Skin.HasSetting(hide_ratings_fire) + $PARAM[display_type_islandscape] + $EXP[ds_widget_rating_threshold]</visible>
+              <left>6</left>
               <top>1</top>
               <control type="label">
-                <top>6%</top>
-                <left>71%</left>
-                <width>47</width>
-                <height>41</height>
-                <align>right</align>
-                <aligny>center</aligny>
-                <font>netSssph</font>
-                <textcolor>B3000000</textcolor>
-                <label>$VAR[ds_infoRat]</label>
-              </control>
-              <control type="label">
                 <top>5%</top>
-                <left>72.1%</left>
+                <left>71.5%</left>
                 <width>47</width>
                 <height>41</height>
                 <align>right</align>
                 <aligny>center</aligny>
                 <font>netSssph</font>
                 <textcolor>white</textcolor>
+                <shadowcolor>FF000000</shadowcolor>
+                <shadowoffsetx>3</shadowoffsetx>
+                <shadowoffsety>3</shadowoffsety>
                 <label>$VAR[ds_infoRat]</label>
               </control>
             </control>
@@ -1369,7 +1396,7 @@
         </focusedlayout>
         <content>
           <item>
-            <visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label) + String.IsEmpty(Window(10000).Property(ds_is_trailer_playing)) + ![Player.HasVideo + [String.IsEmpty(Player.Duration) | Integer.IsLess(Player.Duration,600)]]</visible>
+            <visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
             <property name="poster">$VAR[ds_widget_loading_poster]</property>
             <property name="landscape">$VAR[ds_widget_loading_landscape]</property>
           </item>

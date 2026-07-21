@@ -51,6 +51,7 @@
 	<onunload>ClearProperty(ActorFilms.2.Poster,Home)</onunload>
 	<onunload>ClearProperty(ActorFilms.3.Poster,Home)</onunload>
 	<onunload>ClearProperty(ActorFilms.4.Poster,Home)</onunload>
+	<onload>ClearProperty(Cast.Ready,Home)</onload>
 	<onload>ClearProperty(Cast.0.Name,Home)</onload>
 	<onload>ClearProperty(Cast.1.Name,Home)</onload>
 	<onload>ClearProperty(Cast.2.Name,Home)</onload>
@@ -67,6 +68,14 @@
 			<height>1080</height>
 			<centerleft>50%</centerleft>
 			<width>1920</width>
+			<animation type="WindowOpen" reversible="false">
+				<effect type="rotatey" center="960,540" start="-90" end="0" time="450" delay="200" tween="cubic" easing="out" />
+				<effect type="fade" start="0" end="100" time="450" delay="200" />
+			</animation>
+			<animation type="WindowClose" reversible="false">
+				<effect type="rotatey" center="960,540" start="0" end="90" time="450" tween="cubic" easing="in" />
+				<effect type="fade" start="100" end="0" time="450" />
+			</animation>
 			<animation effect="fade" start="100" end="0" time="500" tween="sine" condition="Control.HasFocus(6001) + [Window.IsVisible(script-embuary-video.xml) | Window.IsVisible(script-embuary-person.xml) | Window.IsVisible(script-embuary-image.xml)]">Conditional</animation>
 			<control type="image">
 				<width>100%</width>
@@ -484,6 +493,7 @@
 					<texture colordiffuse="4D000000">colors/white.png</texture>
 					<visible>Control.IsVisible(4000)</visible>
 				</control>
+				<!-- Fundo escurecido da sinopse do item focado em Para Você. -->
 				<control type="image">
 					<left>775</left>
 					<top>335</top>
@@ -659,6 +669,27 @@
 						<param name="scroll" value="true" />
 						<param name="visible" value="!String.IsEmpty(Window(Home).Property(ds_info_badges))" />
 					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="178" />
+						<param name="label" value="[B][COLOR red]Duração: [/COLOR][/B]$INFO[ListItem.Duration(h)] hr $INFO[ListItem.Duration(m)] mins" />
+						<param name="altlabel" value="Duração: $INFO[ListItem.Duration(h)] hr $INFO[ListItem.Duration(m)] mins" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Duration)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="177" />
+						<param name="label" value="[B][COLOR red]Hora Atual: [/COLOR][/B]$INFO[System.Time]" />
+						<param name="altlabel" value="Hora Atual: $INFO[System.Time]" />
+						<param name="visible" value="true" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="font" value="font10" />
+						<param name="control_id" value="179" />
+						<param name="label" value="[B][COLOR red]$LOCALIZE[31080]: [/COLOR][/B]$INFO[ListItem.EndTimeResume]" />
+						<param name="altlabel" value="$LOCALIZE[31080]: $INFO[ListItem.EndTimeResume]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.EndTimeResume)" />
+					</include>
 				</control>
 				<control type="textbox">
 					<left>790</left>
@@ -705,8 +736,11 @@
 					<aspectratio>keep</aspectratio>
 					<align>center</align>
 					<aligny>center</aligny>
-					<animation type="WindowOpen" reversible="false">
-						<effect type="fade" start="100" end="0" delay="1500" time="3000" />
+					<!-- Enquanto o cast não terminou de carregar (Cast.Ready vazio): pulsa como indicador. -->
+					<animation effect="fade" start="35" end="100" time="900" tween="sine" easing="inout" pulse="true" condition="String.IsEmpty(Window(Home).Property(Cast.Ready))">Conditional</animation>
+					<!-- Cast pronto: some suavemente para revelar o elenco. -->
+					<animation type="Conditional" reversible="false" condition="!String.IsEmpty(Window(Home).Property(Cast.Ready))">
+						<effect type="fade" start="100" end="0" delay="500" time="2000" />
 					</animation>
 				</control>
 
@@ -1233,6 +1267,33 @@
 					<param name="visible" value="String.IsEqual(Window.Property(ds_dialog_tmdb_type),tv)" />
 					<param name="content_path" value="$VAR[VideoInfoRelatedTVRecommendationsPath]" />
 				</include>
+			</control>
+			<!-- Mantém as coordenadas escolhidas e desenha as estrelas sobre o quadro Para Você. -->
+			<control type="group">
+				<left>610</left>
+				<top>-30</top>
+				<control type="label">
+					<left>1150</left>
+					<top>700</top>
+					<width>60</width>
+					<height>40</height>
+					<font>netSsTsb</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>FF000000</shadowcolor>
+					<align>right</align>
+					<aligny>center</aligny>
+					<label>$VAR[ds_infoFocusedRating]</label>
+					<visible>Control.HasFocus(98181) | Control.HasFocus(98183)</visible>
+				</control>
+				<control type="image">
+					<left>1013</left>
+					<top>691</top>
+					<width>140</width>
+					<height>55</height>
+					<aspectratio>keep</aspectratio>
+					<texture>$VAR[ds_infoFocusedMiddleStars]</texture>
+					<visible>Control.HasFocus(98181) | Control.HasFocus(98183)</visible>
+				</control>
 			</control>
 			<control type="label">
 				<right>80</right>

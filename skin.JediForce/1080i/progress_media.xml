@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
     <onload condition="!Window.IsActive(home) + !Window.IsActive(videos) + !Window.IsVisible(home) + !Window.IsVisible(videos)">Action(close)</onload>
+    <onload condition="Player.HasVideo + Integer.IsLess(Player.Duration(secs),600)">PlayerControl(Stop)</onload>
     <defaultcontrol always="true">9000</defaultcontrol>
     <controls>
         <control type="group">

@@ -616,6 +616,11 @@
 					<include content="VideoInfoRelatedStaticItem"><param name="i" value="7" /></include>
 					<include content="VideoInfoRelatedStaticItem"><param name="i" value="8" /></include>
 					<include content="VideoInfoRelatedStaticItem"><param name="i" value="9" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="10" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="11" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="12" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="13" /></include>
+					<include content="VideoInfoRelatedStaticItem"><param name="i" value="14" /></include>
 				</content>
 			</control>
 			<control type="group">

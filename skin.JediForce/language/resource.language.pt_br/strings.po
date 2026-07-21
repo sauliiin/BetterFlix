@@ -55,7 +55,7 @@ msgstr "Assistir como 2D"
 
 msgctxt "#31006"
 msgid "Random movies"
-msgstr "Filmes randômicos"
+msgstr "Filmes aleatórios"
 
 msgctxt "#31007"
 msgid "Unwatched movies"
@@ -79,11 +79,11 @@ msgstr "Álbuns mais reproduzidos"
 
 msgctxt "#31012"
 msgid "Random albums"
-msgstr "Álbuns randômicos"
+msgstr "Álbuns aleatórios"
 
 msgctxt "#31013"
 msgid "Random artists"
-msgstr "Artistas Randômicos"
+msgstr "Artistas aleatórios"
 
 msgctxt "#31014"
 msgid "Unplayed albums"

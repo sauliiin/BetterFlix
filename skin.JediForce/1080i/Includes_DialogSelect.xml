@@ -36,30 +36,6 @@
 					<param name="list_id" value="3" />
 				</include>
 			</control>
-			<!-- DSTV: control group: big icon preview. -->
-			<control type="group">
-				<left>940</left>
-				<top>430</top>
-				<width>260</width>
-				<height>260</height>
-				<control type="image">
-					<texture>$VAR[InfoWallThumbVar]</texture>
-					<aspectratio>keep</aspectratio>
-					<visible>!ListItem.Property(PVR.IsRecordingTimer) + !ListItem.Property(PVR.IsRemindingTimer)</visible>
-				</control>
-				<control type="image">
-					<aspectratio align="top">keep</aspectratio>
-					<aligny>center</aligny>
-					<texture>icons/pvr/timers/recording.png</texture>
-					<visible>ListItem.Property(PVR.IsRecordingTimer)</visible>
-				</control>
-				<control type="image">
-					<aspectratio align="top">keep</aspectratio>
-					<aligny>center</aligny>
-					<texture>icons/pvr/timers/bell.png</texture>
-					<visible>ListItem.Property(PVR.IsRemindingTimer)</visible>
-				</control>
-			</control>
 			<control type="list" id="6">
 				<left>20</left>
 				<top>100</top>
@@ -145,6 +121,18 @@
 						<aligny>center</aligny>
 					</control>
 				</focusedlayout>
+			</control>
+			<!-- Layout Switcher large preview -->
+			<control type="group">
+				<left>380</left>
+				<top>100</top>
+				<right>20</right>
+				<bottom>20</bottom>
+				<visible>String.IsEqual(Control.GetLabel(1),Escolha o estilo do layout)</visible>
+				<control type="image">
+					<texture>$VAR[InfoWallThumbVar]</texture>
+					<aspectratio align="center" aligny="center">keep</aspectratio>
+				</control>
 			</control>
 			<control type="scrollbar" id="61">
 				<left>910</left>

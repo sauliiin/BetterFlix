@@ -109,6 +109,8 @@
         <itemgap>-40</itemgap>
         <focusposition>0</focusposition>
         <usecontrolcoords>true</usecontrolcoords>
+        <!-- Ao chegar na ultima fileira e apertar para baixo, volta para a primeira -->
+        <ondown>SetFocus(5$SKINSHORTCUTS[padded_id]01,0,absolute)</ondown>
         <!-- Widget Panels -->
         <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
         <!-- Empty Menu Item button -->
@@ -156,7 +158,7 @@
       <controls>
           <include content="ds_widgetPanelList">
             <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
-            <param name="section" value="$SKINSHORTCUTS[padded_mmid]"/>
+            <param name="section" value="$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]"/>
             <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
             <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
             <param name="sortby" value="$SKINSHORTCUTS[sortby]" />

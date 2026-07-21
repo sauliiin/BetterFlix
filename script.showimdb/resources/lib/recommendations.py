@@ -25,6 +25,9 @@ from database import db
 TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/%s%s'
 POV_ID = 'plugin.video.pov'
 RECS_TABLE = 'recommendations'
+# Versao da chave do cache. A v2 invalida somente recomendacoes antigas que
+# podiam ter sido publicadas com o limite anterior de 10 itens.
+RECS_CACHE_SCHEMA = 2
 # 1 ano, igual ao EXPIRES_1_YEAR usado pelo POV nas recomendacoes.
 CACHE_MAX_AGE = 365 * 24 * 60 * 60
 # Idioma das recomendacoes: o POV usava en-US. Trocar para 'pt-BR' se quiser
@@ -43,7 +46,7 @@ _pov = None
 # Caches por-processo: como o pluginsource roda num processo novo a cada chamada
 # (reuselanguageinvoker=false), estes vivem so durante uma montagem, mas evitam
 # repetir getSetting/getLocalizedString/getInfoLabel cross-addon para cada um dos
-# 10 itens (eram ~40 chamadas por abertura; passam a ~4).
+# 15 itens (eram varias chamadas por abertura; passam a ~4).
 _pov_setting_cache = {}
 _pov_string_cache = {}
 _kodi_major_cached = None
@@ -162,7 +165,7 @@ def _recommendations_data(media_type, tmdb_id):
     tmdb_api (sessao + API key) e fazemos o GET, cacheando o resultado.
     """
     mt = 'tv' if media_type == 'tvshow' else 'movie'
-    cache_key = '%s_%s' % (mt, tmdb_id)
+    cache_key = 'v%d_%s_%s' % (RECS_CACHE_SCHEMA, mt, tmdb_id)
     row = db.fetch_one(
         'SELECT data, timestamp FROM %s WHERE cache_key = ?' % RECS_TABLE, (cache_key,)
     )
@@ -224,7 +227,7 @@ def _set_video_info(listitem, mediatype, title, tmdb_id, year, plot, rating):
         pass
 
 
-def recommendation_fields(media_type, tmdb_id, limit=10):
+def recommendation_fields(media_type, tmdb_id, limit=15):
     """Lista de dicts simples (sem ListItem) para o worker do servico publicar
     como window properties. media_type: 'movie'|'tv'|'tvshow'. Usa o mesmo
     cache-first de _recommendations_data, entao cache-hit nao toca em rede."""
@@ -238,7 +241,7 @@ def recommendation_fields(media_type, tmdb_id, limit=10):
     try:
         limit = max(1, min(int(limit), 20))
     except Exception:
-        limit = 10
+        limit = 15
     data = _recommendations_data(media_type, tmdb_id)
     out = []
     for item in data[:limit]:
@@ -271,9 +274,9 @@ def build(handle, params):
         media_type = 'movie'
     tmdb_id = params.get('tmdb_id')
     try:
-        limit = max(1, min(int(params.get('limit', 10)), 20))
+        limit = max(1, min(int(params.get('limit', 15)), 20))
     except Exception:
-        limit = 10
+        limit = 15
 
     poster_size, fanart_size = _resolution()
     name_key = 'title' if media_type == 'movie' else 'name'
