@@ -5,10 +5,10 @@
 	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) | Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
 	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] | Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime | Window.IsActive(musicosd) | Window.IsActive(playerprocessinfo) | Window.IsActive(videoosd) | !String.IsEmpty(Player.SeekNumeric) | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
 	<animation type="WindowOpen" reversible="False">
-		<effect type="fade" start="0" end="100" time="300"/>
+		<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
 	</animation>
 	<animation type="WindowClose" reversible="False">
-		<effect type="fade" start="100" end="0" time="300"/>
+		<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
 	</animation>
 	<depth>DepthOSD</depth>
 	<zorder>0</zorder>
@@ -178,20 +178,20 @@
 			<control type="group">
 				<visible>!VideoPlayer.Content(LiveTV)</visible>
 				<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
-					<effect type="fade" start="0" end="100" time="400"/>
-					<effect type="slide" start="0,200" end="0,0" time="400" tween="sine" easing="inout" />
+					<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
+					<effect type="slide" start="0,200" end="0,0" time="250" tween="cubic" easing="out" />
 				</animation>
 				<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
-					<effect type="fade" start="100" end="0" time="400"/>
-					<effect type="slide" start="0,0" end="0,200" time="500" tween="sine" easing="inout" />
+					<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
+					<effect type="slide" start="0,0" end="0,200" time="250" tween="cubic" easing="in" />
 				</animation>
 
 				<!-- Fade when Paused -->
 				<animation type="WindowOpen" reversible="False" condition="Player.Paused | Window.IsActive(fullscreeninfo)">
-					<effect type="fade" start="0" end="100" time="300"/>
+					<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
 				</animation>
 				<animation type="WindowClose" condition="Player.Paused | Window.IsActive(fullscreeninfo)" reversible="False">
-					<effect type="fade" start="100" end="0" time="300"/>
+					<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
 				</animation>
 				<control type="progress">
 					<left>390</left>
@@ -320,20 +320,20 @@
 			<font>fontOSD</font>
 			<!-- Slide when Playing -->
 			<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
-				<effect type="fade" start="0" end="100" time="400"/>
-				<effect type="slide" start="0,200" end="0,0" time="400" tween="sine" easing="inout" />
+				<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
+				<effect type="slide" start="0,200" end="0,0" time="250" tween="cubic" easing="out" />
 			</animation>
 			<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
-				<effect type="fade" start="100" end="0" time="400"/>
-				<effect type="slide" start="0,0" end="0,200" time="500" tween="sine" easing="inout" />
+				<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
+				<effect type="slide" start="0,0" end="0,200" time="250" tween="cubic" easing="in" />
 			</animation>
 
 			<!-- Fade when Paused -->
 			<animation type="WindowOpen" reversible="False" condition="Player.Paused | Window.IsActive(fullscreeninfo)">
-				<effect type="fade" start="0" end="100" time="300"/>
+				<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
 			</animation>
 			<animation type="WindowClose" condition="Player.Paused | Window.IsActive(fullscreeninfo)" reversible="False">
-				<effect type="fade" start="100" end="0" time="300"/>
+				<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
 			</animation>
 		</control>
 		

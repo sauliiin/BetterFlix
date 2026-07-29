@@ -33,6 +33,11 @@ _progress_media_lock = Lock()
 _progress_media_last_active = False
 _progress_media_resume_playback_base = None
 
+# Instâncias únicas de Monitor/Player: reinstanciar xbmc.Player()/xbmc.Monitor() a
+# cada item/lista é caro no Kodi. Reusamos uma só (mesmo padrão do ratings_service).
+_monitor = xbmc.Monitor()
+_player = xbmc.Player()
+
 
 def _available_memory_mb():
     """RAM disponivel em MB, lida de /proc/meminfo (MemAvailable). Retorna None
@@ -87,7 +92,6 @@ def is_progress_media_active():
 
 
 def wait_for_progress_media_release(stop_event=None):
-    monitor = xbmc.Monitor()
     global _progress_media_last_active, _progress_media_resume_playback_base
     while True:
         active = is_progress_media_active()
@@ -98,9 +102,9 @@ def wait_for_progress_media_release(stop_event=None):
             else:
                 if _progress_media_last_active:
                     _progress_media_last_active = False
-                    if xbmc.Player().isPlayingVideo():
+                    if _player.isPlayingVideo():
                         try:
-                            _progress_media_resume_playback_base = float(xbmc.Player().getTime())
+                            _progress_media_resume_playback_base = float(_player.getTime())
                         except Exception:
                             _progress_media_resume_playback_base = 0.0
                     else:
@@ -109,12 +113,12 @@ def wait_for_progress_media_release(stop_event=None):
                 if _progress_media_resume_playback_base is None:
                     return True
 
-                if not xbmc.Player().isPlayingVideo():
+                if not _player.isPlayingVideo():
                     _progress_media_resume_playback_base = None
                     return True
 
                 try:
-                    current_time = float(xbmc.Player().getTime())
+                    current_time = float(_player.getTime())
                 except Exception:
                     current_time = None
 
@@ -130,7 +134,7 @@ def wait_for_progress_media_release(stop_event=None):
 
         if stop_event is not None and stop_event.is_set():
             return False
-        if monitor.waitForAbort(PROGRESS_MEDIA_POLL):
+        if _monitor.waitForAbort(PROGRESS_MEDIA_POLL):
             return False
 
 
@@ -410,29 +414,29 @@ class CacheChecker:
         """Retorna True se ratings, badges e reviews estiverem frescos."""
         now = time.time()
 
+        # JOIN das 3 tabelas numa única query: o INNER JOIN só devolve linha se
+        # ratings, badges e reviews existirem (mesma semântica dos 3 SELECTs).
         row = self._db.fetch_one(
-            "SELECT data, timestamp FROM mdlist_data WHERE imdb_id = ?", (imdb_id,)
+            'SELECT m.data, m.timestamp, b.timestamp, t.timestamp '
+            'FROM mdlist_data m '
+            'JOIN badges_data b ON b.imdb_id = m.imdb_id '
+            'JOIN trakt_reviews t ON t.imdb_id = m.imdb_id '
+            'WHERE m.imdb_id = ?',
+            (imdb_id,)
         )
-        if not row or (now - row[1] >= FineTuning.RATINGS_MAX_AGE):
+        if not row:
+            return False
+        m_data, m_ts, b_ts, t_ts = row
+        if (now - (m_ts or 0) >= FineTuning.RATINGS_MAX_AGE
+                or now - (b_ts or 0) >= FineTuning.BADGES_MAX_AGE
+                or now - (t_ts or 0) >= FineTuning.REVIEWS_MAX_AGE):
             return False
         try:
             import mdblist_api
-            ratings_data = json.loads(row[0] or '{}')
+            ratings_data = json.loads(m_data or '{}')
             if ratings_data.get('badges_schema_version') != mdblist_api.FineTuning.BADGES_SCHEMA_VERSION:
                 return False
         except Exception:
-            return False
-
-        row2 = self._db.fetch_one(
-            "SELECT timestamp FROM badges_data WHERE imdb_id = ?", (imdb_id,)
-        )
-        if not row2 or (now - row2[0] >= FineTuning.BADGES_MAX_AGE):
-            return False
-
-        row3 = self._db.fetch_one(
-            "SELECT timestamp FROM trakt_reviews WHERE imdb_id = ?", (imdb_id,)
-        )
-        if not row3 or (now - row3[0] >= FineTuning.REVIEWS_MAX_AGE):
             return False
 
         return True
@@ -909,7 +913,7 @@ class PrefetchService:
             self._progress.set_list(name)
 
             for key in keys:
-                if self._stop.is_set() or xbmc.Monitor().abortRequested():
+                if self._stop.is_set() or _monitor.abortRequested():
                     abort_requested = True
                     break
                 if not wait_for_progress_media_release(self._stop):
@@ -928,7 +932,7 @@ class PrefetchService:
             s = self._progress.get_list(name)
             Log.list_complete(name, s['fetched'], s['skipped'], s['errors'])
 
-            if abort_requested or self._stop.is_set() or xbmc.Monitor().abortRequested():
+            if abort_requested or self._stop.is_set() or _monitor.abortRequested():
                 break
 
             time.sleep(batch_delay)
@@ -954,7 +958,7 @@ class PrefetchService:
 # ============================================================================
 
 def _monitor_loop():
-    monitor = xbmc.Monitor()
+    monitor = _monitor
     Log.info('Monitor iniciado (intervalo: %dh, boot delay: %ds)'
              % (FineTuning.CHECK_INTERVAL_HOURS, FineTuning.BOOT_DELAY))
 
@@ -970,7 +974,7 @@ def _monitor_loop():
     service = PrefetchService()
 
     while not monitor.abortRequested():
-        is_playing = xbmc.Player().isPlayingVideo()
+        is_playing = _player.isPlayingVideo()
 
         try:
             avail_mb = _available_memory_mb()

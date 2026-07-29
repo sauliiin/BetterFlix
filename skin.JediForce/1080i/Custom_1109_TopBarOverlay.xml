@@ -14,12 +14,12 @@
 	<controls>
 		<control type="group">
 			<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
-				<effect type="fade" start="0" end="100" time="400"/>
-				<effect type="slide" start="0,200" end="0,0" time="400" tween="sine" easing="inout" />
+				<effect type="fade" start="0" end="100" time="300"/>
+				<effect type="slide" start="0,200" end="0,0" time="300" tween="quartic" easing="out" />
 			</animation>
 			<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
-				<effect type="fade" start="100" end="0" time="400"/>
-				<effect type="slide" start="0,0" end="0,200" time="500" tween="sine" easing="inout" />
+				<effect type="fade" start="100" end="0" time="300"/>
+				<effect type="slide" start="0,0" end="0,200" time="300" tween="quartic" easing="in" />
 			</animation>
 
 			<!-- Fade when Paused -->

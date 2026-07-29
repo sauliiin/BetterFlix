@@ -354,7 +354,7 @@
 					<animation effect="fade" start="0" end="100" time="800">Visible</animation>
 					<depth>DepthContentPopout</depth>
 					<right>-70</right>
-					<top>-160</top>
+					<top>-170</top>
 					<width>1400</width>
 					<height>948</height>
 				</control>
@@ -362,7 +362,7 @@
 					<visible>Player.HasVideo + Integer.IsGreater(Player.Time,1) + !Player.Paused + String.IsEmpty(Window(Home).Property(showimdb_home_splash_active))</visible>
 					<right>-70</right>
 					<top>0</top>
-					<width>156%</width>
+					<width>158%</width>
 					<height>85%</height>
 					<fadetime>500</fadetime>
 					<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
@@ -372,8 +372,8 @@
 				<visible>[!Player.HasVideo | Player.Paused | Player.HasVideo + Integer.IsLess(Player.Time,2)] + !String.IsEmpty(Container(54).ListItem.Art(fanart))</visible>
 				<top>0</top>
 				<right>-170</right>
-				<width>68%</width>
-				<height>64%</height>
+				<width>72%</width>
+				<height>68%</height>
 				<aspectratio>stretch</aspectratio>
 				<texture background="true">$INFO[Container(54).ListItem.Art(fanart)]</texture>
 				<fadetime>500</fadetime>
@@ -382,8 +382,8 @@
 				<visible>[!Player.HasVideo | Player.Paused | Player.HasVideo + Integer.IsLess(Player.Time,2)] + String.IsEmpty(Container(54).ListItem.Art(fanart)) + !String.IsEmpty(Container(54).ListItem.Art(landscape))</visible>
 				<top>0</top>
 				<right>-170</right>
-				<width>68%</width>
-				<height>64%</height>
+				<width>72%</width>
+				<height>68%</height>
 				<aspectratio>stretch</aspectratio>
 				<texture background="true">$INFO[Container(54).ListItem.Art(landscape)]</texture>
 				<fadetime>500</fadetime>
@@ -391,24 +391,10 @@
 			<control type="image">
 				<right>-70</right>
 				<top>0</top>
-				<width>85%</width>
-				<height>78%</height>
+				<width>89%</width>
+				<height>80%</height>
 				<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
 				<fadetime>500</fadetime>
-			</control>
-			<control type="image">
-				<left>-100</left>
-				<top>-35</top>
-				<width>1250</width>
-				<height>60%</height>
-				<aspectratio aligny="top">stretch</aspectratio>
-				<texture colordiffuse="info_background">dstv/info_bg.png</texture>
-				<fadetime>500</fadetime>
-			</control>
-			<control type="image">
-				<width>900</width>
-				<height>100%</height>
-				<texture colordiffuse="4D000000">dstv/menu_bg_fade.png</texture>
 			</control>
 			<control type="image">
 				<visible>!String.IsEmpty(Container(54).ListItem.Art(clearlogo))</visible>

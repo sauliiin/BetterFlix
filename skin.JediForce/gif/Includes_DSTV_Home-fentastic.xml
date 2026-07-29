@@ -653,7 +653,7 @@
     <definition>
       <control type="group" id="$PARAM[list_id]1">
         <depth>DepthContentPanel</depth>
-        <visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+        <visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
         <visible>true</visible>
         <animation effect="fade" time="800">VisibleChange</animation>
         <animation type="Conditional" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + !Player.Paused" reversible="true">
@@ -712,7 +712,7 @@
       </control>
       <control type="fixedlist" id="$PARAM[list_id]">
         <depth>DepthContentPopout</depth>
-        <visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+        <visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
         <left>400</left>
         <top>13</top>
         <right>0</right>
@@ -1396,7 +1396,7 @@
         </focusedlayout>
         <content>
           <item>
-            <visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
+            <visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label)</visible>
             <property name="poster">$VAR[ds_widget_loading_poster]</property>
             <property name="landscape">$VAR[ds_widget_loading_landscape]</property>
           </item>

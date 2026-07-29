@@ -38,33 +38,37 @@
     <property name="sortby" tag="property" attribute="name|widgetSortBy" />
     <property name="sortorder" tag="property" attribute="name|widgetSortOrder" />
     <property name="limit" tag="property" attribute="name|widgetLimit" />
-
+    
     <property name="padded_smid">$PYTHON['%02d' % $SKINSHORTCUTS[smid]]</property>
     <property name="padded_mmid">$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]</property>
+    
+    <property name="width" tag="property" attribute="name|displayType" value="squares">187</property>
+    <property name="width" tag="property" attribute="name|displayType" value="landscape">295</property>
+    <property name="width">193</property>
 
-    <property name="width" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="width" tag="property" attribute="name|displayType" value="landscape">240</property>
-    <property name="width">136</property>
-    <property name="height" tag="property" attribute="name|displayType" value="squares">171</property>
-    <property name="height" tag="property" attribute="name|displayType" value="landscape">125</property>
-    <property name="height">189</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="squares">180</property>
-    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">258</property>
-    <property name="widget_width">156</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="squares">224</property>
-    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">190</property>
-    <property name="widget_height">258</property>
+    <property name="height" tag="property" attribute="name|displayType" value="squares">187</property>
+    <property name="height" tag="property" attribute="name|displayType" value="landscape">150</property>
+    <property name="height">290</property>
+
+    <property name="widget_width" tag="property" attribute="name|displayType" value="squares">197</property>
+    <property name="widget_width" tag="property" attribute="name|displayType" value="landscape">312</property>
+    <property name="widget_width">208</property>
+
+    <property name="widget_height" tag="property" attribute="name|displayType" value="squares">270</property>
+    <property name="widget_height" tag="property" attribute="name|displayType" value="landscape">245</property>
+    <property name="widget_height">400</property>
+
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="squares">stretch</property>
     <property name="aspect_ratio" tag="property" attribute="name|displayType" value="landscape">stretch</property>
     <property name="aspect_ratio">stretch</property>
+
     <property name="display_titles" tag="property" attribute="name|displayTitles" value="true">true</property>
     <property name="display_titles">false</property>
+
     <property name="display_type" tag="property" attribute="name|displayType" value="squares">squares</property>
     <property name="display_type" tag="property" attribute="name|displayType" value="landscape">landscape</property>
     <property name="display_type">posters</property>
-    <property name="top_offset" tag="property" attribute="name|displayType" value="landscape">26</property>
-    <property name="top_offset" tag="property" attribute="name|displayType" value="squares">30</property>
-    <property name="top_offset">25</property>
+
     <property name="display_type_isposters" tag="property" attribute="name|displayType" value="squares">false</property>
     <property name="display_type_isposters" tag="property" attribute="name|displayType" value="landscape">false</property>
     <property name="display_type_isposters">true</property>
@@ -80,20 +84,23 @@
     <property name="w_forc">false</property>
     <property name="w_hour" tag="property" attribute="name|widgetPath" value="dstv_ss_weather_hourly">true</property>
     <property name="w_hour">false</property>
+    
+    <property name="list_top" tag="property" attribute="name|displayType" value="landscape">8</property>
+    <property name="list_top">18</property>
   </propertyGroup>
 
   <submenu include="ss_widgets">
     <propertyGroup>MainMenuProps</propertyGroup>
-
+    
     <controls>
       <control type="grouplist" id="50$SKINSHORTCUTS[menuid]000">
         <include>Visible_Right</include>
         <!-- only one widgets grouplist will be visible at any time -->
         <skinshortcuts>visibility</skinshortcuts>
         <left>-50</left>
-        <top>52%</top>
+        <top>60%</top>
         <width>120%</width>
-        <height>514</height>
+        <height>420</height>
         <scrolltime tween="sine" easing="inout">600</scrolltime>
         <orientation>vertical</orientation>
         <wrap>false</wrap>
@@ -107,7 +114,7 @@
         <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
         <!-- Empty Menu Item button -->
         <control type="button" id="50$SKINSHORTCUTS[menuid]999">
-          <visible>Integer.IsLess(Container(50$SKINSHORTCUTS[menuid]000).NumItems,2)</visible>
+          <visible>Integer.IsLess(Container(50$SKINSHORTCUTS[menuid]000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
           <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(50$SKINSHORTCUTS[menuid]999)">Conditional</animation>
           <left>500</left>
           <right>400</right>
@@ -136,6 +143,7 @@
           <onfocus>ClearProperty(ds_info_weather)</onfocus>
           <onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
           <onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+          <onfocus condition="!Player.HasVideo | Player.Paused">ClearProperty(ds_info_clearlogo)</onfocus>
           <onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
           <onfocus>ClearProperty(ds_info_dbtype)</onfocus>
           <texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>
@@ -143,38 +151,38 @@
         </control>
       </control>
     </controls>
-
+    
     <items insert="SubMenuPanels">
       <propertyGroup>SubMenuProps</propertyGroup>
       <controls>
-        <include content="ds_widgetPanelList">
-          <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
-          <param name="section" value="$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]"/>
-          <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
-          <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
-          <param name="sortby" value="$SKINSHORTCUTS[sortby]" />
-          <param name="sortorder" value="$SKINSHORTCUTS[sortorder]" />
-          <param name="limit" value="$SKINSHORTCUTS[limit]" />
-          <param name="widget_target" value="$SKINSHORTCUTS[target]" />
-          <param name="width" value="$SKINSHORTCUTS[width]" />
-          <param name="height" value="$SKINSHORTCUTS[height]" />
-          <param name="widget_width" value="$SKINSHORTCUTS[widget_width]" />
-          <param name="widget_height" value="$SKINSHORTCUTS[widget_height]" />
-          <param name="aspect_ratio" value="$SKINSHORTCUTS[aspect_ratio]" />
-          <param name="display_titles" value="$SKINSHORTCUTS[display_titles]" />
-          <param name="top_offset" value="$SKINSHORTCUTS[top_offset]" />
-          <param name="display_type" value="$SKINSHORTCUTS[display_type]" />
-          <param name="display_type_isposters" value="$SKINSHORTCUTS[display_type_isposters]" />
-          <param name="display_type_issquares" value="$SKINSHORTCUTS[display_type_issquares]" />
-          <param name="display_type_islandscape" value="$SKINSHORTCUTS[display_type_islandscape]" />
-          <param name="pvr_tv_rec_status" value="$SKINSHORTCUTS[pvr_tv_rec_status]" />
-          <param name="w_cond" value="$SKINSHORTCUTS[w_cond]" />
-          <param name="w_hour" value="$SKINSHORTCUTS[w_hour]" />
-          <param name="w_forc" value="$SKINSHORTCUTS[w_forc]" />
-        </include>
+          <include content="ds_widgetPanelList">
+            <param name="list_id" value="5$SKINSHORTCUTS[padded_mmid]$SKINSHORTCUTS[padded_smid]"/>
+            <param name="section" value="$PYTHON['%02d' % $SKINSHORTCUTS[mmid]]"/>
+            <param name="widget_header" value="$SKINSHORTCUTS[label]"/>
+            <param name="content_path" value="$SKINSHORTCUTS[contentPath]"/>
+            <param name="sortby" value="$SKINSHORTCUTS[sortby]" />
+            <param name="sortorder" value="$SKINSHORTCUTS[sortorder]" />
+            <param name="limit" value="$SKINSHORTCUTS[limit]" />
+            <param name="widget_target" value="$SKINSHORTCUTS[target]" />
+            <param name="width" value="$SKINSHORTCUTS[width]" />
+            <param name="height" value="$SKINSHORTCUTS[height]" />
+            <param name="widget_width" value="$SKINSHORTCUTS[widget_width]" />
+            <param name="widget_height" value="$SKINSHORTCUTS[widget_height]" />
+            <param name="aspect_ratio" value="$SKINSHORTCUTS[aspect_ratio]" />
+            <param name="display_titles" value="$SKINSHORTCUTS[display_titles]" />
+            <param name="display_type" value="$SKINSHORTCUTS[display_type]" />
+            <param name="display_type_isposters" value="$SKINSHORTCUTS[display_type_isposters]" />
+            <param name="display_type_issquares" value="$SKINSHORTCUTS[display_type_issquares]" />
+            <param name="display_type_islandscape" value="$SKINSHORTCUTS[display_type_islandscape]" />
+            <param name="pvr_tv_rec_status" value="$SKINSHORTCUTS[pvr_tv_rec_status]" />
+            <param name="w_cond" value="$SKINSHORTCUTS[w_cond]" />
+            <param name="w_hour" value="$SKINSHORTCUTS[w_hour]" />
+            <param name="w_forc" value="$SKINSHORTCUTS[w_forc]" />
+            <param name="list_top" value="$SKINSHORTCUTS[list_top]" />
+          </include>
       </controls>
     </items>
-
+    
   </submenu>
 
 </template>

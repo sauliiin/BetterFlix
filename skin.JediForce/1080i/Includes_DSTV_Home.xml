@@ -123,7 +123,7 @@
 
 	<include name="InfoArea">
 		<control type="group">
-			<top>-10</top>
+			<top>0</top>
 
 			<control type="image">
 				<right>0</right>
@@ -164,7 +164,7 @@
 					<right>0</right>
 					<top>0</top>
 					<width>100%</width>
-					<height>70%</height>
+					<height>85%</height>
 					<aspectratio>scale</aspectratio>
 					<texture background="true">$VAR[ds_infoFanart]</texture>
 					<fadetime>500</fadetime>
@@ -176,7 +176,7 @@
 					<right>0</right>
 					<top>0</top>
 					<width>150%</width>
-					<height>90%</height>
+					<height>110%</height>
 					<fadetime>500</fadetime>
 					<texture colordiffuse="primary_background">$VAR[ds_netflixDiffuse]</texture>
 				</control>
@@ -466,11 +466,11 @@
 				<animation effect="fade" start="0" end="100" time="600" delay="1000">Visible</animation>
 				<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 				<animation effect="fade" start="0" end="100" time="1200" condition="!Player.HasVideo | Player.Paused | Integer.IsLess(Player.Time,2)" reversible="false">Conditional</animation>
-				<animation effect="fade" start="100" end="0" time="10000" delay="2000" condition="Player.HasVideo + !Player.Paused + Integer.IsGreater(Player.Time,1)" reversible="false">Conditional</animation>
+				<animation effect="fade" start="100" end="0" time="10000" delay="2000" condition="Player.HasVideo + !Player.Paused + Integer.IsGreater(Player.Time,1) + !Integer.IsGreater(Player.Duration,600)" reversible="false">Conditional</animation>
 				<left>105</left>
 				<top>10</top>
 				<width>400</width>
-				<height>527</height>
+				<height>595</height>
 				<control type="textbox">
 					<label>$INFO[Window(home).Property(ds_info_desc)]</label>
 					<autoscroll delay="6000" time="6000" repeat="6000">Skin.HasSetting(autoscroll)</autoscroll>
@@ -486,7 +486,7 @@
 
 	<include name="InfoAreaRatings">
 		<control type="group">
-			<top>-10</top>
+			<top>85</top>
 			<right>0</right>
 			<animation effect="fade" start="0" end="100" time="1200" condition="!Player.HasVideo | Player.Paused | Player.HasVideo + Integer.IsLess(Player.Time,2) | Player.HasVideo + Integer.IsGreater(Player.Duration, 600) + Skin.HasSetting(dstv_enable_auto_trailer)" reversible="true">Conditional</animation>
 
@@ -714,7 +714,7 @@
 		<param name="display_type_islandscape"/>
 		<definition>
 			<control type="group" id="$PARAM[list_id]1">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<animation effect="fade" start="100" end="0" time="800" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !Player.Paused + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + Integer.IsGreater(Player.Time,1)" reversible="true">Conditional</animation>
 				<left>190</left>
 				<width>200%</width>
@@ -767,7 +767,7 @@
 				</control>
 			</control>
 			<control type="fixedlist" id="$PARAM[list_id]">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<animation effect="fade" start="100" end="0" time="800" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !Player.Paused + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + Integer.IsGreater(Player.Time,1)" reversible="true">Conditional</animation>
 				<left>45</left>
 				<top>$PARAM[list_top]</top>
@@ -861,15 +861,15 @@
 							</control>
 						</control>
 						<control type="image">
-							<left>14</left>
-							<bottom>-10</bottom>
+							<left>23</left>
+							<top>270</top>
 							<visible>$PARAM[display_type_isposters] + Integer.IsGreater(ListItem.Playcount,0)</visible>
-							<width>30</width>
-							<height>30</height>
+							<width>32</width>
+							<height>32</height>
 							<texture>dstv/watched_i.png</texture>
 						</control>
 						<control type="image">
-							<top>103</top>
+							<top>127</top>
 							<left>20</left>
 							<visible>$PARAM[display_type_islandscape] + Integer.IsGreater(ListItem.Playcount,0)</visible>
 							<width>32</width>
@@ -878,7 +878,6 @@
 						</control>
 							<control type="group">
 								<visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
-								<left>-17</left>
 								<control type="image">
 									<left>83.5%</left>
 									<top>1</top>
@@ -905,7 +904,6 @@
 							</control>
 							<control type="group">
 								<visible>$PARAM[display_type_isposters] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
-								<left>-42</left>
 								<control type="image">
 									<left>75%</left>
 									<top>1</top>
@@ -935,7 +933,6 @@
 							<visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
 							<top>5%</top>
 							<left>79%</left>
-							<animation effect="slide" start="-6,1" end="-6,1" time="0" condition="true">Conditional</animation>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -952,7 +949,6 @@
 							<visible>!$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
 							<top>9</top>
 							<left>68.5%</left>
-							<animation effect="slide" start="-15,0" end="-15,0" time="0" condition="true">Conditional</animation>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -1168,15 +1164,15 @@
 							</control>
 						</control>
 						<control type="image">
-							<left>14</left>
-							<bottom>-10</bottom>
+							<left>23</left>
+							<top>270</top>
 							<visible>$PARAM[display_type_isposters] + Integer.IsGreater(ListItem.Playcount,0)</visible>
-							<width>30</width>
-							<height>30</height>
+							<width>32</width>
+							<height>32</height>
 							<texture>dstv/watched_i.png</texture>
 						</control>
 						<control type="image">
-							<top>103</top>
+							<top>127</top>
 							<left>20</left>
 							<visible>$PARAM[display_type_islandscape] + Integer.IsGreater(ListItem.Playcount,0)</visible>
 							<width>32</width>
@@ -1185,7 +1181,6 @@
 						</control>
 							<control type="group">
 								<visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
-								<left>-17</left>
 								<control type="image">
 									<left>83.5%</left>
 									<top>1</top>
@@ -1212,7 +1207,6 @@
 							</control>
 							<control type="group">
 								<visible>$PARAM[display_type_isposters] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
-								<left>-42</left>
 								<control type="image">
 									<left>75%</left>
 									<top>1</top>
@@ -1241,7 +1235,6 @@
 							<visible>$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
 							<top>5.1%</top>
 							<left>79%</left>
-							<animation effect="slide" start="-6,1" end="-6,1" time="0" condition="true">Conditional</animation>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -1258,7 +1251,6 @@
 							<visible>!$PARAM[display_type_islandscape] + !Skin.HasSetting(hide_ratings_fire) + $EXP[ds_widget_rating_threshold]</visible>
 							<top>9</top>
 							<left>68.5%</left>
-							<animation effect="slide" start="-15,0" end="-15,0" time="0" condition="true">Conditional</animation>
 							<width>47</width>
 							<height>41</height>
 							<align>right</align>
@@ -1274,7 +1266,7 @@
 				</focusedlayout>
 				<content>
 					<item>
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
+						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label)</visible>
 						<icon>$VAR[ds_widget_loading_poster]</icon>
 						<property name="poster">$VAR[ds_widget_loading_poster]</property>
 						<property name="landscape">$VAR[ds_widget_loading_landscape]</property>

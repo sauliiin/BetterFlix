@@ -7,7 +7,6 @@ import xbmcaddon
 import time
 import threading
 import re
-import json
 import importlib
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
@@ -57,11 +56,6 @@ class FineTuning:
     SPLASH_VIDEO_WIDGET_READY_COUNT = 8  # quantidade de widgets com conteúdo real antes de disparar o splash.mp4
     SPLASH_VIDEO_WIDGET_GATE_TIMEOUT = 45.0  # teto de espera pelos widgets reais antes de liberar o splash mesmo incompleto.
     SPLASH_BOOT_COVER_WIDGET_READY_COUNT = 7  # SEM video: quantos widgets reais segurar antes de liberar o boot cover pro fade-out.
-    SPLASH_BOOT_PREFETCH_ENABLED = True  # no boot, materializa widgets invisiveis no skin para aquecer containers.
-    SPLASH_BOOT_PREFETCH_PER_WIDGET_TIMEOUT = 25.0  # tempo máximo aguardando cada lista carregar.
-    SPLASH_BOOT_PREFETCH_POLL = 0.50  # polling entre verificações de carga de cada lista.
-    SPLASH_BOOT_JSONRPC_ENABLED = True  # no boot, varre TODOS os widgets via Files.GetDirectory (JSON-RPC), um a um, sem renderizar nem navegar.
-    SPLASH_BOOT_JSONRPC_PER_WIDGET_TIMEOUT = 30.0  # teto por widget antes de abandonar e seguir ao proximo (o plugin termina em background mesmo assim).
 
     # 1 to 1 = sweet spot after many tests
     TRAILER_WORKERS = 1  # workers do pipeline de resolução de trailer.
@@ -116,10 +110,6 @@ def load_runtime_modules():
 BOOT_COVER_DONE_PROPERTY = "showimdb_boot_cover_done"
 HOME_SPLASH_ACTIVE_PROPERTY = "showimdb_home_splash_active"
 SPLASH_VIDEO_COVER_DONE_PROPERTY = "showimdb_splash_video_cover_done"
-BOOT_PREFETCH_CATEGORY_PROPERTY = "showimdb_boot_prefetch_category"
-BOOT_PREFETCH_OFFSCREEN_PROPERTY = "showimdb_boot_prefetch_offscreen"
-BOOT_JSONRPC_PROGRESS_PROPERTY = "showimdb_boot_jsonrpc_loaded"
-BOOT_JSONRPC_DONE_PROPERTY = "showimdb_boot_jsonrpc_done"
 
 
 def get_widget_boot_debug_source_path():
@@ -202,13 +192,6 @@ def get_container_first_label(container_id):
     return label
 
 
-def get_container_is_updating(container_id):
-    try:
-        return bool(xbmc.getCondVisibility(f"Container({container_id}).IsUpdating"))
-    except Exception:
-        return False
-
-
 def has_real_widget_content(container_id):
     numitems = get_container_numitems(container_id)
     first_label = get_container_first_label(container_id)
@@ -242,331 +225,16 @@ def get_splash_video_widget_gate_timeout():
     return max(1.0, default_timeout)
 
 
-def _summarize_targets_by_category(targets):
-    counts = {}
-    for target in (targets or []):
-        category = (target.get("category") or "desconhecida").strip().lower()
-        counts[category] = counts.get(category, 0) + 1
-    ordered = ["filmes", "series", "generos", "whatelse"]
-    parts = []
-    for category in ordered:
-        parts.append("%s=%s" % (category, counts.get(category, 0)))
-    for category in sorted(counts.keys()):
-        if category not in ordered:
-            parts.append("%s=%s" % (category, counts.get(category, 0)))
-    return ", ".join(parts), counts
-
-
-_SKIN_INFO_HOME_PROPERTY_RE = re.compile(
-    r"\$INFO\[Window\((?:Home|home|10000)\)\.Property\(([^)]+)\)\]"
-)
-
-
-def _resolve_skin_value(value, home_window=None):
-    value = html.unescape(value or "")
-    if not value:
-        return ""
-
-    if home_window is None:
-        try:
-            home_window = xbmcgui.Window(10000)
-        except Exception:
-            home_window = None
-
-    def _replace_home_property(match):
-        if home_window is None:
-            return ""
-        try:
-            return home_window.getProperty(match.group(1)) or ""
-        except Exception:
-            return ""
-
-    value = _SKIN_INFO_HOME_PROPERTY_RE.sub(_replace_home_property, value)
-    return re.sub(r"\$NUMBER\[([^\]]+)\]", r"\1", value)
-
-
-def _snapshot_widget_hint_state():
-    try:
-        home_window = xbmcgui.Window(10000)
-        return home_window, home_window.getProperty("ds_active_widget_id"), home_window.getProperty("ds_prop_widgetpath")
-    except Exception:
-        return None, "", ""
-
-
-def _restore_widget_hint_state(snapshot):
-    home_window, active_widget_id, widget_path = snapshot
-    if home_window is None:
-        return False
-
-    try:
-        if active_widget_id:
-            home_window.setProperty("ds_active_widget_id", active_widget_id)
-        else:
-            home_window.clearProperty("ds_active_widget_id")
-        if widget_path:
-            home_window.setProperty("ds_prop_widgetpath", widget_path)
-        else:
-            home_window.clearProperty("ds_prop_widgetpath")
-        return True
-    except Exception:
-        return False
-
-
-def preload_widgets_without_focus(targets=None):
-    """No boot, materializa categorias invisiveis do skin sem mover foco."""
-    if not FineTuning.SPLASH_BOOT_PREFETCH_ENABLED:
-        return []
-
-    monitor = xbmc.Monitor()
-    per_widget_timeout = max(0.5, float(FineTuning.SPLASH_BOOT_PREFETCH_PER_WIDGET_TIMEOUT))
-    poll = max(0.05, float(FineTuning.SPLASH_BOOT_PREFETCH_POLL))
-    home_window = xbmcgui.Window(10000)
-    hint_snapshot = _snapshot_widget_hint_state()
-
-    try:
-        home_window.setProperty(BOOT_PREFETCH_OFFSCREEN_PROPERTY, "true")
-    except Exception:
-        pass
-
-    scan_targets = list(targets or discover_widget_boot_targets())
-    loaded_widgets = []
-    active_category = None
-
-    try:
-        for target in scan_targets:
-            container_id = target.get("container_id")
-            header = target.get("header") or "<sem_header>"
-            category = target.get("category") or "desconhecida"
-            category_key = (category or "").strip().lower()
-            if monitor.abortRequested():
-                break
-
-            # Troca de categoria — limpa primeiro, espera a skin processar, depois seta a nova.
-            if category_key != active_category:
-                if active_category is not None:
-                    try:
-                        home_window.clearProperty(BOOT_PREFETCH_CATEGORY_PROPERTY)
-                    except Exception:
-                        pass
-                    # Espera a skin processar a remoção da categoria anterior (evita piscada de transição).
-                    monitor.waitForAbort(0.15)
-
-                xbmc.log(
-                    "[ShowIMDB][BootPrefetch] Trocando categoria para prefetch: %s -> %s"
-                    % (active_category or "(nenhuma)", category_key),
-                    xbmc.LOGINFO,
-                )
-                try:
-                    home_window.setProperty(BOOT_PREFETCH_CATEGORY_PROPERTY, category_key)
-                except Exception:
-                    pass
-                active_category = category_key
-
-            xbmc.log(
-                "[ShowIMDB][BootPrefetch] Categoria invisivel para prefetch: categoria=%s container=%s header=%s"
-                % (category, container_id, header),
-                xbmc.LOGINFO,
-            )
-
-            start_wait = time.time()
-            loaded = False
-
-            while not monitor.abortRequested() and (time.time() - start_wait) < per_widget_timeout:
-                now = time.time()
-                is_real, numitems, first_label = has_real_widget_content(container_id)
-                if is_real:
-                    loaded = True
-                    loaded_widgets.append(
-                        {
-                            "container_id": container_id,
-                            "header": header,
-                            "category": category,
-                            "numitems": numitems,
-                            "first_label": first_label,
-                            "elapsed": now - start_wait,
-                            "source": "skin_invisible_category",
-                        }
-                    )
-                    xbmc.log(
-                        "[ShowIMDB][BootPrefetch] Widget carregou no container invisivel do skin; avançando ao próximo: categoria=%s container=%s header=%s items=%s elapsed=%.2fs"
-                        % (category, container_id, header, numitems, now - start_wait),
-                        xbmc.LOGINFO,
-                    )
-                    break
-
-                if monitor.waitForAbort(poll):
-                    break
-
-            if not loaded:
-                xbmc.log(
-                    "[ShowIMDB][BootPrefetch] Timeout aguardando container do skin; avançando ao próximo: categoria=%s container=%s header=%s updating=%s"
-                    % (category, container_id, header, get_container_is_updating(container_id)),
-                    xbmc.LOGWARNING,
-                )
-    finally:
-        try:
-            home_window.clearProperty(BOOT_PREFETCH_CATEGORY_PROPERTY)
-        except Exception:
-            pass
-        # Offscreen é liberado DEPOIS da categoria, para garantir que a skin nunca mostre a última categoria.
-        monitor.waitForAbort(0.10)
-        try:
-            home_window.clearProperty(BOOT_PREFETCH_OFFSCREEN_PROPERTY)
-        except Exception:
-            pass
-        _restore_widget_hint_state(hint_snapshot)
-
-    return loaded_widgets
-
-
-def _jsonrpc_get_directory(path, timeout):
-    """Resolve um plugin:// via Files.GetDirectory. Retorna (ok, numitems, timed_out).
-
-    executeJSONRPC e sincrono e bloqueia ate o plugin terminar, entao rodamos num worker
-    e damos join com timeout: se um widget travar, abandonamos e seguimos ao proximo
-    (o plugin continua em background e ainda aquece o cache do POV mesmo abandonado)."""
-    result = {"ok": False, "numitems": 0, "done": False}
-
-    def _worker():
-        request = json.dumps({
-            "jsonrpc": "2.0",
-            "id": "showimdb_boot_prefetch",
-            "method": "Files.GetDirectory",
-            "params": {"directory": path, "media": "video"},
-        })
-        try:
-            response = json.loads(xbmc.executeJSONRPC(request))
-            if isinstance(response, dict) and "error" not in response:
-                files = (response.get("result") or {}).get("files") or []
-                result["ok"] = True
-                result["numitems"] = len(files)
-            else:
-                err = response.get("error") if isinstance(response, dict) else "resposta invalida"
-                xbmc.log("[ShowIMDB][BootJSONRPC] Erro JSON-RPC: %s | path=%s" % (err, path), xbmc.LOGWARNING)
-        except Exception as exc:
-            xbmc.log("[ShowIMDB][BootJSONRPC] Falha executeJSONRPC: %s | path=%s" % (exc, path), xbmc.LOGWARNING)
-        finally:
-            result["done"] = True
-
-    worker = threading.Thread(target=_worker, name="ShowIMDBBootJSONRPCItem")
-    worker.daemon = True
-    worker.start()
-    worker.join(timeout)
-    if not result["done"]:
-        return False, 0, True
-    return result["ok"], result["numitems"], False
-
-
-def preload_widgets_via_jsonrpc(targets=None):
-    """No boot, carrega cada widget via Files.GetDirectory (JSON-RPC), um a um.
-
-    Totalmente invisivel ao usuario: NAO renderiza container, NAO move foco, NAO navega.
-    So pede ao Kodi pra resolver o plugin:// de cada widget, o que faz o POV rodar e
-    popular os caches dele (metacache/mdblcache) + o DirectoryCache do Kodi. Quando o
-    widget for exibido de verdade depois, ja vem do cache.
-
-    Roda em paralelo ao prefetch offscreen e ao gate do splash; os dois cooperam pelo
-    cache compartilhado do POV (o segundo a tocar cada widget e cache hit barato)."""
-    if not FineTuning.SPLASH_BOOT_JSONRPC_ENABLED:
-        return []
-
-    monitor = xbmc.Monitor()
-    home_window = xbmcgui.Window(10000)
-    per_widget_timeout = max(1.0, float(FineTuning.SPLASH_BOOT_JSONRPC_PER_WIDGET_TIMEOUT))
-
-    # Resolve os $INFO[...] e deduplica por caminho final, preservando a ordem das categorias.
-    work_items = []
-    seen_paths = set()
-    for target in (targets or discover_widget_boot_targets()):
-        raw_path = target.get("content_path") or ""
-        if not raw_path:
-            continue
-        path = _resolve_skin_value(raw_path, home_window)
-        if not path or "$" in path:  # placeholder de skin nao resolvido — nao da pra carregar via JSON-RPC
-            continue
-        if path in seen_paths:
-            continue
-        seen_paths.add(path)
-        work_items.append((target, path))
-
-    total = len(work_items)
-    try:
-        home_window.clearProperty(BOOT_JSONRPC_DONE_PROPERTY)
-        home_window.setProperty(BOOT_JSONRPC_PROGRESS_PROPERTY, "0")
-    except Exception:
-        pass
-
-    if not total:
-        xbmc.log("[ShowIMDB][BootJSONRPC] Nenhum widget com content_path resolvivel para pre-carregar.", xbmc.LOGINFO)
-        try:
-            home_window.setProperty(BOOT_JSONRPC_DONE_PROPERTY, "true")
-        except Exception:
-            pass
-        return []
-
-    xbmc.log("[ShowIMDB][BootJSONRPC] Iniciando sweep JSON-RPC de %d widgets (um a um)." % total, xbmc.LOGINFO)
-    loaded = []
-    t_total = time.time()
-
-    for idx, (target, path) in enumerate(work_items, 1):
-        if monitor.abortRequested():
-            xbmc.log("[ShowIMDB][BootJSONRPC] Abortado pelo monitor em %d/%d." % (idx - 1, total), xbmc.LOGINFO)
-            break
-        header = target.get("header") or "<sem_header>"
-        category = target.get("category") or "desconhecida"
-
-        t0 = time.time()
-        ok, numitems, timed_out = _jsonrpc_get_directory(path, per_widget_timeout)
-        elapsed = time.time() - t0
-
-        if ok:
-            loaded.append({
-                "container_id": target.get("container_id"),
-                "header": header,
-                "category": category,
-                "numitems": numitems,
-                "elapsed": elapsed,
-                "source": "jsonrpc_getdirectory",
-            })
-            xbmc.log(
-                "[ShowIMDB][BootJSONRPC] %d/%d OK categoria=%s header=%s itens=%d (%.2fs)"
-                % (idx, total, category, header, numitems, elapsed),
-                xbmc.LOGINFO,
-            )
-            try:
-                home_window.setProperty(BOOT_JSONRPC_PROGRESS_PROPERTY, str(len(loaded)))
-            except Exception:
-                pass
-        else:
-            motivo = "timeout" if timed_out else "falha"
-            xbmc.log(
-                "[ShowIMDB][BootJSONRPC] %d/%d %s categoria=%s header=%s (%.2fs)"
-                % (idx, total, motivo, category, header, elapsed),
-                xbmc.LOGWARNING,
-            )
-
-    try:
-        home_window.setProperty(BOOT_JSONRPC_DONE_PROPERTY, "true")
-    except Exception:
-        pass
-
-    xbmc.log(
-        "[ShowIMDB][BootJSONRPC] Sweep concluido: %d/%d widgets carregados em %.1fs."
-        % (len(loaded), total, time.time() - t_total),
-        xbmc.LOGINFO,
-    )
-    return loaded
-
-
-def wait_for_splash_video_gate(ready_count=None):
+def wait_for_splash_video_gate(ready_count=None, targets=None):
     splash_video_poll = 0.10
     splash_video_post_widget_buffer = 0.0
     splash_video_widget_gate_timeout = get_splash_video_widget_gate_timeout()
 
     monitor = xbmc.Monitor()
-    # Conta sobre TODAS as categorias: o prefetch roda em paralelo e materializa as invisiveis,
-    # entao o gate precisa enxergar widgets reais de qualquer categoria, nao so das 10 primeiras.
-    targets = discover_widget_boot_targets()
+    # Conta widgets reais de todas as categorias carregadas naturalmente pelo skin.
+    # Reusa os targets já descobertos no boot (evita reler+regex o XML de includes).
+    if targets is None:
+        targets = discover_widget_boot_targets()
     gate_started_at = time.time()
     deadline = gate_started_at + splash_video_widget_gate_timeout
     if ready_count is None:
@@ -1694,59 +1362,25 @@ if __name__ == "__main__":
     window.clearProperty(BOOT_COVER_DONE_PROPERTY)
     window.clearProperty(HOME_SPLASH_ACTIVE_PROPERTY)
     window.clearProperty(SPLASH_VIDEO_COVER_DONE_PROPERTY)
-    window.clearProperty(BOOT_PREFETCH_OFFSCREEN_PROPERTY)
 
     use_splash_video = can_play_splash_video()
-    preload_targets = []
-    
-    # SEMPRE tenta descobrir targets se qualquer prefetch (offscreen ou JSON-RPC) estiver ligado
-    if FineTuning.SPLASH_BOOT_PREFETCH_ENABLED or FineTuning.SPLASH_BOOT_JSONRPC_ENABLED:
-        preload_targets = discover_widget_boot_targets()
-        if preload_targets:
-            xbmc.log("[ShowIMDB][Boot] %d targets de prefetch detectados." % len(preload_targets), xbmc.LOGINFO)
-        else:
-            xbmc.log("[ShowIMDB][Boot] Nenhum target de prefetch detectado (xml de includes vazio ou ausente).", xbmc.LOGINFO)
-
-    # Sweep JSON-RPC: carrega TODOS os widgets, um a um, via Files.GetDirectory.
-    # Inicia o quanto antes (antes do gate, que pode bloquear ate 45s) e roda em background,
-    # invisivel, em paralelo ao prefetch offscreen. Nao bloqueia o boot — o servico segue normal.
-    jsonrpc_thread = None
-    if preload_targets and FineTuning.SPLASH_BOOT_JSONRPC_ENABLED:
-        jsonrpc_thread = threading.Thread(
-            target=preload_widgets_via_jsonrpc,
-            args=(preload_targets,),
-            name="ShowIMDBBootJSONRPC",
-        )
-        jsonrpc_thread.daemon = True
-        jsonrpc_thread.start()
+    preload_targets = discover_widget_boot_targets()
+    if preload_targets:
+        xbmc.log("[ShowIMDB][Boot] %d containers de widget detectados para o gate." % len(preload_targets), xbmc.LOGINFO)
+    else:
+        xbmc.log("[ShowIMDB][Boot] Nenhum container de widget detectado (xml de includes vazio ou ausente).", xbmc.LOGINFO)
 
     splash_thread = None
     splash_result = {"started": False, "finished": False}
     start_splash_video = False
-    preload_thread = None
-    preload_started = False
 
-    if preload_targets:
-        preload_thread = threading.Thread(
-            target=preload_widgets_without_focus,
-            args=(preload_targets,),
-            name="ShowIMDBBootPrefetch",
-        )
-        preload_thread.daemon = True
-
-    # Com splash: o prefetch roda EM PARALELO ao gate (escondido pelo boot cover + BOOT_PREFETCH_OFFSCREEN),
-    # para que o gate consiga contar widgets reais de TODAS as categorias — nao apenas a categoria visivel —
-    # e so dispare o splash.mp4 depois de atingir SPLASH_VIDEO_WIDGET_READY_COUNT widgets reais.
-    # Roda o gate em AMBOS os casos: o boot cover (preto + splash pulsante) SEGURA enquanto os
-    # widgets carregam, contando widgets reais de todas as categorias.
+    # Os containers do skin carregam naturalmente. O gate apenas observa quantos widgets
+    # já possuem conteúdo real antes de liberar o boot cover ou iniciar o splash.
     #   - COM video: espera SPLASH_VIDEO_WIDGET_READY_COUNT (8) antes de disparar o splash.mp4.
-    #   - SEM video: espera so SPLASH_BOOT_COVER_WIDGET_READY_COUNT (2) e ja libera pro fade-out.
+    #   - SEM video: espera SPLASH_BOOT_COVER_WIDGET_READY_COUNT e libera o fade-out.
     if preload_targets:
-        preload_thread.start()
-        preload_started = True
-
         gate_count = None if use_splash_video else FineTuning.SPLASH_BOOT_COVER_WIDGET_READY_COUNT
-        gate_ready, gate_reason, gate_widget = wait_for_splash_video_gate(ready_count=gate_count)
+        gate_ready, gate_reason, gate_widget = wait_for_splash_video_gate(ready_count=gate_count, targets=preload_targets)
         if gate_ready and gate_widget is not None:
             log_first_widget_ready(gate_widget)
         if not gate_ready:

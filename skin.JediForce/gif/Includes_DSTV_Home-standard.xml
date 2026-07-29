@@ -746,7 +746,7 @@
 		<param name="display_type_islandscape"/>
 		<definition>
 			<control type="group" id="$PARAM[list_id]1">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<left>190</left>
 				<width>200%</width>
 				<height>43</height>
@@ -798,7 +798,7 @@
 				</control>
 			</control>
 			<control type="fixedlist" id="$PARAM[list_id]">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<left>45</left>
 				<top>$PARAM[list_top]</top>
 				<right>0</right>
@@ -1312,7 +1312,7 @@
 				</focusedlayout>
 				<content>
 					<item>
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
+						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label)</visible>
 						<icon>$VAR[ds_widget_loading_poster]</icon>
 						<property name="poster">$VAR[ds_widget_loading_poster]</property>
 						<property name="landscape">$VAR[ds_widget_loading_landscape]</property>

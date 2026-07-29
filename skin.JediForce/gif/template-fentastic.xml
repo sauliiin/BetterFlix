@@ -108,7 +108,7 @@
         <skinshortcuts insert="SubMenuPanels">items</skinshortcuts>
         <!-- Empty Menu Item button -->
         <control type="button" id="50$SKINSHORTCUTS[menuid]999">
-          <visible>Integer.IsLess(Container(50$SKINSHORTCUTS[menuid]000).NumItems,2)</visible>
+          <visible>Integer.IsLess(Container(50$SKINSHORTCUTS[menuid]000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
           <animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(50$SKINSHORTCUTS[menuid]999)">Conditional</animation>
           <left>500</left>
           <right>400</right>

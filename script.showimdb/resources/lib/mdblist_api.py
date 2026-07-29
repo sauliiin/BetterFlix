@@ -51,6 +51,27 @@ class FineTuning:
     NETWORK_TIMEOUT = 7
 
 
+# Mapa fixo keyword MDBList -> badge PT-BR. Constante de módulo (era reconstruído
+# a cada cache-miss de get_ratings).
+_HIGHLIGHT_BADGE_MAP = {
+    "imdb-top-250": "Top 250 IMDb",
+    "imdb-top-100": "Top 100 IMDb",
+    "letterboxd-top-250": "Top 250 Letterboxd",
+    "metacritic-must-see": "Must See Metacritic",
+    "certified-fresh": "Certified Fresh",
+    "certified-hot": "Certified Hot",
+    "national-film-registry": "Tao Bom que Virou Patrimonio",
+    "best-picture-winner": "Vencedor de Melhor Filme",
+    "best-picture-nominated": "Indicado a Melhor Filme",
+    "oscar-winner": "Vencedor do Oscar",
+    "oscar-nominated": "Indicado ao Oscar",
+    "cult-film": "Classico Cult",
+    "belongs-to-collection": "Pertence a Coleção",
+    "first-in-collection": "Pertence a Coleção",
+    "collection-follow-up": "Pertence a Coleção",
+}
+
+
 session = requests.Session()
 
 _api_key_cache = None  # (key, timestamp) — TTL 300s; evita Addon()+getSetting por chamada
@@ -212,32 +233,14 @@ def get_ratings(imdb_id):
                 data_to_cache["trakt_rating"] = str(value)
 
         badges = []
-        highlight_dict = {
-            "imdb-top-250": "Top 250 IMDb",
-            "imdb-top-100": "Top 100 IMDb",
-            "letterboxd-top-250": "Top 250 Letterboxd",
-            "metacritic-must-see": "Must See Metacritic",
-            "certified-fresh": "Certified Fresh",
-            "certified-hot": "Certified Hot",
-            "national-film-registry": "Tao Bom que Virou Patrimonio",
-            "best-picture-winner": "Vencedor de Melhor Filme",
-            "best-picture-nominated": "Indicado a Melhor Filme",
-            "oscar-winner": "Vencedor do Oscar",
-            "oscar-nominated": "Indicado ao Oscar",
-            "cult-film": "Classico Cult",
-            "belongs-to-collection": "Pertence a Coleção",
-            "first-in-collection": "Pertence a Coleção",
-            "collection-follow-up": "Pertence a Coleção",
-        }
-
         keywords_raw = json_data.get("keywords", [])
-        matched_keywords = [kw.get("name", "") for kw in keywords_raw if kw.get("name", "") in highlight_dict]
+        matched_keywords = [kw.get("name", "") for kw in keywords_raw if kw.get("name", "") in _HIGHLIGHT_BADGE_MAP]
         if _DEBUG: xbmc.log(f"[ShowIMDB][DEBUG][MDBList] Keywords recebidas: {[kw.get('name') for kw in keywords_raw]} | Badges encontrados: {matched_keywords}", xbmc.LOGINFO)
 
         for kw in keywords_raw:
             name = kw.get("name", "")
-            if name in highlight_dict:
-                badges.append(highlight_dict[name])
+            if name in _HIGHLIGHT_BADGE_MAP:
+                badges.append(_HIGHLIGHT_BADGE_MAP[name])
 
         if badges:
             data_to_cache["highlight_badges"] = ", ".join(badges)

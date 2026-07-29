@@ -237,14 +237,21 @@ def fetch_keyword_badges(tmdb_id, media_type):
     if result and (time.time() - result[1] < FineTuning.CACHE_MAX_AGE_KEYWORDS):
         return result[0] or ""
 
-    url = f"https://api.themoviedb.org/3/{media_type_clean}/{tmdb_id}/keywords?api_key={FineTuning.API_KEY}"
+    # Uma única chamada traz detalhes + keywords (append_to_response) em vez de
+    # dois GETs sequenciais. Keywords vêm aninhadas: movie->keywords.keywords,
+    # tv->keywords.results.
+    url = (
+        f"https://api.themoviedb.org/3/{media_type_clean}/{tmdb_id}"
+        f"?api_key={FineTuning.API_KEY}&language=en-US&append_to_response=keywords"
+    )
     labels = []
     seen = set()
     try:
         response = session.get(url, timeout=FineTuning.NETWORK_TIMEOUT)
         if response.status_code == 200:
-            payload = response.json()
-            raw_keywords = payload.get("keywords", payload.get("results", [])) or []
+            details = response.json()
+            keywords_obj = details.get("keywords") or {}
+            raw_keywords = keywords_obj.get("keywords", keywords_obj.get("results", [])) or []
             names = set()
             for keyword in raw_keywords:
                 name = (keyword.get("name") or "").strip().lower()
@@ -255,14 +262,7 @@ def fetch_keyword_badges(tmdb_id, media_type):
                 if keyword_name in names and label not in seen:
                     labels.append(label)
                     seen.add(label)
-    except Exception as e:
-        if _DEBUG: xbmc.log(f"[ShowIMDB][DEBUG][TMDb] ERRO fetch_keyword_badges | tmdb_id={tmdb_id} | erro={e}", xbmc.LOGWARNING)
 
-    detail_url = f"https://api.themoviedb.org/3/{media_type_clean}/{tmdb_id}?api_key={FineTuning.API_KEY}&language=en-US"
-    try:
-        response = session.get(detail_url, timeout=FineTuning.NETWORK_TIMEOUT)
-        if response.status_code == 200:
-            details = response.json()
             detail_labels = []
             if media_type_clean == "movie" and details.get("belongs_to_collection"):
                 detail_labels.append("Pertence a Coleção")
@@ -273,7 +273,7 @@ def fetch_keyword_badges(tmdb_id, media_type):
                     labels.append(label)
                     seen.add(label)
     except Exception as e:
-        if _DEBUG: xbmc.log(f"[ShowIMDB][DEBUG][TMDb] ERRO fetch_detail_badges | tmdb_id={tmdb_id} | erro={e}", xbmc.LOGWARNING)
+        if _DEBUG: xbmc.log(f"[ShowIMDB][DEBUG][TMDb] ERRO fetch_keyword_badges | tmdb_id={tmdb_id} | erro={e}", xbmc.LOGWARNING)
 
     badges = ", ".join(labels)
     db.execute_query("INSERT OR REPLACE INTO tmdb_keyword_badges VALUES (?, ?, ?)", (cache_key, badges, time.time()))

@@ -6,6 +6,10 @@
 # 3. Organiza os selos (badges) processados pelo MDBList.
 # 4. Grava/Le os textos traduzidos no banco de dados com validade de 30 dias.
 
+import time
+
+from database import db
+
 _omdb_session = None  # session lazy: reusa conexão HTTP entre chamadas OMDb sem pesar o bootstrap
 
 def _get_omdb_session():
@@ -199,11 +203,9 @@ def process_highlights(imdb_id, data, lb_rating, tr_rating):
     # Salvar middle no cache SQLite
     if middle_rating and imdb_id:
         try:
-            from database import db
-            import time as _time
             db.execute_query(
                 "INSERT OR REPLACE INTO middle_cache VALUES (?, ?, ?)",
-                (imdb_id, middle_rating, _time.time())
+                (imdb_id, middle_rating, time.time())
             )
         except Exception: pass
 
@@ -212,10 +214,6 @@ def process_highlights(imdb_id, data, lb_rating, tr_rating):
     omdb_oscars = ""
     raw_badges = data.get("highlight_badges", "")
     incoming_badges_are_current = data.get("badges_schema_version") == 2
-
-    # Importa banco do script para criar a conexão
-    from database import db
-    import time
 
     # Verifica se o filme já passou pelo processo e está salvo no banco nos últimos 30 dias
     cached_badges = db.fetch_one("SELECT oscars, badges, timestamp FROM badges_data WHERE imdb_id = ?", (imdb_id,))

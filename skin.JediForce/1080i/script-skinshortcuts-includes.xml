@@ -387,9 +387,9 @@
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),filmes)</visible>
 			<left>-50</left>
-			<top>52%</top>
+			<top>60%</top>
 			<width>120%</width>
-			<height>514</height>
+			<height>420</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>false</wrap>
@@ -407,13 +407,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -422,6 +421,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50102" />
@@ -432,13 +432,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -447,6 +446,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50103" />
@@ -457,13 +457,12 @@
 				<param name="sortorder" value="descending" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -472,6 +471,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50104" />
@@ -482,13 +482,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -497,6 +496,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50105" />
@@ -507,13 +507,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -522,6 +521,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50106" />
@@ -532,13 +532,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -547,6 +546,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50107" />
@@ -557,13 +557,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -572,6 +571,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50108" />
@@ -582,13 +582,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="$NUMBER[50]" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -597,9 +596,10 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<control type="button" id="501999">
-				<visible>Integer.IsLess(Container(501000).NumItems,2)</visible>
+				<visible>Integer.IsLess(Container(501000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(501999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
@@ -628,6 +628,7 @@
 				<onfocus>ClearProperty(ds_info_weather)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+				<onfocus condition="!Player.HasVideo | Player.Paused">ClearProperty(ds_info_clearlogo)</onfocus>
 				<onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
 				<onfocus>ClearProperty(ds_info_dbtype)</onfocus>
 				<texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>
@@ -638,9 +639,9 @@
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),generos)</visible>
 			<left>-50</left>
-			<top>52%</top>
+			<top>60%</top>
 			<width>120%</width>
-			<height>514</height>
+			<height>420</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>false</wrap>
@@ -658,13 +659,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -673,6 +673,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50202" />
@@ -683,13 +684,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -698,6 +698,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50203" />
@@ -708,13 +709,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -723,6 +723,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50204" />
@@ -733,13 +734,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -748,6 +748,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50205" />
@@ -758,13 +759,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -773,9 +773,10 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<control type="button" id="502999">
-				<visible>Integer.IsLess(Container(502000).NumItems,2)</visible>
+				<visible>Integer.IsLess(Container(502000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(502999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
@@ -804,6 +805,7 @@
 				<onfocus>ClearProperty(ds_info_weather)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+				<onfocus condition="!Player.HasVideo | Player.Paused">ClearProperty(ds_info_clearlogo)</onfocus>
 				<onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
 				<onfocus>ClearProperty(ds_info_dbtype)</onfocus>
 				<texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>
@@ -814,9 +816,9 @@
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<left>-50</left>
-			<top>52%</top>
+			<top>60%</top>
 			<width>120%</width>
-			<height>514</height>
+			<height>420</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>false</wrap>
@@ -834,13 +836,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -849,6 +850,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50302" />
@@ -859,13 +861,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="true" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -874,6 +875,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50303" />
@@ -884,13 +886,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -899,6 +900,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50304" />
@@ -909,13 +911,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -924,6 +925,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50305" />
@@ -934,13 +936,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="136" />
-				<param name="height" value="189" />
-				<param name="widget_width" value="156" />
-				<param name="widget_height" value="258" />
+				<param name="width" value="193" />
+				<param name="height" value="290" />
+				<param name="widget_width" value="208" />
+				<param name="widget_height" value="400" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="25" />
 				<param name="display_type" value="posters" />
 				<param name="display_type_isposters" value="true" />
 				<param name="display_type_issquares" value="false" />
@@ -949,9 +950,10 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="18" />
 				</include>
 			<control type="button" id="503999">
-				<visible>Integer.IsLess(Container(503000).NumItems,2)</visible>
+				<visible>Integer.IsLess(Container(503000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(503999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
@@ -980,6 +982,7 @@
 				<onfocus>ClearProperty(ds_info_weather)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+				<onfocus condition="!Player.HasVideo | Player.Paused">ClearProperty(ds_info_clearlogo)</onfocus>
 				<onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
 				<onfocus>ClearProperty(ds_info_dbtype)</onfocus>
 				<texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>
@@ -990,9 +993,9 @@
 			<include>Visible_Right</include>
 			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),whatelse)</visible>
 			<left>-50</left>
-			<top>52%</top>
+			<top>60%</top>
 			<width>120%</width>
-			<height>514</height>
+			<height>420</height>
 			<scrolltime tween="sine" easing="inout">600</scrolltime>
 			<orientation>vertical</orientation>
 			<wrap>false</wrap>
@@ -1010,13 +1013,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -1025,6 +1027,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50402" />
@@ -1035,13 +1038,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -1050,6 +1052,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50403" />
@@ -1060,13 +1063,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -1075,6 +1077,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50404" />
@@ -1085,13 +1088,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -1100,6 +1102,7 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<include content="ds_widgetPanelList">
 				<param name="list_id" value="50405" />
@@ -1110,13 +1113,12 @@
 				<param name="sortorder" value="" />
 				<param name="limit" value="" />
 				<param name="widget_target" value="videos" />
-				<param name="width" value="240" />
-				<param name="height" value="125" />
-				<param name="widget_width" value="258" />
-				<param name="widget_height" value="190" />
+				<param name="width" value="295" />
+				<param name="height" value="150" />
+				<param name="widget_width" value="312" />
+				<param name="widget_height" value="245" />
 				<param name="aspect_ratio" value="stretch" />
 				<param name="display_titles" value="false" />
-				<param name="top_offset" value="26" />
 				<param name="display_type" value="landscape" />
 				<param name="display_type_isposters" value="false" />
 				<param name="display_type_issquares" value="false" />
@@ -1125,9 +1127,10 @@
 				<param name="w_cond" value="false" />
 				<param name="w_hour" value="false" />
 				<param name="w_forc" value="false" />
+				<param name="list_top" value="8" />
 				</include>
 			<control type="button" id="504999">
-				<visible>Integer.IsLess(Container(504000).NumItems,2)</visible>
+				<visible>Integer.IsLess(Container(504000).NumItems,2) + !Player.HasVideo + !Window.IsActive(busydialog) + !Window.IsActive(busydialognocancel)</visible>
 				<animation effect="fade" start="100" end="0" time="250" tween="sine" reversible="true" condition="!Control.HasFocus(504999)">Conditional</animation>
 				<left>500</left>
 				<right>400</right>
@@ -1156,6 +1159,7 @@
 				<onfocus>ClearProperty(ds_info_weather)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_art)</onfocus>
 				<onfocus>ClearProperty(ds_info_fanart_prop)</onfocus>
+				<onfocus condition="!Player.HasVideo | Player.Paused">ClearProperty(ds_info_clearlogo)</onfocus>
 				<onfocus>ClearProperty(ds_info_imdb_id)</onfocus>
 				<onfocus>ClearProperty(ds_info_dbtype)</onfocus>
 				<texturefocus colordiffuse="selected">dstv/test_small.png</texturefocus>

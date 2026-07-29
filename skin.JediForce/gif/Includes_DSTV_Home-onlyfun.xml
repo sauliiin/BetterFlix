@@ -466,7 +466,7 @@
 				<animation effect="fade" start="0" end="100" time="600" delay="1000">Visible</animation>
 				<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 				<animation effect="fade" start="0" end="100" time="1200" condition="!Player.HasVideo | Player.Paused | Integer.IsLess(Player.Time,2)" reversible="false">Conditional</animation>
-				<animation effect="fade" start="100" end="0" time="10000" delay="2000" condition="Player.HasVideo + !Player.Paused + Integer.IsGreater(Player.Time,1)" reversible="false">Conditional</animation>
+				<animation effect="fade" start="100" end="0" time="10000" delay="2000" condition="Player.HasVideo + !Player.Paused + Integer.IsGreater(Player.Time,1) + !Integer.IsGreater(Player.Duration,600)" reversible="false">Conditional</animation>
 				<left>105</left>
 				<top>10</top>
 				<width>400</width>
@@ -714,7 +714,7 @@
 		<param name="display_type_islandscape"/>
 		<definition>
 			<control type="group" id="$PARAM[list_id]1">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<animation effect="fade" start="100" end="0" time="800" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !Player.Paused + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + Integer.IsGreater(Player.Time,1)" reversible="true">Conditional</animation>
 				<left>190</left>
 				<width>200%</width>
@@ -767,7 +767,7 @@
 				</control>
 			</control>
 			<control type="fixedlist" id="$PARAM[list_id]">
-				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<animation effect="fade" start="100" end="0" time="800" condition="!String.IsEqual(Window(home).Property(ds_active_widget_id),$PARAM[list_id]) + Player.HasVideo + !Player.Paused + !String.IsEmpty(Player.Duration) + Integer.IsLess(Player.Duration,600) + Integer.IsGreater(Player.Time,1)" reversible="true">Conditional</animation>
 				<left>45</left>
 				<top>$PARAM[list_top]</top>
@@ -1266,7 +1266,7 @@
 				</focusedlayout>
 				<content>
 					<item>
-						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1)</visible>
+						<visible>Container($PARAM[list_id]).IsUpdating + Integer.IsLessOrEqual(Container($PARAM[list_id]).NumItems,1) + String.IsEmpty(Container($PARAM[list_id]).ListItemAbsolute(0).Label)</visible>
 						<icon>$VAR[ds_widget_loading_poster]</icon>
 						<property name="poster">$VAR[ds_widget_loading_poster]</property>
 						<property name="landscape">$VAR[ds_widget_loading_landscape]</property>

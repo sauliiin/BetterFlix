@@ -26,7 +26,7 @@
 			<control type="group" id="200">
 
 				<control type="grouplist" id="201">
-					<include>Animation_BottomSlide</include>
+					<include>Animation_OSDBottomSlide</include>
 					<left>133</left>
 					<top>27</top>
 					<width>100%</width>
@@ -73,7 +73,7 @@
 					<top>-1805</top>
 					<width>50</width>
 					<aspectratio>keep</aspectratio>
-					<include>Animation_TopSlide</include>
+					<include>Animation_OSDTopSlide</include>
 					<texture>dstv/jedi/cogb1.png</texture>
 					<animation effect="rotate" start="0" end="360" condition="true" center="auto" time="1800" delay="2000" pulse="true">Conditional</animation>
 					<animation effect="fade" start="100" end="0" time="100" condition="Control.HasFocus(70043) | Control.HasFocus(70046) | Control.HasFocus(70048) | Control.HasFocus(70049)">Conditional</animation>
@@ -85,7 +85,7 @@
 					<height>135</height>
 					<align>left</align>
 					<itemgap>10</itemgap>
-					<include>Animation_TopSlide</include>
+					<include>Animation_OSDTopSlide</include>
 					<scrolltime tween="sine">200</scrolltime>
 					<orientation>horizontal</orientation>
 					<ondown>602</ondown>
@@ -151,7 +151,7 @@
 			</control>
 			<control type="group" id="6000">
 				<top>60</top>
-				<include>Animation_BottomSlide</include>
+				<include>Animation_OSDBottomSlide</include>
 
 				<visible>Player.SeekEnabled</visible>
 				<control type="button" id="87">
@@ -209,7 +209,7 @@
 		</control>
 		<control type="group">
 			<visible>![Window.IsVisible(SliderDialog) | Window.IsVisible(1110) | Window.IsVisible(osdaudiosettings) | Window.IsVisible(osdvideosettings) | Window.IsVisible(VideoBookmarks) | Window.IsVisible(playerprocessinfo) | Window.IsVisible(osdcmssettings) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(pvrchannelguide)]</visible>
-			<include>Animation_TopSlide</include>
+			<include>Animation_OSDTopSlide</include>
 			<animation effect="fade" time="300">VisibleChange</animation>
 
 			<!-- Clearlogo -->
@@ -288,20 +288,20 @@
 			<visible>![Window.IsVisible(SliderDialog) | Window.IsVisible(1110) | Window.IsVisible(osdaudiosettings) | Window.IsVisible(osdvideosettings) | Window.IsVisible(VideoBookmarks) | Window.IsVisible(playerprocessinfo) | Window.IsVisible(osdcmssettings) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(pvrchannelguide)]</visible>
 			<!-- Slide when Playing -->
 			<animation type="WindowOpen" reversible="False" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)">
-				<effect type="fade" start="0" end="100" time="400"/>
-				<effect type="slide" start="0,200" end="0,0" time="400" tween="sine" easing="inout" />
+				<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
+				<effect type="slide" start="0,200" end="0,0" time="250" tween="cubic" easing="out" />
 			</animation>
 			<animation type="WindowClose" condition="!Player.Paused + !Window.IsActive(fullscreeninfo)" reversible="False">
-				<effect type="fade" start="100" end="0" time="400"/>
-				<effect type="slide" start="0,0" end="0,200" time="500" tween="sine" easing="inout" />
+				<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
+				<effect type="slide" start="0,0" end="0,200" time="250" tween="cubic" easing="in" />
 			</animation>
 
 			<!-- Fade when Paused -->
 			<animation type="WindowOpen" reversible="False" condition="Player.Paused | Window.IsActive(fullscreeninfo)">
-				<effect type="fade" start="0" end="100" time="300"/>
+				<effect type="fade" start="0" end="100" time="250" tween="sine" easing="out"/>
 			</animation>
 			<animation type="WindowClose" condition="Player.Paused | Window.IsActive(fullscreeninfo)" reversible="False">
-				<effect type="fade" start="100" end="0" time="300"/>
+				<effect type="fade" start="100" end="0" time="250" tween="sine" easing="in"/>
 			</animation>
 
 			<!-- Time -->
